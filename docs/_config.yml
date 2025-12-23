@@ -1,3 +1,10 @@
 title: Jindřich Ochmann
-description: Vývoj, jazyky, projekty
-theme: jekyll-theme-hacker
+theme: jekyll-theme-cayman
+
+nav:
+  - title: Home
+    url: /
+  - title: Projekty
+    url: /projects
+  - title: O mně
+    url: /about
