@@ -2,6 +2,7 @@
 [j-ochmann.github.io](https://j-ochmann.github.io/)
 - používá Jekyll a GitHub Actions.
 - **docs/index.md** se převede z Markdown na HTML a obalí výchozím Jekyll theme.
+
 ## Jak změnit theme (nejrychlejší způsob)
 V kořeni repa (nebo v /docs) vytvoř nebo uprav soubor:
 **📄 _config.yml**
@@ -29,7 +30,8 @@ docs/
 │   └── img/
 └── _layouts/
 ```
-index.md
+`index.md`
+```md
 ---
 layout: default
 title: Úvod
@@ -41,14 +43,13 @@ Jmenuji se **Jindřich Ochmann**
 - programování
 - jazyky
 - experimenty
+```
+>⚠️ Ten YAML blok (---) je důležitý
 
+## Navigace (menu nahoře)
 
-⚠️ Ten YAML blok (---) je důležitý
-
-4️⃣ Navigace (menu nahoře)
-
-V _config.yml:
-
+V `_config.yml`:
+```yaml
 title: Jindřich Ochmann
 theme: jekyll-theme-cayman
 
@@ -59,18 +60,16 @@ nav:
     url: /projects
   - title: O mně
     url: /about
-
-
+```
 A odpovídající soubory:
-
+```text
 projects.md
 about.md
-
-5️⃣ Vlastní CSS (tady začíná „mám kontrolu“)
-1️⃣ Vytvoř soubor:
-docs/assets/css/style.scss
-
-2️⃣ Obsah:
+```
+## Vlastní CSS (tady začíná „kontrola“)
+1. Vytvoř soubor: `docs/assets/css/style.scss`
+2. Obsah:
+```scss
 ---
 ---
 
@@ -83,21 +82,16 @@ body {
 h1 {
   color: #ff6600;
 }
-
-
+```
 GitHub Pages:
+- pozná SCSS
+- přeloží ho
+- přepíše default styl theme
 
-pozná SCSS
-
-přeloží ho
-
-přepíše default styl theme
-
-6️⃣ Když chceš ÚPLNOU kontrolu (doporučeno pro tebe)
-
-Přestaň používat „remote theme“ a:
-
-1️⃣ Vytvoř layout:
+## Když chcete ÚPLNOU kontrolu
+- nepoužívat „remote theme“
+1. vytvořte layout:
+```html
 docs/_layouts/default.html
 
 <!DOCTYPE html>
@@ -119,42 +113,9 @@ docs/_layouts/default.html
 
 </body>
 </html>
+```
+2. V _config.yml smažte theme:
 
-2️⃣ V _config.yml smaž theme:
+Žádná Jekyll kouzla, ale čistý statický web.
 
-Od té chvíle:
-
-žádné Jekyll kouzla
-
-čistý statický web
-
-Markdown → HTML → tvůj layout
-
-7️⃣ Doporučení pro tebe (upřímně)
-
-Z toho, co dlouhodobě řešíš:
-
-programovací jazyky
-
-generování obsahu
-
-strukturovaná data
-
-👉 GitHub Pages + Jekyll je pro tebe ideální MVP
-
-Ale:
-
-jakmile začneš chtít interaktivitu → Vite / Astro / Next
-
-Pages pak jen jako hosting
-
-8️⃣ Chceš pokračovat?
-
-Můžeme jít kteroukoli cestou:
-
-1️⃣ Navrhnu ti konkrétní strukturu webu (jazyky, projekty, blog)
-2️⃣ Uděláme vlastní minimalistický theme bez Jekyll magie
-3️⃣ Přepneme to na Astro + GitHub Pages
-4️⃣ Nebo z toho uděláme učebnici jazyků, kterou generuješ ze strukturovaných dat
-
-Stačí říct čím chceš, aby ten web byl – a půjdeme rovnou na hotové řešení, ne teorii.
+Markdown → HTML → Váš layout
