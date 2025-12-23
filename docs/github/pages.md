@@ -14,12 +14,12 @@ Commit → push → hotovo.
 
 Pár použitelných theme: `jekyll-theme-minimal/hacker/cayman/midnight/slate/dinky`
 
-[👉 Kompletní seznam](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/adding-a-theme-to-your-github-pages-site-using-jekyll?versionId=free-pro-team%40latest&productId=pages&restPage=getting-started-with-github-pages%2Cconfiguring-a-publishing-source-for-your-github-pages-site#supported-themes)
+👉 [Kompletní seznam](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/adding-a-theme-to-your-github-pages-site-using-jekyll?versionId=free-pro-team%40latest&productId=pages&restPage=getting-started-with-github-pages%2Cconfiguring-a-publishing-source-for-your-github-pages-site#supported-themes)
 
 ## Jak OVLIVNIT OBSAH (strukturu)
 
 Doporučená struktura:
-
+```text
 docs/
 ├── _config.yml
 ├── index.md
@@ -28,7 +28,7 @@ docs/
 ├── assets/
 │   └── img/
 └── _layouts/
-
+```
 index.md
 ---
 layout: default
