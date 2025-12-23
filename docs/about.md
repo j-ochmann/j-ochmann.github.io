@@ -12,8 +12,6 @@ Mým cílem je pomáhat klientům realizovat jejich vize v online světě a posk
 
 3. **Rychlé a spolehlivé řešení** Dodržuji termíny a nabízím podporu i po dokončení projektu.
 
-Využívám svých znalostí a zkušeností, abych klientům pomohl uspět v digitálním světě.
-
 ## Umím
  
 - **Programovat v** C/C++, C#, Java, JavaScript, Python, PHP, ABAP, SQL, etc.
@@ -27,3 +25,5 @@ Využívám svých znalostí a zkušeností, abych klientům pomohl uspět v dig
 - **Hardware** vývoj IoT aplikací a integraci hardwarových řešení s weby
 
 - **Výroba** zkušenost s optimalizací výrobních procesů podle ANSI/ISA-95 standardu v prostředí SAP ABAP
+
+Využívám svých znalostí a zkušeností, abych klientům pomohl uspět v digitálním světě.
