@@ -2,10 +2,15 @@
 Vždy mě fascinovaly technologie a možnost tvořit něco, co může usnadnit život ostatním.
 Časem se tato vášeň změnila v profesi.
 
-Dnes využívám svých znalostí a zkušeností, abych klientům pomohl uspět v digitálním světě.
-
 Specializuji se na tvorbu aplikací s důrazem na funkčnost, uživatelskou přívětivost a moderní design.
 Mým cílem je pomáhat klientům realizovat jejich vize v online světě a poskytnout jim řešení na míru.
+
+## Proč vybrat mě?
+1. **Osobní přístup:** Vaše spokojenost je mým cílem.
+
+2. **Efektivita a kvalita:** Mám zkušenosti s menšími i většími projekty a kladu důraz na detaily.
+
+3. **Rychlé a spolehlivé řešení:** Dodržuji termíny a nabízím podporu i po dokončení projektu.
 
 ## Umím
  
@@ -21,9 +26,4 @@ Mým cílem je pomáhat klientům realizovat jejich vize v online světě a posk
 
 - **Výroba:** Zkušenost s optimalizací výrobních procesů podle ANSI/ISA-95 standardu v prostředí SAP ABAP.
 
-## Proč si vybrat mě?
-1. **Osobní přístup:** Vaše spokojenost je mým cílem.
-
-2. **Efektivita a kvalita:** Mám zkušenosti s menšími i většími projekty a kladu důraz na detaily.
-
-3. **Rychlé a spolehlivé řešení:** Dodržuji termíny a nabízím podporu i po dokončení projektu.
+Využívám svých znalostí a zkušeností, abych klientům pomohl uspět v digitálním světě.
