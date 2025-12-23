@@ -13,8 +13,9 @@ Mým cílem je pomáhat klientům realizovat jejich vize v online světě a posk
   
 - **E-commerce:** Návrh a implementace e-shopů, optimalizace a propojení s platebními branami a dropshippingovými platformami.
 
-**- Hardware:** vývoj IoT aplikací a integrace hardwarových řešení s webovými platformami.
-**- Výroba:** Zkušenost s integrací a optimalizací výrobních procesů podle standardu ANSI/ISA-95 v prostředí SAP ABAP.
+- **Hardware:** vývoj IoT aplikací a integrace hardwarových řešení s webovými platformami.
+
+- **Výroba:** Zkušenost s integrací a optimalizací výrobních procesů podle standardu ANSI/ISA-95 v prostředí SAP ABAP.
 
 ## Proč si vybrat mě?
 **1. Osobní přístup:** Jsem freelancer, což znamená, že vám budu vždy k dispozici. Vaše spokojenost je mým hlavním cílem.
