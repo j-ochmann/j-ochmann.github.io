@@ -1,10 +1,12 @@
 title: Jindřich Ochmann
-theme: jekyll-theme-cayman
+theme: jekyll-theme-minimal
 
 nav:
   - title: Home
     url: /
   - title: Projekty
     url: /projects
+  - title: Tutorialy
+    url: /tutorials
   - title: O mně
     url: /about
