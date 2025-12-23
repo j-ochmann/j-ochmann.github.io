@@ -18,9 +18,11 @@ Mým cílem je pomáhat klientům realizovat jejich vize v online světě a posk
 - **Výroba:** Zkušenost s integrací a optimalizací výrobních procesů podle standardu ANSI/ISA-95 v prostředí SAP ABAP.
 
 ## Proč si vybrat mě?
-**1. Osobní přístup:** Jsem freelancer, což znamená, že vám budu vždy k dispozici. Vaše spokojenost je mým hlavním cílem.
-**2. Efektivita a kvalita:** Mám zkušenosti s menšími i většími projekty a kladu důraz na detaily.
-**3. Rychlé a spolehlivé řešení:** Dodržuji termíny a nabízím podporu i po dokončení projektu.
+1. **Osobní přístup:** Jsem freelancer, což znamená, že vám budu vždy k dispozici. Vaše spokojenost je mým hlavním cílem.
+
+2. **Efektivita a kvalita:** Mám zkušenosti s menšími i většími projekty a kladu důraz na detaily.
+
+3. **Rychlé a spolehlivé řešení:** Dodržuji termíny a nabízím podporu i po dokončení projektu.
 
 ## Můj příběh
 Vždy mě fascinovaly technologie a možnost tvořit něco, co může usnadnit život ostatním.
