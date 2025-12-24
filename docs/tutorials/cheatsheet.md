@@ -5,7 +5,7 @@ title: Cheat sheet
 
 # Cheat sheet
 
-## 0️⃣ Shortcuts
+## 0️⃣ Shell „&& Shortcuts“
 
 ### Git
 ```bash
@@ -35,3 +35,7 @@ gcc -Wall -Wextra -Werror hello.c -o hello &&
    * 📓 zápisník (U+1F4D3)
    * 📒 kroužkový blok (U+1F4D2)
    * 🔖 záložka (U+1F516)
+ 
+### Unicode Keyboard Shortcuts
+- dolní „ `Ctrl + Shift + U`, poté napište `201e` a stiskněte `Enter`.
+- horní “ `Ctrl + Shift + U`, poté napište `201c` a stiskněte `Enter`.
