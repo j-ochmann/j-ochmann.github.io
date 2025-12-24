@@ -116,4 +116,10 @@ Text obalte trojitými zpětnými apostrofy na samostatných řádcích.
       
 - Technické a ASCII varianty
    * [i] – informace
-   * ?> – nápověda/dotaz  
+   * ?> – nápověda/dotaz
+ 
+[i] – informace
+
+?> – nápověda/dotaz  
+
+Informace [i] v textu a ?> s dotazem.
