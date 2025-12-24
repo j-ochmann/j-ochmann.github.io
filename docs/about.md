@@ -1,3 +1,8 @@
+---
+layout: default
+title: O mně
+---
+
 # O mně
 Vždy mě fascinovaly technologie a možnost tvořit něco, co může usnadnit život ostatním.
 Časem se tato vášeň změnila v profesi.
