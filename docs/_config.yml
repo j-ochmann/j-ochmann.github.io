@@ -8,6 +8,31 @@ nav:
     url: /projects
   - title: Tutorialy
     url: /tutorials
+    sublinks:
+      - title: Git
+        url: /tutorials/git/
+        sublinks:
+          - title: GitHub
+            url: /tutorials/git/github
+            sublinks:
+              - title: GitHub Pages
+                url: /tutorials/git/github/pages
+      - title: Markdown
+        url: /tutorials/markdown
+      - title: C/C++
+        url: /tutorials/cpp
+      - title: C#
+        url: /tutorials/csharp
+      - title: Java
+        url: /tutorials/java
+      - title: JavaScript
+        url: /tutorials/javascript
+      - title: PHP
+        url: /tutorials/php
+      - title: Python
+        url: /tutorials/python
+      - title: SQL
+        url: /tutorials/sql
   - title: O mně
     url: /about
   - title: Kontakt
