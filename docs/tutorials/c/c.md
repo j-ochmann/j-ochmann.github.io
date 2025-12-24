@@ -4,9 +4,9 @@ title: C Tahák
 ---
 # C Tahák
 
-## 1️⃣ Nainstaluj C kompilátor (gcc)
+## 1️⃣ Nainstalujte C kompilátor (gcc)
 
-Otevři terminál a zadej:
+Otevřete terminál a zadejte:
 ```bash
 sudo apt update
 sudo apt install build-essential
@@ -16,17 +16,17 @@ Balík build-essential obsahuje:
 - make
 - základní knihovny a hlavičky
   
-Ověř:
+Ověřte:
 ```bash
 gcc --version
 ```
-## 2️⃣ Vytvoř zdrojový soubor
+## 2️⃣ Vytvořte zdrojový soubor
 Např. soubor hello_world.c:
 ```bash
 nano hello_world.c
 ```
 
-Do něj napiš:
+Do něj napište:
 
 ```c {file=hello_world.c}
 #include <stdio.h>
@@ -37,12 +37,12 @@ int main(void) {
 }
 ```
 
-Ulož:
+Uložte:
 - Ctrl + O
 - Enter
 - Ctrl + X
   
-## 3️⃣ Přelož program
+## 3️⃣ Přeložte program
 V tom samém adresáři spusť:
 
 ```bash
@@ -53,7 +53,7 @@ Co se stalo:
 - hello_world.c → zdroják
 - -o hello_world → výsledný spustitelný soubor hello_world
 
-Zkontroluj:
+Zkontrolujte:
 
 ```bash
 ls
@@ -61,7 +61,7 @@ ls
 
 Měl by tam být soubor hello_world
 
-## 4️⃣ Spusť program
+## 4️⃣ Spusťte program
 
 ```bash
 ./hello_world
