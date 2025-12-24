@@ -8,7 +8,7 @@ title: Markdown How-to
 s pomocí
 [Aarona Swartze](https://cs.wikipedia.org/wiki/Aaron_Swartz)
 - slouží pro úpravu textu a převod na HTML
-- [daringfireball.net/projects/markdown](https://daringfireball.net/projects/markdown/)
+- [daringfireball.net](https://daringfireball.net/projects/markdown/)
 
 ## Formátování
 - **tučné** obalte **\*\*hvězdičkami\*\*** nebo __\_\_podtržítky\_\___ 
@@ -34,26 +34,34 @@ s pomocí
 - Odrážkový: __-__, __+__, nebo __*__ následované mezerou
 - Číslovaný: číslice s tečkou (např. 1. )
 - Kontrolovaný:
-  - [x] (zaškrtnutý)
-  - [ ] (prázdný)
+  - [x] zaškrtnutý
+  - [ ] prázdný
 
 ```markdown
 1. první položka
-  1.1 první podpoložka
-  1.2 druhá podpoložka
+  1. první
+  2. druhá
+  3. [x] zaškrtnutá
+  4. [ ] prázdná
 2. druhá položka
-  - jedna „minus“ odrážka
+  - první „minus“ odrážka
   - další „minus“ odrážka
+  - [ ] prázdná
+  - [x] zaškrtnutá
   + plus
   * hvězda
 3. třetí položka
 ```
 1. první položka
-  1.1 první podpoložka
-  1.2 druhá podpoložka
+  1. první
+  2. druhá
+  3. [x] zaškrtnutá
+  4. [ ] prázdná
 2. druhá položka
-  - jedna „mínus“ odrážka
-  - další „mínus“ odrážka
+  - první „minus“ odrážka
+  - další „minus“ odrážka
+  - [ ] prázdná
+  - [x] zaškrtnutá
   + plus
   * hvězda
 3. třetí položka
@@ -67,11 +75,11 @@ s pomocí
 ## Kód a citace
 - Blokový kód:
 ```markdown
-```
+` ``` `
 Text obalte trojitými zpětnými apostrofy na samostatných řádcích.
+` ``` `
 ```
-```
-- Inline kód: Text v řádku obalte \` `jedním zpětným apostrofem`.
+- Inline kód: Text v řádku __`__`obalte jedním zpětným apostrofem`__`__.
 - Citace: Na začátek řádku vložte znak větší než `>`.
 
 ## Tabulky
