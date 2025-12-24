@@ -15,7 +15,18 @@
     <nav>
       <ul>
         {% for item in site.nav %}
-          <li><a href="{{ item.url }}">{{ item.title }}</a></li>
+          <li>
+            <a href="{{ item.url }}">{{ item.title }}</a>
+
+              {% if item.sublinks %}
+                <ul>
+                  {% for sub in item.sublinks %}
+                    <li><a href="{{ sub.url }}">{{ sub.title }}</a></li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+          
+          </li>
         {% endfor %}
       </ul>
     </nav>
