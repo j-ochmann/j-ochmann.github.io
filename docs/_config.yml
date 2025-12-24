@@ -6,6 +6,11 @@ nav:
     url: /
   - title: Projekty
     url: /projects
+  - title: O mně
+    url: /about
+  - title: Kontakt
+    url: /contacts
+    
   - title: Tutorialy
     url: /tutorials
     sublinks:
@@ -21,19 +26,15 @@ nav:
         url: /tutorials/markdown
       - title: C/C++
         url: /tutorials/cpp
-      - title: C#
-        url: /tutorials/csharp
-      - title: Java
-        url: /tutorials/java
-      - title: JavaScript
-        url: /tutorials/javascript
-      - title: PHP
-        url: /tutorials/php
-      - title: Python
-        url: /tutorials/python
-      - title: SQL
-        url: /tutorials/sql
-  - title: O mně
-    url: /about
-  - title: Kontakt
-    url: /contacts
+      #- title: C#
+      #  url: /tutorials/csharp
+      #- title: Java
+      #  url: /tutorials/java
+      #- title: JavaScript
+      #  url: /tutorials/javascript
+      #- title: PHP
+      #  url: /tutorials/php
+      #- title: Python
+      #  url: /tutorials/python
+      #- title: SQL
+      #  url: /tutorials/sql
