@@ -15,6 +15,6 @@
 - [*YouTube*](https://www.youtube.com/@JindrichOchmann)
 
 ### Weby
-- [ochmann.cz](https://ochmann.cz/)
-- [dejmi.space](https://dejmi.space/)
-- [trendhero.eu](https://trendhero.eu/)
+- [ochmann.cz](https://Ochmann.cz/)
+- [dejmi.space](https://DejMi.space/)
+- [trendhero.eu](https://TrendHero.eu/)
