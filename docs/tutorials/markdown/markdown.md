@@ -38,7 +38,6 @@ s pomocí
   - [ ] prázdný
 
 ```markdown
-
 1. první položka
 
   1. první
@@ -58,23 +57,23 @@ s pomocí
 3. třetí položka
 ```
 
-1. první položka
-
-  1. první
-  2. druhá
-  3. [x] zaškrtnutá
-  4. [ ] prázdná
-     
-2. druhá položka
-
-  - první „minus“ odrážka
-  - další „minus“ odrážka
-  - [ ] prázdná
-  - [x] zaškrtnutá
-  + plus
-  * hvězda
-    
-3. třetí položka
+  1. první položka
+  
+    1. první
+    2. druhá
+    3. [x] zaškrtnutá
+    4. [ ] prázdná
+       
+  2. druhá položka
+  
+    - první „minus“ odrážka
+    - další „minus“ odrážka
+    - [ ] prázdná
+    - [x] zaškrtnutá
+    + plus
+    * hvězda
+      
+  3. třetí položka
      
 ## Odkazy a obrázky
 - Odkaz: **\[**_Text odkazu_**](**_URL adresa_**)**
