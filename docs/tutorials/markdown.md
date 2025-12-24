@@ -78,11 +78,11 @@ s pomocí
     
 ## Kód a citace
 - Blokový kód:
-```markdown
-  ```
-  Text obalte trojitými zpětnými apostrofy na samostatných řádcích.
-  ```
+````markdown
 ```
+Text obalte trojitými zpětnými apostrofy na samostatných řádcích.
+```
+````
 - Inline kód: Text v řádku __\`__`obalte jedním zpětným apostrofem`__\`__.
 - Citace: Na začátek řádku vložte znak větší než `>`.
 
