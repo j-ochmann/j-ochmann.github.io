@@ -95,8 +95,9 @@ Text obalte trojitými zpětnými apostrofy na samostatných řádcích.
 | --------- | --------- |
 | Text      | Data      |
 
->Podrobný přehled syntaxe naleznete v [dokumentaci Markdown Guide](https://www.markdownguide.org/).
->
+## Dokumentace
+- podrobný přehled syntaxe [MarkdownGuide.org](https://www.markdownguide.org/).
+- specifická „příchuť“ [GitHub Flavored Markdown Spec](https://github.github.com/gfm/)
+
+__*Tip:*__
 >Pro pohodlné psaní můžete využít online editor [StackEdit](https://stackedit.io).
->
->GitHub specifická „příchuť“ Markdown: [GitHub Flavored Markdown Spec](https://github.github.com/gfm/)
