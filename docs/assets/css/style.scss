@@ -67,12 +67,12 @@ strong, b {
 }
 
 .sidebar a:hover {
-  color: #fff;
+  //color: #fff;
 }
 
 .profile {
-  width: 90%;//120px;
-  //height: 120px;        /* ← klíčové */
+  width: 240px;
+  height: 240px;        /* ← klíčové */
   border-radius: 50%;
   object-fit: cover;   /* ← ořízne bez deformace */
   display: block;
