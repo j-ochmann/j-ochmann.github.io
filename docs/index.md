@@ -2,11 +2,8 @@
 layout: default
 title: Úvod
 ---
-![Jindřich Ochmann](/assets/img/2025-06-02_jindrich_ochmann.jpg){: .profile }
 
 # Ahoj 👋
-Jmenuji se **Jindřich Ochmann**
-
+Jmenuji se **Jindřich** a baví mě:
 - programování
-- jazyky
 - experimenty
