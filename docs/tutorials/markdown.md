@@ -15,7 +15,7 @@ s pomocí
 - *kurzívu* obalte *\*hvězdičkou\** nebo _\_podtržítkem\__
 - ~~přeškrtnutí~~ obalte \~\~vlnovkami\~\~
 - úroveň nadpisu určuje 1-6 **#** mřížek na začátku řádku
-  
+-
 ```markdown
 # Nadpis 1 (největší)
 ## Nadpis 2
@@ -32,10 +32,27 @@ s pomocí
 ###### Nadpis 6  (nejmenší)
 
 ## Seznamy
-- Odrážkový: *, + nebo - následované mezerou
+- Odrážkový: `* + -` následované mezerou
 - Číslovaný: číslice s tečkou (např. 1. )
+- ```markdown
   1. první položka
+    1.1 první podpoložka
+    1.2 druhá podpoložka
   2. druhá položka
+    - jedna „minus“ odrážka
+    - další „minus“ odrážka
+    + plus
+    * hvězda
+  3. třetí položka
+  ```
+  1. první položka
+    1.1 první podpoložka
+    1.2 druhá podpoložka
+  2. druhá položka
+    - jedna „minus“ odrážka
+    - další „minus“ odrážka
+    + plus
+    * hvězda
   3. třetí položka
      
 ## Odkazy a obrázky
