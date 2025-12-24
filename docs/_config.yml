@@ -1,20 +1,8 @@
 title: Jindřich Ochmann
 theme: jekyll-theme-minimal
 
-menu:
-  - title: Domů
-    url: /
-  - title: Projekty
-    url: /projects
-  - title: Tutorialy
-    url: /tutorials
-  - title: O mně
-    url: /about
-  - title: Kontakt
-    url: /contact
-
 nav:
-  - title: Home
+  - title: Úvod
     url: /
   - title: Projekty
     url: /projects
