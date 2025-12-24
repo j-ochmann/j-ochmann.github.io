@@ -4,9 +4,58 @@
 @import "{{ site.theme }}";
 
 body {
-  font-family: system-ui, sans-serif;
+  /* font-family: system-ui, sans-serif;*/
+  color: #f0f0f0; /* Světle šedý text */
+  background-color: #1a1a1a; /* Tmavé pozadí */
 }
 
-h1 {
-  color: #ff6600;
+header, section, footer {
+  background-color: #1a1a1a;
+}
+
+/* Odkazy */
+a {
+  color: #4db6ac; /* Světlejší tyrkysová pro lepší kontrast */
+}
+
+a:hover {
+  color: #80cbc4;
+}
+
+/* Nadpisy */
+h1, h2, h3, h4, h5, h6 {
+  color: #ffffff;
+  /*color: #ff6600;*/
+}
+
+/* Kódové bloky */
+code {
+  background-color: #2d2d2d;
+  color: #e6e6e6;
+  border-color: #444;
+}
+
+pre {
+  background-color: #2d2d2d;
+  border: 1px solid #444;
+  color: #e6e6e6;
+}
+
+/* Boční panel (tlačítka a texty) */
+header p.view a {
+  color: #ffffff;
+}
+
+header ul {
+  border-top: 1px solid #444;
+  border-bottom: 1px solid #444;
+}
+
+header li {
+  color: #999;
+}
+
+/* Horizontální čára */
+hr {
+  border-top: 1px solid #444;
 }
