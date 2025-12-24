@@ -3,15 +3,18 @@ layout: default
 title: Markdown How-to
 ---
 # [Markdown](https://cs.wikipedia.org/wiki/Markdown)
-- je odlehčený značkovací jazyk
-- slouží pro úpravu textu a převod na HTML
-- vytvořil [John Gruber](https://en.wikipedia.org/wiki/John_Gruber) s pomocí [Aarona Swartze](https://cs.wikipedia.org/wiki/Aaron_Swartz)
-- [web](https://daringfireball.net/projects/markdown/)
-1. Formátování
+je odlehčený značkovací jazyk, který vytvořil 
+[John Gruber](https://en.wikipedia.org/wiki/John_Gruber)
+s pomocí
+[Aarona Swartze](https://cs.wikipedia.org/wiki/Aaron_Swartz)
+a slouží pro úpravu textu a převod na HTML.
+- [daringfireball.net/projects/markdown](https://daringfireball.net/projects/markdown/)
+
+## 1. Formátování
 - **tučné** obalte **\*\*hvězdičkami\*\*** nebo __\_\_podtržítky\_\___ 
 - *kurzívu* obalte *\*hvězdičkou\** nebo _\_podtržítkem\__
 - ~~přeškrtnutí~~ obalte \~\~vlnovkami\~\~
-2. Nadpisy
+## 2. Nadpisy
 - 1 až 6 # křížků na začátku řádku určuje úroveň:
 # Nadpis 1 (největší)
 ## Nadpis 2
