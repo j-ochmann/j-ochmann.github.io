@@ -28,7 +28,8 @@ nano hello_world.c
 
 Do něj napište:
 
-```c {file=hello_world.c}
+<!-- file: hello_world.c -->
+```c
 #include <stdio.h>
 
 int main(void) {
@@ -93,7 +94,8 @@ To Vás donutí psát čistý a bezpečný C kód.
 nano read_number.c
 ```
 
-```c {file=read_number.c}
+```c
+// tangle: read_number.c
 #include <stdio.h>
 int main (void)
 {
