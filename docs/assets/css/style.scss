@@ -5,7 +5,7 @@
 /* Definice barev pro světlý (výchozí) režim */
 :root {
   --bg-color: #ffffff;
-  --sidebar-bg: #f5f5f5;
+  --sidebar-bg: #ffffff;
   --text-color: #2e2e2e;
   --link-color: #1e6bb8;
   --heading-color: #111;
@@ -15,7 +15,7 @@
 /* Definice barev pro tmavý režim */
 body.dark-mode {
   --bg-color: #1a1a1a;
-  --sidebar-bg: #111111;
+  --sidebar-bg: #1a1a1a;
   --text-color: #e0e0e0;
   --link-color: #4db6ac;
   --heading-color: #ffffff;
@@ -71,8 +71,8 @@ strong, b {
 }
 
 .profile {
-  width: 120px;
-  height: 120px;        /* ← klíčové */
+  width: 90%;//120px;
+  //height: 120px;        /* ← klíčové */
   border-radius: 50%;
   object-fit: cover;   /* ← ořízne bez deformace */
   display: block;
