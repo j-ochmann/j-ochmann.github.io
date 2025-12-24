@@ -14,7 +14,15 @@ s pomocí
 - **tučné** obalte **\*\*hvězdičkami\*\*** nebo __\_\_podtržítky\_\___ 
 - *kurzívu* obalte *\*hvězdičkou\** nebo _\_podtržítkem\__
 - ~~přeškrtnutí~~ obalte \~\~vlnovkami\~\~
-- úroveň nadpisu určuje 1-6 **#** křížků na začátku řádku
+- úroveň nadpisu určuje 1-6 **#** mřížek na začátku řádku
+```markdown
+# Nadpis 1 (největší)
+## Nadpis 2
+### Nadpis 3
+#### Nadpis 4
+##### Nadpis 5
+###### Nadpis 6  (nejmenší)
+```
 # Nadpis 1 (největší)
 ## Nadpis 2
 ### Nadpis 3
@@ -25,7 +33,10 @@ s pomocí
 ## Seznamy
 - Odrážkový: *, + nebo - následované mezerou
 - Číslovaný: číslice s tečkou (např. 1. )
-
+  1. první položka
+  2. druhá položka
+  3. třetí položka
+     
 ## Odkazy a obrázky
 - Odkaz: \[Text odkazu](URL adresa)
   + např. \[Google](https://www.google.com)
