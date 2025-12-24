@@ -1,61 +1,47 @@
 ---
 ---
-
 @import "{{ site.theme }}";
 
+/* Definice barev pro světlý (výchozí) režim */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #2e2e2e;
+  --link-color: #1e6bb8;
+  --heading-color: #111;
+  --bold-color: #000000; /* Výraznější černá pro tučné písmo */
+}
+
+/* Definice barev pro tmavý režim */
+body.dark-mode {
+  --bg-color: #1a1a1a;
+  --text-color: #e0e0e0;
+  --link-color: #4db6ac;
+  --heading-color: #ffffff;
+  --bold-color: #ffffff; /* Čistě bílá pro tučné písmo v tmavém režimu */
+}
+
 body {
-  /* font-family: system-ui, sans-serif;*/
-  color: #f0f0f0; /* Světle šedý text */
-  background-color: #1a1a1a; /* Tmavé pozadí */
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s; /* Hladký přechod */
 }
 
-header, section, footer {
-  background-color: #1a1a1a;
+h1, h2, h3, h4, h5, h6 { color: var(--heading-color); }
+a { color: var(--link-color); }
+
+/* OPRAVA TUČNÉHO PÍSMA */
+strong, b {
+  color: var(--bold-color);
+  font-weight: 700; /* Vynucení vyšší tučnosti */
 }
 
-/* Odkazy */
-a {
-  color: #4db6ac; /* Světlejší tyrkysová pro lepší kontrast */
-}
-
-a:hover {
-  color: #80cbc4;
-}
-
-/* Nadpisy */
-h1, h2, h3, h4, h5, h6 {
-  color: #ffffff;
-  /*color: #ff6600;*/
-}
-
-/* Kódové bloky */
-code {
-  background-color: #2d2d2d;
-  color: #e6e6e6;
-  border-color: #444;
-}
-
-pre {
-  background-color: #2d2d2d;
-  border: 1px solid #444;
-  color: #e6e6e6;
-}
-
-/* Boční panel (tlačítka a texty) */
-header p.view a {
-  color: #ffffff;
-}
-
-header ul {
-  border-top: 1px solid #444;
-  border-bottom: 1px solid #444;
-}
-
-header li {
-  color: #999;
-}
-
-/* Horizontální čára */
-hr {
-  border-top: 1px solid #444;
+/* Styl pro tlačítko přepínače */
+#theme-toggle {
+  cursor: pointer;
+  padding: 5px 10px;
+  border: 1px solid var(--link-color);
+  background: transparent;
+  color: var(--link-color);
+  border-radius: 4px;
+  margin-bottom: 20px;
 }
