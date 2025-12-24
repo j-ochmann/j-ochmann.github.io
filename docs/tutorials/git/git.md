@@ -3,13 +3,7 @@ layout: default
 title: Git
 ---
 # Git
-## Zkratka
-```bash
-clear &&
-git add . &&
-git commit -m "gc" &&
-git push
-```
+
 ## Instalace (Debian)
 ```bash
 sudo apt update
