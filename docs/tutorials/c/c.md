@@ -25,7 +25,9 @@ Např. soubor hello_world.c:
 ```bash
 nano hello_world.c
 ```
+
 Do něj napiš:
+
 ```c {file=hello_world.c}
 #include <stdio.h>
 
@@ -34,48 +36,63 @@ int main(void) {
     return 0;
 }
 ```
+
 Ulož:
 - Ctrl + O
 - Enter
 - Ctrl + X
+  
 ## 3️⃣ Přelož program
 V tom samém adresáři spusť:
+
 ```bash
 gcc hello_world.c -o hello_world
 ```
+
 Co se stalo:
 - hello_world.c → zdroják
 - -o hello_world → výsledný spustitelný soubor hello_world
+
 Zkontroluj:
+
 ```bash
 ls
 ```
+
 Měl by tam být soubor hello_world
 
 ## 4️⃣ Spusť program
+
 ```bash
 ./hello_world
 ```
+
 Výstup:
+
 ```bash
 Hello, world!
 ```
+
 ## 5️⃣ (Volitelné) Překlad s varováními – doporučeno
 
 Pro správné návyky:
+
 ```bash
 gcc -Wall -Wextra -Werror hello_world.c -o hello_world
 ```
-To tě donutí psát čistý a bezpečný C kód.
+
+To Vás donutí psát čistý a bezpečný C kód.
 
 ## 6️⃣ Co je dobré vědět hned od začátku
 - main vždy vrací int
-- return 0; = program skončil OK
-- stdio.h je standardní knihovna pro vstup/výstup
-- ./ říká shellu „spusť soubor z aktuálního adresáře“
+- `return 0;` = program skončil OK
+- `stdio.h` je standardní knihovna pro vstup/výstup
+- `./` říká shellu „spusť soubor z aktuálního adresáře“
+
 ```bash
 nano read_number.c
 ```
+
 ```c {file=read_number.c}
 #include <stdio.h>
 int main (void)
@@ -86,11 +103,12 @@ int main (void)
     printf("Zadal jste: %d\n", cislo);
     return 0;
 }
-
 ```
 
 ## Doporučená struktura projektu
+
 Pokud chcete mít projekt profesionálně organizovaný, standardní rozložení vypadá takto: 
+
 ```text
 projekt/
 ├── docs/                # Hlavní dokumentace projektu
@@ -108,6 +126,7 @@ projekt/
 ├── build/           # Výstupy kompilace (ignore v gitu)
 └── CMakeLists.txt   # Konfigurace sestavení
 ```
-`Tip:`
+
+__*Tip:*__
 >Pro názvy složek používejte vždy malá písmena a místo mezer podtržítka nebo pomlčky,
 >abyste se vyhnuli problémům s kompatibilitou na různých operačních systémech.
