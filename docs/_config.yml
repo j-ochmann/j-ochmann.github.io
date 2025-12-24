@@ -23,7 +23,7 @@ nav:
               - title: GitHub Pages
                 url: /tutorials/git/github/pages
       - title: Markdown
-        url: /tutorials/markdown
+        url: /tutorials/markdown/markdown
       - title: C/C++
         url: /tutorials/cpp
       #- title: C#
