@@ -7,7 +7,7 @@ title: Kontakt
 - **email**   [*jindrich.ochmann@gmail.com*](mailto:jindrich.ochmann@gmail.com)
 - **adresa**  *Hlavní třída 695/98, 708 00 Ostrava-Poruba*
 
-### IČ 88032353
+### IČ [88032353](https://ares.gov.cz/ekonomicke-subjekty/ros/88032353)
 - **Datová schránka**	*ec658w8*
 - **adresa** *Antala Staška 2059/80b, 140 00 Praha 4*
 
