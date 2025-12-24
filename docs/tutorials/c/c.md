@@ -15,7 +15,8 @@ Balík build-essential obsahuje:
 - gcc (C kompilátor)
 - make
 - základní knihovny a hlavičky
-Ověření:
+  
+Ověř:
 ```bash
 gcc --version
 ```
@@ -25,7 +26,7 @@ Např. soubor hello_world.c:
 nano hello_world.c
 ```
 Do něj napiš:
-```c  {file=hello_world.c}
+```c {file=hello_world.c}
 #include <stdio.h>
 
 int main(void) {
