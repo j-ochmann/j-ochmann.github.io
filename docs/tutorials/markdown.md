@@ -31,8 +31,9 @@ s pomocí
 ###### Nadpis 6  (nejmenší)
 
 ## Seznamy
-- Odrážkový: __*__, __+__, nebo __-__ následované mezerou
+- Odrážkový: __-__, __+__, nebo __*__ následované mezerou
 - Číslovaný: číslice s tečkou (např. 1. )
+
 ```markdown
 1. první položka
   1.1 první podpoložka
@@ -44,33 +45,31 @@ s pomocí
   * hvězda
 3. třetí položka
 ```
-  1. první položka
-    1.1 první podpoložka
-    1.2 druhá podpoložka
-  2. druhá položka
-    - jedna „mínus“ odrážka
-    - další „mínus“ odrážka
-    + plus
-    * hvězda
-  3. třetí položka
+1. první položka
+  1.1 první podpoložka
+  1.2 druhá podpoložka
+2. druhá položka
+  - jedna „mínus“ odrážka
+  - další „mínus“ odrážka
+  + plus
+  * hvězda
+3. třetí položka
      
 ## Odkazy a obrázky
-- Odkaz: **\[**Text odkazu**](**URL adresa**)**
-  + např. \[Google](https://www.google.com)
-  + [Google](https://www.google.com)
-- Obrázek: **\!\[**Popis obrázku**](**URL adresa obrázku**)**
-  + např. \!\[Jindřich](../assets/img/jindrich_16px.jpg)
-  + např. ![Jindřich](../assets/img/jindrich_16px.jpg)
+- Odkaz: **\[**_Text odkazu_**](**_URL adresa_**)**
+  + [Google](https://www.google.com) např. \[Google](https://www.google.com)
+- Obrázek: **\!\[**_Popis obrázku_**](**_URL adresa obrázku_**)**
+  + ![Jindřich](../assets/img/jindrich_16px.jpg) např. \!\[Jindřich](../assets/img/jindrich_16px.jpg)
     
 ## Kód a citace
 - Blokový kód:
-```text
-\```
-Text obalte trojitými zpětnými apostrofy na samostatných řádcích.
-\```
+```markdown
 ```
-- Inline kód: Text v řádku ``obalte jedním zpětným apostrofem``.
-- Citace: Na začátek řádku vložte znak větší než >.
+Text obalte trojitými zpětnými apostrofy na samostatných řádcích.
+```
+```
+- Inline kód: Text v řádku obalte \` `jedním zpětným apostrofem`.
+- Citace: Na začátek řádku vložte znak větší než `>`.
 
 ## Tabulky
 - se tvoří pomocí svislic __|__ pro sloupce a pomlček __-__ pro oddělení hlavičky:
@@ -84,8 +83,10 @@ Text obalte trojitými zpětnými apostrofy na samostatných řádcích.
 | --------- | --------- |
 | Text      | Data      |
 
->Podrobný přehled syntaxe naleznete v [dokumentaci Markdown Guide](www.markdownguide.org).
->Pro pohodlné psaní můžete využít online editor [StackEdit](stackedit.io).
+>Podrobný přehled syntaxe naleznete v [dokumentaci Markdown Guide](https://www.markdownguide.org/).
+>
+>Pro pohodlné psaní můžete využít online editor [StackEdit](https://stackedit.io).
+
 >GitHub specifická „příchuť“ Markdown: [GitHub Flavored Markdown Spec](https://github.github.com/gfm/)
 
 ## Unicode Ikony
