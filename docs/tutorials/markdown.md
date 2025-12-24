@@ -3,11 +3,11 @@ layout: default
 title: Markdown How-to
 ---
 # [Markdown](https://cs.wikipedia.org/wiki/Markdown)
-je odlehčený značkovací jazyk, který vytvořil 
+- je odlehčený značkovací jazyk, který vytvořil 
 [John Gruber](https://en.wikipedia.org/wiki/John_Gruber)
 s pomocí
 [Aarona Swartze](https://cs.wikipedia.org/wiki/Aaron_Swartz)
-a slouží pro úpravu textu a převod na HTML.
+- slouží pro úpravu textu a převod na HTML
 - [daringfireball.net/projects/markdown](https://daringfireball.net/projects/markdown/)
 
 ## 1. Formátování
