@@ -79,11 +79,11 @@ s pomocí
 ## Kód a citace
 - Blokový kód:
 ```markdown
-` ``` `
-Text obalte trojitými zpětnými apostrofy na samostatných řádcích.
-` ``` `
+  ```
+  Text obalte trojitými zpětnými apostrofy na samostatných řádcích.
+  ```
 ```
-- Inline kód: Text v řádku __`__`obalte jedním zpětným apostrofem`__`__.
+- Inline kód: Text v řádku __\`__`obalte jedním zpětným apostrofem`__\`__.
 - Citace: Na začátek řádku vložte znak větší než `>`.
 
 ## Tabulky
@@ -93,18 +93,9 @@ Text obalte trojitými zpětnými apostrofy na samostatných řádcích.
 | --------- | --------- |
 | Text      | Data      |
 ```
-
 | Záhlaví 1 | Záhlaví 2 |
 | --------- | --------- |
 | Text      | Data      |
-
-## KaTeX
-
-The *Gamma function* satisfying $\Gamma(n) = (n-1)!\quad\forall n\in\mathbb N$ is via the Euler integral
-
-$$
-\Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.
-$$
 
 >Podrobný přehled syntaxe naleznete v [dokumentaci Markdown Guide](https://www.markdownguide.org/).
 >
