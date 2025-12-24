@@ -38,6 +38,7 @@ s pomocí
   - [ ] prázdný
 
 ```markdown
+
 1. první položka
   1. první
   2. druhá
@@ -52,6 +53,7 @@ s pomocí
   * hvězda
 3. třetí položka
 ```
+
 1. první položka
   1. první
   2. druhá
