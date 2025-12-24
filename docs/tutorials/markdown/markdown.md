@@ -40,27 +40,33 @@ s pomocí
 ```markdown
 
 1. první položka
+
   1. první
   2. druhá
   3. [x] zaškrtnutá
   4. [ ] prázdná
+
 2. druhá položka
+
   - první „minus“ odrážka
   - další „minus“ odrážka
   - [ ] prázdná
   - [x] zaškrtnutá
   + plus
   * hvězda
+
 3. třetí položka
 ```
 
 1. první položka
+
   1. první
   2. druhá
   3. [x] zaškrtnutá
   4. [ ] prázdná
      
 2. druhá položka
+
   - první „minus“ odrážka
   - další „minus“ odrážka
   - [ ] prázdná
@@ -74,7 +80,7 @@ s pomocí
 - Odkaz: **\[**_Text odkazu_**](**_URL adresa_**)**
   + [Google](https://www.google.com) např. \[Google](https://www.google.com)
 - Obrázek: **\!\[**_Popis obrázku_**](**_URL adresa obrázku_**)**
-  + ![Jindřich](../assets/img/jindrich_16px.jpg) např. \!\[Jindřich](../assets/img/jindrich_16px.jpg)
+  + ![Jindřich](../assets/img/jindrich_16px.jpg) např. \!\[Jindřich](../../assets/img/jindrich_16px.jpg)
     
 ## Kód a citace
 - Blokový kód:
@@ -93,6 +99,7 @@ Text obalte trojitými zpětnými apostrofy na samostatných řádcích.
 | --------- | --------- |
 | Text      | Data      |
 ```
+
 | Záhlaví 1 | Záhlaví 2 |
 | --------- | --------- |
 | Text      | Data      |
