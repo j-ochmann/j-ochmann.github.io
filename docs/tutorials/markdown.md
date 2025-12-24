@@ -20,10 +20,7 @@ title: Markdown How-to
 * Číslovaný: číslice s tečkou (např. 1. ).
 4. Odkazy a obrázky
 Odkaz: \[Text odkazu](URL adresa) – např. \[Google](https://www.google.com)
-Obrázek: \![Popis obrázku](URL adresa obrázku) např. ![Jindřich](../assets/img/IMG_20250712_063930.jpg)
-
-[Soubor](../nadrazena_slozka/podslozka/soubor.txt)
-
+Obrázek: \!\[Popis obrázku](URL adresa obrázku) např. ![Jindřich](../assets/img/053_16px.jpg)
 5. Kód a citace
 Blokový kód: Text obalte trojitými zpětnými apostrofy ``` na samostatných řádcích.
 Inline kód: Text v řádku obalte jedním zpětným apostrofem `.
