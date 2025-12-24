@@ -102,19 +102,10 @@ $$
 \Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.
 $$
 
-```abc
-X: 1
-T: Example Song
-M: 4/4
-L: 1/4
-K: C
-C D E F | G A B c |
-```
-
 >Podrobný přehled syntaxe naleznete v [dokumentaci Markdown Guide](https://www.markdownguide.org/).
 >
 >Pro pohodlné psaní můžete využít online editor [StackEdit](https://stackedit.io).
-
+>
 >GitHub specifická „příchuť“ Markdown: [GitHub Flavored Markdown Spec](https://github.github.com/gfm/)
 
 ## Unicode Ikony
