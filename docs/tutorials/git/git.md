@@ -18,7 +18,7 @@ git add . # Přidá všechny soubory do "staging" oblasti
 git commit -m "Počáteční commit projektu"
 ```
 ## Vytvoření repozitáře na GitHubu
-Přihlaste se na GitHub. Klikněte na 'New repository' (nový repozitář) a pojmenujte ho. 
+Přihlaste se na GitHub. Klikněte na nový repozitář „New repository“ a pojmenujte ho. 
 ### Propojení a nahrání na GitHub
 Zkopírujte a přidejte URL vašeho GitHub repozitáře.
 ```bash
@@ -40,16 +40,18 @@ git branch -M main
 Všimněte si varování u commitu.
 - Git automaticky nastavil e-mail.
 - Pokud chcete, aby se u commitů na GitHubu zobrazovala vaše správná vizitka a profilový obrázek, opravte to:
+  
 ```bash
 git config --global user.name "vaše jméno"
 git config --global user.email "vas@email.com"
 git commit --amend --reset-author
 ```
-## Krok 5: Nastavení SSH (Doporučeno pro budoucí práce)
+
+## Krok 5: Nastavení SSH (Doporučeno)
 Vygenerujte SSH klíč: 
 ```bash
-ssh-keygen -t ed25519 -C "vas@email.com".
+ssh-keygen -t ed25519 -C "váš@email.com".
 ```
-Zkopírujte obsah souboru ~/.ssh/id_ed25519.pub.
-Vložte klíč do nastavení GitHub (Settings -> SSH and GPG keys).
-Po nastavení SSH můžete používat git@github.com:uživatel/repozitář.git místo HTTPS.
+- Zkopírujte obsah souboru ~/.ssh/id_ed25519.pub.
+- Vložte klíč do nastavení GitHub (Settings -> SSH and GPG keys).
+- Po nastavení SSH můžete používat git@github.com:uživatel/repozitář.git místo HTTPS.
