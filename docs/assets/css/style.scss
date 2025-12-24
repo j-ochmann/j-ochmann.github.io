@@ -2,6 +2,13 @@
 ---
 @import "{{ site.theme }}";
 
+.profile {
+  width: 140px;
+  border-radius: 50%;
+  display: block;
+  margin: 1rem auto;
+}
+
 /* Definice barev pro světlý (výchozí) režim */
 :root {
   --bg-color: #ffffff;
