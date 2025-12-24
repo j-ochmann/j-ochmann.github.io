@@ -52,10 +52,11 @@ s pomocí
 Text obalte trojitými zpětnými apostrofy na samostatných řádcích.
 \```
 ```
-- Inline kód: Text v řádku `\`obalte jedním zpětným apostrofem\``.
+- Inline kód: Text v řádku \``obalte jedním zpětným apostrofem`\`.
 - Citace: Na začátek řádku vložte znak větší než >.
-6. Tabulky
-Tabulky se tvoří pomocí svislic | pro sloupce a pomlček - pro oddělení hlavičky:
+
+## Tabulky
+- se tvoří pomocí svislic | pro sloupce a pomlček - pro oddělení hlavičky:
 ```text
 | Záhlaví 1 | Záhlaví 2 |
 | --------- | --------- |
@@ -65,8 +66,8 @@ Tabulky se tvoří pomocí svislic | pro sloupce a pomlček - pro oddělení hla
 | --------- | --------- |
 | Text      | Data      |
 
-Podrobný přehled syntaxe naleznete v [dokumentaci Markdown Guide](www.markdownguide.org).
-Pro pohodlné psaní můžete využít online editor [StackEdit](stackedit.io).
+>Podrobný přehled syntaxe naleznete v [dokumentaci Markdown Guide](www.markdownguide.org).
+>Pro pohodlné psaní můžete využít online editor [StackEdit](stackedit.io).
 >GitHub specifická 'příchuť' Markdown: [GitHub Flavored Markdown Spec](https://github.github.com/gfm/)
 
 ## Unicode Ikony
