@@ -2,11 +2,15 @@
 layout: default
 title: Markdown How-to
 ---
-# Markdown
+# [Markdown](https://cs.wikipedia.org/wiki/Markdown)
+- je odlehčený značkovací jazyk
+- slouží pro úpravu textu a převod na HTML
+- vytvořil [John Gruber](https://en.wikipedia.org/wiki/John_Gruber) s pomocí [Aarona Swartze](https://cs.wikipedia.org/wiki/Aaron_Swartz)
+- [web](https://daringfireball.net/projects/markdown/)
 1. Formátování
 - **tučné** obalte **\*\*hvězdičkami\*\*** nebo __\_\_podtržítky\_\___ 
-- *kurzívu* obalte *\*hvězdičkou\** nebo _\_podtržítkem\__.
-- ~~přeškrtnutí~~ obalte \~\~vlnovkami\~\~.
+- *kurzívu* obalte *\*hvězdičkou\** nebo _\_podtržítkem\__
+- ~~přeškrtnutí~~ obalte \~\~vlnovkami\~\~
 2. Nadpisy
 - 1 až 6 # křížků na začátku řádku určuje úroveň:
 # Nadpis 1 (největší)
@@ -17,20 +21,26 @@ title: Markdown How-to
 ###### Nadpis 6  (nejmenší)
 3. Seznamy
 * Odrážkový: *, + nebo - následované mezerou
-* Číslovaný: číslice s tečkou (např. 1. ).
+* Číslovaný: číslice s tečkou (např. 1. )
 4. Odkazy a obrázky
-Odkaz: \[Text odkazu](URL adresa) – např. \[Google](https://www.google.com)
-Obrázek: \!\[Popis obrázku](URL adresa obrázku) např. ![Jindřich](../assets/img/053_16px.jpg)
+- Odkaz: \[Text odkazu](URL adresa) – např. \[Google](https://www.google.com)
+- Obrázek: \!\[Popis obrázku](URL adresa obrázku) např. ![Jindřich](../assets/img/053_16px.jpg)
 5. Kód a citace
-Blokový kód: Text obalte trojitými zpětnými apostrofy ``` na samostatných řádcích.
-Inline kód: Text v řádku obalte jedním zpětným apostrofem `.
-Citace: Na začátek řádku vložte znak větší než >.
+- Blokový kód:
+```text
+\```
+Text obalte trojitými zpětnými apostrofy na samostatných řádcích.
+\```
+```
+- Inline kód: Text v řádku `\`obalte jedním zpětným apostrofem\``.
+- Citace: Na začátek řádku vložte znak větší než >.
 6. Tabulky
 Tabulky se tvoří pomocí svislic | pro sloupce a pomlček - pro oddělení hlavičky:
-markdown
-{content: }
-Při použití kódu buďte obezřetní.
-
+```text
+| Záhlaví 1 | Záhlaví 2 |
+| --------- | --------- |
+| Text      | Data      |
+```
 | Záhlaví 1 | Záhlaví 2 |
 | --------- | --------- |
 | Text      | Data      |
