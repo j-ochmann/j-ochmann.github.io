@@ -79,7 +79,7 @@ s pomocí
 - Odkaz: **\[**_Text odkazu_**](**_URL adresa_**)**
   + [Google](https://www.google.com) např. \[Google](https://www.google.com)
 - Obrázek: **\!\[**_Popis obrázku_**](**_URL adresa obrázku_**)**
-  + ![Jindřich](../assets/img/jindrich_16px.jpg) např. \!\[Jindřich](../../assets/img/jindrich_16px.jpg)
+  + ![Jindřich](../assets/img/jindrich_16px.jpg) např. \!\[Jindřich](../../../assets/img/jindrich_16px.jpg)
     
 ## Kód a citace
 - Blokový kód:
