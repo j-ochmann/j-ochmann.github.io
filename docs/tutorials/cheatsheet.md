@@ -3,9 +3,9 @@ layout: default
 title: Cheat sheet
 ---
 
-# Cheat sheet
+# CheatSheet
 
-## 0️⃣ Shell „&& Shortcuts“
+## 0️⃣ ShellGlue
 
 ### Git
 ```bash
@@ -23,7 +23,7 @@ gcc -Wall -Wextra -Werror hello.c -o hello &&
 ./hello
 ```
 
-### Unicode Ikony
+### Unicode Icons
 - kniha:
    * 📕 červená (U+1F4D5)
    * 📗 zelená (U+1F4D7)
