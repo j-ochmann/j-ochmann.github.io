@@ -59,6 +59,7 @@ s pomocí
   2. druhá
   3. [x] zaškrtnutá
   4. [ ] prázdná
+     
 2. druhá položka
   - první „minus“ odrážka
   - další „minus“ odrážka
@@ -66,6 +67,7 @@ s pomocí
   - [x] zaškrtnutá
   + plus
   * hvězda
+    
 3. třetí položka
      
 ## Odkazy a obrázky
