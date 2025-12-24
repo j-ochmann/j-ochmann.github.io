@@ -10,7 +10,6 @@ nav:
     url: /about
   - title: Kontakt
     url: /contacts
-    
   - title: Tutorialy
     url: /tutorials
     sublinks:
