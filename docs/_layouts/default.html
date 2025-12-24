@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ page.title }} | {{ site.title }}</title>
+  <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+
+<div class="layout">
+
+  <aside class="sidebar">
+    <img src="/assets/img/2025-06-02_jindrich_ochmann.jpg" class="profile" alt="Jindřich Ochmann">
+
+    <nav>
+      <ul>
+        {% for item in site.menu %}
+          <li><a href="{{ item.url }}">{{ item.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </nav>
+
+  </aside>
+
+  <main class="content">
+    {{ content }}
+  </main>
+
+</div>
+
+</body>
+</html>
