@@ -15,6 +15,7 @@ s pomocí
 - *kurzívu* obalte *\*hvězdičkou\** nebo _\_podtržítkem\__
 - ~~přeškrtnutí~~ obalte \~\~vlnovkami\~\~
 - úroveň nadpisu určuje 1-6 **#** mřížek na začátku řádku
+  
 ```markdown
 # Nadpis 1 (největší)
 ## Nadpis 2
@@ -38,10 +39,10 @@ s pomocí
   3. třetí položka
      
 ## Odkazy a obrázky
-- Odkaz: \[Text odkazu](URL adresa)
+- Odkaz: **\[**Text odkazu**](**URL adresa**)**
   + např. \[Google](https://www.google.com)
   + [Google](https://www.google.com)
-- Obrázek: \!\[Popis obrázku](URL adresa obrázku)
+- Obrázek: **\!\[**Popis obrázku**](**URL adresa obrázku**)**
   + např. \!\[Jindřich](../assets/img/jindrich_16px.jpg)
   + např. ![Jindřich](../assets/img/jindrich_16px.jpg)
     
@@ -52,7 +53,7 @@ s pomocí
 Text obalte trojitými zpětnými apostrofy na samostatných řádcích.
 \```
 ```
-- Inline kód: Text v řádku \``obalte jedním zpětným apostrofem`\`.
+- Inline kód: Text v řádku ``obalte jedním zpětným apostrofem``.
 - Citace: Na začátek řádku vložte znak větší než >.
 
 ## Tabulky
