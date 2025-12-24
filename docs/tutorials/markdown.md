@@ -48,8 +48,8 @@ s pomocí
     1.1 první podpoložka
     1.2 druhá podpoložka
   2. druhá položka
-    - jedna „minus“ odrážka
-    - další „minus“ odrážka
+    - jedna „mínus“ odrážka
+    - další „mínus“ odrážka
     + plus
     * hvězda
   3. třetí položka
@@ -73,19 +73,20 @@ Text obalte trojitými zpětnými apostrofy na samostatných řádcích.
 - Citace: Na začátek řádku vložte znak větší než >.
 
 ## Tabulky
-- se tvoří pomocí svislic | pro sloupce a pomlček - pro oddělení hlavičky:
+- se tvoří pomocí svislic __|__ pro sloupce a pomlček __-__ pro oddělení hlavičky:
 ```text
 | Záhlaví 1 | Záhlaví 2 |
 | --------- | --------- |
 | Text      | Data      |
 ```
+
 | Záhlaví 1 | Záhlaví 2 |
 | --------- | --------- |
 | Text      | Data      |
 
 >Podrobný přehled syntaxe naleznete v [dokumentaci Markdown Guide](www.markdownguide.org).
 >Pro pohodlné psaní můžete využít online editor [StackEdit](stackedit.io).
->GitHub specifická 'příchuť' Markdown: [GitHub Flavored Markdown Spec](https://github.github.com/gfm/)
+>GitHub specifická „příchuť“ Markdown: [GitHub Flavored Markdown Spec](https://github.github.com/gfm/)
 
 ## Unicode Ikony
 - kniha:
