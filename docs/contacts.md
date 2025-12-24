@@ -1,3 +1,7 @@
+---
+layout: default
+title: Kontakt
+---
 ## Kontakty
 - **mobil**   [*(+420) 792 353 539*](tel:+420792353539)
 - **email**   [*jindrich.ochmann@gmail.com*](mailto:jindrich.ochmann@gmail.com)
