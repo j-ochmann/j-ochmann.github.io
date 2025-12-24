@@ -2,13 +2,6 @@
 ---
 @import "{{ site.theme }}";
 
-.profile {
-  width: 140px;
-  border-radius: 50%;
-  display: block;
-  margin: 1rem auto;
-}
-
 /* Definice barev pro světlý (výchozí) režim */
 :root {
   --bg-color: #ffffff;
@@ -51,4 +44,37 @@ strong, b {
   color: var(--link-color);
   border-radius: 4px;
   margin-bottom: 20px;
+}
+
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 240px;
+  background: #111;
+  color: #fff;
+  padding: 1.5rem;
+}
+
+.sidebar a {
+  color: #ddd;
+  text-decoration: none;
+}
+
+.sidebar a:hover {
+  color: #fff;
+}
+
+.profile {
+  width: 120px;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto 1rem;
+}
+
+.content {
+  flex: 1;
+  padding: 2rem;
 }
