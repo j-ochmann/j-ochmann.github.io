@@ -119,28 +119,28 @@ body {
 }
 
 /* Styl pro textové odkazy v obsahu stránky (contacts.md) */
-section a.icon-gh, section a.icon-li, section a.icon-ig, section a.icon-fb, section a.icon-yt {
-  color: var(--brand-color) !important; /* Barva textu i ikony */
+section a[class^="icon-"] {
+  color: rgb(var(--brand)) !important; /* Obarví text i ikonu barvou značky */
+  background: transparent !important;
+  box-shadow: none !important;
+  display: inline-block;
   font-weight: 600;
   text-decoration: none;
-  background: transparent !important; /* Odstraní podkladový kruh */
-  box-shadow: none !important;        /* Odstraní stín */
+  transform: none !important; /* Zruší posuny z oblouku */
   padding: 0;
-  display: inline;                    /* Vrátí textu řádkové chování */
-  transition: opacity 0.2s;
+  width: auto;
+  height: auto;
+}
+
+/* Zajištění, že ikona v seznamu nezdědí bílou barvu ze sidebaru */
+section a[class^="icon-"] i {
+  color: inherit !important;
+  margin-right: 8px;
 }
 
 section a[class^="icon-"]:hover {
-  opacity: 0.7;
   text-decoration: underline !important;
-  transform: none !important; /* Zruší "uskakování" nebo zvětšování z oblouku */
-}
-
-/* Mezera mezi ikonou a textem v seznamu */
-section a[class^="icon-"] i {
-  margin-right: 8px;
-  width: 20px;
-  text-align: center;
+  opacity: 0.8;
 }
 
 header {
