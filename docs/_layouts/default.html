@@ -22,8 +22,7 @@
         <!-- VAŠE MENU A IKONY ZDE -->
         <nav>
           <ul>
-            <li><a href="{{ '/' | relative_url }}">Domů</a></li>
-            <li><a href="{{ '/o-mne/' | relative_url }}">O mně</a></li>
+            {% include nav_item.html links=site.nav %}
           </ul>
         </nav>
 
