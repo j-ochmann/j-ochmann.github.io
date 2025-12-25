@@ -68,6 +68,8 @@ body {
 
 .profile-img a:hover {
   transform: translateY(-10px) scale(1.4) !important;
+  filter: brightness(1.5); /* Rozsvítí obrázek na 150 % jasu */
+  transform: scale(1.2); /* Zvětší obrázek o 10 % */
   color: var(--bold-color);
   z-index: 20;
 }
