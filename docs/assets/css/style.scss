@@ -241,3 +241,52 @@ header {
   #mobile-menu-toggle { display: none; }
   #main-nav { display: block !important; }
 }
+
+/* --- SPOLEČNÉ STYLY (pro oba) --- */
+.profile-container { /* ... vaše styly ... */ }
+
+/* --- POUZE DESKTOP (Nad 770px) --- */
+@media screen and (min-width: 771px) {
+  header {
+    position: fixed;
+    width: 210px;
+    top: 40px;
+    left: calc(50% - 430px); /* Toto funguje jen na velkém monitoru */
+  }
+  #mobile-menu-toggle { display: none; }
+  #main-nav { display: block !important; }
+  .wrapper { max-width: 900px; margin: 0 auto; }
+}
+
+/* --- POUZE MOBIL (Do 770px) --- */
+@media screen and (max-width: 770px) {
+  header {
+    position: fixed !important;
+    top: 0; left: 0; right: 0;
+    width: 100% !important;
+    height: 60px;
+    background: var(--bg-color);
+    display: flex; 
+    flex-direction: row; /* Prvky v liště vedle sebe */
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+    z-index: 1000;
+  }
+
+  .wrapper {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  section {
+    margin-top: 80px !important; /* Odsazení textu od horní lišty */
+    padding: 15px;
+    width: 100% !important;
+    box-sizing: border-box;
+  }
+  
+  /* Skrytí věcí, co se do lišty nevejdou */
+  .profile-img, .profile-description, .social-icons-v-arc { display: none; }
+}
