@@ -2,6 +2,8 @@
 layout: default
 title: Kontakt
 ---
+<div class="contact-list">
+
 ## Kontakty
 - <i class="fa-solid fa-phone"></i> **mobil** [*(+420) 792 353 539*](tel:+420792353539)
 - <i class="fa-solid fa-envelope"></i> **email** [*jindrich.ochmann@gmail.com*](mailto:jindrich.ochmann@gmail.com)
@@ -20,3 +22,5 @@ title: Kontakt
 - <a href="https://www.instagram.com/jindrichochmann"                  class="icon-ig"><i class="fa-brands fa-instagram"></i>Instagram</a>
 - <a href="https://www.facebook.com/jindrich.ochmann"                  class="icon-fb"><i class="fa-brands fa-facebook"></i>Facebook</a>
 - <a href="https://www.youtube.com/@JindrichOchmann"                   class="icon-yt"><i class="fa-brands fa-youtube"></i>YouTube</a>
+
+</div>
