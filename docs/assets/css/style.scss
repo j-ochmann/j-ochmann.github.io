@@ -120,27 +120,31 @@ body {
 
 /* Styl pro textové odkazy v obsahu stránky (contacts.md) */
 section a[class^="icon-"] {
-  color: rgb(var(--brand)) !important; /* Obarví text i ikonu barvou značky */
+  /* ZMĚNA: var(--brand) opraveno na var(--brand-color) */
+  color: rgb(var(--brand-color)) !important; 
   background: transparent !important;
   box-shadow: none !important;
   display: inline-block;
   font-weight: 600;
   text-decoration: none;
-  transform: none !important; /* Zruší posuny z oblouku */
+  transform: none !important; 
   padding: 0;
   width: auto;
   height: auto;
+  margin: 0;
 }
 
-/* Zajištění, že ikona v seznamu nezdědí bílou barvu ze sidebaru */
+/* Zajištění barevnosti ikony i textu */
 section a[class^="icon-"] i {
-  color: inherit !important;
+  color: inherit !important; /* Převezme barvu značky od odkazu */
   margin-right: 8px;
+  transform: none !important;
 }
 
 section a[class^="icon-"]:hover {
   text-decoration: underline !important;
   opacity: 0.8;
+  background: transparent !important;
 }
 
 header {
