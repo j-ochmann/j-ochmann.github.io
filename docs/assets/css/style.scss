@@ -42,6 +42,12 @@ body {
   z-index: 1;
 }
 
+.profile-img a:hover {
+  transform: translateY(-10px) scale(1.2) !important;
+  color: var(--bold-color);
+  z-index: 20;
+}
+
 /* Ikony v plynulém OBLOUKU */
 .social-icons-arc {
   display: flex;
@@ -86,7 +92,7 @@ body {
 
 /* Hover efekt - ikona se při najetí zvýrazní */
 .social-icons-arc a:hover {
-  transform: translateY(-20px) scale(1.2) !important;
+  transform: translateY(-10px) scale(1.2) !important;
   color: var(--bold-color);
   z-index: 20;
 }
