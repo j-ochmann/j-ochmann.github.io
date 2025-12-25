@@ -58,3 +58,42 @@ strong, b {
 .social-icons a:hover {
   filter: brightness(1.2);
 }
+
+/* Fixace celého sidebaru (headeru) vlevo */
+header {
+  position: fixed;
+  width: 210px; /* Standardní šířka pro Minimal theme */
+  top: 40px;
+  left: calc(50% - 430px); /* Udrží sidebar na místě u centrovaného obsahu */
+}
+
+/* Úprava pro navigaci pod logem */
+nav {
+  margin-top: 20px;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+nav li {
+  margin-bottom: 10px;
+}
+
+/* Sociální ikony pod menu */
+.social-icons {
+  margin-top: 30px;
+  display: flex;
+  gap: 15px;
+}
+
+/* Oprava pro mobilní zobrazení (aby se menu nefixovalo přes text) */
+@media screen and (max-width: 770px) {
+  header {
+    position: relative;
+    width: auto;
+    left: 0;
+    top: 0;
+  }
+}
