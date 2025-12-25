@@ -12,7 +12,7 @@ title: Kontakt
 - <i class="fa-solid fa-location-pin"></i> **adresa** *Antala Staška 2059/80b, 140 00 Praha 4*
 
 ### Web
-- <i class="fa-solid fa-personal-circle"></i> [Ochmann.cz](https://ochmann.cz/)
+- <i class="fa-solid fa-globe"></i> [Ochmann.cz](https://ochmann.cz/)
 
 ### Profily
 - <a href="https://github.com/j-ochmann"                               class="icon-gh"><i class="fa-brands fa-github"></i>GitHub</a>
