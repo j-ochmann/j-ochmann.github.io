@@ -1,9 +1,7 @@
 ---
 layout: default
 title: Úvod
+redirect_to: /about/
 ---
 
 # Ahoj 👋
-Jmenuji se **Jindřich** a baví mě:
-- programování
-- experimenty
