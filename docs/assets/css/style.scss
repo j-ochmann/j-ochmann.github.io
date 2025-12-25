@@ -63,8 +63,8 @@ h1, h2, h3, h4, h5, h6 {
   object-fit: cover;
   display: block;
   /*margin: -200 auto;*/
-  margin-top: -35px;
-  margin-bottom: -55px;
+  margin-top: -25px;
+  /*margin-bottom: -55px;*/
 }
 
 .profile-container {
@@ -75,6 +75,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Ikony v oblouku */
 .social-icons-arc {
+  color: red;
   position: absolute;
   top: 110px; /* Pozice vertikálně (střed kruhu je 75px) */
   left: 0;
