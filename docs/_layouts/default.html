@@ -21,7 +21,18 @@
               {% if item.sublinks %}
                 <ul>
                   {% for sub in item.sublinks %}
-                    <li><a href="{{ sub.url }}">{{ sub.title }}</a></li>
+                    <li>
+                      <a href="{{ sub.url }}">{{ sub.title }}</a>
+
+                        {% if sub.sublinks %}
+                          <ul>
+                            {% for subsub in sub.sublinks %}
+                              <li><a href="{{ subsub.url }}">{{ subsub.title }}</a></li>
+                            {% endfor %}
+                          </ul>
+                        {% endif %}
+                    
+                    </li>
                   {% endfor %}
                 </ul>
               {% endif %}
