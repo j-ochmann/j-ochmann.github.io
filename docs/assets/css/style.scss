@@ -14,7 +14,7 @@ body {
   align-items: center;
   text-align: center;
   width: 210px;
-  margin: 0 auto 40px; /* Větší spodní margin pro prostor ikon */
+  margin: 0 auto 40px !important; /* Větší spodní margin pro prostor ikon */
 }
 
 .profile-name {
