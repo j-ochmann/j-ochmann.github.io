@@ -1,7 +1,6 @@
 ---
 layout: default
 title: O mně
-redirect_from: /index.html
 ---
 
 # O mně
