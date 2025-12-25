@@ -1,4 +1,6 @@
 ---
-
+layout: default
+title: Úvod
 ---
-{%- include_relative about.md -%}
+
+# Ahoj 👋
