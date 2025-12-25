@@ -82,16 +82,15 @@ body {
   margin-top: -35px; /* Přitáhne ikony k okraji fotky */
   z-index: 10;
 }
-/*
-.social-icons-arc a {
-  color: red;
-  background: var(--bg-color);
-  background: rgba(255, 255, 255, 0.5); 
-  backdrop-filter: blur(4px); 
-}
-*/
+
+.icon-gh { --brand-color: 36, 41, 47; }   /* GitHub Dark Gray*/
+.icon-li { --brand-color: 0, 119, 181; }  /* LinkedIn Blue*/
+.icon-yt { --brand-color: 255, 0, 0; }    /* YouTube Red*/
+.icon-ig { --brand-color: 225, 48, 108; } /* Instagram Pink/Red*/
+.icon-fb { --brand-color: 24, 119, 242; } /* Facebook Blue*/
 /* Základní vzhled ikon v oblouku */
 .social-icons-arc a {
+  background: rgba(var(--brand-color), 0.7) !important;
   font-size: 1.25rem;
   width: 38px;
   height: 38px;
@@ -102,15 +101,8 @@ body {
   box-shadow: 0 3px 8px rgba(0,0,0,0.2);
   margin: 0 3px; 
   transition: all 0.3s ease;
-  color: #ffffff !important; /* Ikony budou vždy bílé, aby vynikly na barvě */
+  color: #fff !important; /* Ikony budou vždy bílé, aby vynikly na barvě */
 }
-
-/* Definice barev jednotlivých značek (Brand Colors 2025) */
-.icon-gh { background: rgba(36, 41, 47, 0.7) !important; }     /* GitHub Dark Gray */
-.icon-li { background: rgba(0, 119, 181, 0.7) !important; }    /* LinkedIn Blue */
-.icon-yt { background: rgba(255, 0, 0, 0.7) !important; }      /* YouTube Red */
-.icon-ig { background: rgba(225, 48, 108, 0.7) !important; }   /* Instagram Pink/Red */
-.icon-fb { background: rgba(24, 119, 242, 0.7) !important; }   /* Facebook Blue */
 
 /* Hover efekt - při najetí barva ztratí průhlednost (ztmavne/rozjasní se) */
 .social-icons-arc a:hover {
@@ -119,72 +111,20 @@ body {
   box-shadow: 0 8px 15px rgba(0,0,0,0.3);
 }
 
-/* Specifické barvy při hoveru pro plný efekt */
-.icon-gh:hover { background: rgba(36, 41, 47, 1) !important; }
-.icon-li:hover { background: rgba(0, 119, 181, 1) !important; }
-.icon-yt:hover { background: rgba(255, 0, 0, 1) !important; }
-.icon-ig:hover { background: rgba(225, 48, 108, 1) !important; }
-.icon-fb:hover { background: rgba(24, 119, 242, 1) !important; }
-
-
-/* LOGIKA PLYNULÉHO OBLOUKU (Sledování hrany kruhu) */
-/* Krajní ikony (1. a 5.) - jsou nejvýše, aby začaly oblouk */
+/* Krajní 1. a 5. ikona */
 .social-icons-arc a:nth-child(1),
 .social-icons-arc a:nth-child(5) { 
   transform: translateY(-15px); 
 }
-
-/* Vnitřní ikony (2. a 4.) - klesají níže */
+/* Vnitřní 2. a 4. ikona */
 .social-icons-arc a:nth-child(2),
 .social-icons-arc a:nth-child(4) { 
   transform: translateY(8px); 
 }
-
-/* Prostřední ikona (3.) - nejnižší bod oblouku */
+/* Prostřední ikona */
 .social-icons-arc a:nth-child(3) { 
   transform: translateY(18px); 
 }
-
-/* Hover efekt - ikona se při najetí zvýrazní */
-/*.social-icons-arc a:hover {
-  transform: translateY(-15px) scale(1.2) !important;
-  color: var(--bold-color);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-  z-index: 20;
-}*/
-
-/*
-.social-icons-arc {
-  position: absolute;
-  bottom: 20px;
-  width: 100%;
-  height: 60px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  gap: 12px;
-  z-index: 5;
-}
-
-
-.social-icons-arc a {
-  color: var(--link-color);
-  font-size: 1.3rem;
-  transition: all 0.3s ease;
-  display: inline-block;
-}
-
-.social-icons-arc a:nth-child(1), 
-.social-icons-arc a:nth-child(2), 
-.social-icons-arc a:nth-child(3) { transform: translateY(5px); } 
-.social-icons-arc a:nth-child(4) { transform: translateY(-5px); }
-.social-icons-arc a:nth-child(5) { transform: translateY(-35px); }
-
-.social-icons-arc a:hover {
-  transform: translateY(-20px) scale(1.3) !important;
-  color: var(--bold-color);
-}
-*/
 
 header {
   position: fixed;
