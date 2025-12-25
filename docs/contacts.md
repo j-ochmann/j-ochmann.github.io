@@ -8,8 +8,8 @@ title: Kontakt
 - 📍**adresa**  *Hlavní třída 695/98, 708 00 Ostrava-Poruba*
 - 
 - <i class="fa-solid fa-phone"></i> **mobil**   [*(+420) 792 353 539*](tel:+420792353539)
-- <i class="fa-solid fa-email"></i> **email**   [*jindrich.ochmann@gmail.com*](mailto:jindrich.ochmann@gmail.com)
-- <i class="fa-solid fa-address"></i> **adresa**  *Hlavní třída 695/98, 708 00 Ostrava-Poruba*
+- <i class="fa-solid fa-envelope"></i> **email**   [*jindrich.ochmann@gmail.com*](mailto:jindrich.ochmann@gmail.com)
+- <i class="fa-solid fa-location"></i> **adresa**  *Hlavní třída 695/98, 708 00 Ostrava-Poruba*
 
 ### IČ [88032353](https://ares.gov.cz/ekonomicke-subjekty/ros/88032353)
 - **Datová schránka**	*ec658w8*
