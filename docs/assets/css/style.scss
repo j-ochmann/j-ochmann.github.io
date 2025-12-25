@@ -118,6 +118,31 @@ body {
   z-index: 20; /* Aby se zvětšená ikona dostala nad ostatní */
 }
 
+/* Styl pro textové odkazy v obsahu stránky (contacts.md) */
+section a.icon-gh, section a.icon-li, section a.icon-ig, section a.icon-fb, section a.icon-yt {
+  color: var(--brand-color-hex) !important; /* Barva textu i ikony */
+  font-weight: 600;
+  text-decoration: none;
+  background: transparent !important; /* Odstraní podkladový kruh */
+  box-shadow: none !important;        /* Odstraní stín */
+  padding: 0;
+  display: inline;                    /* Vrátí textu řádkové chování */
+  transition: opacity 0.2s;
+}
+
+section a[class^="icon-"]:hover {
+  opacity: 0.7;
+  text-decoration: underline !important;
+  transform: none !important; /* Zruší "uskakování" nebo zvětšování z oblouku */
+}
+
+/* Mezera mezi ikonou a textem v seznamu */
+section a[class^="icon-"] i {
+  margin-right: 8px;
+  width: 20px;
+  text-align: center;
+}
+
 header {
   position: fixed;
   width: 210px;
