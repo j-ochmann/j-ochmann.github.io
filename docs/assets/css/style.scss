@@ -47,3 +47,13 @@ strong, b {
   border-radius: 4px;
   margin-bottom: 20px;
 }
+
+.social-icons a {
+  color: var(--link-color);
+  font-size: 1.5rem;
+  margin-right: 15px;
+  text-decoration: none;
+}
+.social-icons a:hover {
+  filter: brightness(1.2);
+}
