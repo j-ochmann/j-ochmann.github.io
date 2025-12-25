@@ -5,4 +5,4 @@ redirect_to: /about
 ---
 # Ahoj 👋
 
-{% include about.md %}
+{% include_relative about.md %}
