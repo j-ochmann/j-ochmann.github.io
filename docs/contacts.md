@@ -13,16 +13,8 @@ title: Kontakt
 
 ### Web
 - [Ochmann.cz](https://ochmann.cz/)
- 
-### Profil Old
-- <a href="https://github.com/j-ochmann"><i class="fa-brands fa-github"></i></a>
-  [*GitHub*](https://github.com/j-ochmann)
-- <a href="https://www.linkedin.com/in/jind%C5%99ich-ochmann-5186967b"><i class="fa-brands fa-linkedin"></i></a>
-  [*LinkedIn*](https://www.linkedin.com/in/jind%C5%99ich-ochmann-5186967b/)
-- <a href="https://www.instagram.com/jindrichochmann"><i class="fa-brands fa-instagram"></i></a>
-  [*Instagram*](https://www.instagram.com/jindrichochmann/)
 
-### Profil
+### Profily
 - <a href="https://github.com/j-ochmann"                               class="icon-gh"><i class="fa-brands fa-github"></i> GitHub</a>
 - <a href="https://www.linkedin.com/in/jind%C5%99ich-ochmann-5186967b" class="icon-li"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
 - <a href="https://www.instagram.com/jindrichochmann"                  class="icon-ig"><i class="fa-brands fa-instagram"></i> Instagram</a>
