@@ -12,6 +12,7 @@ body {
   position: relative;
   margin-top: -50px;
   margin-bottom: -120px;
+  margin-right: -50px;
   background: var(--bg-color);
   display: inline-block;
   padding: 2px 12px;
@@ -23,7 +24,7 @@ body {
   font-family: 'Montserrat', sans-serif !important;
   text-transform: uppercase;
   letter-spacing: 1px;
-  font-size: 1.1rem !important;
+  font-size: 1rem !important;
 }
 
 .profile-name a {
