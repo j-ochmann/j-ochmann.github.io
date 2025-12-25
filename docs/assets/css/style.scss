@@ -2,7 +2,6 @@
 ---
 @import "{{ site.theme }}";
 
-/* Základní fonty */
 body {
   font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -69,17 +68,16 @@ body {
 .profile-img a:hover {
   transform: translateY(-10px) scale(1.4) !important;
   filter: brightness(1.5); /* Rozsvítí obrázek na 150 % jasu */
-  transform: scale(1.2); /* Zvětší obrázek o 10 % */
+  transform: scale(1.2);   /* Zvětší obrázek o 10 % */
   color: var(--bold-color);
   z-index: 20;
 }
 
-/* Ikony v plynulém OBLOUKU */
 .social-icons-arc {
   display: flex;
   justify-content: center;
   width: 100%;
-  margin-top: -35px; /* Přitáhne ikony k okraji fotky */
+  margin-top: -35px;
   z-index: 10;
 }
 
@@ -92,7 +90,7 @@ body {
 .social-icons-arc a:nth-child(1), .social-icons-arc a:nth-child(5) { --y-pos: -10px; }
 .social-icons-arc a:nth-child(2), .social-icons-arc a:nth-child(4) { --y-pos: 8px; }
 .social-icons-arc a:nth-child(3) { --y-pos: 18px; }
-/* Základní vzhled ikon v oblouku */
+
 .social-icons-arc a {
   background: rgba(var(--brand-color), 0.7) !important;
   font-size: 1.25rem;
@@ -106,24 +104,20 @@ body {
   margin: 0 3px;
   transform: translateY(var(--y-pos));
   transition: all 0.3s ease;
-  color: #fff !important; /* Ikony budou vždy bílé, aby vynikly na barvě */
+  color: #fff !important;
 }
 
-/* Hover efekt - při najetí barva ztratí průhlednost (ztmavne/rozjasní se) */
 .social-icons-arc a:hover {
-  /*transform: translateY(var(--y-pos)) scale(1.2) !important;*/
   transform: translateY(calc(var(--y-pos) - 10px)) scale(1.2) !important;
   background: rgba(var(--brand-color), 1) !important;
   box-shadow: 0 8px 15px rgba(0,0,0,0.3);
-  z-index: 20; /* Aby se zvětšená ikona dostala nad ostatní */
+  z-index: 20;
 }
-
-/* Styl pro textové odkazy v obsahu stránky (contacts.md) */
+/* Styl pro contacts*/
 section a[class^="icon-"] {
-  /* Odstraníme barvu značky z celého odkazu */
-  color: var(--link-color) !important; /* Vrátí barvu běžných odkazů */
+  color: var(--link-color) !important;
   font-weight: 400;
-  font-style: italic;         /* Přidá kurzívu textu */
+  font-style: italic;
   text-decoration: none;
   background: transparent !important;
   box-shadow: none !important;
@@ -137,27 +131,22 @@ section a[class^="icon-"] {
 section a[class^="icon-"] i {
   color: rgb(var(--brand-color)) !important; 
   margin-right: 8px;
-  font-style: normal;         /* Ikona samotná nesmí být nakloněná (kurzíva) */
+  font-style: normal;
   display: inline-block;
   width: 20px;
   text-align: center;
 }
 
 section a[class^="icon-"]:hover {
-  /*text-decoration: underline !important;*/
   font-weight: 600;
   opacity: 0.8;
 }
-  
+/*  
 header {
   position: fixed;
   width: 210px;
   top: 40px;
   left: calc(50% - 430px);
-}
-/*
-@media screen and (max-width: 770px) {
-  header { position: relative; width: auto; left: 0; top: 0; }
 }
 */
 .contact-list ul {
@@ -165,36 +154,54 @@ header {
   padding-left: 20px;
 }
 
-/* --- MOBILNÍ ZOBRAZENÍ (na výšku / úzké displeje) --- */
-@media screen and (max-width: 770px) {
+/* --- DESKTOP ZOBRAZENÍ (vše zůstává při starém) --- */
+@media screen and (min-width: 771px) {
+  #mobile-menu-toggle { display: none; }
+  #main-nav { display: block !important; }
+}
+
+/* --- POUZE DESKTOP (Nad 770px) --- */
+@media screen and (min-width: 771px) {
   header {
-    position: fixed !important; /* Horní lišta fixně */
-    top: 0;
-    left: 0;
+    position: fixed;
+    width: 210px;
+    top: 40px;
+    left: calc(50% - 430px); /* Toto funguje jen na velkém monitoru */
+  }
+  #mobile-menu-toggle { display: none; }
+  #main-nav { display: block !important; }
+  .wrapper { max-width: 900px; margin: 0 auto; }
+}
+
+/* MOBILNÍ ZOBRAZENÍ (na výšku / úzké displeje) */
+@media screen and (max-width: 770px) {
+
+  header {
+    position: fixed !important;
+    top: 0; left: 0; right: 0;
     width: 100% !important;
     height: 60px;
     background: var(--bg-color);
-    z-index: 1000;
-    display: flex;
+    display: flex; 
+    flex-direction: row; /* Prvky v liště vedle sebe */
     align-items: center;
     justify-content: space-between;
-    padding: 0 20px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    border-bottom: 1px solid #eee;
+    padding: 0 15px;
+    z-index: 1000;
   }
 
   /* Skryjeme fotku a popis v horní liště na mobilu */
-  .profile-img, .profile-description, .social-icons-v-arc {
+  .profile-name, .profile-img, .profile-description, .social-icons-arc {
     display: none;
   }
 
-  /* Jméno v horní liště zmenšíme */
+  /* Jméno v horní liště zmenšíme
   .profile-name {
     margin: 0 !important;
     font-size: 1rem !important;
     box-shadow: none;
   }
-
+*/
   /* Hamburger tlačítko */
   #mobile-menu-toggle {
     display: block;
@@ -231,62 +238,15 @@ header {
 
   /* Odsazení obsahu pod fixní lištou */
   section {
-    margin-top: 80px !important;
-    padding: 20px !important;
-  }
-}
-
-/* --- DESKTOP ZOBRAZENÍ (vše zůstává při starém) --- */
-@media screen and (min-width: 771px) {
-  #mobile-menu-toggle { display: none; }
-  #main-nav { display: block !important; }
-}
-
-/* --- SPOLEČNÉ STYLY (pro oba) --- */
-.profile-container { /* ... vaše styly ... */ }
-
-/* --- POUZE DESKTOP (Nad 770px) --- */
-@media screen and (min-width: 771px) {
-  header {
-    position: fixed;
-    width: 210px;
-    top: 40px;
-    left: calc(50% - 430px); /* Toto funguje jen na velkém monitoru */
-  }
-  #mobile-menu-toggle { display: none; }
-  #main-nav { display: block !important; }
-  .wrapper { max-width: 900px; margin: 0 auto; }
-}
-
-/* --- POUZE MOBIL (Do 770px) --- */
-@media screen and (max-width: 770px) {
-  header {
-    position: fixed !important;
-    top: 0; left: 0; right: 0;
-    width: 100% !important;
-    height: 60px;
-    background: var(--bg-color);
-    display: flex; 
-    flex-direction: row; /* Prvky v liště vedle sebe */
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 15px;
-    z-index: 1000;
-  }
-
-  .wrapper {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-  }
-
-  section {
     margin-top: 80px !important; /* Odsazení textu od horní lišty */
     padding: 15px;
     width: 100% !important;
     box-sizing: border-box;
   }
   
-  /* Skrytí věcí, co se do lišty nevejdou */
-  .profile-img, .profile-description, .social-icons-v-arc { display: none; }
+  .wrapper {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
 }
