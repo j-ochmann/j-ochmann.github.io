@@ -154,99 +154,81 @@ header {
   padding-left: 20px;
 }
 
-/* --- DESKTOP ZOBRAZENÍ (vše zůstává při starém) --- */
+/* --- DESKTOP ZOBRAZENÍ (Nad 771px) --- */
 @media screen and (min-width: 771px) {
-  #mobile-menu-toggle { display: none; }
-  #main-nav { display: block !important; }
-}
-
-/* --- POUZE DESKTOP (Nad 770px) --- */
-@media screen and (min-width: 771px) {
+  .mobile-top-bar { display: none; }
+  
   header {
     position: fixed;
     width: 210px;
     top: 40px;
-    left: calc(50% - 430px); /* Toto funguje jen na velkém monitoru */
+    left: calc(50% - 430px);
   }
-  #mobile-menu-toggle { display: none; }
-  #main-nav { display: block !important; }
-  .wrapper { max-width: 900px; margin: 0 auto; }
+
+  #main-nav {
+    display: block !important;
+  }
 }
 
 /* MOBILNÍ ZOBRAZENÍ (na výšku / úzké displeje) */
 @media screen and (max-width: 770px) {
-
-  header {
-    position: fixed !important;
+  /* Horní lišta */
+  .mobile-top-bar {
+    position: fixed;
     top: 0; left: 0; right: 0;
-    width: 100% !important;
     height: 60px;
     background: var(--bg-color);
-    display: flex; 
-    flex-direction: row; /* Prvky v liště vedle sebe */
+    display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 0 15px;
-    z-index: 1000;
+    padding: 0 20px;
+    z-index: 1100;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
   }
 
-  /* Skryjeme fotku a popis v horní liště na mobilu */
-  .profile-name, .profile-img, .profile-description, .social-icons-arc {
-    display: none;
+  .mobile-title {
+    margin-left: 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
   }
 
-  /* Jméno v horní liště zmenšíme
-  .profile-name {
-    margin: 0 !important;
-    font-size: 1rem !important;
-    box-shadow: none;
-  }
-*/
-  /* Hamburger tlačítko */
-  #mobile-menu-toggle {
-    display: block;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    color: var(--link-color);
-    cursor: pointer;
-  }
-
-  /* Navigace na mobilu (Overlay) */
+  /* Skrytí navigace defaultně */
   #main-nav {
-    display: none; /* Defaultně skryto */
+    display: none; 
     position: fixed;
-    top: 60px;
-    left: 0;
-    width: 100%;
-    height: calc(100vh - 60px);
-    background: var(--bg-color);
-    padding: 20px;
-    z-index: 999;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: var(--bg-color) !important; /* Zamezí průhlednosti */
+    z-index: 1050;
+    padding: 80px 20px 20px 20px;
+    overflow-y: auto; /* Aby se dalo v menu rolovat */
   }
 
-  /* Zobrazení menu při aktivaci */
   #main-nav.active {
-    display: block;
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
   }
 
-  #main-nav ul li {
-    font-size: 1.2rem;
-    padding: 15px 0;
-    border-bottom: 1px solid #eee;
+  /* Zobrazení profilu uvnitř rozbaleného menu */
+  #main-nav .profile-container {
+    display: flex !important;
+    margin-bottom: 30px;
   }
 
-  /* Odsazení obsahu pod fixní lištou */
-  section {
-    margin-top: 80px !important; /* Odsazení textu od horní lišty */
-    padding: 15px;
-    width: 100% !important;
-    box-sizing: border-box;
-  }
-  
-  .wrapper {
-    width: 100%;
-    margin: 0;
+  #main-nav .nav-links {
+    list-style: none;
     padding: 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  #main-nav .nav-links li {
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+  }
+
+  /* Odsazení hlavního obsahu */
+  section {
+    margin-top: 80px !important;
   }
 }
