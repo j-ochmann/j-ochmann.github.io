@@ -120,32 +120,32 @@ body {
 
 /* Styl pro textové odkazy v obsahu stránky (contacts.md) */
 section a[class^="icon-"] {
-  /* ZMĚNA: var(--brand) opraveno na var(--brand-color) */
-  color: rgb(var(--brand-color)) !important; 
+  /* Odstraníme barvu značky z celého odkazu */
+  color: var(--link-color) !important; /* Vrátí barvu běžných odkazů */
+  font-weight: 400;
+  font-style: italic;         /* Přidá kurzívu textu */
+  text-decoration: none;
   background: transparent !important;
   box-shadow: none !important;
   display: inline-block;
-  font-weight: 600;
-  text-decoration: none;
   transform: none !important; 
   padding: 0;
   width: auto;
   height: auto;
-  margin: 0;
 }
 
-/* Zajištění barevnosti ikony i textu */
 section a[class^="icon-"] i {
-  color: inherit !important; /* Převezme barvu značky od odkazu */
+  color: rgb(var(--brand-color)) !important; 
   margin-right: 8px;
-  transform: none !important;
+  font-style: normal;         /* Ikona samotná nesmí být nakloněná (kurzíva) */
+  display: inline-block;
+  width: 20px;
+  text-align: center;
 }
 
 section a[class^="icon-"]:hover {
   text-decoration: underline !important;
   opacity: 0.8;
-  background: transparent !important;
-}
 
 header {
   position: fixed;
