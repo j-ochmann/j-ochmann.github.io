@@ -18,15 +18,16 @@
     <div class="wrapper">
       <header>
         <div class="profile-container">
-          {% if site.logo %}
-            <img src="{{ site.logo | relative_url }}" alt="Logo" class="profile-img" />
-          {% endif %}
 
           <h1 class="profile-name">
             <a href="{{ "/" | relative_url }}">{{ site.title | default: site.github.repository_name }}</a>
           </h1>
 
           <p class="profile-description">{{ site.description | default: site.github.project_tagline }}</p>
+
+          {% if site.logo %}
+            <img src="{{ site.logo | relative_url }}" alt="Logo" class="profile-img" />
+          {% endif %}
           
           <div class="social-icons-arc">
             <a href="https://github.com/j-ochmann" class="icon-gh"><i class="fa-brands fa-github"></i></a>
