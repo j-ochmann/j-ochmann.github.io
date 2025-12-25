@@ -106,7 +106,7 @@ body {
 
 /* Hover efekt - při najetí barva ztratí průhlednost (ztmavne/rozjasní se) */
 .social-icons-arc a:hover {
-  transform: translateY(-25px) scale(1.2) !important;
+  transform: scale(1.2) !important; /*translateY(-25px)*/
   opacity: 1;
   box-shadow: 0 8px 15px rgba(0,0,0,0.3);
 }
