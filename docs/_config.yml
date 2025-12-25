@@ -1,8 +1,9 @@
 title: Jindřich Ochmann
-remote_theme: pages-themes/minimal #@v0.2.0
-plugins:
-- jekyll-remote-theme # add this line to the plugins list if you already have one
-#theme: jekyll-theme-minimal
+logo: /assets/img/IMG_20250712_063930.jpg
+description: Jindřich Ochmann – Software Engineer Portfolio
+show_downloads: true # false
+google_analytics:
+theme: jekyll-theme-minimal
 
 nav:
   - title: Úvod
