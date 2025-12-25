@@ -12,22 +12,31 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
   width: 210px;
   margin: 0 auto 40px; /* Větší spodní margin pro prostor ikon */
 }
 
 .profile-name {
+  position: relative;
+  margin: 0 0 5px 0;
+  background: transparent;
+  box-shadow: none;
   font-family: 'Montserrat', sans-serif !important;
   text-transform: uppercase;
-  font-size: 1.1rem !important;
-  margin-bottom: 2px;
+  font-size: 1.2rem !important;
   letter-spacing: 1px;
+  z-index: 10;
 }
 
-.profile-name a { color: var(--heading-color) !important; text-decoration: none !important; }
+.profile-name a {
+  color: var(--heading-color) !important;
+  text-decoration: none !important;
+}
 
 .profile-description {
   font-size: 0.8rem;
+  color: var(--text-color);
   margin-bottom: 15px;
   opacity: 0.8;
 }
