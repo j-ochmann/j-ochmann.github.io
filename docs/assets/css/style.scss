@@ -47,6 +47,12 @@
   filter: brightness(1.2);
 }
 
+.social-icons i {
+  color: red !important;
+  display: inline-block;
+  min-width: 20px;
+}
+
 header {
   position: fixed;
   width: 210px; /* Standardní šířka pro Minimal theme */
