@@ -88,6 +88,10 @@ body {
 .icon-yt { --brand-color: 255, 0, 0; }    /* YouTube Red*/
 .icon-ig { --brand-color: 225, 48, 108; } /* Instagram Pink/Red*/
 .icon-fb { --brand-color: 24, 119, 242; } /* Facebook Blue*/
+
+.social-icons-arc a:nth-child(1), .social-icons-arc a:nth-child(5) { --y-pos: -10px; }
+.social-icons-arc a:nth-child(2), .social-icons-arc a:nth-child(4) { --y-pos: 8px; }
+.social-icons-arc a:nth-child(3) { --y-pos: 18px; }
 /* Základní vzhled ikon v oblouku */
 .social-icons-arc a {
   background: rgba(var(--brand-color), 0.7) !important;
@@ -99,31 +103,19 @@ body {
   justify-content: center;
   border-radius: 50%;
   box-shadow: 0 3px 8px rgba(0,0,0,0.2);
-  margin: 0 3px; 
+  margin: 0 3px;
+  transform: translateY(var(--y-pos));
   transition: all 0.3s ease;
   color: #fff !important; /* Ikony budou vždy bílé, aby vynikly na barvě */
 }
 
 /* Hover efekt - při najetí barva ztratí průhlednost (ztmavne/rozjasní se) */
 .social-icons-arc a:hover {
-  transform: scale(1.2) !important; /*translateY(-25px)*/
-  opacity: 1;
+  /*transform: translateY(var(--y-pos)) scale(1.2) !important;*/
+  transform: translateY(calc(var(--y-pos) - 10px)) scale(1.2) !important;
+  background: rgba(var(--brand-color), 1) !important;
   box-shadow: 0 8px 15px rgba(0,0,0,0.3);
-}
-
-/* Krajní 1. a 5. ikona */
-.social-icons-arc a:nth-child(1),
-.social-icons-arc a:nth-child(5) { 
-  transform: translateY(-15px); 
-}
-/* Vnitřní 2. a 4. ikona */
-.social-icons-arc a:nth-child(2),
-.social-icons-arc a:nth-child(4) { 
-  transform: translateY(8px); 
-}
-/* Prostřední ikona */
-.social-icons-arc a:nth-child(3) { 
-  transform: translateY(18px); 
+  z-index: 20; /* Aby se zvětšená ikona dostala nad ostatní */
 }
 
 header {
