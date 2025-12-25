@@ -2,77 +2,39 @@
 ---
 @import "{{ site.theme }}";
 
-/* Definice barev pro světlý (výchozí) režim */
-:root {
-  --bg-color: #ffffff;
-  --sidebar-bg: #ffffff;
-  --text-color: #2e2e2e;
-  --link-color: #1e6bb8;
-  --heading-color: #111;
-  --bold-color: #000000; /* Výraznější černá pro tučné písmo */
-}
-
-/* Definice barev pro tmavý režim */
-body.dark-mode {
-  --bg-color: #1a1a1a;
-  --sidebar-bg: #1a1a1a;
-  --text-color: #e0e0e0;
-  --link-color: #4db6ac;
-  --heading-color: #ffffff;
-  --bold-color: #ffffff; /* Čistě bílá pro tučné písmo v tmavém režimu */
-}
-
-body {
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  transition: background-color 0.3s, color 0.3s; /* Hladký přechod */
-}
-
-h1, h2, h3, h4, h5, h6 { color: var(--heading-color); }
-a { color: var(--link-color); }
-
-/* OPRAVA TUČNÉHO PÍSMA */
-strong, b {
-  color: var(--bold-color);
-  font-weight: 700; /* Vynucení vyšší tučnosti */
-}
-
-/* Kontejner pro obrázek a jméno */
 .profile-container {
   position: relative;
   text-align: center;
   margin-bottom: 20px;
 }
 
-/* Kulatý obrázek s rámečkem */
 .profile-img {
   width: 150px;
   height: 150px;
-  border-radius: 50%; /* Udělá kruh */
-  border: 4px solid var(--bg-color); /* Vnitřní linka */
-  box-shadow: 0 0 0 1px #d0d7de; /* Tenký šedý rámeček jako na GitHubu */
+  border-radius: 50%;
+  border: 4px solid var(--bg-color);
+  box-shadow: 0 0 0 1px #d0d7de;
   object-fit: cover;
   display: block;
   margin: 0 auto;
 }
 
-/* Tmavý režim: úprava barvy rámečku */
-body.dark-mode .profile-img {
-  box-shadow: 0 0 0 1px #30363d;
-  border-color: var(--bg-color);
-}
-
-/* Jméno částečně přes obrázek */
 .profile-name {
   position: relative;
-  margin-top: -35px; /* Toto vytáhne jméno nahoru přes obrázek */
-  background: var(--bg-color); /* Pozadí pod textem, aby byl čitelný */
+  margin-top: -35px;
+  background: var(--bg-color);
   display: inline-block;
   padding: 2px 12px;
   border-radius: 12px;
   font-size: 1.4rem !important;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Jemný stín pro efekt vrstvy */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   z-index: 10;
+}
+
+.social-icons {
+  margin-top: 30px;
+  display: flex;
+  gap: 15px;
 }
 
 .social-icons a {
@@ -85,7 +47,6 @@ body.dark-mode .profile-img {
   filter: brightness(1.2);
 }
 
-/* Fixace celého sidebaru (headeru) vlevo */
 header {
   position: fixed;
   width: 210px; /* Standardní šířka pro Minimal theme */
@@ -93,7 +54,6 @@ header {
   left: calc(50% - 430px); /* Udrží sidebar na místě u centrovaného obsahu */
 }
 
-/* Úprava pro navigaci pod logem */
 nav {
   margin-top: 20px;
 }
@@ -107,14 +67,6 @@ nav li {
   margin-bottom: 10px;
 }
 
-/* Sociální ikony pod menu */
-.social-icons {
-  margin-top: 30px;
-  display: flex;
-  gap: 15px;
-}
-
-/* Oprava pro mobilní zobrazení (aby se menu nefixovalo přes text) */
 @media screen and (max-width: 770px) {
   header {
     position: relative;
