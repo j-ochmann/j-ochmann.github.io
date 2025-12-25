@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Cheat sheet
+title: CheatSheet
 ---
 
 # CheatSheet
