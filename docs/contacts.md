@@ -3,13 +3,13 @@ layout: default
 title: Kontakt
 ---
 ## Kontakty
-- <i class="fa-regular fa-phone"></i> **mobil** [*(+420) 792 353 539*](tel:+420792353539)
-- <i class="fa-regular fa-envelope"></i> **email** [*jindrich.ochmann@gmail.com*](mailto:jindrich.ochmann@gmail.com)
-- <i class="fa-regular fa-location-pin"></i> **adresa** *Hlavní třída 695/98, 708 00 Ostrava-Poruba*
+- <i class="fa-solid fa-phone"></i> **mobil** [*(+420) 792 353 539*](tel:+420792353539)
+- <i class="fa-solid fa-envelope"></i> **email** [*jindrich.ochmann@gmail.com*](mailto:jindrich.ochmann@gmail.com)
+- <i class="fa-solid fa-location-pin"></i> **adresa** *Hlavní třída 695/98, 708 00 Ostrava-Poruba*
 
 ### IČ [88032353](https://ares.gov.cz/ekonomicke-subjekty/ros/88032353)
-- <i class="fa-regular fa-envelope"></i> **datová schránka** *ec658w8*
-- <i class="fa-regular fa-location-pin"></i> **adresa** *Antala Staška 2059/80b, 140 00 Praha 4*
+- <i class="fa-solid fa-envelope"></i> **datová schránka** *ec658w8*
+- <i class="fa-solid fa-location-pin"></i> **adresa** *Antala Staška 2059/80b, 140 00 Praha 4*
 
 ### Web
 - <i class="fa-solid fa-circle-user"></i> [Ochmann.cz](https://ochmann.cz/)
