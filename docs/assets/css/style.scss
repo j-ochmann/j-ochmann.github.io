@@ -120,7 +120,7 @@ body {
 
 /* Styl pro textové odkazy v obsahu stránky (contacts.md) */
 section a.icon-gh, section a.icon-li, section a.icon-ig, section a.icon-fb, section a.icon-yt {
-  color: var(--brand-color-hex) !important; /* Barva textu i ikony */
+  color: var(--brand-color) !important; /* Barva textu i ikony */
   font-weight: 600;
   text-decoration: none;
   background: transparent !important; /* Odstraní podkladový kruh */
