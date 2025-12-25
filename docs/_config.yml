@@ -19,14 +19,14 @@ nav:
           - title: GitHub
             url: /tutorials/git/github
             sublinks:
-              - title: GitHub Pages
+              - title: Pages
                 url: /tutorials/git/github/pages
       - title: Markdown
         url: /tutorials/markdown/markdown
       - title: C/C++
         url: /tutorials/c/c
-      #- title: C#
-      #  url: /tutorials/csharp
+      - title: C#
+        url: /tutorials/csharp
       #- title: Java
       #  url: /tutorials/java
       #- title: JavaScript
