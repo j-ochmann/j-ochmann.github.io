@@ -15,6 +15,9 @@ title: Kontakt
 - [Ochmann.cz](https://ochmann.cz/)
  
 ### Profil
-- [*GitHub*](https://github.com/j-ochmann)
-- [*LinkedIn*](https://www.linkedin.com/in/jind%C5%99ich-ochmann-5186967b/)
-- [*Instagram*](https://www.instagram.com/jindrichochmann/)
+- <a href="https://github.com/j-ochmann"><i class="fa-brands fa-github"></i></a>
+  [*GitHub*](https://github.com/j-ochmann)
+- <a href="https://www.linkedin.com/in/jind%C5%99ich-ochmann-5186967b"><i class="fa-brands fa-linkedin"></i></a>
+  [*LinkedIn*](https://www.linkedin.com/in/jind%C5%99ich-ochmann-5186967b/)
+- <a href="https://www.instagram.com/jindrichochmann"><i class="fa-brands fa-instagram"></i></a>
+  [*Instagram*](https://www.instagram.com/jindrichochmann/)
