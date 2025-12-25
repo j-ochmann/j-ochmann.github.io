@@ -8,6 +8,12 @@ body {
   line-height: 1.6;
 }
 
+.profile-name {
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase; /* Volitelné: pro moderní technický vzhled */
+  letter-spacing: 1px;
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
