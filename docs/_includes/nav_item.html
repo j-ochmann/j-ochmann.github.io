@@ -1,0 +1,11 @@
+{% for link in include.links %}
+  <li>
+    <a href="{{ link.url }}">{{ link.title }}</a>
+    {% if link.sublinks %}
+      <ul>
+        <!-- Rekurzivní volání pro další úroveň -->
+        {% include nav_item.html links=link.sublinks %}
+      </ul>
+    {% endif %}
+  </li>
+{% endfor %}
