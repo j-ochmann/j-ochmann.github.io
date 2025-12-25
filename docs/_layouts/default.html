@@ -17,6 +17,11 @@
   <body>
     <div class="wrapper">
       <header>
+        <!-- Tlačítko pro hamburger (viditelné jen na mobilu) -->
+        <button id="mobile-menu-toggle" aria-label="Menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        
         <div class="profile-container">
 
           <h1 class="profile-name">
@@ -39,7 +44,7 @@
 
         </div>
           
-        <nav>
+        <nav id="main-nav">
           <ul>
             {% include nav_item.html links=site.nav %}
           </ul>
