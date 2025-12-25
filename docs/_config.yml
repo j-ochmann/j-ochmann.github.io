@@ -37,3 +37,5 @@ nav:
       #  url: /tutorials/python
       #- title: SQL
       #  url: /tutorials/sql
+      - title: CheatSheet
+        url: /tutorials/cheatsheet
