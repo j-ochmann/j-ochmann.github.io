@@ -1,17 +1,13 @@
 title: Jindřich Ochmann
 logo: /assets/img/IMG_20250712_063930.jpg
 description: Software Engineer
-show_downloads: true # false
+show_downloads: false
 google_analytics:
 theme: jekyll-theme-minimal
 
 nav:
-  - title: Úvod
-    url: /
   - title: Projekty
     url: /projects
-  - title: O mně
-    url: /about
   - title: Kontakt
     url: /contacts
   - title: Tutorialy
