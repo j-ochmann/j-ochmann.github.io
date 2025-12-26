@@ -2,6 +2,10 @@
 ---
 @import "{{ site.theme }}";
 
+/* OKAMŽITĚ přebít layout */
+body, main, aside {
+  all: unset;
+}
 /* Globální styly */
 body {
   margin: 0;
@@ -10,9 +14,9 @@ body {
 }
 
 .layout {
+  display: flex;
   max-width: 860px;
   margin: 40px auto;
-  display: flex;
 }
 
 h1, h2, h3 { font-family: 'Montserrat', sans-serif; }
@@ -84,7 +88,7 @@ section a[class^="icon-"] i {
 
 #sidebar {
   width: 210px;
-  flex-shrink: 0;
+  background: var(--bg-color);
 }
 
 .content {
