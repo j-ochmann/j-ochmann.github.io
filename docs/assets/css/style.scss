@@ -41,11 +41,11 @@ h1, h2, h3 { font-family: 'Montserrat', sans-serif; }
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.profile-img a:hover {
+.profile-img:hover {
   transform: translateY(-10px) scale(1.4) !important;
   filter: brightness(1.5); /* Rozsvítí obrázek na 150 % jasu */
   transform: scale(1.2);   /* Zvětší obrázek o 10 % */
-  color: var(--bold-color);
+  box-shadow: 0 8px 15px rgba(0,0,0,0.3);
   z-index: 20;
 }
 
