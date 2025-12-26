@@ -60,55 +60,62 @@ section a[class^="icon-"] i {
 }
 
 /* --- RESPONSIVITA --- */
-
-@media screen and (min-width: 771px) {
+@media (min-width: 771px) {
+  /*
   .mobile-top-bar { display: none; }
   header { position: fixed; width: 210px; top: 40px; left: calc(50% - 430px); }
   #main-nav { display: block !important; }
+  */
+  .wrapper {
+    display: flex;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+  
+  #sidebar {
+    width: 210px;
+  }
+  
+  .content {
+    flex: 1;
+    padding: 2rem;
+  }
 }
 
-@media screen and (max-width: 770px) {
-  #main-nav .profile-container {
-    position: relative;      /* ← důležité */
-    z-index: 1101;           /* ← víc než nav */
-    background: var(--bg-color);
-  }
-  .mobile-top-bar {
-    position: fixed; top: 0; left: 0; right: 0; height: 60px;
-    background: var(--bg-color); display: flex; align-items: center;
-    padding: 0 20px; z-index: 1100; border-bottom: 1px solid rgba(0,0,0,0.1);
-  }
-  .mobile-title { margin-left: 15px; font-weight: bold; text-transform: uppercase; }
-  
-  #main-nav {
-    display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-    background: var(--bg-color) !important; z-index: 1050;
-    padding: 80px 20px; overflow-y: auto;
-  }
-  #main-nav.active { display: flex !important; flex-direction: column; align-items: center; }
-  
-  .nav-links { list-style: none; padding: 0; width: 100%; text-align: center; margin-top: 20px; }
-  .nav-links li { padding: 15px 0; border-bottom: 1px solid rgba(0,0,0,0.05); }
-  
-  section { margin-top: 80px !important; }
-  .wrapper { width: 100%; margin: 0; }
+@media (max-width: 770px) {
 
-    #main-nav .profile-container {
-    display: flex !important;
+  #sidebar {
+    position: fixed;
+    inset: 0;
+    background: var(--bg-color);
+    z-index: 1000;
+
+    display: none;
     flex-direction: column;
     align-items: center;
-    width: 100%; /* Roztažení na šířku menu */
-    margin-bottom: 30px;
-    
-    /* KLÍČOVÁ OPRAVA: Neprůhledné pozadí */
-    background: var(--bg-color) !important; 
-    padding: 20px 0;
-    position: relative;
-    z-index: 1060;
+
+    padding-top: 80px;
+
+    /* KLÍČ: žádný transform uvnitř scroll kontejneru */
+    overflow-y: auto;
   }
-  
-  /* Zajištění, aby i jméno mělo pod sebou barvu, pokud přesahuje */
-  .profile-name {
-    background: var(--bg-color) !important;
+
+  #sidebar.active {
+    display: flex;
+  }
+
+  .profile-container {
+    background: var(--bg-color);
+    width: 100%;
+    padding-bottom: 30px;
+  }
+
+  .social-icons-arc {
+    position: relative;
+    z-index: 1;
+  }
+
+  .content {
+    margin-top: 80px;
   }
 }
