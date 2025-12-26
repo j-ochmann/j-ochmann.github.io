@@ -3,18 +3,17 @@
 @import "{{ site.theme }}";
 
 body {
+  background: #fff;
   margin: 0;
   font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
 }
-/*
+
 .layout {
   max-width: 860px;
   margin: 40px auto;
-  display: flex;
-  align-items: flex-start;
 }
-*/
+
 h1, h2, h3 { font-family: 'Montserrat', sans-serif; }
 
 .profile-container {
@@ -80,66 +79,55 @@ main a[class^="icon-"] i {
   max-width: 860px;
   margin: 0 auto;
 }
-
+/* ===== SIDEBAR – DESKTOP ===== */
 #sidebar {
   position: fixed;
   top: 40px;
-  left: calc(50% - 430px); /* vycentrování layoutu */
+  left: calc(50% - 430px);
   width: 210px;
   height: calc(100vh - 80px);
 
-  background: var(--bg-color);
+  background: #ffffff; /* ⬅️ EXPLICITNĚ */
   padding: 1.5rem;
   border-radius: 12px;
 
   overflow-y: auto;
+  z-index: 100;
 }
-
+/* ===== CONTENT ===== */
 .content {
-  flex: 1;
+  margin-left: 250px; /* ⬅️ KOMPENZACE FIXED SIDEBARU */
   padding: 2rem;
 }
-
+/* ===== HAMBURGER ===== */
 .mobile-top-bar {
   display: none;
   position: fixed;
-  inset: 0 0 auto 0;
+  top: 0;
+  left: 0;
+  right: 0;
   height: 60px;
-  background: var(--bg-color);
+
+  background: #ffffff;
+  z-index: 1100;
+
   align-items: center;
   padding: 0 20px;
-  z-index: 1100;
 }
 /* ===== MOBIL ===== */
-/*
 @media (max-width: 770px) {
-  .layout {
-    flex-direction: column;
-    margin: 0;
-  }
 
-  #sidebar {
-    position: static;
-    width: 100%;
-    border-radius: 0;
-    padding: 1.5rem;
+  .mobile-top-bar {
+    display: flex;
   }
-
-  .content {
-    padding: 1.5rem;
-  }
-}
-*/
-@media (max-width: 770px) {
 
   #sidebar {
     position: fixed;
     inset: 0;
+
     width: 100%;
     height: 100vh;
-
     border-radius: 0;
-    padding-top: 80px;
 
     transform: translateX(-100%);
     transition: transform 0.3s ease;
