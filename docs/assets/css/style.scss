@@ -3,7 +3,18 @@
 @import "{{ site.theme }}";
 
 /* Globální styly */
-body { font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.layout {
+  max-width: 860px;
+  margin: 40px auto;
+  display: flex;
+}
+
 h1, h2, h3 { font-family: 'Montserrat', sans-serif; }
 
 .profile-container {
@@ -72,38 +83,36 @@ section a[class^="icon-"] i {
 }
 
 #sidebar {
-  position: fixed;
-  top: 40px;
-  left: calc(50% - 430px);
   width: 210px;
+  flex-shrink: 0;
 }
 
 .content {
-  margin-left: 210px;
+  flex: 1;
   padding: 2rem;
 }
-@media (min-width: 771px) {
 
-  .mobile-top-bar {
-    display: none;
-  }
-
-  #sidebar {
-    display: block;
-    position: fixed;
-    top: 40px;
-  }
-
-  .content {
-    margin-left: 210px;
-  }
+.mobile-top-bar {
+  display: none;
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 60px;
+  background: var(--bg-color);
+  align-items: center;
+  padding: 0 20px;
+  z-index: 1100;
 }
-
+/* ===== MOBIL ===== */
 @media (max-width: 770px) {
+
+  .layout {
+    margin: 0;
+  }
+
   .mobile-top-bar {
     display: flex;
   }
-  
+
   #sidebar {
     position: fixed;
     inset: 0;
@@ -115,8 +124,6 @@ section a[class^="icon-"] i {
     align-items: center;
 
     padding-top: 80px;
-
-    /* KLÍČ: žádný transform uvnitř scroll kontejneru */
     overflow-y: auto;
   }
 
@@ -124,18 +131,8 @@ section a[class^="icon-"] i {
     display: flex;
   }
 
-  .profile-container {
-    background: var(--bg-color);
-    width: 100%;
-    padding-bottom: 30px;
-  }
-
-  .social-icons-arc {
-    position: relative;
-    z-index: 1;
-  }
-
   .content {
     margin-top: 80px;
+    padding: 1.5rem;
   }
 }
