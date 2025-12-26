@@ -60,26 +60,19 @@ section a[class^="icon-"] i {
 }
 
 /* --- RESPONSIVITA --- */
-@media (min-width: 771px) {
-  /*
-  .mobile-top-bar { display: none; }
-  header { position: fixed; width: 210px; top: 40px; left: calc(50% - 430px); }
-  #main-nav { display: block !important; }
-  */
-  .wrapper {
-    display: flex;
-    max-width: 860px;
-    margin: 0 auto;
-  }
-  
-  #sidebar {
-    width: 210px;
-  }
-  
-  .content {
-    flex: 1;
-    padding: 2rem;
-  }
+.wrapper {
+  display: flex;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+#sidebar {
+  width: 210px;
+}
+
+.content {
+  flex: 1;
+  padding: 2rem;
 }
 
 @media (max-width: 770px) {
