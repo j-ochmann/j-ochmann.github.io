@@ -33,9 +33,20 @@ h1, h2, h3 { font-family: 'Montserrat', sans-serif; }
 .profile-description { font-size: 0.7rem; opacity: 0.7; margin-top: 2px !important; margin-bottom: 5px; }
 
 .profile-img {
-  width: 180px; height: 180px; border-radius: 50%;
-  border: 4px solid var(--link-color); object-fit: cover;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border: 4px solid var(--link-color);
+  object-fit: cover;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.profile-img a:hover {
+  transform: translateY(-10px) scale(1.4) !important;
+  filter: brightness(1.5); /* Rozsvítí obrázek na 150 % jasu */
+  transform: scale(1.2);   /* Zvětší obrázek o 10 % */
+  color: var(--bold-color);
+  z-index: 20;
 }
 
 /* Brand barvy */
@@ -61,6 +72,8 @@ h1, h2, h3 { font-family: 'Montserrat', sans-serif; }
 .social-icons-arc a:hover {
   transform: translateY(calc(var(--y-pos) - 10px)) scale(1.2) !important;
   background: rgba(var(--brand-color), 1) !important;
+  box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+  z-index: 20;
 }
 
 /* Kontakty v contacts.md */
@@ -71,6 +84,10 @@ main a[class^="icon-"] i {
   color: rgb(var(--brand-color)) !important; font-style: normal; margin-right: 8px;
 }
 
+.contact-list ul {
+  list-style: none;
+  padding-left: 20px;
+}
 /* --- RESPONSIVITA --- */
 
 .mobile-top-bar {
