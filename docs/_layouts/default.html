@@ -60,10 +60,13 @@
       const sidebar = document.getElementById('sidebar');
 
       toggle.onclick = () => {
-        sidebar.classList.toggle('active');
-        toggle.querySelector('i').classList.toggle('fa-xmark');
-        toggle.querySelector('i').classList.toggle('fa-bars');
+        if (window.innerWidth <= 770) {
+          sidebar.classList.toggle('active');
+          toggle.querySelector('i').classList.toggle('fa-xmark');
+          toggle.querySelector('i').classList.toggle('fa-bars');
+        }
       };
+
     </script>
   </body>
 </html>
