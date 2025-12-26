@@ -68,10 +68,10 @@ h1, h2, h3 { font-family: 'Montserrat', sans-serif; }
 }
 
 /* Kontakty v contacts.md */
-section a[class^="icon-"] {
+main a[class^="icon-"] {
   color: var(--link-color) !important; font-style: italic; text-decoration: none;
 }
-section a[class^="icon-"] i {
+main a[class^="icon-"] i {
   color: rgb(var(--brand-color)) !important; font-style: normal; margin-right: 8px;
 }
 
