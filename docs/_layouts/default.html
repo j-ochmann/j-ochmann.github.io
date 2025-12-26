@@ -26,13 +26,13 @@
     <div class="layout">
       <aside id="sidebar">
         <div class="profile-container">
-          <h1 class="profile-name">
-            <a href="{{ "/about" | relative_url }}">{{ site.title | default: site.github.repository_name }}</a>
-          </h1>
-          <p class="profile-description">{{ site.description | default: site.github.project_tagline }}</p>
-          {% if site.logo %}
-            <img src="{{ site.logo | relative_url }}" alt="Logo" class="profile-img" />
-          {% endif %}
+          <a href="{{ "/about" | relative_url }}" class="profile-link">
+            <h1 class="profile-name">{{ site.title | default: site.github.repository_name }}</h1>
+            <p  class="profile-description">{{ site.description | default: site.github.project_tagline }}</p>
+            {% if site.logo %}
+              <img src="{{ site.logo | relative_url }}" alt="Logo" class="profile-img" />
+            {% endif %}
+          </a>
           <div class="social-icons-arc">
             <a href="https://github.com/j-ochmann" class="icon-gh"><i class="fa-brands fa-github"></i></a>
             <a href="https://www.linkedin.com/in/jind%C5%99ich-ochmann-5186967b" class="icon-li"><i class="fa-brands fa-linkedin"></i></a>
