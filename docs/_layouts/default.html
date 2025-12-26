@@ -31,6 +31,9 @@
             <p  class="profile-description">{{ site.description | default: site.github.project_tagline }}</p>
             {% if site.logo %}
               <img src="{{ site.logo | relative_url }}" alt="Logo" class="profile-img" />
+              <img src="{{ site.logo | relative_url }}" alt="Logo" class="profile-img main-img" />
+              <!-- Druhý obrázek, který se ukáže při hoveru -->
+              <img src="{{ "/assets/img/20250712_056.jpg" | relative_url }}" alt="Hover Logo" class="profile-img hover-img" />
             {% endif %}
           </a>
           <div class="social-icons-arc">
