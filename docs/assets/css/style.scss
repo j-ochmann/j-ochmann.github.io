@@ -72,12 +72,31 @@ section a[class^="icon-"] i {
 }
 
 #sidebar {
+  position: fixed;
+  top: 40px;
+  left: calc(50% - 430px);
   width: 210px;
 }
 
 .content {
-  flex: 1;
+  margin-left: 210px;
   padding: 2rem;
+}
+@media (min-width: 771px) {
+
+  .mobile-top-bar {
+    display: none;
+  }
+
+  #sidebar {
+    display: block;
+    position: fixed;
+    top: 40px;
+  }
+
+  .content {
+    margin-left: 210px;
+  }
 }
 
 @media (max-width: 770px) {
