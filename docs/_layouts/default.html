@@ -53,18 +53,5 @@
         {{ content }}
       </main>
     </div>
-    
-    <script>
-      const toggle = document.getElementById('mobile-menu-toggle');
-      const sidebar = document.getElementById('sidebar');
-
-      toggle.onclick = () => {
-        if (window.innerWidth <= 770) {
-          sidebar.classList.toggle('active');
-          toggle.querySelector('i').classList.toggle('fa-bars');
-          toggle.querySelector('i').classList.toggle('fa-xmark');
-        }
-      };
-    </script>
   </body>
 </html>
