@@ -85,8 +85,8 @@ main a[class^="icon-"] i {
 }
 
 .contact-list ul {
-  list-style: none;
-  padding-left: 20px;
+  list-style: none !important;
+  padding-left: 20px !important;
 }
 /* --- RESPONSIVITA --- */
 
