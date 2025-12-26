@@ -17,48 +17,46 @@
   </head>
   <body>
     <div class="wrapper">
-      <!-- TOP BAR – pouze mobil -->
-      <div class="mobile-top-bar">
-        <button id="mobile-menu-toggle">
-          <i class="fa-solid fa-bars"></i>
-        </button>
-        <span class="mobile-title">{{ site.title }}</span>
-      </div>
-    
-      <aside id="sidebar">
-        <div class="profile-container">
-          <h1 class="profile-name">
-            <a href="{{ "/about" | relative_url }}">{{ site.title }}</a>
-          </h1>
-    
-          <p class="profile-description">{{ site.description }}</p>
-    
-          {% if site.logo %}
-            <img src="{{ site.logo | relative_url }}" class="profile-img">
-          {% endif %}
-    
-          <div class="social-icons-arc">
-            …
-          </div>
+      <!--<header>-->
+        <!-- Hamburger pro mobil -->
+        <div class="mobile-top-bar">
+          <button id="mobile-menu-toggle">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          <span class="mobile-title">{{ site.title }}</span>
         </div>
-    
-        <nav class="nav-links">
-          <ul>
+        <!-- Tato část se na mobilu celá schová pod hamburger -->
+  <aside id="sidebar">
+          <div class="profile-container">
+            <h1 class="profile-name">
+              <a href="{{ "/about" | relative_url }}">{{ site.title | default: site.github.repository_name }}</a>
+            </h1>
+            <p class="profile-description">{{ site.description | default: site.github.project_tagline }}</p>
+            {% if site.logo %}
+              <img src="{{ site.logo | relative_url }}" alt="Logo" class="profile-img" />
+            {% endif %}
+            <div class="social-icons-arc">
+              <a href="https://github.com/j-ochmann" class="icon-gh"><i class="fa-brands fa-github"></i></a>
+              <a href="https://www.linkedin.com/in/jind%C5%99ich-ochmann-5186967b" class="icon-li"><i class="fa-brands fa-linkedin"></i></a>
+              <a href="https://www.instagram.com/jindrichochmann" class="icon-ig"><i class="fa-brands fa-instagram"></i></a>
+              <a href="https://www.facebook.com/jindrich.ochmann" class="icon-fb"><i class="fa-brands fa-facebook"></i></a>
+              <a href="https://www.youtube.com/@JindrichOchmann" class="icon-yt"><i class="fa-brands fa-youtube"></i></a>
+            </div>        
+          </div>
+          <ul class="nav-links">
             {% include nav_item.html links=site.nav %}
           </ul>
         </nav>
       </aside>
-    
-      <main class="content">
+      <!--</header>-->
+      <section>
         {{ content }}
-      </main>
-    
+      </section>
     </div>
-  
     <script>
       const toggle = document.getElementById('mobile-menu-toggle');
       const sidebar = document.getElementById('sidebar');
-    
+
       toggle.onclick = () => {
         sidebar.classList.toggle('active');
         toggle.querySelector('i').classList.toggle('fa-xmark');
