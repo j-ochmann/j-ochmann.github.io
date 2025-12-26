@@ -17,57 +17,53 @@
   </head>
   <body>
     <div class="wrapper">
-      <header>
-        <!-- Hamburger pro mobil -->
-        <div class="mobile-top-bar">
-          <button id="mobile-menu-toggle" aria-label="Menu">
-            <i class="fa-solid fa-bars"></i>
-          </button>
-          <span class="mobile-title">{{ site.title }}</span>
-        </div>
-        <!-- Tato část se na mobilu celá schová pod hamburger -->
-        <nav id="main-nav">
-          <div class="profile-container">
-            <h1 class="profile-name">
-              <a href="{{ "/about" | relative_url }}">{{ site.title | default: site.github.repository_name }}</a>
-            </h1>
-            <p class="profile-description">{{ site.description | default: site.github.project_tagline }}</p>
-            {% if site.logo %}
-              <img src="{{ site.logo | relative_url }}" alt="Logo" class="profile-img" />
-            {% endif %}
-            <div class="social-icons-arc">
-              <a href="https://github.com/j-ochmann" class="icon-gh"><i class="fa-brands fa-github"></i></a>
-              <a href="https://www.linkedin.com/in/jind%C5%99ich-ochmann-5186967b" class="icon-li"><i class="fa-brands fa-linkedin"></i></a>
-              <a href="https://www.instagram.com/jindrichochmann" class="icon-ig"><i class="fa-brands fa-instagram"></i></a>
-              <a href="https://www.facebook.com/jindrich.ochmann" class="icon-fb"><i class="fa-brands fa-facebook"></i></a>
-              <a href="https://www.youtube.com/@JindrichOchmann" class="icon-yt"><i class="fa-brands fa-youtube"></i></a>
-            </div>        
+      <!-- TOP BAR – pouze mobil -->
+      <div class="mobile-top-bar">
+        <button id="mobile-menu-toggle">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <span class="mobile-title">{{ site.title }}</span>
+      </div>
+    
+      <aside id="sidebar">
+        <div class="profile-container">
+          <h1 class="profile-name">
+            <a href="{{ "/about" | relative_url }}">{{ site.title }}</a>
+          </h1>
+    
+          <p class="profile-description">{{ site.description }}</p>
+    
+          {% if site.logo %}
+            <img src="{{ site.logo | relative_url }}" class="profile-img">
+          {% endif %}
+    
+          <div class="social-icons-arc">
+            …
           </div>
-          <ul class="nav-links">
+        </div>
+    
+        <nav class="nav-links">
+          <ul>
             {% include nav_item.html links=site.nav %}
           </ul>
         </nav>
-      </header>
-      <section>
+      </aside>
+    
+      <main class="content">
         {{ content }}
-      </section>
+      </main>
+    
     </div>
+  
     <script>
       const toggle = document.getElementById('mobile-menu-toggle');
-      const nav = document.getElementById('main-nav');
-      toggle.addEventListener('click', function() {
-        nav.classList.toggle('active');
-        const icon = this.querySelector('i');
-        icon.classList.toggle('fa-bars');
-        icon.classList.toggle('fa-xmark');
-      });
-      // Zavřít menu při kliku na odkaz
-      nav.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-          nav.classList.remove('active');
-          toggle.querySelector('i').classList.replace('fa-xmark', 'fa-bars');
-        });
-      });
+      const sidebar = document.getElementById('sidebar');
+    
+      toggle.onclick = () => {
+        sidebar.classList.toggle('active');
+        toggle.querySelector('i').classList.toggle('fa-xmark');
+        toggle.querySelector('i').classList.toggle('fa-bars');
+      };
     </script>
   </body>
 </html>
