@@ -68,6 +68,11 @@ section a[class^="icon-"] i {
 }
 
 @media screen and (max-width: 770px) {
+  #main-nav .profile-container {
+    position: relative;      /* ← důležité */
+    z-index: 1101;           /* ← víc než nav */
+    background: var(--bg-color);
+  }
   .mobile-top-bar {
     position: fixed; top: 0; left: 0; right: 0; height: 60px;
     background: var(--bg-color); display: flex; align-items: center;
