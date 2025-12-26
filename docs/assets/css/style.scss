@@ -75,6 +75,14 @@ h1, h2, h3 { font-family: 'Montserrat', sans-serif; }
   text-shadow: 0 8px 15px rgba(0,0,0,0.3);
 }
 
+.profile-link:hover .profile-img {
+  transform: translateY(-10px) scale(1.4) !important;
+  filter: brightness(1.5);
+  transform: scale(1.2);
+  box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+  z-index: 20;
+}
+
 /* Brand barvy */
 .icon-gh { --brand-color: 36, 41, 47; }
 .icon-li { --brand-color: 0, 119, 181; }
