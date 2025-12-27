@@ -32,13 +32,44 @@ h1, h2, h3 { font-family: 'Montserrat', sans-serif; }
 
 .profile-description { font-size: 0.7rem; opacity: 0.7; margin-top: 2px !important; margin-bottom: 5px; }
 
+/* Kontejner, který drží oba obrázky na stejném místě */
+.profile-link {
+  position: relative;
+  display: inline-block; /* Nebo block, podle potřeby */
+  width: 150px;  /* Nastavte podle velikosti vašich obrázků */
+  height: 150px;
+}
+
+/* Společný styl pro oba obrázky */
 .profile-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.5s ease-in-out; /* Zde se nastavuje plynulost */
+}
+/*.profile-img {
   width: 180px;
   height: 180px;
   border-radius: 50%;
   border: 4px solid var(--link-color);
   object-fit: cover;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}*/
+/* Výchozí stav: druhý obrázek je neviditelný */
+.hover-img {
+  opacity: 0;
+}
+
+/* Stav při hoveru: 
+   Hlavní obrázek zmizí, druhý se zviditelní */
+.profile-link:hover .main-img {
+  opacity: 0;
+}
+
+.profile-link:hover .hover-img {
+  opacity: 1;
 }
 /*
 .profile-img:hover {
@@ -48,9 +79,6 @@ h1, h2, h3 { font-family: 'Montserrat', sans-serif; }
   box-shadow: 0 8px 15px rgba(0,0,0,0.3);
   z-index: 20;
 }*/
-
-
-
 .profile-link:hover .profile-name,
 .profile-link:hover .profile-description {
   transform: translateY(-10px) scale(1.4) !important;
