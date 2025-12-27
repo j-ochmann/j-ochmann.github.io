@@ -32,68 +32,65 @@ h1, h2, h3 { font-family: 'Montserrat', sans-serif; }
 
 .profile-description { font-size: 0.7rem; opacity: 0.7; margin-top: 2px !important; margin-bottom: 5px; }
 
-/* Kontejner, který drží oba obrázky na stejném místě */
+/* 1. Kontejner pro profil (oprava rozměrů a pozice) */
 .profile-link {
   position: relative;
-  display: inline-block; /* Nebo block, podle potřeby */
-  width: 150px;  /* Nastavte podle velikosti vašich obrázků */
-  height: 150px;
+  display: block;
+  width: 180px;  /* Sjednoceno s velikostí obrázku */
+  height: 180px;
+  margin: 0 auto;
+  text-decoration: none;
 }
 
-/* Společný styl pro oba obrázky */
+/* 2. Společný styl pro oba obrázky */
 .profile-img {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  transition: opacity 0.5s ease-in-out; /* Zde se nastavuje plynulost */
-}
-/*.profile-img {
   width: 180px;
   height: 180px;
-  border-radius: 50%;
+  border-radius: 50%; /* Aby byly kulaté */
   border: 4px solid var(--link-color);
   object-fit: cover;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}*/
-/* Výchozí stav: druhý obrázek je neviditelný */
-.hover-img {
-  opacity: 0;
+  /* Plynulý přechod pro průhlednost i transformaci */
+  transition: opacity 0.5s ease-in-out, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.4s;
 }
 
-/* Stav při hoveru: 
-   Hlavní obrázek zmizí, druhý se zviditelní */
+/* 3. Výchozí stav obrázků */
+.main-img {
+  opacity: 1;
+  z-index: 1;
+}
+
+.hover-img {
+  opacity: 0;
+  z-index: 2; /* Hover obrázek je "nad" tím hlavním */
+}
+
+/* 4. HOVER EFEKT - obrázky */
 .profile-link:hover .main-img {
   opacity: 0;
+  transform: scale(1.2) translateY(-10px);
 }
 
 .profile-link:hover .hover-img {
   opacity: 1;
-}
-/*
-.profile-img:hover {
-  transform: translateY(-10px) scale(1.4) !important;
-  filter: brightness(1.5);
-  transform: scale(1.2);
+  transform: scale(1.2) translateY(-10px);
+  filter: brightness(1.1);
   box-shadow: 0 8px 15px rgba(0,0,0,0.3);
-  z-index: 20;
-}*/
-.profile-link:hover .profile-name,
-.profile-link:hover .profile-description {
-  transform: translateY(-10px) scale(1.4) !important;
-  //color: var(--link-color);     /* volitelně změna barvy textu */
-  //filter: brightness(1.5);      /* rozsvícení */
-  //text-shadow: 0 8px 15px rgba(0,0,0,0.3);
-  z-index: 100;
 }
 
-.profile-link:hover .profile-img {
-  transform: translateY(-10px) scale(1.4) !important;
-  filter: brightness(1.5);
-  transform: scale(1.2);
-  box-shadow: 0 8px 15px rgba(0,0,0,0.3);
-  z-index: 20;
+/* 5. HOVER EFEKT - texty pod obrázkem */
+/* Pokud jsou texty uvnitř .profile-link, musíme je vyjmout z absolutního pozicování obrázků */
+.profile-name, .profile-description {
+  transition: transform 0.4s ease;
+  position: relative;
+  z-index: 10;
+}
+
+.profile-link:hover .profile-name,
+.profile-link:hover .profile-description {
+  transform: translateY(15px); /* Posuneme text dolů, aby ho zvětšený obrázek nepřekryl */
 }
 
 /* Brand barvy */
