@@ -1,14 +1,10 @@
 ---
-id: behavioral
-title: Behavioral Patterns
+title: Chapter 5. Behavioral Patterns
 sidebar:
   label: Behavioral
-  order: 5
-  badge: Novinka
+  #order: 5
 category: Design Patterns
 ---
-# Chapter 5. Behavioral Patterns
-
 Behavioral patterns are concerned with algorithms and the assignment of responsibilities between objects. Behavioral patterns describe not just patterns of objects or classes but also the patterns of communication between them. These patterns characterize complex control flow that’s difficult to follow at run-time. They shift your focus away from flow of control to let you concentrate just on the way objects are interconnected.
 
 Behavioral class patterns use inheritance to distribute behavior between classes. This chapter includes two such patterns. Template Method (325) is the simpler and more common of the two. A template method is an abstract definition of an algorithm. It defines the algorithm step by step. Each step invokes either an abstract operation or a primitive operation. A subclass fleshes out the algorithm by defining the abstract operations. The other behavioral class pattern is Interpreter (243), which represents a grammar as a class hierarchy and implements an interpreter as an operation on instances of these classes.
