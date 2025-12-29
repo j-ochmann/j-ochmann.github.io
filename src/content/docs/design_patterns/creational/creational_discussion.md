@@ -1,6 +1,6 @@
 ---
 id: discussion
-title:Discussion of Creational Patterns
+title: Discussion of Creational Patterns
 category: Creational Patterns
 sidebar:
   label: Discussion
