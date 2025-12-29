@@ -1,11 +1,11 @@
 ---
-id: "factory_method"
-title: "Class Creational: Factory Method
+id: factory_method
+title: "Class Creational: Factory Method"
 sidebar:
   label: Factory Method
   order: 3
   badge: Novinka
-category: "Creational"
+category: Creational
 goF: 3
 tags: ["cpp", "java", "python"]
 ---
