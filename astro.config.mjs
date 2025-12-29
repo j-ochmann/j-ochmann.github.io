@@ -36,12 +36,14 @@ export default defineConfig({
           collapsed: true,
         },
         {
+          type: 'group',
           label: 'Design Patterns',
           collapsed: true,
           link: '/design_patterns/',
           items: [
             /*{ label: 'Design Patterns', link: '/design_patterns/' },*/
             {
+              type: 'group',
               label: 'Creational',
               collapsed: true,
               autogenerate: { directory: 'design_patterns/creational' },
