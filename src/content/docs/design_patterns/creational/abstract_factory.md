@@ -1,16 +1,15 @@
 ---
 id: abstract_factory
-title: "Class Creational: Abstract Factory"
+title: "Object Creational: Abstract Factory"
 sidebar:
   label: Abstract Factory
   order: 1
-  badge: Novinka
+  # badge: Novinka
 category: Creational
 goF: 1
 tags: ["cpp", "java", "python"]
 ---
-# Object Creational: Abstract Factory
-
+<!--# Object Creational: Abstract Factory-->
 ## Intent
 Provide an interface for creating families of related or dependent objects without specifying their concrete classes.
 
