@@ -43,6 +43,14 @@ export default defineConfig({
         },
         {
           label: 'Design Patterns',
+          link: 'design_patterns',
+          collapsed: true,
+          items: [
+             { label: 'C++', slug: 'lang/cpp/quick_reference' },
+          ],
+        },
+        {
+          label: 'Design Patterns',
           autogenerate: { directory: 'design_patterns' },
           collapsed: true
         },

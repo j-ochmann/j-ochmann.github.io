@@ -1,8 +1,8 @@
 ---
-id: cpp_quick_reference
-title: "C++ QUICK REFERENCE"
+id: quick_ref_cpp
+title: "C++ Quick Reference"
 sidebar:
-  label: C++ Quick Reference
+  label: "C++"
   order: 1
 category: programming
 tags: [cpp, programming]
