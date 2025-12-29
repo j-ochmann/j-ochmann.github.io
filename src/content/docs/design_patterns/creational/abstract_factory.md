@@ -1,11 +1,13 @@
 ---
-id: "abstract_factory"
-title: "Abstract Factory"
-category: "Creational"
+id: abstract_factory
+title: "Class Creational: Abstract Factory"
+sidebar:
+  label: Abstract Factory
+  order: 1
+  badge: Novinka
+category: Creational
 goF: 1
 tags: ["cpp", "java", "python"]
-sidebar:
-  order: 1
 ---
 # Object Creational: Abstract Factory
 

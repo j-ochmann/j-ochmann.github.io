@@ -1,10 +1,10 @@
 ---
-id: "prototype"
+id: prototype
 title: "Class Creational: Prototype"
 sidebar:
   label: Prototype
   order: 4
-category: "Creational"
+category: Creational
 goF: 4
 tags: ["cpp", "java", "python"]
 ---

@@ -1,10 +1,10 @@
 ---
-id: "singleton"
+id: singleton
 title: "Object Creational: Singleton"
 sidebar:
   label: Singleton
   order: 5
-category: "Creational"
+category: Creational
 goF: 5
 tags: ["cpp", "java", "python"]
 ---

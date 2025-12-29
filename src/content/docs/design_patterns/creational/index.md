@@ -1,11 +1,10 @@
 ---
-id: "creational"
-title: "Creational Patterns"
-category: "Creational Patterns"
+id: creational
+title: Creational Patterns
 sidebar:
   label: Creational
-  order: 0
-category: "Design Patterns"
+  order: 3
+category: Design Patterns
 ---
 # Chapter 3. Creational Patterns
 

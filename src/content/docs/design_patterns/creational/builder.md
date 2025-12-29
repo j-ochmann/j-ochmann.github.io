@@ -1,11 +1,11 @@
 ---
-id: "builder"
-title: "Builder"
-category: "Creational"
-goF: 2
-tags: ["cpp", "java", "python"]
+id: builder
+title: Builder
 sidebar:
   order: 2
+category: Creational
+goF: 2
+tags: ["cpp", "java", "python"]
 ---
 # Object Creational: Builder
 
