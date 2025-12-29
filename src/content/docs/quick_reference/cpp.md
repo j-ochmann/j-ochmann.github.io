@@ -294,7 +294,7 @@ fprintf(f, "x=%d", 3);  // Print "x=3" Other conversions:
   "%c %s"               // char, char*
   "%%"                  // %
 sprintf(s, "x=%d", 3);  // Print to array of char s
-printf("x=%d”, 3);      // Print to stdout (screen unless redirected)
+printf("x=%d", 3);      // Print to stdout (screen unless redirected)
 fprintf(stderr, ...     // Print to standard error (not redirected)
 getc(f);                // Read one char (as an int) or EOF from f
 ungetc(c, f);           // Put back one c to f
