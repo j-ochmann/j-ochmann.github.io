@@ -5,7 +5,7 @@ import rehypeMermaid from 'rehype-mermaid';
 
 export default defineConfig({
   site: 'https://j-ochmann.github.io',
-  base: '/<astro>', 
+  base: '/astro', 
 
   markdown: {
     syntaxHighlight: {
@@ -35,4 +35,3 @@ export default defineConfig({
     }),
   ],
 });
-
