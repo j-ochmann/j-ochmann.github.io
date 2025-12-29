@@ -28,8 +28,9 @@ export default defineConfig({
           ],
         },
         {
-          label: 'Reference',
-          autogenerate: { directory: 'reference' },
+          label: 'Design Patterns',
+          autogenerate: { directory: 'design_patterns' },
+          collapsed: true // Sekce bude v menu defaultně zavřená
         },
       ],
     }),
