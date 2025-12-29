@@ -21,7 +21,11 @@ A solution is to configure the RTFReader class with a TextConverter object that 
 Subclasses of TextConverter specialize in different conversions and formats. For example, an ASCIIConverter ignores requests to convert anything except plain text. A TeXConverter, on the other hand, will implement operations for all requests in order to produce a TEX representation that captures all the stylistic information in the text. A TextWidgetConverter will produce a complex user interface object that lets the user see and edit the text.
 
 ```mermaid
-class RTFReader
+classDiagram
+    direction TD
+
+    class RTFReader {
+    }
 ```
 
 Each kind of converter class takes the mechanism for creating and assembling a complex object and puts it behind an abstract interface. The converter is separate from the reader, which is responsible for parsing an RTF document.
@@ -38,7 +42,11 @@ Use the Builder pattern when
 ## Structure
 
 ```mermaid
-class Director
+classDiagram
+    direction TD
+
+    class Director {
+    }
 ```
 
 ## Participants
@@ -65,7 +73,11 @@ class Director
 The following interaction diagram illustrates how Builder and Director cooperate with a client.
 
 ```mermaid
+classDiagram
+    direction TD
 
+    class Dummy {
+    }
 ```
 
 ## Consequences
