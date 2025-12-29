@@ -25,7 +25,11 @@ The solution lies in making GraphicTool create a new Graphic by copying or “cl
 So in our music editor, each tool for creating a music object is an instance of GraphicTool that’s initialized with a different prototype. Each GraphicTool instance will produce a music object by cloning its prototype and adding the clone to the score.
 
 ```mermaid
+classDiagram
+    direction TD
 
+    class Dummy {
+    }
 ```
 
 We can use the Prototype pattern to reduce the number of classes even further. We have separate classes for whole notes and half notes, but that’s probably unnecessary. Instead they could be instances of the same class initialized with different bitmaps and durations. A tool for creating whole notes becomes just a GraphicTool whose prototype is a MusicalNote initialized to be a whole note. This can reduce the number of classes in the system dramatically. It also makes it easier to add a new kind of note to the music editor.
@@ -41,7 +45,11 @@ Use the Prototype pattern when a system should be independent of how its product
 ## Structure
 
 ```mermaid
+classDiagram
+    direction TD
 
+    class Dummy {
+    }
 ```
 
 ## Participants
@@ -109,14 +117,14 @@ We’ll define a MazePrototypeFactory subclass of the MazeFactory class (page 92
 
 MazePrototypeFactory augments the MazeFactory interface with a constructor that takes the prototypes as arguments:
 
-```mermaid
+```cpp
 #ifdef SampleCode1
 #include "C++/MazeGame.H"
 #include "C++/MazeFactory.H"
 #include "C++/MazeParts.H"
 ```
 
-```mermaid
+```cpp
 class MazePrototypeFactory : public MazeFactory {
 public:
     MazePrototypeFactory(Maze*, Wall*, Room*, Door*);
@@ -136,7 +144,7 @@ private:
 
 The new constructor simply initializes its prototypes:
 
-```mermaid
+```cpp
 MazePrototypeFactory::MazePrototypeFactory (
     Maze* m, Wall* w, Room* r, Door* d
 ) {
@@ -149,7 +157,7 @@ MazePrototypeFactory::MazePrototypeFactory (
 
 The member functions for creating walls, rooms, and doors are similar: Each clones a prototype and then initializes it. Here are the definitions of MakeWall and MakeDoor:
 
-```mermaid
+```cpp
 Wall* MazePrototypeFactory::MakeWall () const {
     return _prototypeWall->Clone();
 }
@@ -163,11 +171,11 @@ Door* MazePrototypeFactory::MakeDoor (Room* r1, Room *r2) const {
 
 We can use MazePrototypeFactory to create a prototypical or default maze just by initializing it with prototypes of basic maze components:
 
-```mermaid
+```cpp
 void dummy () {
 ```
 
-```mermaid
+```cpp
 MazeGame game;
 MazePrototypeFactory simpleMazeFactory(
     new Maze, new Wall, new Room, new Door
@@ -178,11 +186,11 @@ Maze* maze = game.CreateMaze(simpleMazeFactory);
 
 To change the type of maze, we initialize MazePrototypeFactory with a different set of prototypes. The following call creates a maze with a BombedDoor and a RoomWithABomb:
 
-```mermaid
+```cpp
 void dummy2 () {
 ```
 
-```mermaid
+```cpp
 MazePrototypeFactory bombedMazeFactory(
     new Maze, new BombedWall,
     new RoomWithABomb, new Door
@@ -193,7 +201,7 @@ An object that can be used as a prototype, such as an instance of Wall, must sup
 
 Compare the following definition of Door to the one on page 83:
 
-```mermaid
+```cpp
 #endif
 #ifdef SampleCode2
 #define Door_H
@@ -202,7 +210,7 @@ Compare the following definition of Door to the one on page 83:
 #include "C++/MazeParts.H"
 ```
 
-```mermaid
+```cpp
 class Door : public MapSite {
 public:
     Door();
@@ -235,7 +243,7 @@ Door* Door::Clone () const {
 
 The BombedWall subclass must override Clone and implement a corresponding copy constructor.
 
-```mermaid
+```cpp
 class BombedWall : public Wall {
 public:
     BombedWall();

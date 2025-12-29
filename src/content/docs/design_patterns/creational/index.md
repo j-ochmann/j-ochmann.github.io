@@ -3,7 +3,7 @@ id: creational
 title: Chapter 3. Creational Patterns
 sidebar:
   label: Creational
-  order: 3
+  order: 100
 category: Design Patterns
 ---
 Creational design patterns abstract the instantiation process. They help make a system independent of how its objects are created, composed, and represented. A class creational pattern uses inheritance to vary the class that’s instantiated, whereas an object creational pattern will delegate instantiation to another object.
@@ -23,7 +23,11 @@ The classes Room, Door, and Wall define the components of the maze used in all o
 The following diagram shows the relationships between these classes:
 
 ```mermaid
-class UML
+classDiagram
+    direction TD
+
+    class Dummy {
+    }
 ```
 
 Each room has four sides. We use an enumeration Direction in C++ implementations to specify the north, south, east, and west sides of a room:

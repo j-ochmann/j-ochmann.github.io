@@ -28,6 +28,10 @@ The Factory Method pattern offers a solution. It encapsulates the knowledge of w
 
 ```mermaid
 classDiagram
+    direction TD
+
+    class Dummy {
+    }
 ```
 
 Application subclasses redefine an abstract CreateDocument operation on Application to return the appropriate Document subclass. Once an Application subclass is instantiated, it can then instantiate application-specific Documents without knowing their class. We call CreateDocument a factory method because it’s responsible for “manufacturing” an object.
@@ -44,6 +48,10 @@ Use the Factory Method pattern when
 
 ```mermaid
 classDiagram
+    direction TD
+
+    class Dummy {
+    }
 ```
 
 ## Participants
@@ -82,6 +90,10 @@ Here are two additional consequences of the Factory Method pattern:
 
     ```mermaid
     classDiagram
+        direction TD
+
+        class Dummy {
+        }
     ```
 
     The Figure class provides a CreateManipulator factory method that lets clients create a Figure’s corresponding Manipulator. Figure subclasses override this method to return an instance of the Manipulator subclass that’s right for them. Alternatively, the Figure class may implement CreateManipulator to return a default Manipulator instance, and Figure subclasses may simply inherit that default. The Figure classes that do so need no corresponding Manipulator subclass—hence the hierarchies are only partially parallel.
