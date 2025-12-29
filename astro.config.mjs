@@ -32,16 +32,19 @@ export default defineConfig({
         { icon: 'github', label: 'GitHub', href: 'https://github.com/j-ochmann' }
       ],
       sidebar: [
-        /*{
-          label: 'Guides',
-          items: [
-            { label: 'Example Guide', slug: 'guides/example' },
-          ],
-        },*/
+        {
+          label: 'Quick Reference',
+          //link: '/lang/quick_reference',
+          autogenerate: { directory: '/quick_reference' },
+          collapsed: true
+          // items: [
+          //   { label: 'C++', slug: 'lang/cpp/quick_reference' },
+          // ],
+        },
         {
           label: 'Design Patterns',
           autogenerate: { directory: 'design_patterns' },
-          collapsed: true // Sekce bude v menu defaultně zavřená
+          collapsed: true
         },
       ],
     }),
