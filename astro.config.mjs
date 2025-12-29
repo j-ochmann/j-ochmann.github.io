@@ -21,12 +21,12 @@ export default defineConfig({
         { icon: 'github', label: 'GitHub', href: 'github.com' }
       ],
       sidebar: [
-        {
+        /*{
           label: 'Guides',
           items: [
             { label: 'Example Guide', slug: 'guides/example' },
           ],
-        },
+        },*/
         {
           label: 'Design Patterns',
           autogenerate: { directory: 'design_patterns' },
