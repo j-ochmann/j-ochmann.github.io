@@ -71,6 +71,9 @@ jobs:
           ${{ steps.detect-package-manager.outputs.runner }} astro build
         working-directory: ${{ env.BUILD_PATH }}
 
+      - name: List build artifacts
+        run: ls -R ${{ env.BUILD_PATH }}/dist
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

@@ -67,6 +67,10 @@ export default defineConfig({
           label: 'External Resources',
           link: '/external_resources/',
         },
+        {
+          label: '3D Graph Example',
+          link: '/3d-graph-example/',
+        },
       ],
     }),
   ],

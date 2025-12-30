@@ -1,0 +1,51 @@
+---
+title: 3D Graph Example
+description: A demonstration of a 3D graph visualization in Astro.
+template: splash
+---
+<div id="3d-graph" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;"></div>
+
+<script src="//cdn.jsdelivr.net/npm/3d-force-graph"></script>
+
+<script is:inline>
+{`
+  // Sample data representing an inheritance structure
+  const gData = {
+    nodes: [
+      { id: 'Animal', color: 'red' },
+      { id: 'Mammal' },
+      { id: 'Reptile' },
+      { id: 'Canine' },
+      { id: 'Feline' },
+      { id: 'Dog' },
+      { id: 'Cat' },
+      { id: 'Lizard' }
+    ],
+    links: [
+      { source: 'Mammal', target: 'Animal' },
+      { source: 'Reptile', target: 'Animal' },
+      { source: 'Canine', target: 'Mammal' },
+      { source: 'Feline', target: 'Mammal' },
+      { source: 'Dog', target: 'Canine' },
+      { source: 'Cat', target: 'Feline' },
+      { source: 'Lizard', target: 'Reptile' }
+    ]
+  };
+
+  // Wait for the DOM to be ready
+  document.addEventListener('DOMContentLoaded', () => {
+    const graphContainer = document.getElementById('3d-graph');
+    if (graphContainer) {
+      const myGraph = ForceGraph3D()(graphContainer);
+      
+      myGraph.graphData(gData)
+        .nodeLabel('id')
+        .nodeAutoColorBy('group')
+        .linkDirectionalParticles(1);
+
+      // Fit graph to canvas
+      myGraph.zoomToFit(400);
+    }
+  });
+`}
+</script>
