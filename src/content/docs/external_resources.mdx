@@ -6,25 +6,15 @@ description: A collection of external resources for further learning.
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
 <CardGrid stagger>
-	<Card title="" icon="book">
-
-        ## Průvodce labyrintem algoritmů
-
-        Martin Mareš, Tomáš Valla
-        
-        [Download PDF](/pruvodce_labyrintem_algoritmu_v2.pdf)
-	</Card>
-	<Card title="" icon="open-book">
-
-        ## ECMA-334
-
-        ## C# language specification
-
-        7th edition, December 2023
-
-        [Download PDF](/ECMA-334_7th_edition_december_2023.pdf)
-	</Card>
+        <Card title="Průvodce labyrintem algoritmů" icon="book">
+                <p><strong>Martin Mareš, Tomáš Valla</strong></p>
+                <p><a href="/pruvodce_labyrintem_algoritmu_v2.pdf">Download PDF</a></p>
+        </Card>
+        <Card title="ECMA-334 – C# language specification" icon="code-block">
+                <p>
+                        7th edition<br />
+                        December 2023
+                </p>
+                <p><a href="/ECMA-334_7th_edition_december_2023.pdf">Download PDF</a></p>
+        </Card>
 </CardGrid>
-
-
-
