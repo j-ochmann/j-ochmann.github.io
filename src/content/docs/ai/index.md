@@ -12,14 +12,23 @@ Computer Science
 
 ```mermaid
 graph TD
-    subgraph CS [Počítačové vědy]
-        subgraph DS [Datová věda]
-            subgraph AI [Umělá inteligence]
-                ML[Strojové učení]
-            end
-        end
+    subgraph CS [Informatika]
+        A[Algoritmy]
+        B[Struktury]
     end
 
+    subgraph DS [Datová věda]
+        C[Statistika]
+        D[Analýza]
+    end
+
+    AI((Umělá inteligence))
+
+    %% Vazby definující průnik
+    AI --- CS
+    AI --- DS
+
+    style AI fill:#f96,stroke:#333,stroke-width:4px
 ```
    
 informatika
