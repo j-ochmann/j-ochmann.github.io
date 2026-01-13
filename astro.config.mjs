@@ -2,6 +2,7 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import rehypeMermaid from 'rehype-mermaid';
+import d2 from 'astro-d2'; // Předpokládá se instalace integrace
 
 export default defineConfig({
   site: 'https://j-ochmann.github.io',
@@ -10,7 +11,7 @@ export default defineConfig({
   markdown: {
     syntaxHighlight: {
       type: 'shiki',
-      excludeLangs: ['mermaid'],
+      excludeLangs: ['mermaid', 'd2'],
     },
     rehypePlugins: [
       [rehypeMermaid, {
@@ -24,6 +25,7 @@ export default defineConfig({
     ]
   },
   integrations: [
+    d2(),
     starlight({
       title: 'DevBook',
       social: [
