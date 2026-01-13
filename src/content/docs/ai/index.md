@@ -9,6 +9,15 @@ Computer Science
 - Artificial Intelligence
   - Machine Learning
     - Deep Learning
+```d2
+Informatika: {
+  AI: Umělá inteligence
+}
+Datová věda: {
+  AI: Umělá inteligence
+}
+# D2 automaticky detekuje stejné ID a může je vizuálně propojit
+```
 
 ```mermaid
 graph TD
