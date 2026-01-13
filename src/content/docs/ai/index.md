@@ -1,5 +1,10 @@
-# AI - Artificial Intelligence
-
+---
+title: "AI - Artificial Intelligence"
+sidebar:
+  label: AI
+  order: 0
+category: ai
+---
 Computer Science
 - Artificial Intelligence
   - Machine Learning
