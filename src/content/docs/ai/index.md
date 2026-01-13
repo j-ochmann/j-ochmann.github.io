@@ -11,32 +11,15 @@ Computer Science
     - Deep Learning
 
 ```mermaid
-graph BT
-    %% Definice hlavních oblastí
-    subgraph DS [Datová věda]
-        direction TB
-        subgraph AI_Core [Umělá inteligence]
-            subgraph ML [Strojové učení]
-                DL[Hluboké učení]
+graph TD
+    subgraph CS [Počítačové vědy]
+        subgraph DS [Datová věda]
+            subgraph AI [Umělá inteligence]
+                ML[Strojové učení]
             end
         end
     end
 
-    subgraph CS [Počítačové vědy]
-        direction TB
-        SoftEng[Softwarové inženýrství]
-        DB[Databázové systémy]
-    end
-
-    %% Propojení oblastí (znázornění průniku)
-    AI_Core --- CS
-
-    %% Stylizace
-    style DS fill:#f0f4ff,stroke:#2b579a,stroke-width:3px
-    style CS fill:#fff4e6,stroke:#d4a017,stroke-width:3px
-    style AI_Core fill:#e1f5fe,stroke:#0288d1
-    style ML fill:#81d4fa,stroke:#039be5
-    style DL fill:#4fc3f7,stroke:#0277bd,color:#fff
 ```
    
 informatika
