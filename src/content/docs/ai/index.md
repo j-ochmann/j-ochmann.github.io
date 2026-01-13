@@ -10,13 +10,19 @@ Computer Science
   - Machine Learning
     - Deep Learning
 ```d2
-Informatika: {
-  AI: Umělá inteligence
+Computer Science:
+{
+  Artificial Intelligence:
+  {
+    Machine Learning:
+    {
+      Deep Learning
+    }
+  }
 }
-Datová věda: {
-  AI: Umělá inteligence
+Data Science: {
+  Machine Learning
 }
-# D2 automaticky detekuje stejné ID a může je vizuálně propojit
 ```
 
 ```mermaid
