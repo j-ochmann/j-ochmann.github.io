@@ -10,12 +10,9 @@ Computer Science
   - Machine Learning
     - Deep Learning
 ```d2
-Computer Science:
-{
-  Artificial Intelligence:
-  {
-    Machine Learning:
-    {
+Computer Science: {
+  Artificial Intelligence: {
+    Machine Learning: {
       Deep Learning
     }
   }
