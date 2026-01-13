@@ -71,6 +71,10 @@ export default defineConfig({
           label: '3D Graph Example',
           link: '/3d-graph-example/',
         },
+        {
+          label: 'Artificial Intelligence',
+          link: '/ai/',
+        },
       ],
     }),
   ],
