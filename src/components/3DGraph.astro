@@ -55,6 +55,14 @@ const Graph = ForceGraph3D()(document.getElementById('3d-graph'))
   })
   .linkDirectionalParticles(2)
   .linkDirectionalParticleWidth(1.2);
+  const bloomPass = new THREE.UnrealBloomPass(
+    new THREE.Vector2(window.innerWidth, window.innerHeight),
+    1.2,
+    0.8,
+    0.0
+  );
+
+  Graph.postProcessingComposer().addPass(bloomPass);
 
 Graph.zoomToFit(400);
 
