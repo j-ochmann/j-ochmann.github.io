@@ -1,11 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Polyfill for THREE modules if not present (for standalone script usage)
-  if (typeof THREE === 'undefined') {
-    console.error("THREE.js is not loaded.");
+  // Ensure all THREE.js components are loaded
+  if (typeof THREE === 'undefined' || !THREE.EffectComposer || !THREE.UnrealBloomPass || typeof ForceGraph3D === 'undefined') {
+    console.error("Required libraries (THREE.js, EffectComposer, UnrealBloomPass, 3d-force-graph) are not loaded.");
     return;
   }
 
-  // Data for the graph
   const gData = {
     nodes: [
       { id: 'Animal', color: '#ff0000' },
@@ -28,14 +27,12 @@ document.addEventListener('DOMContentLoaded', () => {
     ]
   };
 
-  // Container for the graph
   const container = document.getElementById('3d-graph');
   if (!container) {
-    console.error("Container #3d-graph not found.");
-    return;
+      console.error('Container element #3d-graph not found.');
+      return;
   }
-  
-  // Initialize the 3D Force Graph
+
   const Graph = ForceGraph3D()(container)
     .graphData(gData)
     .backgroundColor('#000003')
@@ -75,34 +72,27 @@ document.addEventListener('DOMContentLoaded', () => {
       );
     });
 
-  // Add lighting to the scene for the bloom effect
+  // Add lighting
   Graph.scene().add(new THREE.AmbientLight(0xffffff, 0.5));
   const dirLight = new THREE.DirectionalLight(0xffffff, 1);
   dirLight.position.set(50, 50, 50);
   Graph.scene().add(dirLight);
 
-  // Add UnrealBloomPass for the glow effect
-  // Ensure EffectComposer and passes are loaded
-  if (THREE.EffectComposer && THREE.UnrealBloomPass) {
-    const bloomPass = new THREE.UnrealBloomPass(
-      new THREE.Vector2(window.innerWidth, window.innerHeight),
-      4,   // strength
-      1,   // radius
-      0    // threshold
-    );
-    Graph.postProcessingComposer().addPass(bloomPass);
+  // Post-processing with Bloom effect
+  const bloomPass = new THREE.UnrealBloomPass(
+    new THREE.Vector2(window.innerWidth, window.innerHeight),
+    4,   // strength
+    1,   // radius
+    0    // threshold
+  );
+  Graph.postProcessingComposer().addPass(bloomPass);
 
-    // Handle window resizing
-    window.addEventListener('resize', () => {
-        Graph.renderer().setSize(window.innerWidth, window.innerHeight);
-        bloomPass.setSize(new THREE.Vector2(window.innerWidth, window.innerHeight));
-    });
-  } else {
-    console.error("EffectComposer or UnrealBloomPass not loaded. Make sure they are included.");
-  }
-
-
-  // Zoom to fit the graph
+  // Zoom to fit
   Graph.zoomToFit(400);
 
+  // Handle resize
+  window.addEventListener('resize', () => {
+    Graph.renderer().setSize(window.innerWidth, window.innerHeight);
+    bloomPass.setSize(new THREE.Vector2(window.innerWidth, window.innerHeight));
+  });
 });
