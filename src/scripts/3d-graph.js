@@ -35,17 +35,48 @@ if (container) {
     .backgroundColor('#000003')
     .nodeLabel('id')
     .nodeThreeObject(node => {
-      const color = new THREE.Color(node.color).convertSRGBToLinear().multiplyScalar(1.5);
-      return new THREE.Mesh(
-        new THREE.SphereGeometry(4, 32, 32),
-        new THREE.MeshStandardMaterial({
-          color,
-          emissive: color,
-          emissiveIntensity: 1,
-          roughness: 0.2,
-          metalness: 0
-        })
-      );
+      // Create the sphere
+      const sphereMaterial = new THREE.MeshStandardMaterial({
+        color: new THREE.Color(node.color).convertSRGBToLinear().multiplyScalar(1.5),
+        emissive: new THREE.Color(node.color).convertSRGBToLinear().multiplyScalar(1.5),
+        emissiveIntensity: 1,
+        roughness: 0.2,
+        metalness: 0
+      });
+      const sphere = new THREE.Mesh(new THREE.SphereGeometry(4, 32, 32), sphereMaterial);
+
+      // Create the text sprite
+      const canvas = document.createElement('canvas');
+      const context = canvas.getContext('2d');
+      const fontSize = 24;
+      context.font = `Bold ${fontSize}px Arial`;
+      
+      const text = node.id;
+      const metrics = context.measureText(text);
+      const textWidth = metrics.width;
+      canvas.width = textWidth + 8; // padding
+      canvas.height = fontSize + 8; // padding
+
+      // Re-apply font settings after canvas resize
+      context.font = `Bold ${fontSize}px Arial`;
+      context.textAlign = 'center';
+      context.textBaseline = 'middle';
+      context.fillStyle = 'rgba(255, 255, 255, 0.9)';
+      context.fillText(text, canvas.width / 2, canvas.height / 2);
+
+      const texture = new THREE.CanvasTexture(canvas);
+      const spriteMaterial = new THREE.SpriteMaterial({ map: texture, transparent: true, depthTest: false });
+      const sprite = new THREE.Sprite(spriteMaterial);
+      sprite.renderOrder = 999;
+      sprite.scale.set(canvas.width / 2, canvas.height / 2, 1.0);
+      sprite.position.set(0, 12, 0); // Position the label a bit higher above the sphere
+
+      // Create a group to hold both
+      const group = new THREE.Group();
+      group.add(sphere);
+      group.add(sprite);
+
+      return group;
     })
     .linkMaterial(link => {
       const color = new THREE.Color(link.color || '#ffffff').convertSRGBToLinear();
