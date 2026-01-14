@@ -32,5 +32,7 @@ category: courses
 **Tip:** *Pokud hledáte certifikáty na Courseru, vždy hledejte tlačítko "Financial Aid available" (Finanční pomoc). Po schválení žádosti (trvá cca 15 dní) můžete získat placený certifikát zdarma.*
 
 ## YouTube
-- [ÚFAL MFF UK](https://www.youtube.com/@ufalmffuk6883) Úvodní přednáška: Umělá inteligence, strojové učení, neuronové sítě [ AI v kontextu #1 ]
+- [ÚFAL MFF UK](https://www.youtube.com/@ufalmffuk6883)
+  Úvodní přednáška: **Umělá inteligence, strojové učení, neuronové sítě**
+  [ AI v kontextu #1 ]
   <iframe width="560" height="315" src="https://www.youtube.com/embed/_pgbYA5sznw?si=jYxHBuaA7r516phA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
