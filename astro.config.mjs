@@ -77,6 +77,11 @@ export default defineConfig({
           label: 'Artificial Intelligence',
           link: '/ai/',
         },
+        {
+          label: 'Courses',
+          link: '/courses/',
+          badge: 'Free',
+        },
       ],
     }),
   ],
