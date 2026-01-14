@@ -1,8 +1,38 @@
 ---
+// src/pages/index.astro
 import RootLayout from '../layouts/RootLayout.astro';
 ---
+
 <RootLayout>
-  <h1>Jindřich Ochmann</h1>
-  <p>Software Engineer</p>
-  <!-- obsah landing page -->
+  <section class="landing-hero">
+    <div class="profile-container">
+      <a href="/about" class="profile-link">
+        <div class="profile-img-wrapper">
+          <img src="/assets/img/20250712_056.jpg" alt="Jindřich" class="profile-img main-img" />
+          <img src="/assets/img/20250712_055.jpg" alt="Jindřich" class="profile-img hover-img" />
+        </div>
+        <div class="profile-namedesc">
+          <h1 class="profile-name">Jindřich Ochmann</h1>
+          <p class="profile-description">Software Engineer</p>
+        </div>
+      </a>
+
+      <div class="social-icons-arc">
+        <a href="https://github.com/j-ochmann" class="icon-gh"><i class="fa-brands fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/jind%C5%99ich-ochmann-5186967b" class="icon-li"><i class="fa-brands fa-linkedin"></i></a>
+        <a href="https://www.instagram.com/jindrichochmann" class="icon-ig"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://www.facebook.com/jindrich.ochmann" class="icon-fb"><i class="fa-brands fa-facebook"></i></a>
+        <a href="https://www.youtube.com/@JindrichOchmann" class="icon-yt"><i class="fa-brands fa-youtube"></i></a>
+      </div>
+    </div>
+
+    <div class="landing-links">
+      <h2>Moje projekty</h2>
+      <ul>
+        <li><a href="/dev">Dev – projekty a experimenty</a></li>
+        <li><a href="/devbook">DevBook – učebnice a tutorialy</a></li>
+        <li><a href="/devhub">DevHub – repo a nástroje</a></li>
+      </ul>
+    </div>
+  </section>
 </RootLayout>
