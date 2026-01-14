@@ -1,47 +1,41 @@
----
----
-
 <div id="3d-graph" style="position:fixed; inset:0"></div>
 
-<script is:inline type="module">
-  import ForceGraph3D from 'https://cdn.jsdelivr.net/npm/3d-force-graph@1.77.0/dist/3d-force-graph.module.js';
-  import { UnrealBloomPass } from 'https://esm.sh/three/examples/jsm/postprocessing/UnrealBloomPass.js';
+<script is:inline src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+<script is:inline src="https://unpkg.com/three@0.160.0/examples/js/postprocessing/EffectComposer.js"></script>
+<script is:inline src="https://unpkg.com/three@0.160.0/examples/js/postprocessing/RenderPass.js"></script>
+<script is:inline src="https://unpkg.com/three@0.160.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
+<script is:inline src="https://unpkg.com/3d-force-graph"></script>
 
-  // jednoduchá data
-  const gData = {
-    nodes: [
-      { id: 'Animal', group: 1 },
-      { id: 'Mammal', group: 2 },
-      { id: 'Reptile', group: 2 },
-      { id: 'Canine', group: 3 },
-      { id: 'Feline', group: 3 },
-      { id: 'Dog', group: 4 },
-      { id: 'Cat', group: 4 },
-      { id: 'Lizard', group: 4 }
-    ],
-    links: [
-      { source: 'Mammal', target: 'Animal' },
-      { source: 'Reptile', target: 'Animal' },
-      { source: 'Canine', target: 'Mammal' },
-      { source: 'Feline', target: 'Mammal' },
-      { source: 'Dog', target: 'Canine' },
-      { source: 'Cat', target: 'Feline' },
-      { source: 'Lizard', target: 'Reptile' }
-    ]
-  };
+<script is:inline>
+const gData = {
+  nodes: [
+    { id: 'Animal', color: '#ff6666' },
+    { id: 'Mammal', color: '#66ff66' },
+    { id: 'Reptile', color: '#6666ff' },
+    { id: 'Canine', color: '#87ceeb' },
+    { id: 'Feline', color: '#ffa500' },
+    { id: 'Dog', color: '#87ceeb' },
+    { id: 'Cat', color: '#ffa500' },
+    { id: 'Lizard', color: '#6666ff' }
+  ],
+  links: [
+    { source: 'Mammal', target: 'Animal' },
+    { source: 'Reptile', target: 'Animal' },
+    { source: 'Canine', target: 'Mammal' },
+    { source: 'Feline', target: 'Mammal' },
+    { source: 'Dog', target: 'Canine' },
+    { source: 'Cat', target: 'Feline' },
+    { source: 'Lizard', target: 'Reptile' }
+  ]
+};
 
-  const container = document.getElementById('3d-graph');
+const Graph = ForceGraph3D()(document.getElementById('3d-graph'))
+  .graphData(gData)
+  .backgroundColor('#000003')
+  .nodeLabel('id')
+  .nodeAutoColorBy('id');
 
-  const Graph = new ForceGraph3D(container)
-    .backgroundColor('#000003')
-    .graphData(gData)
-    .nodeLabel('id')
-    .nodeAutoColorBy('group');
-
-  // --- Bloom efekt ---
-  const bloomPass = new UnrealBloomPass();
-  bloomPass.strength = 4;  // síla glow
-  bloomPass.radius = 1;
-  bloomPass.threshold = 0;
-  Graph.postProcessingComposer().addPass(bloomPass);
+// --- Bloom efekt ---
+const bloomPass = new THREE.UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 4, 1, 0);
+Graph.postProcessingComposer().addPass(bloomPass);
 </script>
