@@ -1,3 +1,6 @@
+---
+---
+
 <div id="3d-graph" style="position:fixed; inset:0"></div>
 
 <script is:inline src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
@@ -9,14 +12,14 @@
 <script is:inline>
 const gData = {
   nodes: [
-    { id: 'Animal', color: '#ff6666' },
-    { id: 'Mammal', color: '#66ff66' },
-    { id: 'Reptile', color: '#6666ff' },
-    { id: 'Canine', color: '#87ceeb' },
-    { id: 'Feline', color: '#ffa500' },
-    { id: 'Dog', color: '#87ceeb' },
-    { id: 'Cat', color: '#ffa500' },
-    { id: 'Lizard', color: '#6666ff' }
+    { id: 'Animal',  color: '#ff5555' },
+    { id: 'Mammal',  color: '#55ff55' },
+    { id: 'Reptile', color: '#5555ff' },
+    { id: 'Canine',  color: '#55ccff' },
+    { id: 'Feline',  color: '#ffaa00' },
+    { id: 'Dog',     color: '#55ccff' },
+    { id: 'Cat',     color: '#ffaa00' },
+    { id: 'Lizard',  color: '#5555ff' }
   ],
   links: [
     { source: 'Mammal', target: 'Animal' },
@@ -31,69 +34,48 @@ const gData = {
 
 const Graph = ForceGraph3D()(document.getElementById('3d-graph'))
   .graphData(gData)
-  .nodeAutoColorBy('id')
-  .nodeLabel('id')
+  .backgroundColor('#000000')
   .nodeThreeObject(node => {
-    const sprite = new THREE.Sprite(
-      new THREE.SpriteMaterial({
-        map: makeTextTexture(node.id, '#ffffff'),//node.color),
-        transparent: true
-      })
-    );
-    sprite.scale.set(20, 10, 1);
-    return sprite;
-  })
-  .onNodeClick(node => {
-    const distance = 80;
-    const distRatio = 1 + distance / Math.hypot(node.x, node.y, node.z);
+    const color = new THREE.Color(node.color);
 
+    const material = new THREE.MeshStandardMaterial({
+      color,
+      emissive: color,
+      emissiveIntensity: 1.5,
+      roughness: 0.4,
+      metalness: 0.0
+    });
+
+    return new THREE.Mesh(
+      new THREE.SphereGeometry(4, 32, 32),
+      material
+    );
+  })
+  .nodeLabel(node => node.id)
+  .linkDirectionalParticles(2)
+  .linkDirectionalParticleWidth(1.2)
+  .onNodeClick(node => {
+    const distance = 120;
+    const distRatio = 1 + distance / Math.hypot(node.x, node.y, node.z);
     Graph.cameraPosition(
       { x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio },
       node,
       1500
     );
-  })
-  .linkDirectionalParticles(2)
-  .linkDirectionalParticleWidth(1.2);
-  const bloomPass = new THREE.UnrealBloomPass(
-    new THREE.Vector2(window.innerWidth, window.innerHeight),
-    1.5,
-    1.0,
-    0.0
-  );
-
-  Graph.postProcessingComposer().addPass(bloomPass);
+  });
 
 Graph.zoomToFit(400);
 
-// ---- text texture ----
-function makeTextTexture(text, color) {
-  const canvas = document.createElement('canvas');
-  const ctx = canvas.getContext('2d');
-  canvas.width = 512;
-  canvas.height = 256;
-/*
-  ctx.fillStyle = 'rgba(20,20,20,0.85)';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+const bloomPass = new THREE.UnrealBloomPass(
+  new THREE.Vector2(window.innerWidth, window.innerHeight),
+  1.2,
+  1.0,
+  0.0
+);
 
-  ctx.fillStyle = color;
-  ctx.font = '64px sans-serif';
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
-  ctx.fillText(text, canvas.width / 2, canvas.height / 2);
-*/
-  ctx.fillStyle = 'rgba(0,0,0,0.0)'; // ŽÁDNÉ pozadí
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+Graph.postProcessingComposer().addPass(bloomPass);
 
-  ctx.fillStyle = '#ffffff';        // čistě bílý text
-  ctx.font = 'bold 72px sans-serif';
-  ctx.shadowColor = '#ffffff';
-  ctx.shadowBlur = 20;
-
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
-  ctx.fillText(text, canvas.width / 2, canvas.height / 2);
-
-  return new THREE.CanvasTexture(canvas);
-}
+window.addEventListener('resize', () => {
+  bloomPass.setSize(window.innerWidth, window.innerHeight);
+});
 </script>
