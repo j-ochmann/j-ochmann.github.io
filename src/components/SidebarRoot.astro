@@ -1,27 +1,24 @@
 ---
-// src/components/SidebarRoot.astro
-import profileMain from '../assets/img/20250712_056.jpg';
-import profileHover from '../assets/img/20250712_055.jpg';
-import '../assets/css/style.css';
+// SidebarRoot.astro
+import '../assets/css/style.scss';
 
-// pevné odkazy pro root landing page
-const links = [
-  { title: 'Portfolio', url: '/' },
-  { title: 'DevHub', url: '/dev/' },
-  { title: 'Kontakt', url: '/contacts/' },
+// Navigační odkazy pro root
+const navLinks = [
+  { title: "Portfolio", url: "/" },
+  { title: "DevHub", url: "/dev/" },
+  { title: "Kontakt", url: "/contacts/" },
 ];
 ---
+
 <aside class="sidebar-root">
   <div class="profile-container">
     <a href="/" class="profile-link">
       <div class="profile-img-wrapper">
-        <img src={profileMain} alt="Jindřich" class="profile-img main-img" />
-        <img src={profileHover} alt="Jindřich" class="profile-img hover-img" />
+        <img src="/assets/img/20250712_056.jpg" alt="Jindřich" class="profile-img main-img" />
+        <img src="/assets/img/20250712_055.jpg" alt="Jindřich" class="profile-img hover-img" />
       </div>
-      <div class="profile-namedesc">
-        <h1 class="profile-name">Jindřich Ochmann</h1>
-        <p class="profile-description">Software Engineer</p>
-      </div>
+      <h1 class="profile-name">Jindřich Ochmann</h1>
+      <p class="profile-description">Software Engineer</p>
     </a>
 
     <div class="social-icons-arc">
@@ -34,7 +31,7 @@ const links = [
 
     <nav class="nav-links">
       <ul>
-        {links.map(link => (
+        {navLinks.map(link => (
           <li><a href={link.url}>{link.title}</a></li>
         ))}
       </ul>
