@@ -36,7 +36,7 @@ const Graph = ForceGraph3D()(document.getElementById('3d-graph'))
   .nodeThreeObject(node => {
     const sprite = new THREE.Sprite(
       new THREE.SpriteMaterial({
-        map: makeTextTexture(node.id, node.color),
+        map: makeTextTexture(node.id, '#ffffff'),//node.color),
         transparent: true
       })
     );
