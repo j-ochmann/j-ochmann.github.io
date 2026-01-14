@@ -3,21 +3,26 @@
 
 <div id="3d-graph" style="position:fixed; inset:0"></div>
 
+<!-- THREE.js + postprocessing + 3D Force Graph -->
 <script is:inline src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+<script is:inline src="https://unpkg.com/three@0.160.0/examples/js/postprocessing/EffectComposer.js"></script>
+<script is:inline src="https://unpkg.com/three@0.160.0/examples/js/postprocessing/RenderPass.js"></script>
+<script is:inline src="https://unpkg.com/three@0.160.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
 <script is:inline src="https://unpkg.com/3d-force-graph"></script>
 
 <script is:inline>
 document.addEventListener('DOMContentLoaded', () => {
+
   const gData = {
     nodes: [
-      { id: 'Animal', color: '#ff0000' },
-      { id: 'Mammal', color: '#00ff00' },
+      { id: 'Animal',  color: '#ff0000' },
+      { id: 'Mammal',  color: '#00ff00' },
       { id: 'Reptile', color: '#0000ff' },
-      { id: 'Canine', color: '#00ffff' },
-      { id: 'Feline', color: '#ffaa00' },
-      { id: 'Dog', color: '#00ffff' },
-      { id: 'Cat', color: '#ffaa00' },
-      { id: 'Lizard', color: '#0000ff' }
+      { id: 'Canine',  color: '#00ffff' },
+      { id: 'Feline',  color: '#ffaa00' },
+      { id: 'Dog',     color: '#00ffff' },
+      { id: 'Cat',     color: '#ffaa00' },
+      { id: 'Lizard',  color: '#0000ff' }
     ],
     links: [
       { source: 'Mammal', target: 'Animal', color:'#ff00ff' },
@@ -36,37 +41,23 @@ document.addEventListener('DOMContentLoaded', () => {
     .graphData(gData)
     .backgroundColor('#000000')
     .nodeThreeObject(node => {
-      // hlavní uzel
-      const color = new THREE.Color(node.color);
+      // Uzly s vysokou HDR intenzitou
+      const color = new THREE.Color(node.color).convertSRGBToLinear().multiplyScalar(5);
       const material = new THREE.MeshStandardMaterial({
         color,
         emissive: color,
-        emissiveIntensity: 2,
+        emissiveIntensity: 1,
         roughness: 0.4,
         metalness: 0
       });
-      const sphere = new THREE.Mesh(new THREE.SphereGeometry(4, 32, 32), material);
-
-      // halo simulující glow
-      const spriteMaterial = new THREE.SpriteMaterial({
-        map: new THREE.TextureLoader().load('https://i.ibb.co/q0P9VbR/halo.png'),
-        color: color,
-        transparent: true,
-        opacity: 0.6,
-        blending: THREE.AdditiveBlending
-      });
-      const sprite = new THREE.Sprite(spriteMaterial);
-      sprite.scale.set(15, 15, 1);
-      sphere.add(sprite);
-
-      return sphere;
+      return new THREE.Mesh(new THREE.SphereGeometry(4, 32, 32), material);
     })
     .linkMaterial(link => {
-      const color = new THREE.Color(link.color || '#ffffff');
+      const color = new THREE.Color(link.color || '#ffffff').convertSRGBToLinear().multiplyScalar(5);
       return new THREE.MeshStandardMaterial({
         color,
         emissive: color,
-        emissiveIntensity: 2,
+        emissiveIntensity: 1,
         transparent: true,
         opacity: 0.8
       });
@@ -85,5 +76,36 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
   Graph.zoomToFit(400);
+
+  // --- Render přes HDR + UnrealBloomPass ---
+  const renderer = Graph.renderer();
+  renderer.toneMapping = THREE.ReinhardToneMapping;
+  renderer.outputEncoding = THREE.sRGBEncoding;
+
+  const scene = Graph.scene();
+  const camera = Graph.camera();
+
+  const composer = new THREE.EffectComposer(renderer);
+  composer.addPass(new THREE.RenderPass(scene, camera));
+
+  const bloomPass = new THREE.UnrealBloomPass(
+    new THREE.Vector2(window.innerWidth, window.innerHeight),
+    3.0, // síla glow
+    1.0, // radius
+    0.0  // threshold nízko = vše projde bloomem
+  );
+
+  composer.addPass(bloomPass);
+
+  // Přepíšeme render loop
+  renderer.setAnimationLoop(() => {
+    composer.render();
+  });
+
+  // Resizing
+  window.addEventListener('resize', () => {
+    bloomPass.setSize(window.innerWidth, window.innerHeight);
+  });
+
 });
 </script>
