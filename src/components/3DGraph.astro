@@ -14,23 +14,23 @@
 document.addEventListener('DOMContentLoaded', () => {
   const gData = {
     nodes: [
-      { id: 'Animal',  color: '#ff5555' },
-      { id: 'Mammal',  color: '#55ff55' },
-      { id: 'Reptile', color: '#5555ff' },
-      { id: 'Canine',  color: '#55ccff' },
+      { id: 'Animal',  color: '#ff0000' },
+      { id: 'Mammal',  color: '#00ff00' },
+      { id: 'Reptile', color: '#0000ff' },
+      { id: 'Canine',  color: '#00ffff' },
       { id: 'Feline',  color: '#ffaa00' },
-      { id: 'Dog',     color: '#55ccff' },
+      { id: 'Dog',     color: '#00ffff' },
       { id: 'Cat',     color: '#ffaa00' },
-      { id: 'Lizard',  color: '#5555ff' }
+      { id: 'Lizard',  color: '#0000ff' }
     ],
     links: [
-      { source: 'Mammal', target: 'Animal', color:'#00ffff' },
-      { source: 'Reptile', target: 'Animal', color:'#00ffff' },
+      { source: 'Mammal', target: 'Animal', color:'#ff00ff' },
+      { source: 'Reptile', target: 'Animal', color:'#ff00ff' },
       { source: 'Canine', target: 'Mammal', color:'#00ffff' },
       { source: 'Feline', target: 'Mammal', color:'#00ffff' },
       { source: 'Dog', target: 'Canine', color:'#00ffff' },
-      { source: 'Cat', target: 'Feline', color:'#00ffff' },
-      { source: 'Lizard', target: 'Reptile', color:'#00ffff' }
+      { source: 'Cat', target: 'Feline', color:'#ffaa00' },
+      { source: 'Lizard', target: 'Reptile', color:'#ffaa00' }
     ]
   };
 
@@ -44,18 +44,18 @@ document.addEventListener('DOMContentLoaded', () => {
       const material = new THREE.MeshStandardMaterial({
         color,
         emissive: color,
-        emissiveIntensity: 4, // 🔥 svítí
+        emissiveIntensity: 5, // 🔥 silný glow
         roughness: 0.4,
         metalness: 0
       });
       return new THREE.Mesh(new THREE.SphereGeometry(4, 32, 32), material);
     })
     .linkMaterial(link => {
-      const color = new THREE.Color(link.color || '#00ffff');
+      const color = new THREE.Color(link.color || '#ffffff');
       return new THREE.MeshStandardMaterial({
         color,
         emissive: color,
-        emissiveIntensity: 3
+        emissiveIntensity: 3  // 🔥 linky svítí
       });
     })
     .nodeLabel(node => node.id)
@@ -83,9 +83,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const bloomPass = new THREE.UnrealBloomPass(
     new THREE.Vector2(window.innerWidth, window.innerHeight),
-    2.5, // strength 🔥
-    1.0, // radius
-    0.1  // threshold (nízký = vše se svítí)
+    3.0,  // 🔥 síla glow
+    1.0,  // radius
+    0.0   // threshold nízko = vše svítí
   );
 
   composer.addPass(bloomPass);
