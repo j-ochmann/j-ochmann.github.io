@@ -1,15 +1,12 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import BaseLayout from '../components/BaseLayout.astro';
 ---
 
-<BaseLayout sidebarType="root" title="Portfolio">
-  <section class="landing">
-    <h1>Jindřich Ochmann</h1>
-    <p>Software Engineer & Developer</p>
-    <div class="landing-buttons">
-      <a href="/dev">DevHub</a>
-      <a href="/devbook">DevBook</a>
-      <a href="/contacts">Kontakt</a>
-    </div>
-  </section>
+<BaseLayout>
+  <h2>Vítejte na mém portfoliu!</h2>
+  <p>Profil, projekty a kontakty.</p>
+  <ul>
+    <li><a href="/dev">DevHub</a></li>
+    <li><a href="/projects">Projekty</a></li>
+  </ul>
 </BaseLayout>
