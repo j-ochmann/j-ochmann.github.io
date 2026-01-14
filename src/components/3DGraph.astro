@@ -3,6 +3,7 @@
 
 <div id="3d-graph" style="position:fixed; inset:0"></div>
 
+<!-- THREE.js + postprocessing + 3D Force Graph -->
 <script is:inline src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
 <script is:inline src="https://unpkg.com/three@0.160.0/examples/js/postprocessing/EffectComposer.js"></script>
 <script is:inline src="https://unpkg.com/three@0.160.0/examples/js/postprocessing/RenderPass.js"></script>
@@ -10,72 +11,92 @@
 <script is:inline src="https://unpkg.com/3d-force-graph"></script>
 
 <script is:inline>
-const gData = {
-  nodes: [
-    { id: 'Animal',  color: '#ff5555' },
-    { id: 'Mammal',  color: '#55ff55' },
-    { id: 'Reptile', color: '#5555ff' },
-    { id: 'Canine',  color: '#55ccff' },
-    { id: 'Feline',  color: '#ffaa00' },
-    { id: 'Dog',     color: '#55ccff' },
-    { id: 'Cat',     color: '#ffaa00' },
-    { id: 'Lizard',  color: '#5555ff' }
-  ],
-  links: [
-    { source: 'Mammal', target: 'Animal' },
-    { source: 'Reptile', target: 'Animal' },
-    { source: 'Canine', target: 'Mammal' },
-    { source: 'Feline', target: 'Mammal' },
-    { source: 'Dog', target: 'Canine' },
-    { source: 'Cat', target: 'Feline' },
-    { source: 'Lizard', target: 'Reptile' }
-  ]
-};
+document.addEventListener('DOMContentLoaded', () => {
+  const gData = {
+    nodes: [
+      { id: 'Animal',  color: '#ff5555' },
+      { id: 'Mammal',  color: '#55ff55' },
+      { id: 'Reptile', color: '#5555ff' },
+      { id: 'Canine',  color: '#55ccff' },
+      { id: 'Feline',  color: '#ffaa00' },
+      { id: 'Dog',     color: '#55ccff' },
+      { id: 'Cat',     color: '#ffaa00' },
+      { id: 'Lizard',  color: '#5555ff' }
+    ],
+    links: [
+      { source: 'Mammal', target: 'Animal', color:'#00ffff' },
+      { source: 'Reptile', target: 'Animal', color:'#00ffff' },
+      { source: 'Canine', target: 'Mammal', color:'#00ffff' },
+      { source: 'Feline', target: 'Mammal', color:'#00ffff' },
+      { source: 'Dog', target: 'Canine', color:'#00ffff' },
+      { source: 'Cat', target: 'Feline', color:'#00ffff' },
+      { source: 'Lizard', target: 'Reptile', color:'#00ffff' }
+    ]
+  };
 
-const Graph = ForceGraph3D()(document.getElementById('3d-graph'))
-  .graphData(gData)
-  .backgroundColor('#000000')
-  .nodeThreeObject(node => {
-    const color = new THREE.Color(node.color);
+  const container = document.getElementById('3d-graph');
 
-    const material = new THREE.MeshStandardMaterial({
-      color,
-      emissive: color,
-      emissiveIntensity: 1.5,
-      roughness: 0.4,
-      metalness: 0.0
+  const Graph = ForceGraph3D()(container)
+    .graphData(gData)
+    .backgroundColor('#000000')
+    .nodeThreeObject(node => {
+      const color = new THREE.Color(node.color);
+      const material = new THREE.MeshStandardMaterial({
+        color,
+        emissive: color,
+        emissiveIntensity: 4, // 🔥 svítí
+        roughness: 0.4,
+        metalness: 0
+      });
+      return new THREE.Mesh(new THREE.SphereGeometry(4, 32, 32), material);
+    })
+    .linkMaterial(link => {
+      const color = new THREE.Color(link.color || '#00ffff');
+      return new THREE.MeshStandardMaterial({
+        color,
+        emissive: color,
+        emissiveIntensity: 3
+      });
+    })
+    .nodeLabel(node => node.id)
+    .linkDirectionalParticles(2)
+    .linkDirectionalParticleWidth(1.2)
+    .onNodeClick(node => {
+      const distance = 120;
+      const distRatio = 1 + distance / Math.hypot(node.x, node.y, node.z);
+      Graph.cameraPosition(
+        { x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio },
+        node,
+        1500
+      );
     });
 
-    return new THREE.Mesh(
-      new THREE.SphereGeometry(4, 32, 32),
-      material
-    );
-  })
-  .nodeLabel(node => node.id)
-  .linkDirectionalParticles(2)
-  .linkDirectionalParticleWidth(1.2)
-  .onNodeClick(node => {
-    const distance = 120;
-    const distRatio = 1 + distance / Math.hypot(node.x, node.y, node.z);
-    Graph.cameraPosition(
-      { x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio },
-      node,
-      1500
-    );
+  Graph.zoomToFit(400);
+
+  // --- BLOOM efekt ---
+  const renderer = Graph.renderer();
+  const scene = Graph.scene();
+  const camera = Graph.camera();
+
+  const composer = new THREE.EffectComposer(renderer);
+  composer.addPass(new THREE.RenderPass(scene, camera));
+
+  const bloomPass = new THREE.UnrealBloomPass(
+    new THREE.Vector2(window.innerWidth, window.innerHeight),
+    2.5, // strength 🔥
+    1.0, // radius
+    0.1  // threshold (nízký = vše se svítí)
+  );
+
+  composer.addPass(bloomPass);
+
+  // render loop přes composer
+  renderer.setAnimationLoop(() => {
+    composer.render();
   });
 
-Graph.zoomToFit(400);
-
-const bloomPass = new THREE.UnrealBloomPass(
-  new THREE.Vector2(window.innerWidth, window.innerHeight),
-  1.2,
-  1.0,
-  0.0
-);
-
-Graph.postProcessingComposer().addPass(bloomPass);
-
-window.addEventListener('resize', () => {
-  bloomPass.setSize(window.innerWidth, window.innerHeight);
+  window.addEventListener('resize', () => {
+    bloomPass.setSize(window.innerWidth, window.innerHeight);
+  });
 });
 </script>
