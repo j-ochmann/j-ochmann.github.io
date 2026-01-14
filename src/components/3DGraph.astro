@@ -1,15 +1,12 @@
----
----
-<div id="3d-graph" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;"></div>
+<div id="3d-graph" style="position:fixed; inset:0"></div>
 
-<script is:inline src="//unpkg.com/three"></script>
-<script is:inline src="//unpkg.com/three/examples/js/postprocessing/EffectComposer.js"></script>
-<script is:inline src="//unpkg.com/three/examples/js/postprocessing/RenderPass.js"></script>
-<script is:inline src="//unpkg.com/three/examples/js/postprocessing/UnrealBloomPass.js"></script>
-<script is:inline src="//cdn.jsdelivr.net/npm/3d-force-graph"></script>
+<script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+<script src="https://unpkg.com/three@0.160.0/examples/js/postprocessing/EffectComposer.js"></script>
+<script src="https://unpkg.com/three@0.160.0/examples/js/postprocessing/RenderPass.js"></script>
+<script src="https://unpkg.com/three@0.160.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
+<script src="https://unpkg.com/3d-force-graph"></script>
 
 <script is:inline>
-// Sample data representing an inheritance structure
 const gData = {
   nodes: [
     { id: 'Animal', color: '#ff6666' },
@@ -32,60 +29,51 @@ const gData = {
   ]
 };
 
-// Wait for the DOM to be ready
-document.addEventListener('DOMContentLoaded', () => {
-  const graphContainer = document.getElementById('3d-graph');
-  if (graphContainer) {
-    const myGraph = ForceGraph3D()(graphContainer);
-
-    // --- Bloom Effect ---
-    const bloomPass = new THREE.UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.5, 0.4, 0.85);
-    bloomPass.strength = 1.2;
-    bloomPass.radius = 1;
-    bloomPass.threshold = 0.1;
-    myGraph.postProcessingComposer().addPass(bloomPass);
-    
-    myGraph.graphData(gData)
-      .nodeLabel('id') // Keep hover label
-      // --- Click-to-focus ---
-      .onNodeClick(node => {
-        const distance = 80;
-        const distRatio = 1 + distance/Math.hypot(node.x, node.y, node.z);
-
-        myGraph.cameraPosition(
-          { x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio }, // new position
-          node, // lookAt target
-          2000  // transition duration
-        );
+const Graph = ForceGraph3D()(document.getElementById('3d-graph'))
+  .graphData(gData)
+  .nodeAutoColorBy('id')
+  .nodeLabel('id')
+  .nodeThreeObject(node => {
+    const sprite = new THREE.Sprite(
+      new THREE.SpriteMaterial({
+        map: makeTextTexture(node.id, node.color),
+        transparent: true
       })
-      // --- Text-nodes ---
-      .nodeCanvasObject((node, ctx, globalScale) => {
-        const label = node.id;
-        const fontSize = 14 / globalScale;
-        ctx.font = `${fontSize}px Sans-Serif`;
-        const textWidth = ctx.measureText(label).width;
-        const bckgDimensions = [textWidth, fontSize].map(n => n + fontSize * 0.4); // padding
+    );
+    sprite.scale.set(20, 10, 1);
+    return sprite;
+  })
+  .onNodeClick(node => {
+    const distance = 80;
+    const distRatio = 1 + distance / Math.hypot(node.x, node.y, node.z);
 
-        ctx.fillStyle = 'rgba(30, 30, 30, 0.9)';
-        ctx.fillRect(-bckgDimensions[0] / 2, -bckgDimensions[1] / 2, ...bckgDimensions);
+    Graph.cameraPosition(
+      { x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio },
+      node,
+      1500
+    );
+  })
+  .linkDirectionalParticles(2)
+  .linkDirectionalParticleWidth(1.2);
 
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillStyle = node.color;
-        ctx.fillText(label, 0, 0);
+Graph.zoomToFit(400);
 
-        node.__bckgDimensions = bckgDimensions; // for pointer interaction
-      })
-      .nodePointerAreaPaint((node, color, ctx) => {
-        ctx.fillStyle = color;
-        const bckgDimensions = node.__bckgDimensions;
-        bckgDimensions && ctx.fillRect(-bckgDimensions[0] / 2, -bckgDimensions[1] / 2, ...bckgDimensions);
-      })
-      .linkDirectionalParticles(2)
-      .linkDirectionalParticleWidth(1.2);
+// ---- text texture ----
+function makeTextTexture(text, color) {
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = 512;
+  canvas.height = 256;
 
-    // Fit graph to canvas
-    myGraph.zoomToFit(400);
-  }
-});
+  ctx.fillStyle = 'rgba(20,20,20,0.85)';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  ctx.fillStyle = color;
+  ctx.font = '64px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(text, canvas.width / 2, canvas.height / 2);
+
+  return new THREE.CanvasTexture(canvas);
+}
 </script>
