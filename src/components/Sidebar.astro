@@ -1,0 +1,50 @@
+---
+import NavBase from './NavBase.ts';
+
+interface Props {
+  type?: 'root' | 'default';
+}
+
+const { type = 'default' } = Astro.props;
+---
+
+<aside class={`sidebar ${type}-sidebar`}>
+  <div class="profile-container">
+    <img src="/assets/img/20250712_056.jpg" alt="Profil" class="profile-img main-img" />
+    <img src="/assets/img/20250712_055.jpg" alt="Hover profil" class="profile-img hover-img" />
+    <h1 class="profile-name">Jindřich Ochmann</h1>
+    <p class="profile-description">Software Engineer</p>
+
+    <div class="social-icons-arc">
+      <a href="https://github.com/j-ochmann" class="icon-gh"><i class="fa-brands fa-github"></i></a>
+      <a href="https://www.linkedin.com/in/jind%C5%99ich-ochmann-5186967b" class="icon-li"><i class="fa-brands fa-linkedin"></i></a>
+      <a href="https://www.instagram.com/jindrichochmann" class="icon-ig"><i class="fa-brands fa-instagram"></i></a>
+    </div>
+  </div>
+
+  <nav class="nav-links">
+    <ul>
+      {type === 'default' ? (
+        NavBase.map(item => (
+          <li>
+            <a href={item.url}>{item.title}</a>
+            {item.sublinks && (
+              <ul>
+                {item.sublinks.map(sub => (
+                  <li><a href={sub.url}>{sub.title}</a></li>
+                ))}
+              </ul>
+            )}
+          </li>
+        ))
+      ) : (
+        <>
+          <li><a href="/">Portfolio</a></li>
+          <li><a href="/dev">DevHub</a></li>
+          <li><a href="/devbook">DevBook</a></li>
+          <li><a href="/contacts">Kontakt</a></li>
+        </>
+      )}
+    </ul>
+  </nav>
+</aside>

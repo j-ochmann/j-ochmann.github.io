@@ -1,18 +1,26 @@
 ---
-const { sidebarType = "default" } = Astro.props;
+import Sidebar from '../components/Sidebar.astro';
+
+interface Props {
+  sidebarType?: 'root' | 'default';
+  title?: string;
+}
+
+const { sidebarType = 'default', title } = Astro.props;
 ---
+
 <html lang="cs">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{Astro.props.title || "Jindřich Ochmann"}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title ? title + ' | ' : ''}Jindřich Ochmann</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
   </head>
   <body>
-    {sidebarType === "root" && <SidebarRoot />}
-    {sidebarType === "default" && <SidebarDefault />}
-    
+    <Sidebar type={sidebarType} />
+
     <main class="content">
-      {Astro.children}
+      <slot />
     </main>
   </body>
 </html>
