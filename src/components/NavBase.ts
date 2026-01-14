@@ -4,8 +4,17 @@ export interface NavLink {
   sublinks?: NavLink[];
 }
 
-export const navLinks: NavLink[] = [
-  { title: "Portfolio", url: "/" },
-  { title: "DevHub", url: "/dev" },
-  { title: "Kontakt", url: "/contacts" },
+export const navLinks = [
+  { 
+    title: "Portfolio",
+    url: "/",
+  },
+  { 
+    title: "DevHub",
+    url: "/dev",
+  },
+  {
+    title: "Kontakt",
+    url: "/contacts",
+  },
 ];
