@@ -18,7 +18,9 @@ Computer Science: {
   }
 }
 Data Science: {
-  Machine Learning
+  Machine Learning: {
+    Deep Learning
+  }
 }
 ```
 
