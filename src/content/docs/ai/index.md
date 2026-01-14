@@ -28,7 +28,7 @@ informatika: {
     }
   }
 }
-Data Science: {
+datová věda: {
   strojové učení: {
     hluboké učení
   }
