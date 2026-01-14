@@ -3,13 +3,6 @@ title: 3D Graph Example
 description: A demonstration of a 3D graph visualization in Astro.
 template: splash
 ---
-<div id="3d-graph" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;"></div>
+import ThreeDGraph from '../../components/3DGraph.astro';
 
-<script src="//unpkg.com/three"></script>
-<script src="//unpkg.com/three/examples/js/postprocessing/EffectComposer.js"></script>
-<script src="//unpkg.com/three/examples/js/postprocessing/RenderPass.js"></script>
-<script src="//unpkg.com/three/examples/js/postprocessing/UnrealBloomPass.js"></script>
-
-<script src="//cdn.jsdelivr.net/npm/3d-force-graph"></script>
-
-<script src="/astro/scripts/3d-graph.js"></script>
+<ThreeDGraph />
