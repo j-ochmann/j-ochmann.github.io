@@ -1,15 +1,18 @@
 ---
-import Sidebar from "../components/Sidebar.astro";
-import nav from "../data/nav-base";
+const { sidebarType = "default" } = Astro.props;
 ---
-
 <html lang="cs">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{Astro.props.title || "Jindřich Ochmann"}</title>
+  </head>
   <body>
-    <div class="layout">
-      <Sidebar nav={nav} />
-      <main class="content">
-        <slot />
-      </main>
-    </div>
+    {sidebarType === "root" && <SidebarRoot />}
+    {sidebarType === "default" && <SidebarDefault />}
+    
+    <main class="content">
+      {Astro.children}
+    </main>
   </body>
 </html>
