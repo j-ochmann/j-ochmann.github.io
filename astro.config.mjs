@@ -6,7 +6,7 @@ import d2 from 'astro-d2'; // Předpokládá se instalace integrace
 
 export default defineConfig({
   site: 'https://j-ochmann.github.io',
-  base: '/astro', 
+  base: '/', 
 
   markdown: {
     syntaxHighlight: {
