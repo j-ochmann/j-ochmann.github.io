@@ -1,0 +1,18 @@
+---
+export interface NavItem {
+  title: string;
+  href: string;
+  children?: NavItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<ul>
+  {items.map((item: NavItem) => (
+    <li>
+      <a href={item.href}>{item.title}</a>
+      {item.children && <NavTree items={item.children} />}
+    </li>
+  ))}
+</ul>

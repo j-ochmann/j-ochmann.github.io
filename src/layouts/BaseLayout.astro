@@ -1,0 +1,15 @@
+---
+import Sidebar from "../components/Sidebar.astro";
+import nav from "../data/nav-base";
+---
+
+<html lang="cs">
+  <body>
+    <div class="layout">
+      <Sidebar nav={nav} />
+      <main class="content">
+        <slot />
+      </main>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+---
+import NavTree from "./NavTree.astro";
+
+export interface NavItem {
+  title: string;
+  href: string;
+  children?: NavItem[];
+}
+
+const {
+  nav,
+  showBackToRoot = false,
+} = Astro.props;
+---
+
+<aside id="sidebar">
+  <!-- PROFIL = VŽDY HOME -->
+  <div class="profile-container">
+    <a href="/" class="profile-link">
+      <div class="profile-img-wrapper">
+        <img src="/assets/img/20250712_056.jpg" class="profile-img main-img" alt="Jindřich Ochmann" />
+        <img src="/assets/img/20250712_055.jpg" class="profile-img hover-img" alt="Jindřich Ochmann" />
+      </div>
+
+      <h1 class="profile-name">Jindřich Ochmann</h1>
+      <p class="profile-description">Software Engineer</p>
+    </a>
+
+    <!-- SOCIÁLNÍ IKONY -->
+    <div class="social-icons-arc">
+      <a href="https://github.com/j-ochmann" class="icon-gh"><i class="fa-brands fa-github"></i></a>
+      <a href="https://www.linkedin.com/in/jind%C5%99ich-ochmann-5186967b" class="icon-li"><i class="fa-brands fa-linkedin"></i></a>
+      <a href="https://www.youtube.com/@JindrichOchmann" class="icon-yt"><i class="fa-brands fa-youtube"></i></a>
+    </div>
+  </div>
+
+  <!-- NAVIGACE -->
+  <nav class="nav-links">
+    {showBackToRoot && (
+      <ul class="nav-root-back">
+        <li><a href="/">← Portfolio</a></li>
+      </ul>
+    )}
+
+    <NavTree items={nav} />
+  </nav>
+</aside>
