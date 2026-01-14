@@ -5,7 +5,6 @@ template: splash
 ---
 <div id="3d-graph" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;"></div>
 
-{ /*Additional Three.js scripts for post-processing*/ }
 <script src="//unpkg.com/three"></script>
 <script src="//unpkg.com/three/examples/js/postprocessing/EffectComposer.js"></script>
 <script src="//unpkg.com/three/examples/js/postprocessing/RenderPass.js"></script>
@@ -68,7 +67,7 @@ template: splash
         .nodeCanvasObject((node, ctx, globalScale) => {
           const label = node.id;
           const fontSize = 14 / globalScale;
-          ctx.font = `\${fontSize}px Sans-Serif`;
+          ctx.font = `${fontSize}px Sans-Serif`;
           const textWidth = ctx.measureText(label).width;
           const bckgDimensions = [textWidth, fontSize].map(n => n + fontSize * 0.4); // padding
 
