@@ -5,14 +5,14 @@ import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPa
 // Graph data
 const gData = {
   nodes: [
-    { id: 'Animal', color: '#ff0000' },
+    { id: 'Animal', color: 'hsl(61, 100%, 50%)' },
     { id: 'Mammal', color: '#00ff00' },
-    { id: 'Reptile', color: '#0000ff' },
+    { id: 'Reptile', color: 'rgb(228, 189, 255)' },
     { id: 'Canine', color: '#00ffff' },
     { id: 'Feline', color: '#ffaa00' },
     { id: 'Dog', color: '#00ffff' },
     { id: 'Cat', color: '#ffaa00' },
-    { id: 'Lizard', color: '#0000ff' }
+    { id: 'Lizard', color: 'rgb(228, 189, 255)' }
   ],
   links: [
     { source: 'Mammal', target: 'Animal', color:'#ff00ff' },
