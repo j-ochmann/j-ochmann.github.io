@@ -40,22 +40,25 @@ document.addEventListener('DOMContentLoaded', () => {
     .graphData(gData)
     .backgroundColor('#000000')
     .nodeThreeObject(node => {
-      const color = new THREE.Color(node.color);
+      // High-intensity linear color pro glow
+      const color = new THREE.Color(node.color).convertSRGBToLinear().multiplyScalar(5);
       const material = new THREE.MeshStandardMaterial({
         color,
         emissive: color,
-        emissiveIntensity: 5, // 🔥 silný glow
+        emissiveIntensity: 1, // už vysoký díky multiplyScalar
         roughness: 0.4,
         metalness: 0
       });
       return new THREE.Mesh(new THREE.SphereGeometry(4, 32, 32), material);
     })
     .linkMaterial(link => {
-      const color = new THREE.Color(link.color || '#ffffff');
+      const color = new THREE.Color(link.color || '#00ffff').convertSRGBToLinear().multiplyScalar(5);
       return new THREE.MeshStandardMaterial({
         color,
         emissive: color,
-        emissiveIntensity: 3  // 🔥 linky svítí
+        emissiveIntensity: 1,
+        transparent: true,
+        opacity: 1.0
       });
     })
     .nodeLabel(node => node.id)
@@ -83,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const bloomPass = new THREE.UnrealBloomPass(
     new THREE.Vector2(window.innerWidth, window.innerHeight),
-    3.0,  // 🔥 síla glow
+    3.0,  // síla glow
     1.0,  // radius
     0.0   // threshold nízko = vše svítí
   );
