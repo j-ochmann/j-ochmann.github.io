@@ -5,8 +5,10 @@
 
 <script is:inline type="module">
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
-import { UnrealBloomPass } from 'https://esm.sh/three/examples/jsm/postprocessing/UnrealBloomPass.js';
 import ForceGraph3D from 'https://cdn.jsdelivr.net/npm/3d-force-graph@1.77.0/dist/3d-force-graph.module.js';
+import { UnrealBloomPass } from 'https://esm.sh/three/examples/jsm/postprocessing/UnrealBloomPass.js';
+import { EffectComposer } from 'https://esm.sh/three/examples/jsm/postprocessing/EffectComposer.js';
+import { RenderPass } from 'https://esm.sh/three/examples/jsm/postprocessing/RenderPass.js';
 
 const gData = {
   nodes: [
@@ -70,27 +72,34 @@ const Graph = new ForceGraph3D({ renderer: new THREE.WebGLRenderer({ antialias: 
     );
   });
 
-// Fit graph
 Graph.zoomToFit(400);
 
-// --- UnrealBloomPass ---
-const bloomPass = new UnrealBloomPass();
-bloomPass.strength = 4;   // síla glow
-bloomPass.radius = 1;
-bloomPass.threshold = 0;
-Graph.postProcessingComposer().addPass(bloomPass);
-
-// Přepíšeme render loop přes composer
+// --- Postprocessing Composer + UnrealBloomPass ---
 const renderer = Graph.renderer();
 renderer.toneMapping = THREE.ReinhardToneMapping;
 renderer.outputEncoding = THREE.sRGBEncoding;
+
+// Composer
+const composer = new EffectComposer(renderer);
+composer.addPass(new RenderPass(Graph.scene(), Graph.camera()));
+
+const bloomPass = new UnrealBloomPass(
+  new THREE.Vector2(window.innerWidth, window.innerHeight),
+  4,    // strength
+  1,    // radius
+  0     // threshold
+);
+composer.addPass(bloomPass);
+
+// Přepíšeme render loop
 renderer.setAnimationLoop(() => {
-  Graph.postProcessingComposer().render();
+  composer.render();
 });
 
 // Resize
 window.addEventListener('resize', () => {
   renderer.setSize(window.innerWidth, window.innerHeight);
+  composer.setSize(window.innerWidth, window.innerHeight);
   bloomPass.setSize(window.innerWidth, window.innerHeight);
 });
 </script>
