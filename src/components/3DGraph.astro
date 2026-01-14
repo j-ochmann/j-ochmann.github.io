@@ -41,7 +41,6 @@ document.addEventListener('DOMContentLoaded', () => {
     .graphData(gData)
     .backgroundColor('#000000')
     .nodeThreeObject(node => {
-      // Uzly s vysokou HDR intenzitou
       const color = new THREE.Color(node.color).convertSRGBToLinear().multiplyScalar(5);
       const material = new THREE.MeshStandardMaterial({
         color,
@@ -75,18 +74,10 @@ document.addEventListener('DOMContentLoaded', () => {
       );
     });
 
-  Graph.zoomToFit(400);
-
   // --- Render přes HDR + UnrealBloomPass ---
   const renderer = Graph.renderer();
   renderer.toneMapping = THREE.ReinhardToneMapping;
   renderer.outputEncoding = THREE.sRGBEncoding;
-
-  const scene = Graph.scene();
-  const camera = Graph.camera();
-
-  const composer = new THREE.EffectComposer(renderer);
-  composer.addPass(new THREE.RenderPass(scene, camera));
 
   const bloomPass = new THREE.UnrealBloomPass(
     new THREE.Vector2(window.innerWidth, window.innerHeight),
@@ -94,18 +85,9 @@ document.addEventListener('DOMContentLoaded', () => {
     1.0, // radius
     0.0  // threshold nízko = vše projde bloomem
   );
+  Graph.postProcessingComposer().addPass(bloomPass);
 
-  composer.addPass(bloomPass);
-
-  // Přepíšeme render loop
-  renderer.setAnimationLoop(() => {
-    composer.render();
-  });
-
-  // Resizing
-  window.addEventListener('resize', () => {
-    bloomPass.setSize(window.innerWidth, window.innerHeight);
-  });
+  Graph.zoomToFit(400);
 
 });
 </script>
