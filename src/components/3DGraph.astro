@@ -4,11 +4,11 @@
 <div id="3d-graph" style="position:fixed; inset:0"></div>
 
 <script is:inline type="module">
-  import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
-  import ForceGraph3D from 'https://cdn.jsdelivr.net/npm/3d-force-graph@1.77.0/dist/3d-force-graph.module.js';
-  import { UnrealBloomPass } from 'https://esm.sh/three/examples/jsm/postprocessing/UnrealBloomPass.js';
-  import { EffectComposer } from 'https://esm.sh/three/examples/jsm/postprocessing/EffectComposer.js';
-  import { RenderPass } from 'https://esm.sh/three/examples/jsm/postprocessing/RenderPass.js';
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
+import ForceGraph3D from 'https://cdn.jsdelivr.net/npm/3d-force-graph@1.77.0/dist/3d-force-graph.module.js';
+import { EffectComposer } from 'https://esm.sh/three/examples/jsm/postprocessing/EffectComposer.js';
+import { RenderPass } from 'https://esm.sh/three/examples/jsm/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'https://esm.sh/three/examples/jsm/postprocessing/UnrealBloomPass.js';
 
 const gData = {
   nodes: [
@@ -34,21 +34,23 @@ const gData = {
 
 const container = document.getElementById('3d-graph');
 
-const Graph = new ForceGraph3D({ renderer: new THREE.WebGLRenderer({ antialias: true }) })(container)
+const Graph = ForceGraph3D()(container)
   .graphData(gData)
   .backgroundColor('#000003')
   .nodeLabel('id')
   .nodeAutoColorBy('id')
   .nodeThreeObject(node => {
     const color = new THREE.Color(node.color).convertSRGBToLinear().multiplyScalar(5);
-    const material = new THREE.MeshStandardMaterial({
-      color,
-      emissive: color,
-      emissiveIntensity: 1,
-      roughness: 0.4,
-      metalness: 0
-    });
-    return new THREE.Mesh(new THREE.SphereGeometry(4, 32, 32), material);
+    return new THREE.Mesh(
+      new THREE.SphereGeometry(4, 32, 32),
+      new THREE.MeshStandardMaterial({
+        color,
+        emissive: color,
+        emissiveIntensity: 1,
+        roughness: 0.4,
+        metalness: 0
+      })
+    );
   })
   .linkMaterial(link => {
     const color = new THREE.Color(link.color || '#ffffff').convertSRGBToLinear().multiplyScalar(5);
@@ -74,29 +76,28 @@ const Graph = new ForceGraph3D({ renderer: new THREE.WebGLRenderer({ antialias: 
 
 Graph.zoomToFit(400);
 
-// --- Postprocessing Composer + UnrealBloomPass ---
+// --- Postprocessing + UnrealBloomPass ---
 const renderer = Graph.renderer();
 renderer.toneMapping = THREE.ReinhardToneMapping;
 renderer.outputEncoding = THREE.sRGBEncoding;
 
-// Composer
 const composer = new EffectComposer(renderer);
 composer.addPass(new RenderPass(Graph.scene(), Graph.camera()));
 
 const bloomPass = new UnrealBloomPass(
   new THREE.Vector2(window.innerWidth, window.innerHeight),
-  4,    // strength
-  1,    // radius
-  0     // threshold
+  4,   // strength
+  1,   // radius
+  0    // threshold
 );
 composer.addPass(bloomPass);
 
-// Přepíšeme render loop
+// Render loop přes composer
 renderer.setAnimationLoop(() => {
   composer.render();
 });
 
-// Resize
+// Resize handling
 window.addEventListener('resize', () => {
   renderer.setSize(window.innerWidth, window.innerHeight);
   composer.setSize(window.innerWidth, window.innerHeight);
