@@ -35,24 +35,24 @@ if (container) {
     .backgroundColor('#000003')
     .nodeLabel('id')
     .nodeThreeObject(node => {
-      const color = new THREE.Color(node.color).convertSRGBToLinear().multiplyScalar(5);
+      const color = new THREE.Color(node.color).convertSRGBToLinear().multiplyScalar(1.5);
       return new THREE.Mesh(
         new THREE.SphereGeometry(4, 32, 32),
         new THREE.MeshStandardMaterial({
           color,
           emissive: color,
-          emissiveIntensity: 3,
+          emissiveIntensity: 1,
           roughness: 0.2,
           metalness: 0
         })
       );
     })
     .linkMaterial(link => {
-      const color = new THREE.Color(link.color || '#ffffff').convertSRGBToLinear().multiplyScalar(3);
+      const color = new THREE.Color(link.color || '#ffffff').convertSRGBToLinear();
       return new THREE.MeshStandardMaterial({
         color,
         emissive: color,
-        emissiveIntensity: 2,
+        emissiveIntensity: 0.5,
         transparent: true,
         opacity: 0.8
       });
@@ -78,9 +78,9 @@ if (container) {
   // Post-processing with Bloom effect
   const bloomPass = new UnrealBloomPass(
     new THREE.Vector2(window.innerWidth, window.innerHeight),
-    4,   // strength
-    1,   // radius
-    0    // threshold
+    1.2,  // strength
+    0.7,  // radius
+    0.85  // threshold
   );
   Graph.postProcessingComposer().addPass(bloomPass);
 
