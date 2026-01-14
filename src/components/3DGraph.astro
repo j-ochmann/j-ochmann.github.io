@@ -9,23 +9,23 @@
 <script is:inline>
 const gData = {
   nodes: [
-    { id: 'Animal', color: '#ff6666' },
-    { id: 'Mammal', color: '#66ff66' },
-    { id: 'Reptile', color: '#6666ff' },
-    { id: 'Canine', color: '#87ceeb' },
-    { id: 'Feline', color: '#ffa500' },
-    { id: 'Dog', color: '#87ceeb' },
-    { id: 'Cat', color: '#ffa500' },
-    { id: 'Lizard', color: '#6666ff' }
+    { id: 'Animal', color: '#ff0000' },
+    { id: 'Mammal', color: '#00ff00' },
+    { id: 'Reptile', color: '#0000ff' },
+    { id: 'Canine', color: '#00ffff' },
+    { id: 'Feline', color: '#ffaa00' },
+    { id: 'Dog', color: '#00ffff' },
+    { id: 'Cat', color: '#ffaa00' },
+    { id: 'Lizard', color: '#0000ff' }
   ],
   links: [
-    { source: 'Mammal', target: 'Animal' },
-    { source: 'Reptile', target: 'Animal' },
-    { source: 'Canine', target: 'Mammal' },
-    { source: 'Feline', target: 'Mammal' },
-    { source: 'Dog', target: 'Canine' },
-    { source: 'Cat', target: 'Feline' },
-    { source: 'Lizard', target: 'Reptile' }
+    { source: 'Mammal', target: 'Animal', color:'#ff00ff' },
+    { source: 'Reptile', target: 'Animal', color:'#ff00ff' },
+    { source: 'Canine', target: 'Mammal', color:'#00ffff' },
+    { source: 'Feline', target: 'Mammal', color:'#00ffff' },
+    { source: 'Dog', target: 'Canine', color:'#00ffff' },
+    { source: 'Cat', target: 'Feline', color:'#ffaa00' },
+    { source: 'Lizard', target: 'Reptile', color:'#ffaa00' }
   ]
 };
 
@@ -33,9 +33,31 @@ const Graph = ForceGraph3D()(document.getElementById('3d-graph'))
   .graphData(gData)
   .backgroundColor('#000003')
   .nodeLabel('id')
-  .nodeAutoColorBy('id');
+  .nodeThreeObject(node => {
+    const color = new THREE.Color(node.color).convertSRGBToLinear().multiplyScalar(5);
+    return new THREE.Mesh(
+      new THREE.SphereGeometry(4, 32, 32),
+      new THREE.MeshStandardMaterial({
+        color,
+        emissive: color,
+        emissiveIntensity: 3, // 👈 hodně svítí
+        roughness: 0.2,
+        metalness: 0
+      })
+    );
+  })
+  .linkMaterial(link => {
+    const color = new THREE.Color(link.color || '#ffffff').convertSRGBToLinear().multiplyScalar(3);
+    return new THREE.MeshStandardMaterial({
+      color,
+      emissive: color,
+      emissiveIntensity: 2, // 👈 svítí i linky
+      transparent: true,
+      opacity: 0.8
+    });
+  });
 
 // --- Bloom efekt ---
-const bloomPass = new THREE.UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 4, 1, 0);
+const bloomPass = new THREE.UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 3, 1, 0);
 Graph.postProcessingComposer().addPass(bloomPass);
 </script>
