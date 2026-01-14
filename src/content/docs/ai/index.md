@@ -5,7 +5,6 @@ sidebar:
   order: 0
 category: ai
 ---
-[Elements of AI](https://www.elementsofai.cz/)
 
 ```d2
 Computer Science: {
