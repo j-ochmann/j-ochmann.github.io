@@ -1,38 +1,35 @@
-document.addEventListener('DOMContentLoaded', () => {
-  // Ensure all THREE.js components are loaded
-  if (typeof THREE === 'undefined' || !THREE.EffectComposer || !THREE.UnrealBloomPass || typeof ForceGraph3D === 'undefined') {
-    console.error("Required libraries (THREE.js, EffectComposer, UnrealBloomPass, 3d-force-graph) are not loaded.");
-    return;
-  }
+import * as THREE from 'three';
+import ForceGraph3D from '3d-force-graph';
+import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
 
-  const gData = {
-    nodes: [
-      { id: 'Animal', color: '#ff0000' },
-      { id: 'Mammal', color: '#00ff00' },
-      { id: 'Reptile', color: '#0000ff' },
-      { id: 'Canine', color: '#00ffff' },
-      { id: 'Feline', color: '#ffaa00' },
-      { id: 'Dog', color: '#00ffff' },
-      { id: 'Cat', color: '#ffaa00' },
-      { id: 'Lizard', color: '#0000ff' }
-    ],
-    links: [
-      { source: 'Mammal', target: 'Animal', color:'#ff00ff' },
-      { source: 'Reptile', target: 'Animal', color:'#ff00ff' },
-      { source: 'Canine', target: 'Mammal', color:'#00ffff' },
-      { source: 'Feline', target: 'Mammal', color:'#00ffff' },
-      { source: 'Dog', target: 'Canine', color:'#00ffff' },
-      { source: 'Cat', target: 'Feline', color:'#ffaa00' },
-      { source: 'Lizard', target: 'Reptile', color:'#ffaa00' }
-    ]
-  };
+// Graph data
+const gData = {
+  nodes: [
+    { id: 'Animal', color: '#ff0000' },
+    { id: 'Mammal', color: '#00ff00' },
+    { id: 'Reptile', color: '#0000ff' },
+    { id: 'Canine', color: '#00ffff' },
+    { id: 'Feline', color: '#ffaa00' },
+    { id: 'Dog', color: '#00ffff' },
+    { id: 'Cat', color: '#ffaa00' },
+    { id: 'Lizard', color: '#0000ff' }
+  ],
+  links: [
+    { source: 'Mammal', target: 'Animal', color:'#ff00ff' },
+    { source: 'Reptile', target: 'Animal', color:'#ff00ff' },
+    { source: 'Canine', target: 'Mammal', color:'#00ffff' },
+    { source: 'Feline', target: 'Mammal', color:'#00ffff' },
+    { source: 'Dog', target: 'Canine', color:'#00ffff' },
+    { source: 'Cat', target: 'Feline', color:'#ffaa00' },
+    { source: 'Lizard', target: 'Reptile', color:'#ffaa00' }
+  ]
+};
 
-  const container = document.getElementById('3d-graph');
-  if (!container) {
-      console.error('Container element #3d-graph not found.');
-      return;
-  }
+// Get container
+const container = document.getElementById('3d-graph');
 
+if (container) {
+  // Initialize Graph
   const Graph = ForceGraph3D()(container)
     .graphData(gData)
     .backgroundColor('#000003')
@@ -79,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
   Graph.scene().add(dirLight);
 
   // Post-processing with Bloom effect
-  const bloomPass = new THREE.UnrealBloomPass(
+  const bloomPass = new UnrealBloomPass(
     new THREE.Vector2(window.innerWidth, window.innerHeight),
     4,   // strength
     1,   // radius
@@ -95,4 +92,6 @@ document.addEventListener('DOMContentLoaded', () => {
     Graph.renderer().setSize(window.innerWidth, window.innerHeight);
     bloomPass.setSize(new THREE.Vector2(window.innerWidth, window.innerHeight));
   });
-});
+} else {
+  console.error('Container element #3d-graph not found.');
+}

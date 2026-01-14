@@ -2,11 +2,6 @@
 ---
 <div id="3d-graph" style="position:fixed; inset:0"></div>
 
-<!-- Three.js a postprocessing musí být globální, proto is:inline -->
-<script is:inline src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
-<script is:inline src="https://unpkg.com/three@0.160.0/examples/js/postprocessing/EffectComposer.js"></script>
-<script is:inline src="https://unpkg.com/three@0.160.0/examples/js/postprocessing/RenderPass.js"></script>
-<script is:inline src="https://unpkg.com/three@0.160.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
-<script is:inline src="https://unpkg.com/3d-force-graph"></script>
-
-<script is:inline src="/astro/scripts/3d-graph.js"></script>
+<script>
+  import '../scripts/3d-graph.js';
+</script>
