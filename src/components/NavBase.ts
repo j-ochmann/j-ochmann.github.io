@@ -1,15 +1,11 @@
-export default [
-  {
-    title: "Projects",
-    url: "/projects",
-  },
-  {
-    title: "Tutorials",
-    url: "/tutorials",
-    sublinks: [
-      { title: "Git", url: "/tutorials/git" },
-      { title: "Markdown", url: "/tutorials/markdown" },
-      { title: "C/C++", url: "/tutorials/c/c" },
-    ],
-  },
+export interface NavLink {
+  title: string;
+  url: string;
+  sublinks?: NavLink[];
+}
+
+export const navLinks: NavLink[] = [
+  { title: "Portfolio", url: "/" },
+  { title: "DevHub", url: "/dev" },
+  { title: "Kontakt", url: "/contacts" },
 ];

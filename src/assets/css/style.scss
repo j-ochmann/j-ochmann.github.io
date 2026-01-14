@@ -1,0 +1,132 @@
+/* ---------- SIDEBAR COMMON ---------- */
+.sidebar {
+  position: fixed;
+  top: 40px;
+  left: 20px;
+  width: 210px;
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  overflow-y: auto;
+  z-index: 100;
+  transition: transform 0.3s ease;
+}
+
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.profile-img {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border: 4px solid #2c3e50;
+  object-fit: cover;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  position: absolute;
+}
+
+.profile-img-wrapper {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  margin-bottom: 10px;
+}
+
+.main-img { opacity: 1; z-index: 1; }
+.hover-img { opacity: 0; z-index: 2; }
+
+.profile-container:hover .main-img {
+  opacity: 0;
+  transform: scale(1.2) translateY(-10px);
+}
+.profile-container:hover .hover-img {
+  opacity: 1;
+  transform: scale(1.2) translateY(-10px);
+}
+
+/* -------- SOCIAL ICONS ARC -------- */
+.social-icons-arc {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: -35px;
+}
+
+.social-icons-arc a {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  margin: 0 3px;
+  transition: all 0.3s ease;
+}
+
+/* Nastavení brand barev */
+.icon-gh { background: #24292f; }
+.icon-li { background: #0077b5; }
+.icon-yt { background: #ff0000; }
+.icon-ig { background: #e1306c; }
+.icon-fb { background: #1877f2; }
+
+.social-icons-arc a:hover {
+  transform: scale(1.2);
+  filter: brightness(1.1);
+  box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+}
+
+/* ---------- NAVIGATION ---------- */
+.nav-links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.nav-links ul li {
+  margin: 8px 0;
+}
+
+.nav-links ul li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+/* SUBMENU */
+.nav-links ul li ul {
+  padding-left: 15px;
+  margin-top: 5px;
+}
+
+/* ---------- ROOT vs DEFAULT SIDEBAR ---------- */
+.root-sidebar {
+  top: 40px;
+}
+
+.default-sidebar {
+  top: 40px;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 770px) {
+  .sidebar {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100vh;
+    border-radius: 0;
+    transform: translateX(-100%);
+    z-index: 1000;
+  }
+
+  .sidebar.active {
+    transform: translateX(0);
+  }
+}
