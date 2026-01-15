@@ -86,7 +86,7 @@
   border-radius: 50%;
   color: #ffffff;
   opacity: 0.7; /* Ikony budou lehce průsvitné */
-  transition: all 0.5s ease;
+  transition: all 0.4s ease;
   /*transform-origin: 0 50; /* vzdálenost od středu kruhu */
 
   /* Zde je ten trik: Posuneme ikonu od středu, ale rotaci necháme na individuálních prvcích */
@@ -100,6 +100,10 @@
   width: 22px;
   height: 22px;
 }
+
+.social-icons-arc .icon-ig svg { width: 27px; height: 27px; }
+.social-icons-arc .icon-fb svg { width: 28px; height: 28px; }
+.social-icons-arc .icon-yt svg { width: 27px; height: 27px; }
 
 /* Nastavení ikon po oblouku */
 /* Úhly pro spodní oblouk (90° je přesně dole, rozptyl 130° až 50°) */
@@ -147,12 +151,12 @@
   font-family: 'Syne' !important;
   font-size: 18px;
   letter-spacing: 2px;
-  //font-weight: 700;
+  font-weight: 700;
   text-transform: uppercase;
   /* Toto vytvoří jemné pozadí přímo za písmeny */
   paint-order: stroke;
   stroke: rgba(255, 255, 255, 0.5);
-  stroke-width: 4px;
+  stroke-width: 6px;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
