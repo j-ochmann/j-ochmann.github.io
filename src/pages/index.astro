@@ -1,18 +1,13 @@
 ---
-import "../assets/css/style.scss";
-import Sidebar from '../components/SidebarFoto.astro';
+import RootLayout from '../layouts/RootLayout.astro';
+import SidebarFoto from '../components/SidebarFoto.astro';
 ---
-
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Moje Astro stránka</title>
-  </head>
-  <body>
-    <Sidebar />
-    <main>
+<RootLayout>
+  <div class="layout">
+    <SidebarFoto />
+    <main class="content">
       <h1>Vítejte!</h1>
       <p>Obsah hlavní stránky...</p>
     </main>
-  </body>
-</html>
+  </div>
+</RootLayout>

@@ -1,5 +1,5 @@
 ---
-import SocialIcons from "../components/icons/SocialIcons.astro";
+
 ---
 <aside class="sidebar root-sidebar">
   <!-- ---------- PROFILE ---------- -->
@@ -19,21 +19,26 @@ import SocialIcons from "../components/icons/SocialIcons.astro";
         </svg>
       </div>
 
-    <!-- ---------- SOCIAL ICONS ARC ---------- -->
-    <div class="social-icons-arc">
-      <a href="https://github.com/j-ochmann" class="icon-gh" target="_blank" rel="noopener noreferrer">
-        <svg viewBox="0 0 16 16">
-          <use href="#icon-github" />
-        </svg>
-      </a>
-      <a href="https://www.linkedin.com/in/jindrich-ochmann/" class="icon-li" target="_blank" rel="noopener noreferrer"></a>
-      <a href="https://www.youtube.com/@JindrichOchmann" class="icon-yt" target="_blank" rel="noopener noreferrer"></a>
-      <a href="https://www.instagram.com/jindrichochmann/" class="icon-ig" target="_blank" rel="noopener noreferrer"></a>
-      <a href="https://www.facebook.com/jindrich.ochmann/" class="icon-fb" target="_blank" rel="noopener noreferrer"></a>
+      <!-- ---------- SOCIAL ICONS ARC ---------- -->
+      <div class="social-icons-arc">
+        <a href="https://github.com/j-ochmann" class="icon-gh">
+          <svg><use xlink:href="#icon-github"></use></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/jindrich-ochmann" class="icon-li">
+          <svg><use xlink:href="#icon-linkedin"></use></svg>
+        </a>
+        <a href="https://www.instagram.com/jindrichochmann" class="icon-ig">
+          <svg><use xlink:href="#icon-instagram"></use></svg>
+        </a>
+        <a href="https://www.facebook.com/jindrich.ochmann" class="icon-fb">
+          <svg><use xlink:href="#icon-facebook"></use></svg>
+        </a>
+        <a href="https://www.youtube.com/@JindrichOchmann" class="icon-yt">
+          <svg><use xlink:href="#icon-youtube"></use></svg>
+        </a>
+      </div>
+      
     </div>
-
-    </div>
-
   </div>
 
   <!-- ---------- NAVIGATION ---------- -->
