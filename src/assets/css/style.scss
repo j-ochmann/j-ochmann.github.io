@@ -1,3 +1,24 @@
+/* ---------- ANIMATIONS ---------- */
+@keyframes pulse-glow {
+  0%   { box-shadow: 0 0 20px rgb(252, 252, 252); }
+  50%  { box-shadow: 0 0  5px rgb(0, 0, 0); filter: brightness(1.5); }
+  100% { box-shadow: 0 0 20px rgb(252, 252, 252); }
+}
+@keyframes float {
+  0% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(-10px) scale(1.02); }
+  100% { transform: translateY(0px) scale(1); }
+}
+@keyframes blob {
+  0% { border-radius: 5% 5% 5% 5%; }
+  33% { border-radius: 30% 20% 25% 25%; }
+  66% { border-radius: 40% 60% 30% 70%; }
+  100% { border-radius: 5% 5% 5% 5%; }
+}
+@keyframes hueCycle {
+  from { filter: hue-rotate(0deg) brightness(1.2); }
+  to { filter: hue-rotate(360deg) brightness(1.2); }
+}
 /* ---------- SIDEBAR COMMON ---------- */
 .sidebar {
   position: relative;
@@ -10,6 +31,7 @@
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   overflow-y: visible; //auto;
   z-index: 100;
+  //animation: blob 10s linear infinite;
   transition: transform 0.3s ease;
 }
 
@@ -49,6 +71,7 @@
   position: absolute;
   top: 0;
   left: 0;
+  //animation: pulse-glow 3s infinite ease-in-out;
   transform: scale(1);
   transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.7s ease;
 }
@@ -62,6 +85,7 @@
 .hover-img {
   opacity: 0;
   z-index: 2;
+  animation: pulse-glow 3s infinite ease-in-out;
   transform: scale(0.5) rotate(-180deg);
 }
 
@@ -77,14 +101,14 @@
 }
 
 /* ---------- SOCIAL ICONS ARC ---------- */
-.social-icons-arc {
+.social-icons {
   position: absolute;
   top: 90px;  /* Polovina výšky obrázku (180/2) */
   left: 90px; /* Polovina šířky obrázku (180/2) */
   z-index: 3;
 }
 
-.social-icons-arc a {
+.social-icons a {
   position: absolute;
   width: 38px;
   height: 38px;
@@ -95,80 +119,148 @@
   justify-content: center;
   border-radius: 50%;
   color: #ffffff;
+  //background: #939393;
+  //--bg-color: #939393; /* Výchozí hodnota */
+  //background: var(--bg-color);
+  background:
+  radial-gradient(circle at 30% 107%, 
+    #5c5c5c 0%,#ffffff 100% );
   opacity: 0.7; /* Ikony budou lehce průsvitné */
+  //animation: pulse-glow 3s infinite ease-in-out;
   transition: all 0.4s ease;
   /* Zde je ten trik: Posuneme ikonu od středu, ale rotaci necháme na individuálních prvcích */
   /* translateX určuje poloměr oblouku (90px obrázek + mezera) */
   transform: rotate(var(--angle)) translateX(70px) translateY(-70px) rotate(calc(-1 * var(--angle)));
 }
 
-.social-icons-arc a svg {
+.social-icons a svg {
   fill: currentColor;
   width: 22px;
   height: 22px;
 }
 
-.social-icons-arc .icon-instagram svg { width: 27px; height: 27px; }
-.social-icons-arc .icon-facebook svg { width: 28px; height: 28px; }
-.social-icons-arc .icon-youtube svg { width: 27px; height: 27px; }
-.social-icons-arc .icon-whatsapp svg { width: 30px; height: 30px; }
-.social-icons-arc .icon-email svg { width: 25px; height: 25px; }
+.social-icons .icon-instagram svg { width: 27px; height: 27px; }
+.social-icons .icon-facebook svg { width: 28px; height: 28px; }
+.social-icons .icon-youtube svg { width: 27px; height: 27px; }
+.social-icons .icon-whatsapp svg { width: 30px; height: 30px; }
+.social-icons .icon-email svg { width: 25px; height: 25px; }
+.social-icons .icon-search svg { width: 32px; height: 32px; }
+.social-icons .icon-login svg { width: 25px; height: 25px; }
+.social-icons .icon-settings svg { width: 28px; height: 28px; }
 
 /* Nastavení ikon po oblouku */
-$icon-count: 9;
+$icon-count: 12;
 $start-angle: 160deg;
 $angle-range: 180deg;
 $angle-step: $angle-range / ($icon-count - 1);
 
 @for $i from 1 through $icon-count {
-  .social-icons-arc a:nth-child(#{$i}) {
+  .social-icons a:nth-child(#{$i}) {
     --angle: #{$start-angle + (($i - 1) * -$angle-step)};
   }
 }
+
 /* Brand colors */
-.icon-github { background: #24292f; }
-.icon-linkedin { background: #0077b5; }
-.icon-youtube { background: #ff0000; }
-//.icon-instagram { background: #e1306c; }
-.icon-instagram {
-  /* Klasický Instagram přechod: žlutá -> červená -> fialová/modrá */
-  background: radial-gradient(
-    circle at 30% 107%, 
-    #fdf497 0%, 
-    #fdf497 5%, 
-    #fd5949 45%, 
-    #d6249f 60%, 
-    #285AEB 90%
-  );
+.social-icons .icon-github    { background: #24292f; }
+.social-icons .icon-linkedin  { background: #0077b5; }
+.social-icons .icon-youtube   { background: #ff0000; }
+.social-icons .icon-facebook  { background: #1877f2; }
+.social-icons .icon-whatsapp  { background: #25D366;
+ }
+.social-icons .icon-instagram { background:
+  radial-gradient(circle at 30% 107%, 
+    #fdf497 0%,#fdf497 5%,#fd5949 45%,#d6249f 60%,#285AEB 90% );
 }
-.icon-facebook { background: #1877f2; }
-.icon-whatsapp { background: #25D366; }
-//.icon-email { background: #ffd504; }
-//.icon-email { background: #EA4335; }
-.icon-email {
-  background: #ffffff;
-  background: radial-gradient(circle at 0% 0%, #4285f4 40%, transparent 80%),
-              radial-gradient(circle at 100% 0%, #ea4335 40%, transparent 80%),
-              radial-gradient(circle at 100% 100%, #fbbc05 40%, transparent 80%),
-              radial-gradient(circle at 0% 100%, #34a853 40%, transparent 80%);
+.social-icons .icon-email     { background:
+  radial-gradient(circle at 0% 0%, #4285f4 40%, transparent 80%),
+  radial-gradient(circle at 100% 0%, #ea4335 40%, transparent 80%),
+  radial-gradient(circle at 100% 100%, #fbbc05 40%, transparent 80%),
+  radial-gradient(circle at 0% 100%, #34a853 40%, transparent 80%);
 }
+.social-icons .icon-sun    { background: #7cf1fe; color: #ffea00; }
+.social-icons .icon-moon  { background: #000000; color: #ffea00; }
 
 /* Hover efekt ikon */
-.social-icons-arc a:hover {
+.social-icons a:hover {
   /* Zvětšíme scale a mírně poloměr (ze 110 na 120), úhel zůstává díky proměnné stejný */
   transform: rotate(var(--angle)) translateX(75px) translateY(-75px) rotate(calc(-1 * var(--angle))) scale(1.5);
   box-shadow: 0 8px 15px rgba(0,0,0,0.5);
   filter: brightness(1.1);
   opacity: 1;
   z-index: 100;
+  animation: pulse-glow 3s infinite ease-in-out;
   //box-shadow: 0 8px 15px rgba(0,0,0,0.3);
 }
+
+/* ---------- PROFILE ACTIONS ---------- */
+.action-icons {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%; /* Covers the profile image wrapper */
+  height: 100%;
+  display: flex; /* Use flexbox for positioning icons */
+  justify-content: flex-start; /* Align to start (left) */
+  align-items: flex-start; /* Align to start (top) */
+  pointer-events: none; /* Hidden by default */
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 4; /* Ensure it's above other elements if needed */
+}
+
+.profile-container:hover .action-icons {
+  opacity: 1;
+  pointer-events: auto; /* Active on hover */
+}
+
+.action-icons a {
+  /* Base icon styling, similar to .social-icons a */
+  position: absolute; /* Absolute positioning within .action-icons */
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #ffffff;
+  background: radial-gradient(circle at 30% 107%, #5c5c5c 0%,#ffffff 100% );
+  opacity: 0.7;
+  transition: all 0.4s ease;
+}
+
+.action-icons a svg {
+  fill: currentColor;
+  width: 22px;
+  height: 22px;
+}
+
+/* Specific positioning for settings and login within profile-actions */
+.action-icons .icon-settings {
+    top: 10px;
+    left: 10px;
+}
+
+.action-icons .icon-login {
+    top: 10px;
+    left: 55px;
+}
+
+.action-icons a:hover {
+  transform: scale(1.2); /* Slightly enlarge on hover */
+  box-shadow: 0 8px 15px rgba(0,0,0,0.5);
+  filter: brightness(1.1);
+  opacity: 1;
+  z-index: 100;
+  animation: pulse-glow 3s infinite ease-in-out;
+}
+
 /* ---------- NAME CIRCLE ---------- */
 .name-circle svg {
   width: 100%;
   height: 100%;
   /* Filtry pro skelný efekt */
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); 
+  //animation: float 4s ease-in-out infinite;
 }
 /* Vytvoření skelného prstence pomocí filtru na textu */
 .name-circle text {
@@ -198,11 +290,6 @@ $angle-step: $angle-range / ($icon-count - 1);
   transform: rotate(-45deg); 
   transition: transform 1s ease;
   z-index: 2;
-}
-
-.name-circle svg {
-  width: 100%;
-  height: 100%;
 }
 
 /* Efekt: Jméno se může při hoveru na profil taky mírně otočit nebo zvětšit */
