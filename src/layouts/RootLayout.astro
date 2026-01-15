@@ -1,6 +1,7 @@
 ---
 import "../assets/css/style.scss";
 import SidebarRoot from '../components/SidebarRoot.astro';
+import SocialIcons from "../components/icons/SocialIcons.astro";
 ---
 
 <html lang="cs">
@@ -18,11 +19,14 @@ import SidebarRoot from '../components/SidebarRoot.astro';
           referrerpolicy="no-referrer" />
   </head>
   <body>
-    <div class="layout">
-      <SidebarRoot />
-      <main class="content">
-        <slot /> <!-- sem se vloží obsah konkrétní stránky, např. index.astro -->
-      </main>
-    </div>
+    <SocialIcons />
+            <SidebarRoot />
+
+      <div class="layout">
+        <main class="content">
+          <slot />
+        </main>
+      </div>
+    <slot />
   </body>
 </html>
