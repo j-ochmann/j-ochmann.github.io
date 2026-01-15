@@ -100,7 +100,7 @@
   box-shadow: 0 8px 25px rgba(0,0,0,0.4);
 }
 
-/* ---------- SOCIAL ICONS ARC ---------- */
+/* ---------- ICONS ARC ---------- */
 .social-icons {
   position: absolute;
   top: 90px;  /* Polovina výšky obrázku (180/2) */
@@ -145,8 +145,8 @@
 .social-icons .icon-whatsapp svg { width: 30px; height: 30px; }
 .social-icons .icon-email svg { width: 25px; height: 25px; }
 .social-icons .icon-search svg { width: 32px; height: 32px; }
-.social-icons .icon-login svg { width: 25px; height: 25px; }
-.social-icons .icon-settings svg { width: 28px; height: 28px; }
+.action-icons .icon-login svg { width: 25px; height: 25px; }
+.action-icons .icon-settings svg { width: 28px; height: 28px; }
 
 /* Nastavení ikon po oblouku */
 $icon-count: 12;
@@ -192,67 +192,11 @@ $angle-step: $angle-range / ($icon-count - 1);
   //box-shadow: 0 8px 15px rgba(0,0,0,0.3);
 }
 
-/* ---------- PROFILE ACTIONS ---------- */
 .action-icons {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%; /* Covers the profile image wrapper */
-  height: 100%;
-  display: flex; /* Use flexbox for positioning icons */
-  justify-content: flex-start; /* Align to start (left) */
-  align-items: flex-start; /* Align to start (top) */
-  pointer-events: none; /* Hidden by default */
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  z-index: 4; /* Ensure it's above other elements if needed */
+  @extend .social-icons;
 }
-
-.profile-container:hover .action-icons {
-  opacity: 1;
-  pointer-events: auto; /* Active on hover */
-}
-
-.action-icons a {
-  /* Base icon styling, similar to .social-icons a */
-  position: absolute; /* Absolute positioning within .action-icons */
-  width: 38px;
-  height: 38px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  color: #ffffff;
-  background: radial-gradient(circle at 30% 107%, #5c5c5c 0%,#ffffff 100% );
-  opacity: 0.7;
-  transition: all 0.4s ease;
-}
-
-.action-icons a svg {
-  fill: currentColor;
-  width: 22px;
-  height: 22px;
-}
-
-/* Specific positioning for settings and login within profile-actions */
-.action-icons .icon-settings {
-    top: 10px;
-    left: 10px;
-}
-
-.action-icons .icon-login {
-    top: 10px;
-    left: 55px;
-}
-
-.action-icons a:hover {
-  transform: scale(1.2); /* Slightly enlarge on hover */
-  box-shadow: 0 8px 15px rgba(0,0,0,0.5);
-  filter: brightness(1.1);
-  opacity: 1;
-  z-index: 100;
-  animation: pulse-glow 3s infinite ease-in-out;
-}
+//.action-icons .icon-settings { }
+//.action-icons .icon-login {}
 
 /* ---------- NAME CIRCLE ---------- */
 .name-circle svg {
