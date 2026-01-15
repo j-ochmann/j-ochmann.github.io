@@ -7,7 +7,17 @@ import SocialIcons from "../components/icons/SocialIcons.astro";
     <div class="profile-img-wrapper">
       <img src="/assets/img/20250712_056.jpg" alt="Hlavní foto" class="profile-img main-img" />
       <img src="/assets/img/20250712_055.jpg" alt="Hover foto" class="profile-img hover-img" />
-
+      <!-- ---------- NAME CIRCLE ---------- -->
+      <div class="name-circle">
+        <svg viewBox="0 0 200 200">
+          <path id="circlePath" d="M 20, 100 A 80, 80 0 1, 1 180, 100" fill="transparent" />
+          <text>
+            <textPath href="#circlePath" startOffset="50%" text-anchor="middle">
+              Jindřich Ochmann
+            </textPath>
+          </text>
+        </svg>
+      </div>
 
     <!-- ---------- SOCIAL ICONS ARC ---------- -->
     <div class="social-icons-arc">
