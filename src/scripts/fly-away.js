@@ -1,5 +1,5 @@
 // Toggles the blur effect for ghost trails. Set to false to disable blur.
-const ENABLE_BLUR_EFFECT = false;
+const ENABLE_BLUR_EFFECT = true;
 
 // Get the container for action icons (trigger for events)
 const actionIconsContainer = document.querySelector('.action-icons');
@@ -35,6 +35,78 @@ function getRandomVelocity() {
   };
 }
 
+// Helper to parse all color stops from a gradient string
+function parseColorsFromGradient(gradientString) {
+  const colors = [];
+  // Regex to match various color formats: rgba, rgb, hsla, hsl, hex, named colors.
+  // It needs to be global to find all occurrences within the gradient string.
+  const colorRegex = /(rgba?\([\d,\s.]+\)|hsla?\([\d,\s.%]+\)|#[0-9a-fA-F]{3,8}|[a-zA-Z]+)/g;
+  let match;
+
+  while ((match = colorRegex.exec(gradientString)) !== null) {
+    colors.push(match[0]);
+  }
+  return colors;
+}
+
+// Helper to convert any CSS color string to an rgba(r,g,b,1) array
+// Uses a temporary DOM element to leverage browser's native color parsing.
+function colorToRgbaArray(colorString) {
+  const tempDiv = document.createElement('div');
+  // Assign to 'color' property to leverage browser's CSS parsing capabilities
+  tempDiv.style.color = colorString;
+  document.body.appendChild(tempDiv);
+  const rgbaComputed = window.getComputedStyle(tempDiv).color;
+  tempDiv.remove(); // Clean up the temporary element
+
+  const parts = rgbaComputed.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d*\.?\d+))?\)/);
+  if (parts && parts.length >= 4) {
+    const r = parseInt(parts[1]);
+    const g = parseInt(parts[2]);
+    const b = parseInt(parts[3]);
+    const a = parseFloat(parts[4] || 1); // Get alpha, default to 1 if not present
+
+    // If the color is essentially transparent black, return a distinct color to indicate this case
+    if (a === 0 && r === 0 && g === 0 && b === 0) {
+      return [255, 20, 147, 1]; // Diagnostic: DeepPink for transparent black
+    }
+    // Otherwise, return r, g, b components and force alpha to 1 for averaging
+    return [r, g, b, 1];
+  }
+  // Default color if parsing fails - Diagnostic: Red
+  return [255, 0, 0, 1];
+}
+
+// Helper to extract the primary color from an element's background, handling gradients.
+// Always returns an rgba string with full opacity (1).
+function getAverageColor(element) {
+  const computedStyle = window.getComputedStyle(element);
+  const backgroundImage = computedStyle.backgroundImage;
+  let baseColor = computedStyle.backgroundColor; // Default fallback to solid background color
+
+  if (backgroundImage && (backgroundImage.startsWith('linear-gradient') || backgroundImage.startsWith('radial-gradient'))) {
+    const gradientColors = parseColorsFromGradient(backgroundImage);
+    if (gradientColors.length > 0) {
+      let rSum = 0, gSum = 0, bSum = 0;
+      gradientColors.forEach(colorStr => {
+        const rgbaArr = colorToRgbaArray(colorStr);
+        rSum += rgbaArr[0];
+        gSum += rgbaArr[1];
+        bSum += rgbaArr[2];
+      });
+      // Calculate average RGB values
+      baseColor = `rgba(${Math.round(rSum / gradientColors.length)}, ${Math.round(gSum / gradientColors.length)}, ${Math.round(bSum / gradientColors.length)}, 1)`;
+    } else {
+      // Fallback if gradient colors could not be parsed - Diagnostic: DarkOrange
+      baseColor = 'rgb(255, 140, 0)';
+    }
+  }
+
+  // Ensure the final baseColor is an rgba(..., 1) string, using the robust conversion.
+  const rgbaArr = colorToRgbaArray(baseColor);
+  return `rgba(${rgbaArr[0]}, ${rgbaArr[1]}, ${rgbaArr[2]}, 1)`;
+}
+
 function startContinuousFlyAway(icon) {
   // Clear any existing interval for this icon to prevent multiple animations
   if (iconMovementIntervals.has(icon)) {
@@ -52,14 +124,14 @@ function startContinuousFlyAway(icon) {
     ghostContainer.style.width = '100vw';
     ghostContainer.style.height = '100vh';
     ghostContainer.style.pointerEvents = 'none'; // Ghosts should not interfere with mouse events
-    ghostContainer.style.zIndex = '99'; // Place above most elements, but below action-icon if it has higher z-index
+    ghostContainer.style.zIndex = '101'; // Place above the sidebar (which has z-index: 100)
     document.body.appendChild(ghostContainer);
   }
 
   const initialRect = originalRects.get(icon);
-  // Get the background color of the icon
-  const iconComputedStyle = window.getComputedStyle(icon);
-  const iconBackgroundColor = iconComputedStyle.backgroundColor;
+  // Get the base color for the ghost, ensuring it's an rgba(..., 1) string
+  const iconBaseColor = getAverageColor(icon);
+
   // Start icons from their original position on the screen
   let currentX = initialRect.left;
   let currentY = initialRect.top;
@@ -71,6 +143,8 @@ function startContinuousFlyAway(icon) {
   icon.style.position = 'fixed';
   icon.style.left = `${currentX}px`;
   icon.style.top = `${currentY}px`;
+  icon.style.zIndex = '102'; // Set icon's z-index higher than ghostContainer's
+  icon.style.opacity = '1'; // Set opacity to 1 (opaque)
   icon.style.margin = '0'; // Clear any margins that might affect position
   icon.style.transition = 'none'; // Disable CSS transition for physics-like movement during bounce
 
@@ -108,7 +182,9 @@ function startContinuousFlyAway(icon) {
       ghost.style.width = `${icon.offsetWidth}px`;
       ghost.style.height = `${icon.offsetHeight}px`;
       ghost.style.borderRadius = '50%'; // Make it round if icons are round, or adjust as needed
-      ghost.style.backgroundColor = iconBackgroundColor.replace('rgb', 'rgba').replace(')', ', 0.4)'); // Use icon's background color with adjusted opacity
+      
+      // Use the iconBaseColor (which is rgba(..., 1)) and adjust its opacity to 0.4
+      ghost.style.backgroundColor = iconBaseColor.replace(/,\s*1\)/, ', 0.4)');
 
       // Calculate blur and initial opacity based on speed
       const ghostBlurAmount = ENABLE_BLUR_EFFECT ? Math.min(currentSpeed * 0.8, 15) : 0; // Slightly less blur for ghosts (max 15px) or no blur
@@ -261,6 +337,8 @@ function stopContinuousFlyAway() {
       icon.style.margin = ''; // Clear margin
       icon.style.transform = ''; // Explicitly clear transform to allow CSS hover effects
       icon.style.transition = ''; // Explicitly clear transition to allow CSS hover effects
+      icon.style.zIndex = ''; // Clear z-index
+      icon.style.opacity = ''; // Clear opacity
     }, actualDuration); // Use the individual duration for the timeout
   });
 }
