@@ -132,7 +132,7 @@
   //--bg-color: #939393; /* Výchozí hodnota */
   //background: var(--bg-color);
   background:
-  radial-gradient(circle at 30% 107%, 
+  radial-gradient(circle at 30% 107%,
     #5c5c5c 0%,#ffffff 100% );
   opacity: 0.7; /* Ikony budou lehce průsvitné */
   //animation: pulse-glow 3s infinite ease-in-out;
@@ -165,7 +165,7 @@
 .social-icons .icon-whatsapp  { background: #25D366;
  }
 .social-icons .icon-instagram { background:
-  radial-gradient(circle at 30% 107%, 
+  radial-gradient(circle at 30% 107%,
     #fdf497 0%,#fdf497 5%,#fd5949 45%,#d6249f 60%,#285AEB 90% );
 }
 .social-icons .icon-email     { background:
@@ -232,12 +232,60 @@ $action-angle-range: $angle-range;
 //.action-icons .icon-settings { }
 //.action-icons .icon-login {}
 
+// Styles for Searchbar.astro icons
+.searchbar-action-icons {
+  display: flex; /* Display icons in a row */
+  gap: 10px; /* Space between icons */
+  justify-content: center; /* Center them horizontally */
+  padding: 10px 0; /* Vertical padding */
+  margin-top: 10px; /* Space from elements above */
+}
+
+.searchbar-action-icons a {
+  /* Base icon styling, copied from .social-icons a */
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #ffffff;
+  background: radial-gradient(circle at 30% 107%, #5c5c5c 0%,#ffffff 100% );
+  opacity: 0.7;
+  transition: all 0.4s ease;
+
+  position: static; /* Ensure not absolutely positioned */
+  transform: none; /* Remove any arc transforms */
+  margin: 0; /* Clear margins */
+}
+
+.searchbar-action-icons a svg {
+  fill: currentColor;
+  width: 22px;
+  height: 22px;
+}
+
+// Icon-specific SVG sizes for searchbar icons
+.searchbar-action-icons .icon-search svg { width: 32px; height: 32px; }
+.searchbar-action-icons .icon-sun svg { width: 32px; height: 32px; }
+.searchbar-action-icons .icon-moon svg { width: 32px; height: 32px; }
+
+// Hover effect for searchbar icons
+.searchbar-action-icons a:hover {
+  transform: scale(1.2); /* Simple scale on hover */
+  box-shadow: 0 8px 15px rgba(0,0,0,0.5);
+  filter: brightness(1.1);
+  opacity: 1;
+  z-index: 100;
+  animation: pulse-glow 3s infinite ease-in-out;
+}
+
 /* ---------- NAME CIRCLE ---------- */
 .name-circle svg {
   width: 100%;
   height: 100%;
   /* Filtry pro skelný efekt */
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); 
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
   //animation: float 4s ease-in-out infinite;
 }
 /* Vytvoření skelného prstence pomocí filtru na textu */
@@ -265,7 +313,7 @@ $action-angle-range: $angle-range;
   width: 210px;
   height: 210px;
   pointer-events: none; /* Aby šlo přes text klikat na ikony */
-  transform: rotate(-45deg); 
+  transform: rotate(-45deg);
   transition: transform 1s ease;
   z-index: 2;
 }
