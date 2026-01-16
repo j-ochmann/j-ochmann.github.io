@@ -242,8 +242,8 @@ function stopContinuousFlyAway() {
       icon.style.left = ''; // Clear left/top to let original CSS take over
       icon.style.top = '';
       icon.style.margin = ''; // Clear margin
-      // icon.style.transform = ''; // This line is now handled by originalTransforms.get(icon) and should not be cleared.
-      icon.style.transition = ''; // Clear inline transition
+      icon.style.transform = ''; // Explicitly clear transform to allow CSS hover effects
+      icon.style.transition = ''; // Explicitly clear transition to allow CSS hover effects
     }, actualDuration); // Use the individual duration for the timeout
   });
 }
