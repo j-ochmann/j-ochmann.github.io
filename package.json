@@ -21,6 +21,7 @@
     "3d-force-graph": "^1.79.0",
     "astro": "^5.6.1",
     "astro-d2": "^0.8.1",
+    "lucide-react": "^0.562.0",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
     "rehype-mermaid": "^3.0.0",
