@@ -1,7 +1,6 @@
 ---
 import "../assets/css/style.scss";
 import Icons from "../components/icons/icons.astro";
-import { ModeToggle } from '@/components/ModeToggle';
 ---
 
 <script is:inline>
@@ -39,7 +38,6 @@ import { ModeToggle } from '@/components/ModeToggle';
           referrerpolicy="no-referrer" />
   </head>
   <body>
-    <ModeToggle client:load />
     <Icons />
     <slot />
   </body>
