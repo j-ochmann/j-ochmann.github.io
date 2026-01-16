@@ -1,0 +1,59 @@
+---
+// src/components/starlight/Sidebar.astro
+// This is a custom sidebar that overrides the default Starlight component.
+
+// Import default Starlight components we want to reuse.
+import SiteTitle from '@astrojs/starlight/components/SiteTitle.astro';
+import Search from '@astrojs/starlight/components/Search.astro';
+import ThemeSelect from '@astrojs/starlight/components/ThemeSelect.astro';
+import SocialIcons from '@astrojs/starlight/components/SocialIcons.astro';
+import SidebarContent from '@astrojs/starlight/components/SidebarContent.astro';
+
+const { sidebar } = Astro.props;
+---
+
+<div class="custom-sidebar-header">
+  <img src="/assets/img/2025-06-02_jindrich_ochmann.jpg" alt="Profilová fotka" class="profile-picture" />
+  
+  <div class="site-title-container">
+    <SiteTitle />
+  </div>
+
+  <div class="sidebar-controls">
+    <Search />
+    <ThemeSelect />
+  </div>
+</div>
+
+<!-- Render the default sidebar content (the navigation tree) -->
+<SidebarContent sidebar={sidebar} />
+
+<style>
+  .custom-sidebar-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem 1rem;
+    gap: 1rem;
+    text-align: center;
+    border-bottom: 1px solid var(--sl-color-gray-5);
+  }
+
+  .profile-picture {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 0.5rem;
+  }
+  
+  .site-title-container {
+    /* The default SiteTitle component has its own styles */
+  }
+
+  .sidebar-controls {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+</style>
