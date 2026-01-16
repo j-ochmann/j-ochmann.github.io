@@ -195,7 +195,8 @@ function stopContinuousFlyAway() {
       icon.style.left = '';
       icon.style.top = '';
       icon.style.margin = '';
-      icon.style.transition = '';
+      icon.style.transform = ''; // Clear inline transform to allow CSS hover effects
+      icon.style.transition = 'transform 0.5s ease-out, left 0.5s ease-out, top 0.5s ease-out';
     }, actualDuration);
   });
 }
