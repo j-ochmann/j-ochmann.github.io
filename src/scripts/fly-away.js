@@ -114,14 +114,19 @@ function startContinuousFlyAway(icon) {
       const ghostBlurAmount = ENABLE_BLUR_EFFECT ? Math.min(currentSpeed * 0.8, 15) : 0; // Slightly less blur for ghosts (max 15px) or no blur
       const initialGhostOpacity = Math.min(currentSpeed / dynamicMaxSpeedForGhost * 0.7, 0.7); // Slightly less opaque for faster ghosts (max 0.7)
 
-      ghost.style.filter = `blur(${ghostBlurAmount}px)`;
+      // Apply blur only if ENABLE_BLUR_EFFECT is true
+      if (ENABLE_BLUR_EFFECT) {
+        ghost.style.filter = `blur(${ghostBlurAmount}px)`;
+      }
       ghost.style.opacity = `${initialGhostOpacity}`;
       ghost.style.transition = 'opacity 0.6s ease-out, filter 0.6s ease-out, transform 0.6s ease-out';
 
       // Schedule fade out and removal
       setTimeout(() => {
         ghost.style.opacity = '0';
-        ghost.style.filter = 'blur(0px)'; // Reduce blur as it fades
+        if (ENABLE_BLUR_EFFECT) { // Only attempt to reduce blur if it was initially applied
+          ghost.style.filter = 'blur(0px)';
+        }
       }, 50); // Start fading shortly after creation
 
       setTimeout(() => {
