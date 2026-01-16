@@ -109,6 +109,65 @@
   box-shadow: 0 8px 25px rgba(0,0,0,0.4);
 }
 
+// Základní mixin pro kruhové tlačítko
+@mixin icon-base($size: 38px) {    
+  width: 22px;
+  height: 22px;
+  color: #ffffff;
+  background: #939393;
+  opacity: 0.7;
+  width: $size;
+  height: $size;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.4s ease;
+
+  svg {
+    fill: currentColor;
+    width: 22px;
+    height: 22px;
+  }
+
+  &:hover {
+    transform: scale(1.5);
+    z-index: 100;
+  }
+}
+// Mixin pro nastavení konkrétní ikony
+@mixin icon-style($size: 22px, $baseFrontCol, $baseBackCol) {
+  color: $baseFrontCol !important;
+  background: $baseBackCol !important;
+  & svg {
+    width: $size !important;
+    height: $size !important;
+  }
+}
+/* ICONS COLORS & SIZES */
+$baseFrontCol: #ffffff;
+$baseBackCol:
+  radial-gradient(circle at 30% 107%, #5c5c5c 0%, #ffffff 100%);
+$instagram-colors:
+  radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+$google-colors:
+  radial-gradient(circle at 0% 0%,    #4285f4 40%, transparent 80%), 
+  radial-gradient(circle at 100% 0%,  #ea4335 40%, transparent 80%),
+  radial-gradient(circle at 100% 100%,#fbbc05 40%, transparent 80%), 
+  radial-gradient(circle at 0% 100%,  #34a853 40%, transparent 80%);
+
+.icon-github    { @include icon-style(22px, $baseFrontCol, #24292f); }
+.icon-linkedin  { @include icon-style(22px, $baseFrontCol, #0077b5); }
+.icon-facebook  { @include icon-style(28px, $baseFrontCol, #1877f2); }
+.icon-youtube   { @include icon-style(27px, $baseFrontCol, #ff0000); }
+.icon-whatsapp  { @include icon-style(30px, $baseFrontCol, #25D366); }
+.icon-search    { @include icon-style(32px, $baseFrontCol, $baseBackCol); }
+.icon-settings  { @include icon-style(28px, $baseFrontCol, $baseBackCol); }
+.icon-login     { @include icon-style(25px, $baseFrontCol, $baseBackCol); }
+.icon-sun       { @include icon-style(25px, #ffea00, #7cf1fe); }
+.icon-moon      { @include icon-style(25px, #ffea00, #000000); }
+.icon-instagram { @include icon-style(27px, $baseFrontCol, $instagram-colors); }
+.icon-email     { @include icon-style(25px, $baseFrontCol, $google-colors); }
 /* ---------- ICONS ARC ---------- */
 .social-icons {
   position: absolute;
@@ -116,111 +175,45 @@
   left: 90px; /* Polovina šířky obrázku (180/2) */
   z-index: 3;
 }
-
 .social-icons a {
+  @include icon-base;
   position: absolute;
-  width: 38px;
-  height: 38px;
   margin-top: -19px; /* Vycentrování ikony (výška/2) */
   margin-left: -19px; /* Vycentrování ikony (šířka/2) */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  color: #ffffff;
-  //background: #939393;
-  //--bg-color: #939393; /* Výchozí hodnota */
-  //background: var(--bg-color);
-  background:
-  radial-gradient(circle at 30% 107%,
-    #5c5c5c 0%,#ffffff 100% );
-  opacity: 0.7; /* Ikony budou lehce průsvitné */
-  //animation: pulse-glow 3s infinite ease-in-out;
-  transition: all 0.4s ease;
-  /* Zde je ten trik: Posuneme ikonu od středu, ale rotaci necháme na individuálních prvcích */
-  /* translateX určuje poloměr oblouku (90px obrázek + mezera) */
   transform: rotate(var(--angle)) translateX(70px) translateY(-70px) rotate(calc(-1 * var(--angle)));
 }
-
-.social-icons a svg {
-  fill: currentColor;
-  width: 22px;
-  height: 22px;
-}
-
-.social-icons .icon-instagram svg { width: 27px; height: 27px; }
-.social-icons .icon-facebook svg { width: 28px; height: 28px; }
-.social-icons .icon-youtube svg { width: 27px; height: 27px; }
-.social-icons .icon-whatsapp svg { width: 30px; height: 30px; }
-.social-icons .icon-email svg { width: 25px; height: 25px; }
-.social-icons .icon-search svg { width: 32px; height: 32px; }
-.action-icons .icon-login svg { width: 25px; height: 25px; }
-.action-icons .icon-settings svg { width: 28px; height: 28px; }
-
-/* Brand colors */
-.social-icons .icon-github    { background: #24292f; }
-.social-icons .icon-linkedin  { background: #0077b5; }
-.social-icons .icon-youtube   { background: #ff0000; }
-.social-icons .icon-facebook  { background: #1877f2; }
-.social-icons .icon-whatsapp  { background: #25D366;
- }
-.social-icons .icon-instagram { background:
-  radial-gradient(circle at 30% 107%,
-    #fdf497 0%,#fdf497 5%,#fd5949 45%,#d6249f 60%,#285AEB 90% );
-}
-.social-icons .icon-email     { background:
-  radial-gradient(circle at 0% 0%, #4285f4 40%, transparent 80%),
-  radial-gradient(circle at 100% 0%, #ea4335 40%, transparent 80%),
-  radial-gradient(circle at 100% 100%, #fbbc05 40%, transparent 80%),
-  radial-gradient(circle at 0% 100%, #34a853 40%, transparent 80%);
-}
-.social-icons .icon-sun    { background: #7cf1fe; color: #ffea00; }
-.social-icons .icon-moon  { background: #000000; color: #ffea00; }
-
-/* Hover efekt ikon */
 .social-icons a:hover {
-  /* Zvětšíme scale a mírně poloměr (ze 110 na 120), úhel zůstává díky proměnné stejný */
   transform: rotate(var(--angle)) translateX(75px) translateY(-75px) rotate(calc(-1 * var(--angle))) scale(1.5);
   box-shadow: 0 8px 15px rgba(0,0,0,0.5);
   filter: brightness(1.1);
   opacity: 1;
   z-index: 100;
   animation: pulse-glow 3s infinite ease-in-out;
-  //box-shadow: 0 8px 15px rgba(0,0,0,0.3);
 }
-
 /* Nastavení ikon po oblouku */
 $icon-count: 10;
 $start-angle: 160deg;
 $angle-range: 180deg;
 $angle-step: $angle-range / ($icon-count - 1);
+$action-start-angle: $start-angle + 2*$angle-step;
 
 @for $i from 1 through $icon-count {
   .social-icons a:nth-child(#{$i}) {
     --angle: #{$start-angle + (($i - 1) * -$angle-step)};
   }
-}
-/* Nastavení akčních ikon po oblouku */
-.action-icons {
-  @extend .social-icons;
-  opacity: 0; /* Make invisible by default */
-  pointer-events: none; /* Make non-interactive by default */
-  transition: opacity 0.3s ease; /* Smooth transition */
-}
-
-.action-icons a{
-  transform: rotate(var(--angle)) translateX(70px) translateY(-70px) rotate(calc(-1 * var(--angle)));
-}
-
-$action-icon-count: 12;
-$action-start-angle: $start-angle + 2*$angle-step;
-$action-angle-range: $angle-range;
-//$action-angle-step: $action-angle-range / ($action-icon-count - 1);
-
-@for $i from 1 through $action-icon-count {
   .action-icons a:nth-child(#{$i}) {
     --angle: #{$action-start-angle + (($i - 1) * $angle-step)};
   }
+}
+
+.action-icons {
+  @extend .social-icons;
+  opacity: 0; /* invisible by default */
+  pointer-events: none; /* non-interactive by default */
+  transition: opacity 0.3s ease; /* Smooth transition */
+}
+.action-icons a{
+  transform: rotate(var(--angle)) translateX(70px) translateY(-70px) rotate(calc(-1 * var(--angle)));
 }
 
 .profile-container:hover .action-icons {
@@ -228,60 +221,25 @@ $action-angle-range: $angle-range;
   pointer-events: auto; /* Interactive on hover */
 }
 
-
-//.action-icons .icon-settings { }
-//.action-icons .icon-login {}
-
-// Styles for Searchbar.astro icons
+// New styles for searchbar-action-icons
 .searchbar-action-icons {
-  display: flex; /* Display icons in a row */
-  gap: 10px; /* Space between icons */
-  justify-content: center; /* Center them horizontally */
-  padding: 10px 0; /* Vertical padding */
-  margin-top: 10px; /* Space from elements above */
+  display: flex; /* Arrange icons in a row */
+  gap: 10px; /* Add some space between icons */
+  justify-content: center; /* Center the icons if needed */
+  padding: 10px 0; /* Add some vertical padding */
+  margin-top: 10px; // A bit of margin to separate from other elements
 }
 
 .searchbar-action-icons a {
-  /* Base icon styling, copied from .social-icons a */
-  width: 38px;
-  height: 38px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  color: #ffffff;
-  background: radial-gradient(circle at 30% 107%, #5c5c5c 0%,#ffffff 100% );
-  opacity: 0.7;
-  transition: all 0.4s ease;
-
-  position: static; /* Ensure not absolutely positioned */
-  transform: none; /* Remove any arc transforms */
-  margin: 0; /* Clear margins */
+  @extend .social-icons; // Inherit all basic icon styles, colors, sizes
+  
+  // Override arc positioning properties
+  position: static; /* Prevent absolute positioning */
+  margin: 0; /* Reset margins that were used for centering absolute icons */
+  transform: none; /* Remove any transform for arc positioning */
 }
 
-.searchbar-action-icons a svg {
-  fill: currentColor;
-  width: 22px;
-  height: 22px;
-}
-
-// Icon-specific SVG sizes for searchbar icons
-.searchbar-action-icons .icon-search svg { width: 32px; height: 32px; }
-.searchbar-action-icons .icon-sun svg { width: 32px; height: 32px; }
-.searchbar-action-icons .icon-moon svg { width: 32px; height: 32px; }
-
-// Hover effect for searchbar icons
-.searchbar-action-icons a:hover {
-  transform: scale(1.2); /* Simple scale on hover */
-  box-shadow: 0 8px 15px rgba(0,0,0,0.5);
-  filter: brightness(1.1);
-  opacity: 1;
-  z-index: 100;
-  animation: pulse-glow 3s infinite ease-in-out;
-}
-
-/* ---------- NAME CIRCLE ---------- */
-.name-circle svg {
+/* ---------- NAME CIRCLE ---------- */.name-circle svg {
   width: 100%;
   height: 100%;
   /* Filtry pro skelný efekt */
