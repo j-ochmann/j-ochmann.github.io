@@ -1,3 +1,6 @@
+// Toggles the blur effect for ghost trails. Set to false to disable blur.
+const ENABLE_BLUR_EFFECT = false;
+
 // Get the container for action icons (trigger for events)
 const actionIconsContainer = document.querySelector('.action-icons');
 
@@ -49,11 +52,14 @@ function startContinuousFlyAway(icon) {
     ghostContainer.style.width = '100vw';
     ghostContainer.style.height = '100vh';
     ghostContainer.style.pointerEvents = 'none'; // Ghosts should not interfere with mouse events
-    ghostContainer.style.zIndex = '1'; // Place behind main icons and other elements if needed
+    ghostContainer.style.zIndex = '99'; // Place above most elements, but below action-icon if it has higher z-index
     document.body.appendChild(ghostContainer);
   }
 
   const initialRect = originalRects.get(icon);
+  // Get the background color of the icon
+  const iconComputedStyle = window.getComputedStyle(icon);
+  const iconBackgroundColor = iconComputedStyle.backgroundColor;
   // Start icons from their original position on the screen
   let currentX = initialRect.left;
   let currentY = initialRect.top;
@@ -68,8 +74,8 @@ function startContinuousFlyAway(icon) {
   icon.style.margin = '0'; // Clear any margins that might affect position
   icon.style.transition = 'none'; // Disable CSS transition for physics-like movement during bounce
 
-  // Store the current state for this icon, including initialSpeed
-  bouncingIconsState.set(icon, { x: currentX, y: currentY, vx, vy, rot: currentRot, vRot, initialSpeed });
+  // Store the current state for this icon, including initialSpeed and last ghost position
+  bouncingIconsState.set(icon, { x: currentX, y: currentY, vx, vy, rot: currentRot, vRot, initialSpeed, lastGhostX: currentX, lastGhostY: currentY });
 
   const intervalId = setInterval(() => {
     const state = bouncingIconsState.get(icon);
@@ -79,7 +85,7 @@ function startContinuousFlyAway(icon) {
     const currentSpeed = Math.sqrt(state.vx * state.vx + state.vy * state.vy);
 
     // Create ghost elements for trails
-    const minGhostDistance = 15; // Pixels distance to create a new ghost
+    const minGhostDistance = 10; // Pixels distance to create a new ghost
     const distanceSinceLastGhost = Math.sqrt(
       Math.pow(state.x - state.lastGhostX, 2) + Math.pow(state.y - state.lastGhostY, 2)
     );
@@ -87,7 +93,7 @@ function startContinuousFlyAway(icon) {
     const dynamicMaxSpeedForGhost = Math.min(state.initialSpeed * 2.5, 35); // Get dynamicMaxSpeed for ghost opacity calculation
 
     if (currentSpeed > 3 && distanceSinceLastGhost > minGhostDistance) {
-      const ghost = icon.cloneNode(true); // Clone the icon element
+      const ghost = document.createElement('div'); // Create a new div element for the ghost
       ghost.classList.add('fly-away-ghost'); // Add a class for identification and potential CSS styling
       ghostContainer.appendChild(ghost); // Append to the dedicated ghost container
 
@@ -97,10 +103,16 @@ function startContinuousFlyAway(icon) {
       ghost.style.top = `${state.y}px`;
       ghost.style.transform = `rotate(${state.rot}deg)`;
       ghost.style.pointerEvents = 'none'; // Ensure ghosts don't interfere with mouse events
+      
+      // Set dimensions of the ghost to match the icon
+      ghost.style.width = `${icon.offsetWidth}px`;
+      ghost.style.height = `${icon.offsetHeight}px`;
+      ghost.style.borderRadius = '50%'; // Make it round if icons are round, or adjust as needed
+      ghost.style.backgroundColor = iconBackgroundColor.replace('rgb', 'rgba').replace(')', ', 0.4)'); // Use icon's background color with adjusted opacity
 
       // Calculate blur and initial opacity based on speed
-      const ghostBlurAmount = Math.min(currentSpeed * 0.7, 10); // More blur for ghosts
-      const initialGhostOpacity = Math.min(currentSpeed / dynamicMaxSpeedForGhost * 0.8, 0.8); // More opaque for faster ghosts
+      const ghostBlurAmount = ENABLE_BLUR_EFFECT ? Math.min(currentSpeed * 0.8, 15) : 0; // Slightly less blur for ghosts (max 15px) or no blur
+      const initialGhostOpacity = Math.min(currentSpeed / dynamicMaxSpeedForGhost * 0.7, 0.7); // Slightly less opaque for faster ghosts (max 0.7)
 
       ghost.style.filter = `blur(${ghostBlurAmount}px)`;
       ghost.style.opacity = `${initialGhostOpacity}`;
