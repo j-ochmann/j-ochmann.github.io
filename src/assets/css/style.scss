@@ -41,18 +41,15 @@
   //animation: blob 10s linear infinite;
   transition: transform 0.3s ease;
 }
-
 .layout {
   display: flex;
 }
-
 .content {
   flex-grow: 1;
   padding: 2.5rem;
   font-family: 'Montserrat' !important;
   color: #333;
 }
-
 /* ---------- PROFILE ---------- */
 .profile-container {
   display: flex;
@@ -62,42 +59,35 @@
   margin-bottom: 40px;
   position: relative;
 }
-
 .profile-img-wrapper {
   position: relative;
   width: 180px;
   height: 180px;
   margin-bottom: 10px;
 }
-
 .profile-img {
   width: 180px;
   height: 180px;
   border-radius: 50%;
-  //border: 1px solid #8f8f8fc7;
   object-fit: cover;
   transition: transform 0.5s ease, opacity 0.5s ease;
   position: absolute;
   top: 0;
   left: 0;
-  //animation: pulse-glow 3s infinite ease-in-out;
   transform: scale(1);
   transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.7s ease;
 }
-
 .main-img {
   opacity: 1;
   z-index: 1;
   transform: scale(1) rotate(0deg);
 }
-
 .hover-img {
   opacity: 0;
   z-index: 2;
   animation: pulse-glow 3s infinite ease-in-out;
   transform: scale(0.5) rotate(-180deg);
 }
-
 .profile-container:hover .main-img {
   opacity: 0;
   transform: scale(1.5) rotate(180deg);
@@ -108,8 +98,7 @@
   transform: scale(1.2) rotate(0deg);
   box-shadow: 0 8px 25px rgba(0,0,0,0.4);
 }
-
-// Základní mixin pro kruhové tlačítko
+// BASE FOR ROUND ICONS
 @mixin icon-base($size: 38px) {    
   width: 22px;
   height: 22px;
@@ -123,19 +112,17 @@
   justify-content: center;
   border-radius: 50%;
   transition: all 0.4s ease;
-
   svg {
     fill: currentColor;
     width: 22px;
     height: 22px;
   }
-
   &:hover {
     transform: scale(1.5);
     z-index: 100;
   }
 }
-// Mixin pro nastavení konkrétní ikony
+// BASE ICON STYLE
 @mixin icon-style($size: 22px, $baseFrontCol, $baseBackCol) {
   color: $baseFrontCol !important;
   background: $baseBackCol !important;
@@ -215,7 +202,6 @@ $action-start-angle: $start-angle + 2*$angle-step;
 .action-icons a{
   transform: rotate(var(--angle)) translateX(70px) translateY(-70px) rotate(calc(-1 * var(--angle)));
 }
-
 .profile-container:hover .action-icons {
   opacity: 1; /* Visible on hover */
   pointer-events: auto; /* Interactive on hover */
@@ -231,88 +217,68 @@ $action-start-angle: $start-angle + 2*$angle-step;
 }
 
 .searchbar-action-icons a {
-  @extend .social-icons; // Inherit all basic icon styles, colors, sizes
-  
-  // Override arc positioning properties
-  position: static; /* Prevent absolute positioning */
-  margin: 0; /* Reset margins that were used for centering absolute icons */
-  transform: none; /* Remove any transform for arc positioning */
+  @include icon-base;
 }
 
-/* ---------- NAME CIRCLE ---------- */.name-circle svg {
+/* ---------- NAME CIRCLE ---------- */
+.name-circle svg {
   width: 100%;
   height: 100%;
-  /* Filtry pro skelný efekt */
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
-  //animation: float 4s ease-in-out infinite;
 }
-/* Vytvoření skelného prstence pomocí filtru na textu */
 .name-circle text {
-  fill: #333; /* Barva textu */
-  //font-family: 'Montserrat' !important;
-  //font-family: 'Space Grotesk' !important;
-  font-family: 'Syne' !important;
+  fill: #333;
+  font-family: 'Syne', 'Montserrat', 'Space Grotesk', sans-serif !important;
   font-size: 18px;
   letter-spacing: 2px;
   font-weight: 700;
   text-transform: uppercase;
-  /* Toto vytvoří jemné pozadí přímo za písmeny */
   paint-order: stroke;
   stroke: rgba(255, 255, 255, 0.5);
   stroke-width: 6px;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
-
 .name-circle {
   position: absolute;
-  top: -15px; /* Upravte podle toho, jak vysoko nad obrázkem má jméno být */
+  top: -15px;
   left: -15px;
   width: 210px;
   height: 210px;
-  pointer-events: none; /* Aby šlo přes text klikat na ikony */
+  pointer-events: none;
   transform: rotate(-45deg);
   transition: transform 1s ease;
   z-index: 2;
 }
-
-/* Efekt: Jméno se může při hoveru na profil taky mírně otočit nebo zvětšit */
 .profile-container:hover .name-circle {
   transform: scale(1.3) rotate(0deg);
 }
-
 /* ---------- NAVIGATION ---------- */
 .nav-links ul {
   list-style: none;
   padding: 0;
 }
-
 .nav-links ul li {
   margin: 8px 0;
 }
-
 .nav-links ul li a {
   font-family: 'Montserrat', sans-serif;
   text-decoration: none;
   color: #333;
   font-weight: 500;
 }
-
 /* SUBMENU */
 .nav-links ul li ul {
   padding-left: 15px;
   margin-top: 5px;
 }
-
 /* ---------- ROOT vs DEFAULT SIDEBAR ---------- */
 .root-sidebar {
   top: 40px;
 }
-
 .default-sidebar {
   top: 40px;
 }
-
 /* ---------- RESPONSIVE ---------- */
 @media (max-width: 770px) {
   .sidebar {
@@ -324,7 +290,6 @@ $action-start-angle: $start-angle + 2*$angle-step;
     transform: translateX(-100%);
     z-index: 1000;
   }
-
   .sidebar.active {
     transform: translateX(0);
   }
