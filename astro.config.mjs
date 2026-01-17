@@ -31,7 +31,7 @@ export default defineConfig({
     react(),
     d2(),
     starlight({
-    title: 'DevBook',
+    title: 'Jindřich Ochmann - Software Engineer',
     customCss: ['./src/styles/globals.scss'],
     social: [
       { icon: 'github', label: 'GitHub', href: 'https://github.com/j-ochmann' }
