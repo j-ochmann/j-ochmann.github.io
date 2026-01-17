@@ -4,29 +4,19 @@
 @import '@fontsource/montserrat/400.css';
 @import '@fontsource/montserrat/600.css';
 @import '@fontsource/montserrat/700.css';
-
 @import "tailwindcss";
 
-header.header {
-    display: none;
-}
-
 :root {
-  /* Vynuluje proměnnou pro výšku headeru, kterou Starlight používá pro layout */
-  --sl-nav-height: 0rem !important;
+  --sl-nav-height: 0px !important;
+  --sl-mobile-toc-height: 0px !important;
 }
 
 header.header {
   display: none !important;
 }
 
-/* Pokud tam stále vidíte mezeru nahoře, vynuťte nulový top u hlavního obsahu */
-.page {
-  padding-top: 0 !important;
-}
-
-.content {
-  margin-top: 0 !important;
+/* 4. Resetování pozice obsahu, aby začínal úplně nahoře */
+.content-panel {
   padding-top: 0 !important;
 }
 
