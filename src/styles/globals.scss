@@ -1,4 +1,12 @@
-//@import "tailwindcss";
+/* ---------- FONTS ---------- */
+@import '@fontsource/syne/400.css';
+@import '@fontsource/syne/700.css';
+@import '@fontsource/montserrat/400.css';
+@import '@fontsource/montserrat/600.css';
+@import '@fontsource/montserrat/700.css';
+
+@import "tailwindcss";
+
 header.header {
     display: none;
 }
@@ -16,6 +24,12 @@ header.header {
 .page {
   padding-top: 0 !important;
 }
+
+.content {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
 /* ---------- ANIMATIONS ---------- */
 @keyframes pulse-glow {
   0%   { box-shadow: 0 0 20px rgb(252, 252, 252); }
@@ -46,15 +60,18 @@ header.header {
 }
 /* ---------- SIDEBAR COMMON ---------- */
 .sidebar {
-  position: relative;
-  top: 20px;
-  left: 20px;
-  width: 210px;
+  width: 300px;
+  //width: var(--sl-sidebar-width, 300px);
   background: #ffffff;
   padding: 1.5rem;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  overflow-y: visible; //auto;
+  //overflow-x: auto;
+  overflow-y: auto;
+  //overflow-x: hidden; /* Added to prevent horizontal scrollbar from profile-container */
+  //overflow-y: visible; //auto;
+
+  scrollbar-width: none;
   z-index: 100;
   //animation: blob 10s linear infinite;
   transition: transform 0.3s ease;
@@ -62,19 +79,20 @@ header.header {
 .layout {
   display: flex;
 }
+/*
 .content {
   flex-grow: 1;
   padding: 2.5rem;
   font-family: 'Montserrat' !important;
   color: #333;
-}
+}*/
 /* ---------- PROFILE ---------- */
 .profile-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  margin-bottom: 40px;
+  margin: 30px 0px 40px 0px;
   position: relative;
 }
 .profile-img-wrapper {

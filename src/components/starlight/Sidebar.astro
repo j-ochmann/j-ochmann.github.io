@@ -1,5 +1,6 @@
 ---
 // src/components/starlight/Sidebar.astro
+import "../../styles/globals.scss";
 import SiteTitle from '@astrojs/starlight/components/SiteTitle.astro';
 import Search from '@astrojs/starlight/components/Search.astro';
 import ThemeSelect from '@astrojs/starlight/components/ThemeSelect.astro';
@@ -12,7 +13,7 @@ const { sidebar } = Astro.props;
   import "../../scripts/fly-away.js";
 </script>
 
-<aside class="sidebar root-sidebar">
+<!-- <aside class="sidebar root-sidebar"> -->
   <Icons />
   <!-- ---------- PROFILE ---------- -->
   <div class="profile-container">
@@ -87,7 +88,8 @@ const { sidebar } = Astro.props;
       <li><a href="/blog">Blog</a></li>
     </ul>
   </nav>
-</aside>
+<!-- </aside> -->
+ <!--
 <div class="custom-sidebar-header">
   
   <div class="site-title-container">
@@ -95,9 +97,9 @@ const { sidebar } = Astro.props;
   </div>
 
   <div class="sidebar-controls">
-    <Search />
+     <Search /> 
     <ThemeSelect />
-  </div>
+  </div>-->
 </div>
 
 
