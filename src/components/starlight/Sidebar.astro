@@ -1,19 +1,94 @@
 ---
 // src/components/starlight/Sidebar.astro
-// This is a custom sidebar that overrides the default Starlight component.
-
-// Import default Starlight components we want to reuse.
 import SiteTitle from '@astrojs/starlight/components/SiteTitle.astro';
 import Search from '@astrojs/starlight/components/Search.astro';
 import ThemeSelect from '@astrojs/starlight/components/ThemeSelect.astro';
 import SocialIcons from '@astrojs/starlight/components/SocialIcons.astro';
-import SidebarContent from '@astrojs/starlight/components/SidebarContent.astro';
-
+import Searchbar from '../Searchbar.astro';
+import Icons from '../icons/icons.astro';
 const { sidebar } = Astro.props;
 ---
+<script>
+  import "../../scripts/fly-away.js";
+</script>
 
+<aside class="sidebar root-sidebar">
+  <Icons />
+  <!-- ---------- PROFILE ---------- -->
+  <div class="profile-container">
+    <div class="profile-img-wrapper">
+      <img src="/assets/img/20250712_056.jpg" alt="Hlavní foto" class="profile-img main-img" />
+      <img src="/assets/img/20250712_055.jpg" alt="Hover foto" class="profile-img hover-img" />
+      <!-- ---------- NAME CIRCLE ---------- -->
+      <div class="name-circle">
+        <svg viewBox="0 0 200 200">
+          <path id="circlePath" d="M 20, 100 A 80, 80 0 1, 1 180, 100" fill="transparent" />
+          <text>
+            <textPath href="#circlePath" startOffset="50%" text-anchor="middle">
+              Jindřich Ochmann
+            </textPath>
+          </text>
+        </svg>
+      </div>
+
+      <!-- ---------- SOCIAL ICONS ---------- -->
+      <div class="social-icons">
+        <a href="https://github.com/j-ochmann"
+           class="icon-github">
+          <svg><use href="#icon-github"></use></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/jindrich-ochmann"
+           class="icon-linkedin">
+          <svg><use href="#icon-linkedin"></use></svg>
+        </a>
+        <a href="https://www.instagram.com/jindrichochmann" class="icon-instagram">
+          <svg><use href="#icon-instagram"></use></svg>
+        </a>
+        <a href="https://www.facebook.com/jindrich.ochmann" class="icon-facebook">
+          <svg><use href="#icon-facebook"></use></svg>
+        </a>
+        <a href="https://www.youtube.com/@JindrichOchmann" class="icon-youtube">
+          <svg><use href="#icon-youtube"></use></svg>
+        </a>
+        <a href="https://wa.me/420792353539" class="icon-whatsapp">
+          <svg><use href="#icon-whatsapp"></use></svg>
+        </a>
+        <a href="mailto:jindrich.ochmann@gmail.com" class="icon-email">
+          <svg><use href="#icon-email"></use></svg>
+        </a>
+      </div>
+      <!-- ---------- ACTIONS ICONS ---------- -->
+      <div class="action-icons">
+        <a href="" class="icon-settings">
+          <svg><use href="#icon-settings"></use></svg>
+        </a>
+        <a href="" class="icon-login">
+          <svg><use href="#icon-login"></use></svg>
+        </a>
+      </div>
+      
+    </div>
+  </div>
+
+  <Searchbar />
+
+  <!-- ---------- NAVIGATION ---------- -->
+  <nav class="nav-links">
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li>
+        <a href="/about">About</a>
+        <ul>
+          <li><a href="/about/team">Team</a></li>
+          <li><a href="/about/contact">Contact</a></li>
+        </ul>
+      </li>
+      <li><a href="/projects">Projects</a></li>
+      <li><a href="/blog">Blog</a></li>
+    </ul>
+  </nav>
+</aside>
 <div class="custom-sidebar-header">
-  <img src="/assets/img/2025-06-02_jindrich_ochmann.jpg" alt="Profilová fotka" class="profile-picture" />
   
   <div class="site-title-container">
     <SiteTitle />
@@ -25,35 +100,4 @@ const { sidebar } = Astro.props;
   </div>
 </div>
 
-<!-- Render the default sidebar content (the navigation tree) -->
-<SidebarContent sidebar={sidebar} />
 
-<style>
-  .custom-sidebar-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 1.5rem 1rem;
-    gap: 1rem;
-    text-align: center;
-    border-bottom: 1px solid var(--sl-color-gray-5);
-  }
-
-  .profile-picture {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 0.5rem;
-  }
-  
-  .site-title-container {
-    /* The default SiteTitle component has its own styles */
-  }
-
-  .sidebar-controls {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-  }
-</style>

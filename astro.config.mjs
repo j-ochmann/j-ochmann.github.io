@@ -32,9 +32,14 @@ export default defineConfig({
     d2(),
     starlight({
     title: 'DevBook',
+    customCss: ['./src/styles/globals.scss'],
     social: [
       { icon: 'github', label: 'GitHub', href: 'https://github.com/j-ochmann' }
     ],
+    components: {
+      Header: './src/components/starlight/Header.astro',
+      Sidebar: './src/components/starlight/Sidebar.astro'
+    },
     sidebar: [
       {
         label: 'Quick Reference',
