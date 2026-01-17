@@ -5,34 +5,29 @@ sidebar:
   order: 0
 category: courses
 ---
-## Certifikáty a digitální odznaky zdarma
-### 1. Umělá inteligence (AI)
-- [Cognitive Class](https://cognitiveclass.ai/) (IBM platforma) 
-- [Elements of AI](https://www.elementsofai.cz/) je celosvětově uznávaný kurz (dostupný i v češtině díky [prg.ai](https://prg.ai/) a [ČVUT](https://www.cvut.cz/)), který po dokončení nabízí bezplatný certifikát o základech AI.
-- [Google AI Essentials](https://grow.google/intl/cz/courses-and-tools/?category=career&topic=ai)
-  nabízí kurzy zaměřené na praktické využití AI, přičemž některé materiály a odznaky (skill badges) jsou dostupné zdarma.
-- [DeepLearning.AI (AI For Everyone)](https://www.coursera.org/learn/ai-for-everyone) Na Coursera lze tento populární kurz studovat zdarma v režimu „Audit“, certifikát je placený. 
+## Free Certificates and Digital Badges
+### 1. Artificial Intelligence (AI)
+- [Cognitive Class](https://cognitiveclass.ai/) (IBM platform) 
+- [Elements of AI](https://www.elementsofai.com/) is a globally recognized course that offers a free certificate on the basics of AI upon completion.
+- [Google AI Essentials](https://grow.google/courses-and-tools/?category=career&topic=ai) offers courses focused on the practical use of AI, with some materials and skill badges available for free.
+- [DeepLearning.AI (AI For Everyone)](https://www.coursera.org/learn/ai-for-everyone) This popular course can be audited for free on Coursera; the certificate is paid. 
 
-### 2. Cloud a infrastruktura
-- [Microsoft Virtual Training Days](https://www.microsoft.com/cs-cz/events/category/microsoft-virtual-training-days?scenario=mvtd#section-master-explore-all)
-  pravidelně pořádá bezplatné webináře (např. pro Azure, AI, Power Platform).
-  Účastníci často získávají voucher na certifikační zkoušku (např. AZ-900 Fundamentals) zdarma.
-- [Oracle Cloud Infrastructure (OCI) Training](https://www.oracle.com/education/training/oracle-cloud-infrastructure/)
-  často nabízí bezplatné výukové cesty a v rámci speciálních akcí i certifikační zkoušky zdarma.
-- [Cisco Networking Academy:](https://www.netacad.com/) nabízí bezplatné úvodní kurzy do sítí a kybernetické bezpečnosti s digitálními odznaky (Introduction to Cybersecurity, Networking Basics). 
+### 2. Cloud and Infrastructure
+- [Microsoft Virtual Training Days](https://www.microsoft.com/en-us/events/category/microsoft-virtual-training-days?scenario=mvtd#section-master-explore-all) regularly holds free webinars (e.g., for Azure, AI, Power Platform). Participants often receive a voucher for a free certification exam (e.g., AZ-900 Fundamentals).
+- [Oracle Cloud Infrastructure (OCI) Training](https://www.oracle.com/education/training/oracle-cloud-infrastructure/) often offers free learning paths and, during special promotions, free certification exams.
+- [Cisco Networking Academy:](https://www.netacad.com/) offers free introductory courses in networking and cybersecurity with digital badges (Introduction to Cybersecurity, Networking Basics). 
 
-### 3. Programování a Web
-- [freeCodeCamp](https://www.freecodecamp.org) je nezávislá platforma nabízející tisíce hodin výuky (web design, Python, data science) s plnohodnotnými certifikáty zdarma.
-- [HackerRank](https://www.hackerrank.com) a [CodeSignal](https://codesignal.com/) nabízejí certifikace dovedností na základě vyřešení praktických kódovacích úloh. 
+### 3. Programming and Web
+- [freeCodeCamp](https://www.freecodecamp.org) is an independent platform offering thousands of hours of training (web design, Python, data science) with full-fledged certificates for free.
+- [HackerRank](https://www.hackerrank.com) and [CodeSignal](https://codesignal.com/) offer skill certifications based on solving practical coding challenges. 
 
-### 4. Analýza dat a IT podpora
-- [Google Skillshop](https://skillshop.docebosaas.com/pages/16/skillshop-home-page)
-  Bezplatné certifikace pro Google Analytics, Google Ads a další marketingové i analytické nástroje.
+### 4. Data Analysis and IT Support
+- [Google Skillshop](https://skillshop.docebosaas.com/pages/16/skillshop-home-page) Free certifications for Google Analytics, Google Ads, and other marketing and analytics tools.
 
-**Tip:** *Pokud hledáte certifikáty na Courseru, vždy hledejte tlačítko "Financial Aid available" (Finanční pomoc). Po schválení žádosti (trvá cca 15 dní) můžete získat placený certifikát zdarma.*
+**Tip:** *If you are looking for certificates on Coursera, always look for the "Financial Aid available" button. After your application is approved (it takes about 15 days), you can get a paid certificate for free.*
 
 ## YouTube
 - [ÚFAL MFF UK](https://www.youtube.com/@ufalmffuk6883)
-  Úvodní přednáška: **Umělá inteligence, strojové učení, neuronové sítě**
-  [ AI v kontextu #1 ]
+  Introductory lecture: **Artificial intelligence, machine learning, neural networks**
+  #### AI in context #1
   <iframe width="560" height="315" src="https://www.youtube.com/embed/_pgbYA5sznw?si=jYxHBuaA7r516phA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>

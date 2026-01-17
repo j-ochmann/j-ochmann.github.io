@@ -20,18 +20,3 @@ Data Science: {
   }
 }
 ```
-
-```d2
-informatika: {
-  umělá inteligence: {
-    strojové učení: {
-      hluboké učení
-    }
-  }
-}
-datová věda: {
-  strojové učení: {
-    hluboké učení
-  }
-}
-```
