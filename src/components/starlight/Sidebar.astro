@@ -1,7 +1,7 @@
 ---
 import SiteTitle from '@astrojs/starlight/components/SiteTitle.astro';
-//import Search from '@astrojs/starlight/components/Search.astro';
-//import ThemeSelect from '@astrojs/starlight/components/ThemeSelect.astro';
+import Search from '@astrojs/starlight/components/Search.astro';
+import ThemeSelect from '@astrojs/starlight/components/ThemeSelect.astro';
 //import SocialIcons from '@astrojs/starlight/components/SocialIcons.astro';
 import Searchbar from '../Searchbar.astro';
 import Icons from '../icons/icons.astro';
@@ -80,13 +80,13 @@ import hoverImage from '@/assets/img/me/20250712_055.jpg?url';
 <DefaultSidebar {...Astro.props} />
 
 <div class="custom-sidebar-header">
-  
+  <!--
   <div class="site-title-container">
-    <!--<SiteTitle />-->
+    <SiteTitle />
   </div>
-
+-->
   <div class="sidebar-controls">
-    <!-- <Search /> -->
-    <!-- <ThemeSelect /> -->
+    <Search />
+    <ThemeSelect />
   </div>
 </div>
