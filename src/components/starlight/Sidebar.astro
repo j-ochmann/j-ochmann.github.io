@@ -1,11 +1,9 @@
 ---
-// src/components/starlight/Sidebar.astro
-//import "../../styles/globals.scss";
-//import SiteTitle from '@astrojs/starlight/components/SiteTitle.astro';
+import SiteTitle from '@astrojs/starlight/components/SiteTitle.astro';
 //import Search from '@astrojs/starlight/components/Search.astro';
 //import ThemeSelect from '@astrojs/starlight/components/ThemeSelect.astro';
 //import SocialIcons from '@astrojs/starlight/components/SocialIcons.astro';
-//import Searchbar from '../Searchbar.astro';
+import Searchbar from '../Searchbar.astro';
 import Icons from '../icons/icons.astro';
 // const { sidebar } = Astro.props;
 import type { Props } from '@astrojs/starlight/props';
@@ -77,7 +75,7 @@ import hoverImage from '@/assets/img/me/20250712_055.jpg?url';
   </div>
 </div>
 
-<!--<Searchbar /> -->
+<!-- <Searchbar /> -->
 
 <DefaultSidebar {...Astro.props} />
 
