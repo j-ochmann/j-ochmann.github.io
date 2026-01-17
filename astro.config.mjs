@@ -33,15 +33,19 @@ export default defineConfig({
     starlight({
     title: 'Jindřich Ochmann - Software Engineer',
     customCss: ['./src/styles/globals.scss'],
+    locales: { root: { lang: 'en', label: 'English' },
+                 cs: { lang: 'cs', label: 'Čeština' },
+    },
     social: [
       { icon: 'github', label: 'GitHub', href: 'https://github.com/j-ochmann' }
     ],
     components: {
+      ThemeSelect: './src/components/starlight/ThemeSelect.astro',
+      //LanguageSelect: './src/components/starlight/LanguageSelect.astro',
       Header: './src/components/starlight/Empty.astro',
-      // PageTitle: './src/components/starlight/Empty.astro',
+      RightSidebar: './src/components/starlight/Empty.astro',
       MobileTableOfContents: './src/components/starlight/Empty.astro',
-      Sidebar: './src/components/starlight/Sidebar.astro',
-      RightSidebar: './src/components/starlight/Empty.astro'
+      Sidebar: './src/components/starlight/Sidebar.astro'
     },
     sidebar: [
       {
@@ -49,14 +53,9 @@ export default defineConfig({
         autogenerate: { directory: 'quick_reference' },
         collapsed: true,
       },
-      // {
-      //   label: 'Design Patterns',
-      //   autogenerate: { directory: 'design_patterns' },
-      // },
       {
         label: 'Design Patterns',
         collapsed: true,
-        //link: '/design_patterns/',
         items: [
           { 
             label: 'Overview',

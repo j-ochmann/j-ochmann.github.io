@@ -5,10 +5,37 @@
 @import '@fontsource/montserrat/600.css';
 @import '@fontsource/montserrat/700.css';
 //@import "tailwindcss";
+html, body {
+  overflow-x: clip !important;
+  position: relative;
+  width: 100%;
+}
+/* Cílení přímo na kontejnery Starlightu, které mohou generovat scrollbar */
+.starlight__sidebar, 
+.sidebar-content,
+aside.sidebar {
+  overflow-x: clip !important;
+  /* Zajištění, že se sidebar nebude snažit být širší než je definováno */
+  max-width: var(--sl-sidebar-width) !important; 
+}
+/* Vypnutí scrollbaru pro starší prohlížeče (fallback) */
+* {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+*::-webkit-scrollbar {
+  display: none; /* Chrome/Safari/Brave */
+}
+/* POZOR: výše uvedené skryje i vertikální scrollbar. 
+   Pokud chcete nechat vertikální, použijte toto místo toho: */
+.starlight__sidebar::-webkit-scrollbar {
+  height: 0; /* Skryje pouze horizontální */
+}
 
 :root {
   --sl-nav-height: 0px !important;
   --sl-mobile-toc-height: 0px !important;
+    overflow-x: clip;
 }
 
 header.header {
@@ -47,28 +74,59 @@ header.header {
   100% { transform: translate(0, 0) rotate(360deg); }
 }
 /* ---------- SIDEBAR COMMON ---------- */
-/*.sidebar {
-  width: var(--sl-sidebar-width, 320px);
-}*/
-.layout {
-  display: flex;
-}
-.sidebar-content {
-  height: 90%;
-  max-width: 90%;
+.starlight__sidebar {
+  overflow-x: clip !important; /* Ikony mohou vyčnívat, ale nezpůsobí scrollbar */
 }
 
+.sidebar-content {
+  height: 90%;
+  width: 100%; /* Změněno z max-width pro lepší centrování */
+  display: flex;
+  flex-direction: column;
+  //align-items: center; /* Vycentruje vše uvnitř sidebaru */
+}
+/* Vycentrování položek v DefaultSidebar */
+/*.sidebar-content :global(nav > ul) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  width: 100%;
+}*/
+
+.sidebar-content :global(details) {
+  width: 100%;
+}
+
+.sidebar-content :global(summary) {
+  justify-content: center !important; /* Zarovná šipky a text kategorií na střed */
+}
+
+.sidebar-content :global(a) {
+  text-align: center;
+  justify-content: center;
+}
+
+.sidebar-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  margin-top: 2rem;
+}
 /* ---------- PROFILE ---------- */
-.profile-container {
-  max-width: 96%;
+.circular-menu-wrapper {
+  width: 100%; /* Aby mohl flexbox uvnitř centrovat na střed sidebaru */
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  margin: 30px 0px 30px 0px;
+  margin: 30px 0px;
   position: relative;
+  overflow: visible; /* Důležité: ikony musí být vidět i mimo kontejner */
 }
-.profile-img-wrapper {
+.circular-menu {
   position: relative;
   width: 180px;
   height: 180px;
@@ -97,11 +155,11 @@ header.header {
   animation: pulse-glow 3s infinite ease-in-out;
   transform: scale(0.5) rotate(-180deg);
 }
-.profile-container:hover .main-img {
+.circular-menu-wrapper:hover .main-img {
   opacity: 0;
   transform: scale(1.5) rotate(180deg);
 }
-.profile-container:hover .hover-img {
+.circular-menu-wrapper:hover .hover-img {
   opacity: 1;
   transform: scale(1.2);
   transform: scale(1.2) rotate(0deg);
@@ -214,7 +272,7 @@ $action-start-angle: $start-angle + 2*$angle-step;
 .action-icons a{
   transform: rotate(var(--angle)) translateX(70px) translateY(-70px) rotate(calc(-1 * var(--angle)));
 }
-.profile-container:hover .action-icons {
+.circular-menu-wrapper:hover .action-icons {
   opacity: 1; /* Visible on hover */
   pointer-events: auto; /* Interactive on hover */
 }
@@ -262,7 +320,7 @@ $action-start-angle: $start-angle + 2*$angle-step;
   transition: transform 1s ease;
   z-index: 2;
 }
-.profile-container:hover .name-circle {
+.circular-menu-wrapper:hover .name-circle {
   transform: scale(1.3) rotate(0deg);
 }
 /* ---------- NAVIGATION ---------- */

@@ -2,6 +2,7 @@
 import SiteTitle from '@astrojs/starlight/components/SiteTitle.astro';
 import Search from '@astrojs/starlight/components/Search.astro';
 import ThemeSelect from '@astrojs/starlight/components/ThemeSelect.astro';
+import LanguageSelect from '@astrojs/starlight/components/LanguageSelect.astro';
 //import SocialIcons from '@astrojs/starlight/components/SocialIcons.astro';
 import Searchbar from '../Searchbar.astro';
 import Icons from '../icons/icons.astro';
@@ -18,8 +19,8 @@ import hoverImage from '@/assets/img/me/20250712_055.jpg?url';
 
 <Icons />
 <!-- ---------- PROFILE ---------- -->
-<div class="profile-container">
-  <div class="profile-img-wrapper">
+<div class="circular-menu-wrapper">
+  <div class="circular-menu">
     <a href="/about" aria-label="About page">
       <img src={mainImage} alt="Jindrich Ochmann, a software engineer, smiling at the camera in a professional portrait setting with a neutral background, conveying approachability and professionalism" class="profile-img main-img" />
       <img src={hoverImage} alt="Jindrich Ochmann, a software engineer, in a professional portrait setting with a neutral background, conveying approachability and professionalism in an alternative pose" class="profile-img hover-img" />
@@ -35,7 +36,6 @@ import hoverImage from '@/assets/img/me/20250712_055.jpg?url';
         </text>
       </svg>
     </div>
-
     <!-- ---------- SOCIAL ICONS ---------- -->
     <div class="social-icons">
       <a href="https://github.com/j-ochmann"
@@ -71,22 +71,14 @@ import hoverImage from '@/assets/img/me/20250712_055.jpg?url';
         <svg><use href="#icon-login"></use></svg>
       </a>
     </div>
-    
   </div>
 </div>
 
-<!-- <Searchbar /> -->
-
-<DefaultSidebar {...Astro.props} />
-
-<div class="custom-sidebar-header">
-  <!--
-  <div class="site-title-container">
-    <SiteTitle />
-  </div>
--->
-  <div class="sidebar-controls">
-    <Search />
-    <ThemeSelect />
-  </div>
+<div class="wrapper">
+  <Searchbar />
+  <Search />
+  <ThemeSelect />
+  <LanguageSelect />
+  <DefaultSidebar {...Astro.props} />
+  <!--<SiteTitle />-->
 </div>
