@@ -4,7 +4,7 @@
 @import '@fontsource/montserrat/400.css';
 @import '@fontsource/montserrat/600.css';
 @import '@fontsource/montserrat/700.css';
-@import "tailwindcss";
+//@import "tailwindcss";
 
 :root {
   --sl-nav-height: 0px !important;
@@ -14,8 +14,6 @@
 header.header {
   display: none !important;
 }
-
-/* 4. Resetování pozice obsahu, aby začínal úplně nahoře */
 .content-panel {
   padding-top: 0 !important;
 }
@@ -49,33 +47,12 @@ header.header {
   100% { transform: translate(0, 0) rotate(360deg); }
 }
 /* ---------- SIDEBAR COMMON ---------- */
-.sidebar {
-  width: 300px;
-  //width: var(--sl-sidebar-width, 300px);
-  background: #ffffff;
-  padding: 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  //overflow-x: auto;
-  overflow-y: auto;
-  //overflow-x: hidden; /* Added to prevent horizontal scrollbar from profile-container */
-  //overflow-y: visible; //auto;
-
-  scrollbar-width: none;
-  z-index: 100;
-  //animation: blob 10s linear infinite;
-  transition: transform 0.3s ease;
-}
+/*.sidebar {
+  width: var(--sl-sidebar-width, 320px);
+}*/
 .layout {
   display: flex;
 }
-/*
-.content {
-  flex-grow: 1;
-  padding: 2.5rem;
-  font-family: 'Montserrat' !important;
-  color: #333;
-}*/
 /* ---------- PROFILE ---------- */
 .profile-container {
   display: flex;

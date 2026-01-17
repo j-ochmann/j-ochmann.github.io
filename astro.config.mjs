@@ -37,8 +37,11 @@ export default defineConfig({
       { icon: 'github', label: 'GitHub', href: 'https://github.com/j-ochmann' }
     ],
     components: {
-      // Header: './src/components/starlight/Header.astro',
-      Sidebar: './src/components/starlight/Sidebar.astro'
+      Header: './src/components/starlight/Empty.astro',
+      // PageTitle: './src/components/starlight/Empty.astro',
+      MobileTableOfContents: './src/components/starlight/Empty.astro',
+      Sidebar: './src/components/starlight/Sidebar.astro',
+      RightSidebar: './src/components/starlight/Empty.astro'
     },
     sidebar: [
       {

@@ -1,100 +1,89 @@
 ---
 // src/components/starlight/Sidebar.astro
-import "../../styles/globals.scss";
-import SiteTitle from '@astrojs/starlight/components/SiteTitle.astro';
-import Search from '@astrojs/starlight/components/Search.astro';
-import ThemeSelect from '@astrojs/starlight/components/ThemeSelect.astro';
-import SocialIcons from '@astrojs/starlight/components/SocialIcons.astro';
-import Searchbar from '../Searchbar.astro';
+//import "../../styles/globals.scss";
+//import SiteTitle from '@astrojs/starlight/components/SiteTitle.astro';
+//import Search from '@astrojs/starlight/components/Search.astro';
+//import ThemeSelect from '@astrojs/starlight/components/ThemeSelect.astro';
+//import SocialIcons from '@astrojs/starlight/components/SocialIcons.astro';
+//import Searchbar from '../Searchbar.astro';
 import Icons from '../icons/icons.astro';
-const { sidebar } = Astro.props;
+// const { sidebar } = Astro.props;
+import type { Props } from '@astrojs/starlight/props';
+import DefaultSidebar from '@astrojs/starlight/components/Sidebar.astro';
 ---
 <script>
   import "../../scripts/fly-away.js";
 </script>
 
-  <Icons />
-  <!-- ---------- PROFILE ---------- -->
-  <div class="profile-container">
-    <div class="profile-img-wrapper">
-      <img src="/assets/img/20250712_056.jpg" alt="Hlavní foto" class="profile-img main-img" />
-      <img src="/assets/img/20250712_055.jpg" alt="Hover foto" class="profile-img hover-img" />
-      <!-- ---------- NAME CIRCLE ---------- -->
-      <div class="name-circle">
-        <svg viewBox="0 0 200 200">
-          <path id="circlePath" d="M 20, 100 A 80, 80 0 1, 1 180, 100" fill="transparent" />
-          <text>
-            <textPath href="#circlePath" startOffset="50%" text-anchor="middle">
-              Jindřich Ochmann
-            </textPath>
-          </text>
-        </svg>
-      </div>
-
-      <!-- ---------- SOCIAL ICONS ---------- -->
-      <div class="social-icons">
-        <a href="https://github.com/j-ochmann"
-           class="icon-github">
-          <svg><use href="#icon-github"></use></svg>
-        </a>
-        <a href="https://www.linkedin.com/in/jindrich-ochmann"
-           class="icon-linkedin">
-          <svg><use href="#icon-linkedin"></use></svg>
-        </a>
-        <a href="https://www.instagram.com/jindrichochmann" class="icon-instagram">
-          <svg><use href="#icon-instagram"></use></svg>
-        </a>
-        <a href="https://www.facebook.com/jindrich.ochmann" class="icon-facebook">
-          <svg><use href="#icon-facebook"></use></svg>
-        </a>
-        <a href="https://www.youtube.com/@JindrichOchmann" class="icon-youtube">
-          <svg><use href="#icon-youtube"></use></svg>
-        </a>
-        <a href="https://wa.me/420792353539" class="icon-whatsapp">
-          <svg><use href="#icon-whatsapp"></use></svg>
-        </a>
-        <a href="mailto:jindrich.ochmann@gmail.com" class="icon-email">
-          <svg><use href="#icon-email"></use></svg>
-        </a>
-      </div>
-      <!-- ---------- ACTIONS ICONS ---------- -->
-      <div class="action-icons">
-        <a href="" class="icon-settings">
-          <svg><use href="#icon-settings"></use></svg>
-        </a>
-        <a href="" class="icon-login">
-          <svg><use href="#icon-login"></use></svg>
-        </a>
-      </div>
-      
+<Icons />
+<!-- ---------- PROFILE ---------- -->
+<div class="profile-container">
+  <div class="profile-img-wrapper">
+    <img src="/assets/img/20250712_056.jpg" alt="Hlavní foto" class="profile-img main-img" />
+    <img src="/assets/img/20250712_055.jpg" alt="Hover foto" class="profile-img hover-img" />
+    <!-- ---------- NAME CIRCLE ---------- -->
+    <div class="name-circle">
+      <svg viewBox="0 0 200 200">
+        <path id="circlePath" d="M 20, 100 A 80, 80 0 1, 1 180, 100" fill="transparent" />
+        <text>
+          <textPath href="#circlePath" startOffset="50%" text-anchor="middle">
+            Jindřich Ochmann
+          </textPath>
+        </text>
+      </svg>
     </div>
+
+    <!-- ---------- SOCIAL ICONS ---------- -->
+    <div class="social-icons">
+      <a href="https://github.com/j-ochmann"
+          class="icon-github">
+        <svg><use href="#icon-github"></use></svg>
+      </a>
+      <a href="https://www.linkedin.com/in/jindrich-ochmann"
+          class="icon-linkedin">
+        <svg><use href="#icon-linkedin"></use></svg>
+      </a>
+      <a href="https://www.instagram.com/jindrichochmann" class="icon-instagram">
+        <svg><use href="#icon-instagram"></use></svg>
+      </a>
+      <a href="https://www.facebook.com/jindrich.ochmann" class="icon-facebook">
+        <svg><use href="#icon-facebook"></use></svg>
+      </a>
+      <a href="https://www.youtube.com/@JindrichOchmann" class="icon-youtube">
+        <svg><use href="#icon-youtube"></use></svg>
+      </a>
+      <a href="https://wa.me/420792353539" class="icon-whatsapp">
+        <svg><use href="#icon-whatsapp"></use></svg>
+      </a>
+      <a href="mailto:jindrich.ochmann@gmail.com" class="icon-email">
+        <svg><use href="#icon-email"></use></svg>
+      </a>
+    </div>
+    <!-- ---------- ACTIONS ICONS ---------- -->
+    <div class="action-icons">
+      <a href="" class="icon-settings">
+        <svg><use href="#icon-settings"></use></svg>
+      </a>
+      <a href="" class="icon-login">
+        <svg><use href="#icon-login"></use></svg>
+      </a>
+    </div>
+    
   </div>
+</div>
 
-  <Searchbar />
+<!--<Searchbar /> -->
 
-  <!-- ---------- NAVIGATION ---------- -->
-  <nav class="nav-links">
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li>
-        <a href="/about">About</a>
-        <ul>
-          <li><a href="/about/team">Team</a></li>
-          <li><a href="/about/contact">Contact</a></li>
-        </ul>
-      </li>
-      <li><a href="/projects">Projects</a></li>
-      <li><a href="/blog">Blog</a></li>
-    </ul>
-  </nav>
+<DefaultSidebar {...Astro.props} />
+
 <div class="custom-sidebar-header">
   
   <div class="site-title-container">
-    <SiteTitle />
+    <!--<SiteTitle />-->
   </div>
 
   <div class="sidebar-controls">
-     <Search /> 
-    <ThemeSelect />
+    <!-- <Search /> -->
+    <!-- <ThemeSelect /> -->
   </div>
 </div>
