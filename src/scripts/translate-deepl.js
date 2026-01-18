@@ -1,10 +1,9 @@
 import fs from "fs-extra";
-import { glob } from "glob"; // Opravený import
+import { glob } from "glob";
 import matter from "gray-matter";
 import * as deepl from "deepl-node";
 import path from "path";
 
-// Inicializace překladače
 const translator = new deepl.Translator(process.env.DEEPL_API_KEY);
 
 async function translate() {
