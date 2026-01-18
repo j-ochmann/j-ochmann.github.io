@@ -24,7 +24,7 @@ jobs:
         run: npm install fs-extra glob gray-matter
 
       - name: Run LibreTranslate Script
-        run: node src/scripts/translate-lt.js
+        run: node src/scripts/translate-libre.js
         env:
           LT_URL: "http://${{ secrets.IP }}:5000" # Vaše veřejná IP
           LT_API_KEY: ${{ secrets.LIBRE_TRANSLATE_API_KEY }}        # Klíč z ltmanage
