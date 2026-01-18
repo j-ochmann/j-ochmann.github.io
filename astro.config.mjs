@@ -46,8 +46,29 @@ export default defineConfig({
     ],
     defaultLocale: 'en',
     locales: {
-      en: { lang: 'en', label: 'English' },
-      cs: { lang: 'cs', label: 'Čeština',},
+      en: { lang: 'en', label: 'English' },   // English  1.500
+      cs: { lang: 'cs', label: 'Čeština'},    // Czech
+      sk: { lang: 'sk', label: 'Slovenčina'}, // Slovak
+      pl: { lang: 'pl', label: 'Polski'},     // Polish
+      uk: { lang: 'uk', label: 'Українська'}, // Ukrainian
+      ru: { lang: 'ru', label: 'Русский'},    // Russian  150
+      de: { lang: 'de', label: 'Deutsch'},    // German
+      fr: { lang: 'fr', label: 'Français'},   // French   280
+      it: { lang: 'it', label: 'Italiano'},   // Italian
+      nl: { lang: 'nl', label: 'Nederlands'}, // Dutch
+      fi: { lang: 'fi', label: 'Suomi'},      // Finnish
+      no: { lang: 'no', label: 'Norsk'},      // Norwegian
+      sv: { lang: 'sv', label: 'Svenska'},    // Swedish
+      es: { lang: 'es', label: 'Español'},    // Spanish   550
+      pt: { lang: 'pt', label: 'Português'},  // Portuguese 219
+      tr: { lang: 'tr', label: 'Türkçe'},     // Turkish
+      el: { lang: 'el', label: 'Ελληνικά'},   // Greek
+      zh: { lang: 'zh', label: '简体中文'},    // Chinese   1.100
+      ja: { lang: 'ja', label: '日本語'},      // Japanese
+      ko: { lang: 'ko', label: '한국어'},      // Korean
+      hi: { lang: 'hi', label: 'हिन्दी'},        // Hindi       600
+      ar: { lang: 'ar', label: 'العربية'},      // Arabic      350
+      he: { lang: 'he', label: 'עברית'},       // Hebrew
     },
     social: [
       { icon: 'github', label: 'GitHub', href: 'https://github.com/j-ochmann' }
