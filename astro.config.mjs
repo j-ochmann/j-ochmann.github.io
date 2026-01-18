@@ -10,7 +10,9 @@ import { fileURLToPath } from 'node:url'; // Importujte pro práci s cestami
 export default defineConfig({
   site: 'https://j-ochmann.github.io',
   base: '/', 
-
+  redirects: {
+    '/': '/en/',
+  },
   markdown: {
     syntaxHighlight: {
       type: 'shiki',
@@ -42,13 +44,10 @@ export default defineConfig({
           },
         },
     ],
-    locales: { root: { lang: 'en', label: 'English' },
-                 cs: { lang: 'cs',
-                       label: 'Čeština', 
-                         sidebar: [
-                           { label: 'Kurzy', link: '/cs/courses/', badge: { text: 'zdarma', variant: 'success' } },
-                         ],
-                 },
+    defaultLocale: 'en',
+    locales: {
+      en: { lang: 'en', label: 'English' },
+      cs: { lang: 'cs', label: 'Čeština',},
     },
     social: [
       { icon: 'github', label: 'GitHub', href: 'https://github.com/j-ochmann' }
