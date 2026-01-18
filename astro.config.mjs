@@ -143,6 +143,11 @@ export default defineConfig({
         translations: { cs: 'Ukázka 3D grafu' },
         link: '/3d-graph-example/',
       },
+      {
+        label: 'Flags',
+        translations: { cs: 'Vlajky' },
+        link: '/flags/',
+      },
     ],
   })],
   vite: {
