@@ -33,6 +33,15 @@ export default defineConfig({
     starlight({
     title: 'Jindřich Ochmann - Software Engineer',
     customCss: ['./src/styles/globals.scss'],
+    head: [
+        {
+          tag: 'meta',
+          attrs: {
+            name: 'google-site-verification',
+            content: 'Ckax2z86O63zqfKByYNbkFo2q0C-rmFhUQnvEZxo0qM',
+          },
+        },
+    ],
     locales: { root: { lang: 'en', label: 'English' },
                  cs: { lang: 'cs',
                        label: 'Čeština', 
@@ -55,8 +64,14 @@ export default defineConfig({
     sidebar: [
       {
         label: 'Quick Reference',
-        translations: { cs: 'Kvintesence' },
+        translations: { cs: 'Taháky' },
         autogenerate: { directory: 'quick_reference' },
+        collapsed: true,
+      },
+      {
+        label: 'Tutorials',
+        translations: { cs: 'Tutorialy' },
+        autogenerate: { directory: 'tutorials' },
         collapsed: true,
       },
       {
@@ -66,18 +81,22 @@ export default defineConfig({
         items: [
           { 
             label: 'Overview',
+            translations: { cs: 'Přehled' },
             link: '/design_patterns/',
           },
           {
             label: 'Creational',
+            translations: { cs: 'Tvůrčí' },
             autogenerate: { directory: 'design_patterns/creational/' },
             collapsed: true, 
           },
           { label: 'Structural',
+            translations: { cs: 'Strukturální' },
             autogenerate: { directory: 'design_patterns/structural/' },
             collapsed: true,
           },
           { label: 'Behavioral',
+            translations: { cs: 'Behaviorální' },
             autogenerate: { directory: 'design_patterns/behavioral' },
             collapsed: true,
           },
@@ -89,9 +108,10 @@ export default defineConfig({
         link: '/external_resources/',
       },
       {
-        label: '3D Graph Example',
-        translations: { cs: 'Ukázka 3D grafu' },
-        link: '/3d-graph-example/',
+        label: 'Courses',
+        translations: { cs: 'Kurzy' },
+        link: '/courses/',
+        badge: 'Free',
       },
       {
         label: 'Artificial Intelligence',
@@ -99,16 +119,9 @@ export default defineConfig({
         link: '/ai/',
       },
       {
-        label: 'Courses',
-        translations: { cs: 'Kurzy' },
-        link: '/courses/',
-        badge: 'Free',
-      },
-      {
-        label: 'Tutorials',
-        translations: { cs: 'Tutorialy' },
-        autogenerate: { directory: 'tutorials' },
-        collapsed: true,
+        label: '3D Graph Example',
+        translations: { cs: 'Ukázka 3D grafu' },
+        link: '/3d-graph-example/',
       },
     ],
   })],
