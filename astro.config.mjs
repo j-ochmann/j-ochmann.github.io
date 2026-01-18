@@ -90,7 +90,7 @@ export default defineConfig({
       },
       {
         label: '3D Graph Example',
-        translations: { cs: '3D graf ukázka' },
+        translations: { cs: 'Ukázka 3D grafu' },
         link: '/3d-graph-example/',
       },
       {
@@ -103,6 +103,12 @@ export default defineConfig({
         translations: { cs: 'Kurzy' },
         link: '/courses/',
         badge: 'Free',
+      },
+      {
+        label: 'Tutorials',
+        translations: { cs: 'Tutorialy' },
+        autogenerate: { directory: 'tutorials' },
+        collapsed: true,
       },
     ],
   })],
