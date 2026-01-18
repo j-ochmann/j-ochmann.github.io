@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  libretranslate:
+    image: libretranslate/libretranslate:latest
+    container_name: libretranslate
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    environment:
+      # Načte pouze potřebné jazyky pro úsporu RAM (cca 2-3 GB)
+      - LT_LOAD_ONLY=en,cs
+      # Zapne podporu API klíčů pro zabezpečení vaší veřejné IP
+      - LT_API_KEYS=true
+      # Vypne návrhy a metriky pro úsporu CPU
+      - LT_SUGGESTIONS=false
+      - LT_METRICS=false
+      # Omezí počet vláken procesoru (vhodné pro slabší HW)
+      - LT_THREADS=2
+    volumes:
+      # Trvalé úložiště pro modely a databázi klíčů
+      - lt_data:/app/db
+
+volumes:
+  lt_data:
