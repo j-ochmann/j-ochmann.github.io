@@ -1,36 +1,36 @@
-name: Automatický překlad dokumentace
-on:
-  push:
-    branches: [main]
-    paths:
-      - 'src/content/docs/cs/**'
-      - 'src/content/docs/en/**'
+# name: Automatický překlad dokumentace
+# on:
+#   push:
+#     branches: [main]
+#     paths:
+#       - 'src/content/docs/cs/**'
+#       - 'src/content/docs/en/**'
 
-jobs:
-  translate:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write # Nutné pro zápis přeložených souborů
-    steps:
-      - uses: actions/checkout@v4
+# jobs:
+#   translate:
+#     runs-on: ubuntu-latest
+#     permissions:
+#       contents: write # Nutné pro zápis přeložených souborů
+#     steps:
+#       - uses: actions/checkout@v4
 
-      # 1. Překlad z ČEŠTINY do Angličtiny a Němčiny
-      - name: Translate from Czech
-        uses: KevinRohn/gh-action-markdown-translate-ai@v1
-        with:
-          api_key: ${{ secrets.OPENAI_API_KEY }}
-          source_lang: "Czech"
-          target_langs: "English, German"
-          # Cesta k souborům, které se mají sledovat
-          file_extension: ".md, .mdx"
-          folder_path: "src/content/docs/cs"
+#       # 1. Překlad z ČEŠTINY do Angličtiny a Němčiny
+#       - name: Translate from Czech
+#         uses: KevinRohn/gh-action-markdown-translate-ai@v1
+#         with:
+#           api_key: ${{ secrets.OPENAI_API_KEY }}
+#           source_lang: "Czech"
+#           target_langs: "English, German"
+#           # Cesta k souborům, které se mají sledovat
+#           file_extension: ".md, .mdx"
+#           folder_path: "src/content/docs/cs"
 
-      # 2. Překlad z ANGLIČTINY do Češtiny a Němčiny
-      - name: Translate from English
-        uses: KevinRohn/gh-action-markdown-translate-ai@v1
-        with:
-          api_key: ${{ secrets.DeepL }}
-          source_lang: "English"
-          target_langs: "Czech, German"
-          file_extension: ".md, .mdx"
-          folder_path: "src/content/docs/en"
+#       # 2. Překlad z ANGLIČTINY do Češtiny a Němčiny
+#       - name: Translate from English
+#         uses: KevinRohn/gh-action-markdown-translate-ai@v1
+#         with:
+#           api_key: ${{ secrets.DeepL }}
+#           source_lang: "English"
+#           target_langs: "Czech, German"
+#           file_extension: ".md, .mdx"
+#           folder_path: "src/content/docs/en"
