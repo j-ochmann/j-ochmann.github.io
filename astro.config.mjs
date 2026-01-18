@@ -59,7 +59,7 @@ export default defineConfig({
       fi: { lang: 'fi', label: 'Suomi'},      // Finnish
       no: { lang: 'no', label: 'Norsk'},      // Norwegian
       sv: { lang: 'sv', label: 'Svenska'},    // Swedish
-      es: { lang: 'es', label: 'Español'},    // Spanish   550
+      es: { lang: 'es', label: 'Español'},    // Spanish    550
       pt: { lang: 'pt', label: 'Português'},  // Portuguese 219
       tr: { lang: 'tr', label: 'Türkçe'},     // Turkish
       el: { lang: 'el', label: 'Ελληνικά'},   // Greek
@@ -67,7 +67,7 @@ export default defineConfig({
       ja: { lang: 'ja', label: '日本語'},      // Japanese
       ko: { lang: 'ko', label: '한국어'},      // Korean
       hi: { lang: 'hi', label: 'हिन्दी'},        // Hindi       600
-      ar: { lang: 'ar', label: 'العربية'},      // Arabic      350
+      ar: { lang: 'ar', label: 'العربية'},      // Arabic       350
       he: { lang: 'he', label: 'עברית'},       // Hebrew
     },
     social: [
