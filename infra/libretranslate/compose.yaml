@@ -19,7 +19,9 @@ services:
       - LT_THREADS=2
     volumes:
       # Trvalé úložiště pro modely a databázi klíčů
-      - lt_data:/app/db
+      - /home/jindrich/Data/Docker/LibreTranslate:/home/libretranslate/.local/share/argos-translate
+      # LEVÁ STRANA: absolutní cesta na vašem HDD
+      # PRAVÁ STRANA: vnitřní cesta v kontejneru (NEMĚNIT)
 
 volumes:
   lt_data:
