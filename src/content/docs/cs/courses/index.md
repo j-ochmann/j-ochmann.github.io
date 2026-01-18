@@ -3,6 +3,9 @@ title: "Kurzy"
 sidebar:
   label: Kurzy
   order: 0
+  badge:
+    text: Zdarma
+    variant: success
 category: courses
 ---
 ## Certifikáty a digitální odznaky zdarma

@@ -34,7 +34,12 @@ export default defineConfig({
     title: 'Jindřich Ochmann - Software Engineer',
     customCss: ['./src/styles/globals.scss'],
     locales: { root: { lang: 'en', label: 'English' },
-                 cs: { lang: 'cs', label: 'Čeština' },
+                 cs: { lang: 'cs',
+                       label: 'Čeština', 
+                         sidebar: [
+                           { label: 'Kurzy', link: '/cs/courses/', badge: { text: 'zdarma', variant: 'success' } },
+                         ],
+                 },
     },
     social: [
       { icon: 'github', label: 'GitHub', href: 'https://github.com/j-ochmann' }
@@ -50,11 +55,13 @@ export default defineConfig({
     sidebar: [
       {
         label: 'Quick Reference',
+        translations: { cs: 'Kvintesence' },
         autogenerate: { directory: 'quick_reference' },
         collapsed: true,
       },
       {
         label: 'Design Patterns',
+        translations: { cs: 'Návrhové vzory' },
         collapsed: true,
         items: [
           { 
@@ -78,18 +85,22 @@ export default defineConfig({
       },
       {
         label: 'External Resources',
+        translations: { cs: 'Externí materiály' },
         link: '/external_resources/',
       },
       {
         label: '3D Graph Example',
+        translations: { cs: '3D graf ukázka' },
         link: '/3d-graph-example/',
       },
       {
         label: 'Artificial Intelligence',
+        translations: { cs: 'Umělá inteligence' },
         link: '/ai/',
       },
       {
         label: 'Courses',
+        translations: { cs: 'Kurzy' },
         link: '/courses/',
         badge: 'Free',
       },
