@@ -1,0 +1,42 @@
+name: Translate docs with DeepL
+
+on:
+  push:
+    paths:
+      - "src/content/docs/cs/**/*.md"
+
+jobs:
+  translate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm install deepl-node gray-matter fs-extra glob
+
+      - name: Translate Markdown files
+        run: node scripts/translate.js
+        env:
+          DEEPL_API_KEY: ${{ secrets.DEEPL_API_KEY }}
+
+      - name: Commit and Push translations
+        run: |
+          git config user.name "deepl-bot"
+          git config user.email "jindrich.ochmann@gmail.com"
+          git add src/content/docs/en
+          # Commit pouze pokud jsou změny, zamezení pádu workflow
+          if [ -n "$(git status --porcelain)" ]; then
+            git commit -m "auto: translate cs → en"
+            git push
+          else
+            echo "Nothing to commit"
+          fi
