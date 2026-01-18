@@ -4,50 +4,81 @@ import matter from "gray-matter";
 import * as deepl from "deepl-node";
 import path from "path";
 
+// Initialize the translator
 const translator = new deepl.Translator(process.env.DEEPL_API_KEY);
 
-async function translate() {
-  // Opravený glob pro moderní Node.js
-  const files = await glob("src/content/docs/cs/**/*.md");
+/**
+ * Translates markdown files from a source language to a target language.
+ * Skips translation if the target file already exists.
+ * @param {string} sourceLang - The source language code (e.g., 'cs').
+ * @param {string} targetLang - The target language code (e.g., 'en').
+ * @param {deepl.TargetLanguage} deeplTargetLang - The specific target language for DeepL API (e.g., 'en-US').
+ */
+async function translateDirection(sourceLang, targetLang, deeplTargetLang) {
+  console.log(`\n--- Starting translation from ${sourceLang.toUpperCase()} to ${targetLang.toUpperCase()} ---`);
+  
+  const files = await glob(`src/content/docs/${sourceLang}/**/*.md`);
 
   for (const file of files) {
-    const target = file.replace("/cs/", "/en/");
+    const targetPath = file.replace(`/${sourceLang}/`, `/${targetLang}/`);
 
-    // Přeskočit, pokud už existuje
-    if (await fs.pathExists(target)) continue;
+    // Skip if target file already exists to prevent loops and re-translation
+    if (await fs.pathExists(targetPath)) {
+      continue;
+    }
 
-    // Čtení souboru
-    const raw = await fs.readFile(file, "utf8");
-    const { content, data } = matter(raw);
+    const rawContent = await fs.readFile(file, "utf8");
+    const { content, data } = matter(rawContent);
 
-    // Pokud je soubor prázdný, přeskočit
-    if (!content.trim()) continue;
+    // Skip empty files
+    if (!content.trim()) {
+      console.log(`Skipping empty file: ${file}`);
+      continue;
+    }
 
-    console.log(`Překládám: ${file}...`);
+    console.log(`Translating: ${file}...`);
 
     try {
       const result = await translator.translateText(
         content,
-        "cs",
-        "en-US",
-        { 
+        sourceLang,
+        deeplTargetLang,
+        {
           preserveFormatting: true,
-          tagHandling: "xml", // KLÍČOVÉ: Ochrání Markdown značky
-          ignoreTags: ["code", "pre"] // Volitelné: nešahat na kód
+          tagHandling: "xml",
+          ignoreTags: ["code", "pre"],
         }
       );
 
-      await fs.ensureDir(path.dirname(target));
+      await fs.ensureDir(path.dirname(targetPath));
       await fs.writeFile(
-        target,
+        targetPath,
         matter.stringify(result.text, data)
       );
 
-      console.log(`✔ Hotovo: ${target}`);
+      console.log(`✔ Success: ${targetPath}`);
     } catch (err) {
-      console.error(`✖ Chyba u ${file}:`, err);
+      console.error(`✖ Error for ${file}:`, err);
     }
   }
 }
 
-translate();
+/**
+ * Main function to run all translation directions.
+ */
+async function main() {
+  if (!process.env.DEEPL_API_KEY) {
+    console.error("DEEPL_API_KEY environment variable is not set.");
+    return;
+  }
+  
+  // Translate from Czech to English
+  await translateDirection("cs", "en", "en-US");
+
+  // Translate from English to Czech
+  await translateDirection("en", "cs", "cs");
+
+  console.log("\n--- Translation process finished. ---");
+}
+
+main();
