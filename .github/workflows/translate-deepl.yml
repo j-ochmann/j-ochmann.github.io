@@ -24,7 +24,7 @@ jobs:
         run: npm install deepl-node gray-matter fs-extra glob
 
       - name: Translate Markdown files
-        run: node scripts/translate.js
+        run: node scripts/translate-deepl.js
         env:
           DEEPL_API_KEY: ${{ secrets.DEEPL_API_KEY }}
 
