@@ -1,5 +1,5 @@
 ---
-title: O mně
+title: "Čauky mňauky"
 ---
 Vždy mě fascinovaly technologie a možnost tvořit něco, co může usnadnit život ostatním.
 Časem se tato vášeň změnila v profesi.
@@ -16,13 +16,13 @@ Mým cílem je pomáhat klientům realizovat jejich vize v online světě a posk
 3. **Rychlé a spolehlivé řešení** Dodržuji termíny a nabízím podporu i po dokončení projektu.
 
 ## Co umím
- 
+
 - **Programovat** C/C++, C#, Java, JavaScript, Python, PHP, ABAP, SQL, etc.
 
 - **Serverová řešení** Linux, Docker
 
 - **Web aplikace** WordPress, WooCommerce, PrestaShop, NopCommerce, Nextcloud, GitHub Pages
- 
+
 - **E-commerce** propojení e-shopu s platební branou a dropshipping platformou
 
 - **Hardware** vývoj IoT aplikací a integraci hardwarových řešení s weby
