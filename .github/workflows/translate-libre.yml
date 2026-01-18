@@ -1,0 +1,42 @@
+name: LibreTranslate
+
+on:
+  push:
+    paths:
+      - "src/content/docs/cs/**/*.md"
+
+jobs:
+  translate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm install fs-extra glob gray-matter
+
+      - name: Run LibreTranslate Script
+        run: node scripts/translate-lt.js
+        env:
+          LT_URL: "http://${{ secrets.IP }}:5000" # Vaše veřejná IP
+          LT_API_KEY: ${{ secrets.LIBRE_TRANSLATE_API_KEY }}        # Klíč z ltmanage
+
+      - name: Commit changes
+        run: |
+          git config user.name "lt-bot"
+          git config user.email "jindrich.ochmann@gmail.com"
+          git add src/content/docs/en
+          if [ -n "$(git status --porcelain)" ]; then
+            git commit -m "auto: LibreTranslate cs → en"
+            git push
+          else
+            echo "No changes to commit"
+          fi
