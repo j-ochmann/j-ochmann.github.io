@@ -17,6 +17,8 @@ services:
       - LT_METRICS=false
       # Omezí počet vláken procesoru (vhodné pro slabší HW)
       - LT_THREADS=2
+      - LT_GUMBO_PARSER=true
+
     volumes:
       # Trvalé úložiště pro modely a databázi klíčů
       - /home/jindrich/Data/Docker/LibreTranslate:/home/libretranslate/.local/share/argos-translate

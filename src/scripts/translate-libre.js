@@ -8,8 +8,10 @@ const API_KEY = process.env.LT_API_KEY;
 
 async function translate() {
   const files = await glob("src/content/docs/cs/**/*.md");
+  console.log(`Nalezeno souborů k překladu: ${files.length}`); // Tady uvidíte, jestli glob funguje
 
   for (const file of files) {
+    console.log(`Zpracovávám soubor: ${file}`);
     const target = file.replace("/cs/", "/en/");
     if (await fs.pathExists(target)) continue;
 
