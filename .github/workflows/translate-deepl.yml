@@ -23,8 +23,11 @@ jobs:
       - name: Install dependencies
         run: npm install deepl-node gray-matter fs-extra glob
 
+      - name: List files for debugging
+        run: ls -R
+
       - name: Translate Markdown files
-        run: node scripts/translate-deepl.js
+        run: node src/scripts/translate-deepl.js
         env:
           DEEPL_API_KEY: ${{ secrets.DEEPL_API_KEY }}
 
