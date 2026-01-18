@@ -4,54 +4,54 @@ title: Git
 ---
 # Git
 
-## Instalace (Debian)
+## Installation (Debian)
 ```bash
 sudo apt update
 sudo apt install git
 ```
-## Vytvoření lokálního repozitáře
-Přejděte do adresáře vašeho projektu:
+## Creating a local repository
+Navigate to your project directory:
 ```bash
-cd /cesta/k/vasemu/projektu
-git init  # Inicializuje Git v projektu
-git add . # Přidá všechny soubory do "staging" oblasti
-git commit -m "Počáteční commit projektu"
+cd /path/to/your/project
+git init  # Initializes Git in the project
+git add . # Adds all files to the "staging" area
+git commit -m "Initial project commit"
 ```
-## Vytvoření repozitáře na GitHubu
-Přihlaste se na GitHub. Klikněte na nový repozitář „New repository“ a pojmenujte ho. 
-### Propojení a nahrání na GitHub
-Zkopírujte a přidejte URL vašeho GitHub repozitáře.
+## Creating a repository on GitHub
+Log in to GitHub. Click on "New repository" and name it.
+### Connecting and uploading to GitHub
+Copy and add the URL of your GitHub repository.
 ```bash
-git remote add origin github.com:uživatel/repozitář.git
+git remote add origin github.com:user/repository.git
 ```
-Pushněte (nahrajte) lokální kód na GitHub:
+Push (upload) local code to GitHub:
 ```bash
-git push -u origin main # nebo master, záleží na názvu hlavní větve
+git push -u origin main # or master, depending on the name of the main branch
 ```
-Pokud název větve neodpovídá, může se oběvit chyba:
+If the branch name does not match, an error may appear:
 ```bash
 error: src refspec main does not match any
-error: failed to push some refs to 'github.com:uživatel/repozitář.git'
+error: failed to push some refs to 'github.com:user/repository.git'
 ```
-Opravte přejmenováním aktuální věteve master na main:
+Fix this by renaming the current master branch to main:
 ```bash
 git branch -M main
 ```
-Všimněte si varování u commitu.
-- Git automaticky nastavil e-mail.
-- Pokud chcete, aby se u commitů na GitHubu zobrazovala vaše správná vizitka a profilový obrázek, opravte to:
-  
+Note the warning on the commit.
+- Git automatically set up the email.
+- If you want your commits on GitHub to show your correct business card and profile picture, correct this:
+
 ```bash
-git config --global user.name "vaše jméno"
-git config --global user.email "vas@email.com"
+git config --global user.name "your name"
+git config --global user.email "your@email.com"
 git commit --amend --reset-author
 ```
 
-## Krok 5: Nastavení SSH (Doporučeno)
-Vygenerujte SSH klíč: 
+## Step 5: Setting up SSH (Recommended)
+Generate an SSH key:
 ```bash
-ssh-keygen -t ed25519 -C "váš@email.com".
+ssh-keygen -t ed25519 -C "your@email.com".
 ```
-- Zkopírujte obsah souboru ~/.ssh/id_ed25519.pub.
-- Vložte klíč do nastavení GitHub (Settings -> SSH and GPG keys).
-- Po nastavení SSH můžete používat git@github.com:uživatel/repozitář.git místo HTTPS.
+- Copy the contents of the ~/.ssh/id_ed25519.pub file.
+- Paste the key into GitHub settings (Settings -> SSH and GPG keys).
+- After setting up SSH, you can use git@github.com:user/repository.git instead of HTTPS.

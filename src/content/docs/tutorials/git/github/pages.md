@@ -3,76 +3,76 @@ layout: default
 title: GitHub Pages
 ---
 # GitHub Web Pages
-1. Vytvoření repozitáře
-    - repository name: uzivatelske-jmeno.github.io
-    - musí být nastaven jako public (veřejný)
-    - zaškrtněte Add a README file 
-2. Nahrání obsahu webu
-    - index.html (hlavní stránka webu)
-    - commit changes pro uložení změn. 
-3. Aktivace GitHub Pages
-    - záložka Settings v horním menu repozitáře
-    - „Pages“ v levém panelu v sekci „Code and automation“
-    - v „Build and deployment“ u Source vybrat Deploy from a branch
-    - rozevíracím seznamu pod Branch vyberte větev main (nebo master) a složku / (root)
-    - klikněte na tlačítko Save. 
-4. Zveřejnění webu
-    - Po uložení se v horní části sekce „Pages“ objeví lišta s informací o probíhajícím nasazení.
-    - Během několika minut (obvykle do 10) se zobrazí potvrzení,
-      že web je online, spolu s jeho adresou: uzivatelske-jmeno.github.io. 
-## Důležitá omezení:
-GitHub Pages podporuje pouze statické weby (HTML, CSS, JavaScript, frameworky jako React nebo Angular).
-Nepodporuje serverové jazyky jako PHP, Python (Django/Flask) nebo databáze.
+1. Create a repository
+    - repository name: username.github.io
+    - must be set as public
+    - check Add a README file
+2. Upload website content
+    - index.html (main website page)
+    - commit changes to save them.
+3. Activate GitHub Pages
+    - Settings tab in the top menu of the repository
+    - "Pages" in the left panel in the "Code and automation" section
+    - in "Build and deployment" under Source, select Deploy from a branch
+    - in the drop-down list under Branch, select the main (or master) branch and the / (root) folder
+    - click the Save button.
+4. Publish the website
+    - After saving, a bar will appear at the top of the "Pages" section with information about the ongoing deployment.
+    - Within a few minutes (usually up to 10), a confirmation will appear,
+      that the website is online, along with its address: username.github.io.
+## Important limitations:
+GitHub Pages only supports static websites (HTML, CSS, JavaScript, frameworks like React or Angular).
+It does not support server-side languages like PHP, Python (Django/Flask) or databases.
 
-## GitHub Pages můžete vytvářet pomocí Markdown (.md).
-   GitHub má v sobě integrovaný generátor Jekyll,
-   který tyto soubory automaticky převede na webové stránky.
-   
-## Zde jsou hlavní způsoby, jak na to:
-1. Rychlá metoda přes výběr motivu (nejjednodušší)
-Tato cesta nevyžaduje žádné psaní kódu, stačí vám jeden .md soubor:
-Vytvořte v repozitáři soubor README.md nebo index.md.
-Přejděte do Settings -> Pages.
-V sekci „Build and deployment“ klikněte na tlačítko Choose a theme (pokud se nezobrazuje, ujistěte se, že máte jako zdroj nastaveno Deploy from a branch).
-Vyberte si vzhled a potvrďte. GitHub automaticky vytvoří soubor _config.yml, který Markdown propojí s vybranou šablonou. 
-2. Vlastní struktura s Jekyll
-Pokud chcete mít nad webem větší kontrolu, můžete Markdown soubory organizovat sami:
-index.md: Stane se hlavní stránkou (index.html).
-kontakt.md: Automaticky se převede na adresu uzivatel.github.io/kontakt.html.
-Front Matter: Na začátek každého .md souboru můžete přidat metadata (např. název stránky nebo šablonu):
+## You can create GitHub Pages using Markdown (.md).
+   GitHub has an integrated Jekyll generator,
+   which automatically converts these files into web pages.
+
+## Here are the main ways to do it:
+1. Quick method via theme selection (easiest)
+This method does not require any coding, you only need one .md file:
+Create a README.md or index.md file in the repository.
+Go to Settings -> Pages.
+In the "Build and deployment" section, click the Choose a theme button (if not displayed, make sure you have Deploy from a branch set as the source).
+Select a theme and confirm. GitHub automatically creates a _config.yml file, which links Markdown to the selected template.
+2. Custom structure with Jekyll
+If you want more control over the website, you can organize Markdown files yourself:
+index.md: Becomes the main page (index.html).
+kontakt.md: Automatically converts to uzivatel.github.io/kontakt.html.
+Front Matter: You can add metadata to the beginning of each .md file (e.g., page title or template):
 markdown
 ---
 layout: post
-title: Moje první stránka
+title: My first page
 ---
-Zde už píšete klasický Markdown text...
- 
-Výhody a omezení v roce 2025:
-Automatizace: Kdykoliv upravíte .md soubor a uložíte změny (commit), web se během chvilky sám aktualizuje.
-Vzhled: Bez vybraného motivu (Theme) bude web vypadat jako prostý text. Doporučuje se proto v nastavení Pages vždy nějaký motiv zvolit.
-Pokročilé nástroje: Pro dokumentace můžete využít i specializované generátory jako mdBook, které rovněž pracují čistě s Markdownem a GitHub je podporuje.
+Here you write classic Markdown text...
+
+Advantages and limitations in 2025:
+Automation: Whenever you edit an .md file and save changes (commit), the website automatically updates within moments.
+Appearance: Without a selected theme, the website will look like plain text. It is therefore recommended to always select a theme in the Pages settings.
+Advanced tools: For documentation, you can also use specialized generators like mdBook, which also work purely with Markdown and are supported by GitHub.
 # GitHub Pages
 [j-ochmann.github.io](https://j-ochmann.github.io/)
-- používá Jekyll a GitHub Actions.
-- **docs/index.md** se převede z Markdown na HTML a obalí výchozím Jekyll theme.
+- uses Jekyll and GitHub Actions.
+- **docs/index.md** is converted from Markdown to HTML and wrapped in the default Jekyll theme.
 
-## Jak změnit theme (nejrychlejší způsob)
-V kořeni repa (nebo v /docs) vytvoř nebo uprav soubor:
+## How to change the theme (fastest way)
+In the repository root (or in /docs) create or modify the file:
 **📄 _config.yml**
 ```yaml
 title: Jindřich Ochmann
-description: Vývoj, jazyky, projekty
+description: Development, languages, projects
 theme: jekyll-theme-hacker
 ```
-Commit → push → hotovo.
+Commit → push → done.
 
-Pár použitelných theme: `jekyll-theme-minimal/hacker/cayman/midnight/slate/dinky`
+A few usable themes: `jekyll-theme-minimal/hacker/cayman/midnight/slate/dinky`
 
-👉 [Kompletní seznam](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/adding-a-theme-to-your-github-pages-site-using-jekyll?versionId=free-pro-team%40latest&productId=pages&restPage=getting-started-with-github-pages%2Cconfiguring-a-publishing-source-for-your-github-pages-site#supported-themes)
+👉 [Complete list](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/adding-a-theme-to-your-github-pages-site-using-jekyll?versionId=free-pro-team%40latest&productId=pages&restPage=getting-started-with-github-pages%2Cconfiguring-a-publishing-source-for-your-github-pages-site#supported-themes)
 
-## Jak OVLIVNIT OBSAH (strukturu)
+## How to INFLUENCE CONTENT (structure)
 
-Doporučená struktura:
+Recommended structure:
 ```text
 docs/
 ├── _config.yml
@@ -87,21 +87,21 @@ docs/
 ```md
 ---
 layout: default
-title: Úvod
+title: Introduction
 ---
 
-# Ahoj 👋
-Jmenuji se **Jindřich Ochmann**
+# Hello 👋
+My name is **Jindřich Ochmann**
 
-- programování
-- jazyky
-- experimenty
+- programming
+- languages
+- experiments
 ```
->⚠️ Ten YAML blok (---) je důležitý
+>⚠️ That YAML block (---) is important
 
-## Navigace (menu nahoře)
+## Navigation (top menu)
 
-V `_config.yml`:
+In `_config.yml`:
 ```yaml
 title: Jindřich Ochmann
 theme: jekyll-theme-cayman
@@ -109,19 +109,19 @@ theme: jekyll-theme-cayman
 nav:
   - title: Home
     url: /
-  - title: Projekty
+  - title: Projects
     url: /projects
-  - title: O mně
+  - title: About me
     url: /about
 ```
-A odpovídající soubory:
+And corresponding files:
 ```text
 projects.md
 about.md
 ```
-## Vlastní CSS (tady začíná „kontrola“)
-1. Vytvoř soubor: `docs/assets/css/style.scss`
-2. Obsah:
+## Custom CSS (this is where "control" begins)
+1. Create file: `docs/assets/css/style.scss`
+2. Content:
 ```scss
 ---
 ---
@@ -137,18 +137,18 @@ h1 {
 }
 ```
 GitHub Pages:
-- pozná SCSS
-- přeloží ho
-- přepíše default styl theme
+- recognizes SCSS
+- translates it
+- overwrites default theme style
 
-## Když chcete ÚPLNOU kontrolu
-- nepoužívat „remote theme“
-1. vytvořte layout:
+## If you want FULL control
+- do not use "remote theme"
+1. create layout:
 ```html
 docs/_layouts/default.html
 
 <!DOCTYPE html>
-<html lang="cs">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>{{ page.title }} | {{ site.title }}</title>
@@ -167,8 +167,8 @@ docs/_layouts/default.html
 </body>
 </html>
 ```
-2. V _config.yml smažte theme:
+2. In _config.yml delete theme:
 
-Žádná Jekyll kouzla, ale čistý statický web.
+No Jekyll magic, just a clean static website.
 
-Markdown → HTML → Váš layout
+Markdown → HTML → Your layout

@@ -1,29 +1,29 @@
+--- 
+title: C Cheat Sheet
 ---
-title: C Tahák
----
-## 1️⃣ Nainstalujte C kompilátor (gcc)
+## 1️⃣ Install C compiler (gcc)
 
-Otevřete terminál a zadejte:
+Open terminal and type:
 ```bash
 sudo apt update
 sudo apt install build-essential
 ```
-Balík build-essential obsahuje:
-- gcc (C kompilátor)
+The build-essential package includes:
+- gcc (C compiler)
 - make
-- základní knihovny a hlavičky
+- basic libraries and headers
   
-Ověřte:
+Verify:
 ```bash
 gcc --version
 ```
-## 2️⃣ Vytvořte zdrojový soubor
-Např. soubor hello_world.c:
+## 2️⃣ Create a source file
+E.g., file hello_world.c:
 ```bash
 nano hello_world.c
 ```
 
-Do něj napište:
+Write into it:
 <!-- file: hello_world.c -->
 ```c
 #include <stdio.h>
@@ -34,57 +34,57 @@ int main(void) {
 }
 ```
 
-Uložte:
+Save:
 - Ctrl + O
 - Enter
 - Ctrl + X
   
-## 3️⃣ Přeložte program
-V tom samém adresáři spusť:
+## 3️⃣ Compile the program
+In the same directory, run:
 
 ```bash
 gcc hello_world.c -o hello_world
 ```
 
-Co se stalo:
-- hello_world.c → zdroják
-- -o hello_world → výsledný spustitelný soubor hello_world
+What happened:
+- hello_world.c → source file
+- -o hello_world → resulting executable file hello_world
 
-Zkontrolujte:
+Check:
 
 ```bash
 ls
 ```
 
-Měl by tam být soubor hello_world
+There should be a file named hello_world
 
-## 4️⃣ Spusťte program
+## 4️⃣ Run the program
 
 ```bash
 ./hello_world
 ```
 
-Výstup:
+Output:
 
 ```bash
 Hello, world!
 ```
 
-## 5️⃣ (Volitelné) Překlad s varováními – doporučeno
+## 5️⃣ (Optional) Compile with warnings – recommended
 
-Pro správné návyky:
+For good habits:
 
 ```bash
 gcc -Wall -Wextra -Werror hello_world.c -o hello_world
 ```
 
-To Vás donutí psát čistý a bezpečný C kód.
+This will force you to write clean and safe C code.
 
-## 6️⃣ Co je dobré vědět hned od začátku
-- main vždy vrací int
-- `return 0;` = program skončil OK
-- `stdio.h` je standardní knihovna pro vstup/výstup
-- `./` říká shellu „spusť soubor z aktuálního adresáře“
+## 6️⃣ What's good to know right from the start
+- main always returns int
+- `return 0;` = program finished OK
+- `stdio.h` is the standard library for input/output
+- `./` tells the shell "run the file from the current directory"
 
 ```bash
 nano read_number.c
@@ -96,35 +96,35 @@ nano read_number.c
 int main (void)
 {
     int cislo;
-    printf("Zadejte cele cislo: ");
+    printf("Enter an integer: ");
     scanf("%d",&cislo);
-    printf("Zadal jste: %d\n", cislo);
+    printf("You entered: %d\n", cislo);
     return 0;
 }
 ```
 
-## Doporučená struktura projektu
+## Recommended project structure
 
-Pokud chcete mít projekt profesionálně organizovaný, standardní rozložení vypadá takto: 
+If you want to organize your project professionally, a standard layout looks like this: 
 
 ```text
 projekt/
-├── docs/                # Hlavní dokumentace projektu
-│   ├── tutorials/       # Návody ve formě .md souborů
-│   └── examples_src/    # .md soubory, ze kterých generujete kód
-├── examples/            # Výsledné vygenerované .c soubory (ukázky)
-├── scripts/             # Skripty (Python/Bash), které provádějí generování
-├── external/            # MD4C a další knihovny
-├── src/             # Váš zdrojový kód (.c, .cpp)
-├── include/         # Vaše hlavičkové soubory (.h)
-├── external/        # Cizí knihovny (např. md4c)
+├── docs/                # Main project documentation
+│   ├── tutorials/       # Tutorials in .md files
+│   └── examples_src/    # .md files from which you generate code
+├── examples/            # Resulting generated .c files (examples)
+├── scripts/             # Scripts (Python/Bash) that perform generation
+├── external/            # MD4C and other libraries
+├── src/             # Your source code (.c, .cpp)
+├── include/         # Your header files (.h)
+├── external/        # External libraries (e.g., md4c)
 │   └── md4c/
 │       ├── md4c.h
 │       └── md4c.c
-├── build/           # Výstupy kompilace (ignore v gitu)
-└── CMakeLists.txt   # Konfigurace sestavení
+├── build/           # Compilation outputs (ignore in git)
+└── CMakeLists.txt   # Build configuration
 ```
 
-__*Tip:*__
->Pro názvy složek používejte vždy malá písmena a místo mezer podtržítka nebo pomlčky,
->abyste se vyhnuli problémům s kompatibilitou na různých operačních systémech.
+__*Tip:*
+>Always use lowercase letters for folder names and underscores or hyphens instead of spaces,
+to avoid compatibility issues on different operating systems.

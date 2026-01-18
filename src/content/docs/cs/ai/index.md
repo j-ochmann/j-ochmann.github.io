@@ -1,5 +1,5 @@
 ---
-title: "AI - Artificial Intelligence"
+title: "AI - umělá inteligence"
 sidebar:
   label: AI
   order: 0
