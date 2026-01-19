@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   lingva:
-    image: thelinuxguy/lingva-translate:latest
+    image: lingvatranslate/lingva-translate:latest
     container_name: lingva
     restart: unless-stopped
     ports:
