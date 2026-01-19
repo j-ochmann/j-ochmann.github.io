@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - "src/content/docs/**/*.{md,mdx}"
+  workflow_dispatch: # Přidá tlačítko "Run workflow" v GitHubu
 
 jobs:
   translate:
