@@ -45,7 +45,7 @@ import 'flag-icons/css/flag-icons.min.css';
   .fi {
     width: 2rem !important;
     height: 2rem !important;
-    margin-bottom: 0.5rem;
+    margin-bottom: -0.3rem; /* Snížení mezery */
     border: 1px solid #525252;
     border-radius: 50%;
     overflow: hidden; /* Zajistí, že obsah nepřesáhne kruh */
@@ -53,11 +53,15 @@ import 'flag-icons/css/flag-icons.min.css';
     /* Přikáže obrázku na pozadí, aby vyplnil celý kontejner */
     background-size: cover !important;
     background-position: center;
+    z-index: 1;
   }
   code {
     font-family: monospace;
-    background: #f4f4f4;
-    padding: 2px 4px;
-    border-radius: 4px;
-  }
+    background: #bebebe76;
+    padding: 0px 2px 0px 2px;
+    border-radius: 5px;
+    transform: rotate(-35deg); /* Otočení o 45 stupňů */
+    margin: -0.3rem 0 0 1.5rem; /* Posun nahoru a doprava */
+    z-index: 0;
+ }
 </style>
