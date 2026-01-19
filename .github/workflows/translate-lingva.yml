@@ -1,0 +1,42 @@
+name: Lingva Multi-Language Translation
+
+on:
+  push:
+    paths:
+      - "src/content/docs/**/*.{md,mdx}"
+
+jobs:
+  translate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm install fs-extra glob gray-matter
+
+      - name: Run Translation
+        run: node scripts/translate-lingva.js
+        env:
+          # URL vaší Lingva instance v Portaineru
+          LINGVA_URL: "http://${{ secrets.IP }}:5000"
+
+      - name: Commit and Push
+        run: |
+          git config user.name "lingva-bot"
+          git config user.email "jindrich.ochmann@gmail.com"
+          git add .
+          if [ -n "$(git status --porcelain)" ]; then
+            git commit -m "auto: i18n translation update [skip ci]"
+            git push
+          else
+            echo "No changes"
+          fi

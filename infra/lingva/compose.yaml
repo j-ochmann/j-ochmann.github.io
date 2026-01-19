@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  lingva:
+    image: thelinuxguy/lingva-translate:latest
+    container_name: lingva
+    restart: unless-stopped
+    ports:
+      - "5000:3000"
+    environment:
+      - NODE_ENV=production
