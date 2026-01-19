@@ -4,7 +4,7 @@ import { getCollection } from 'astro:content';
 
 const allDocs = await getCollection('docs');
 const languages = ['cs', 'en', 'de', 'es'];
-const docsMap = {};
+const docsMap: { [key: string]: { id: string; locales: { [key: string]: any } } } = {};
 
 allDocs.forEach(entry => {
   // Starlight ID jsou ve formátu 'cs/index' nebo 'en/tutorials/git'
