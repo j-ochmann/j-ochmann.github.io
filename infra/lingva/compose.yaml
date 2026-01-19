@@ -1,10 +1,15 @@
-version: '3.8'
+version: '3'
+
 services:
   lingva:
-    image: lingvatranslate/lingva-translate:latest
     container_name: lingva
+    image: thedaviddelta/lingva-translate:latest
     restart: unless-stopped
-    ports:
-      - "5000:3000"
     environment:
-      - NODE_ENV=production
+      # Změňte na vaši skutečnou doménu
+      - site_domain=lingva.ochmann.cz 
+      - force_default_theme=light
+      - default_source_lang=auto
+      - default_target_lang=en
+    ports:
+      - 3000:3000
