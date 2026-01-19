@@ -25,7 +25,7 @@ jobs:
         run: npm install fs-extra glob gray-matter
 
       - name: Run Translation
-        run: node scripts/translate-lingva.js
+        run: node src/scripts/translate-lingva.js
         env:
           # URL vaší Lingva instance v Portaineru
           LINGVA_URL: "http://${{ secrets.IP }}:3000"
