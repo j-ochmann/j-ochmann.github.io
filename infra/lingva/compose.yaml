@@ -6,8 +6,7 @@ services:
     image: thedaviddelta/lingva-translate:latest
     restart: unless-stopped
     environment:
-      # Změňte na vaši skutečnou doménu
-      - site_domain=lingva.ochmann.cz 
+      - site_domain=${SITE_DOMAIN}
       - force_default_theme=light
       - default_source_lang=auto
       - default_target_lang=en
