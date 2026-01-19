@@ -27,7 +27,7 @@ jobs:
         run: node scripts/translate-lingva.js
         env:
           # URL vaší Lingva instance v Portaineru
-          LINGVA_URL: "http://${{ secrets.IP }}:5000"
+          LINGVA_URL: "http://${{ secrets.IP }}:3000"
 
       - name: Commit and Push
         run: |

@@ -12,7 +12,7 @@ import path from "path";
  *    nikdy nepoužije překlad jako zdroj pro další překlad.
  *    Zamezuje degradaci textu (tzv. "tichá pošta"). */
 
-const LINGVA_URL = process.env.LINGVA_URL || "http://SERVER_IP:5000";
+const LINGVA_URL = process.env.LINGVA_URL || "http://SERVER_IP:3000";
 const CONTENT_PATH = "src/content/docs";
 const LANGUAGES = ["cs", "en", "de", "es"];
 
