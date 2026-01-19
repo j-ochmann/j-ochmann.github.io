@@ -1,12 +1,17 @@
 ---
 id: command
-title: "Object Behavioral: Command"
+title: 'Object Behavioral: Command'
 sidebar:
   label: Command
   order: 14
 category: Behavioral
 goF: 14
-tags: ["cpp", "java", "python"]
+tags:
+  - cpp
+  - java
+  - python
+content_hash: fea6af453a429e4179076f52c88030e0
+translation_status: original
 ---
 ## Intent
 

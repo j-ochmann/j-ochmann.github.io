@@ -1,12 +1,17 @@
 ---
 id: facade
-title: "Object Structural: Facade"
+title: 'Object Structural: Facade'
 sidebar:
   label: Facade
   order: 10
 category: Structural
 goF: 10
-tags: ["cpp", "java", "python"]
+tags:
+  - cpp
+  - java
+  - python
+content_hash: da284b9e7a3bb2671e1270081a384a7c
+translation_status: original
 ---
 ## Intent
 

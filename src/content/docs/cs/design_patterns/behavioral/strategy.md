@@ -1,12 +1,17 @@
 ---
 id: strategy
-title: "Object Behavioral: Strategy"
+title: 'Object Behavioral: Strategy'
 sidebar:
   label: Strategy
   order: 21
 category: Behavioral
 goF: 21
-tags: ["cpp", "java", "python"]
+tags:
+  - cpp
+  - java
+  - python
+content_hash: 47c03ea16c5d749fb4e9cf06d5a30809
+translation_status: original
 ---
 ## Intent
 

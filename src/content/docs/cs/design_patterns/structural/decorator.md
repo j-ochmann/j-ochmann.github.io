@@ -1,12 +1,17 @@
 ---
 id: decorator
-title: "Object Structural: Decorator"
+title: 'Object Structural: Decorator'
 sidebar:
   label: Decorator
   order: 9
 category: Structural
 goF: 9
-tags: ["cpp", "java", "python"]
+tags:
+  - cpp
+  - java
+  - python
+content_hash: 6d5a0e75aa9bcb99cf5fd7b4fe99e11f
+translation_status: original
 ---
 ## Intent
 

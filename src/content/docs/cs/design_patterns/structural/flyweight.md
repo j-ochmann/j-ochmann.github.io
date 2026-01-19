@@ -1,12 +1,17 @@
 ---
 id: flyweight
-title: "Object Structural: Flyweight"
+title: 'Object Structural: Flyweight'
 sidebar:
   label: Flyweight
   order: 11
 category: Structural
 goF: 11
-tags: ["cpp", "java", "python"]
+tags:
+  - cpp
+  - java
+  - python
+content_hash: 84635909d2740d736afc8a536919b695
+translation_status: original
 ---
 ## Intent
 

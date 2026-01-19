@@ -1,12 +1,17 @@
 ---
 id: bridge
-title: "Object Structural: Bridge"
+title: 'Object Structural: Bridge'
 sidebar:
   label: Bridge
   order: 7
 category: Structural
 goF: 7
-tags: ["cpp", "java", "python"]
+tags:
+  - cpp
+  - java
+  - python
+content_hash: d46721651e006ee19f2caa99fb423dd1
+translation_status: original
 ---
 ## Intent
 

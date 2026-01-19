@@ -1,12 +1,17 @@
 ---
 id: visitor
-title: "Object Behavioral: Visitor"
+title: 'Object Behavioral: Visitor'
 sidebar:
   label: Visitor
   order: 23
 category: Behavioral
 goF: 23
-tags: ["cpp", "java", "python"]
+tags:
+  - cpp
+  - java
+  - python
+content_hash: 515e1b29456cc448cae61176b5866d70
+translation_status: original
 ---
 ## Intent
 

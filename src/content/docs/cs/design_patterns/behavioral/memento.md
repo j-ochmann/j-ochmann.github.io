@@ -1,12 +1,17 @@
 ---
 id: memento
-title: "Object Behavioral: Memento"
+title: 'Object Behavioral: Memento'
 sidebar:
   label: Memento
   order: 18
 category: Behavioral
 goF: 18
-tags: ["cpp", "java", "python"]
+tags:
+  - cpp
+  - java
+  - python
+content_hash: 09c0af5e1da79b9a134d71749203ccd2
+translation_status: original
 ---
 ## Intent
 

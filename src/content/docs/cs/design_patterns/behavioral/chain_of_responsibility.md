@@ -1,12 +1,17 @@
 ---
 id: chain_of_responsibility
-title: "Objektově behaviorální: Řetězec zodpovědnosti"
+title: 'Objektově behaviorální: Řetězec zodpovědnosti'
 sidebar:
   label: Řetězec zodpovědnosti
   order: 13
 category: Behaviorální
 goF: 13
-tags: ["cpp", "java", "python"]
+tags:
+  - cpp
+  - java
+  - python
+content_hash: a525b31a206adb212cff61b3d2e94ee3
+translation_status: original
 ---
 ## Účel
 

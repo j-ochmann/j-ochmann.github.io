@@ -1,6 +1,8 @@
 ---
 layout: default
 title: GitHub Pages
+content_hash: 9f2fa426eb61090916fd65fa993d492f
+translation_status: original
 ---
 # GitHub Web Pages
 1. Create a repository

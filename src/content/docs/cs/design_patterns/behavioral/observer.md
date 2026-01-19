@@ -1,12 +1,17 @@
 ---
 id: observer
-title: "Object Behavioral: Observer"
+title: 'Object Behavioral: Observer'
 sidebar:
   label: Observer
   order: 19
 category: Behavioral
 goF: 19
-tags: ["cpp", "java", "python"]
+tags:
+  - cpp
+  - java
+  - python
+content_hash: 8f8c639a919996d17323d0e7f1d36a77
+translation_status: original
 ---
 ## Intent
 

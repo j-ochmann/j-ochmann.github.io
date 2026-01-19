@@ -4,6 +4,8 @@ sidebar:
   label: Discussion
   order: 13
 category: Structural
+content_hash: a8dfd25b669a40d8fb164c7c4bbd2447
+translation_status: original
 ---
 You may have noticed similarities between the structural patterns, especially in their participants and collaborations. This is so probably because structural patterns rely on the same small set of language mechanisms for structuring code and objects: single and multiple inheritance for class-based patterns, and object composition for object patterns. But the similarities belie the different intents among these patterns. In this section we compare and contrast groups of structural patterns to give you a feel for their relative merits.
 

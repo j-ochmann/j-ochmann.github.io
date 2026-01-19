@@ -1,11 +1,15 @@
 ---
 id: quick_ref_cpp
-title: "C++ Quick Reference"
+title: C++ Quick Reference
 sidebar:
-  label: "C++"
+  label: C++
   order: 1
 category: programming
-tags: [cpp, programming]
+tags:
+  - cpp
+  - programming
+content_hash: de56df3a5778806406681894b9365538
+translation_status: original
 ---
 ## Preprocessor
 

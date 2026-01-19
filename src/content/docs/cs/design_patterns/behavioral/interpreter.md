@@ -1,12 +1,17 @@
 ---
 id: interpreter
-title: "Object Behavioral: Interpreter"
+title: 'Object Behavioral: Interpreter'
 sidebar:
   label: Interpreter
   order: 15
 category: Behavioral
 goF: 15
-tags: ["cpp", "java", "python"]
+tags:
+  - cpp
+  - java
+  - python
+content_hash: 14c38e2a373fd09b2756aa8670c81d09
+translation_status: original
 ---
 ## Intent
 

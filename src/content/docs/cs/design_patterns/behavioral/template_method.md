@@ -1,12 +1,17 @@
 ---
 id: template_method
-title: "Object Behavioral: Template Method"
+title: 'Object Behavioral: Template Method'
 sidebar:
   label: Template Method
   order: 22
 category: Behavioral
 goF: 22
-tags: ["cpp", "java", "python"]
+tags:
+  - cpp
+  - java
+  - python
+content_hash: f2790f973c7a17baf96f1a293a4f2348
+translation_status: original
 ---
 ## Intent
 

@@ -1,12 +1,17 @@
 ---
 id: proxy
-title: "Object Structural: Proxy"
+title: 'Object Structural: Proxy'
 sidebar:
   label: Proxy
   order: 12
 category: Structural
 goF: 12
-tags: ["cpp", "java", "python"]
+tags:
+  - cpp
+  - java
+  - python
+content_hash: 87c8f08f1a409c3f86e085650763c742
+translation_status: original
 ---
 ## Intent
 

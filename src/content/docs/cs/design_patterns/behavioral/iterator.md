@@ -1,12 +1,17 @@
 ---
 id: iterator
-title: "Object Behavioral: Iterator"
+title: 'Object Behavioral: Iterator'
 sidebar:
   label: Iterator
   order: 16
 category: Behavioral
 goF: 16
-tags: ["cpp", "java", "python"]
+tags:
+  - cpp
+  - java
+  - python
+content_hash: ca87b4769b1c55c5f9d3be082e0764da
+translation_status: original
 ---
 ## Intent
 

@@ -1,12 +1,17 @@
 ---
 id: adapter
-title: "Class, Object Structural: Adapter"
+title: 'Class, Object Structural: Adapter'
 sidebar:
   label: Adapter
   order: 6
 category: Structural
 goF: 6
-tags: ["cpp", "java", "python"]
+tags:
+  - cpp
+  - java
+  - python
+content_hash: 682732873c8f9472698c3239efad0bce
+translation_status: original
 ---
 ## Intent
 

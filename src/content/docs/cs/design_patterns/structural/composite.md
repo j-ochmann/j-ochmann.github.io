@@ -1,12 +1,17 @@
 ---
 id: composite
-title: "Object Structural: Composite"
+title: 'Object Structural: Composite'
 sidebar:
   label: Composite
   order: 8
 category: Structural
 goF: 8
-tags: ["cpp", "java", "python"]
+tags:
+  - cpp
+  - java
+  - python
+content_hash: 4283adeb9e6ca11805b474866309c992
+translation_status: original
 ---
 ## Intent
 

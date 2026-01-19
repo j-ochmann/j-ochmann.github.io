@@ -1,9 +1,11 @@
 ---
-title: "Discussion of Behavioral Patterns"
+title: Discussion of Behavioral Patterns
 sidebar:
   label: Discussion
   order: 24
-category: "Behavioral"
+category: Behavioral
+content_hash: 87f838591ee67a289fac174dd5c4d185
+translation_status: original
 ---
 ## Encapsulating Variation
 

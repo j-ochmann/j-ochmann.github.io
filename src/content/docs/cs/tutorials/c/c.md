@@ -1,5 +1,7 @@
 ---
 title: C Tahák
+content_hash: 8dae22faf08ddbd9b155931bf4aeebbd
+translation_status: original
 ---
 
 ## 1️⃣ Nainstalujte C kompilátor (gcc)

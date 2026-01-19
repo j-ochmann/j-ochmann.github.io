@@ -1,12 +1,17 @@
 ---
 id: singleton
-title: "Object Creational: Singleton"
+title: 'Object Creational: Singleton'
 sidebar:
   label: Singleton
   order: 5
 category: Creational
 goF: 5
-tags: ["cpp", "java", "python"]
+tags:
+  - cpp
+  - java
+  - python
+content_hash: 584f7680d0bd105d784ab8425b6f7ce4
+translation_status: original
 ---
 ## Intent
 

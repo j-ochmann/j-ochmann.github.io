@@ -1,12 +1,17 @@
 ---
 id: state
-title: "Object Behavioral: State"
+title: 'Object Behavioral: State'
 sidebar:
   label: State
   order: 20
 category: Behavioral
 goF: 20
-tags: ["cpp", "java", "python"]
+tags:
+  - cpp
+  - java
+  - python
+content_hash: d0573d3dd01eeb80f2029ce5c6746410
+translation_status: original
 ---
 ## Intent
 

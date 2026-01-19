@@ -1,12 +1,17 @@
 ---
 id: chain_of_responsibility
-title: "Object Behavioral: Chain of Responsibility"
+title: 'Object Behavioral: Chain of Responsibility'
 sidebar:
   label: Chain of Responsibility
   order: 13
 category: Behavioral
 goF: 13
-tags: ["cpp", "java", "python"]
+tags:
+  - cpp
+  - java
+  - python
+content_hash: 1ca5aeec0aa1bb968f943ecf3d776223
+translation_status: original
 ---
 ## Intent
 

@@ -1,12 +1,17 @@
 ---
 id: mediator
-title: "Object Behavioral: Mediator"
+title: 'Object Behavioral: Mediator'
 sidebar:
   label: Mediator
   order: 17
 category: Behavioral
 goF: 17
-tags: ["cpp", "java", "python"]
+tags:
+  - cpp
+  - java
+  - python
+content_hash: 50c4d0e6a4c3e9e8b2d1d821c0aeae92
+translation_status: original
 ---
 ## Intent
 

@@ -1,5 +1,7 @@
 ---
 title: libre test
+content_hash: e49508bfdbab13520d20bbc9465bae26
+translation_status: original
 ---
 
 ## Spuštění testu

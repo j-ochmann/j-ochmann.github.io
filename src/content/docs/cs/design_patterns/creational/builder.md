@@ -1,12 +1,17 @@
 ---
 id: builder
-title: "Object Creational: Builder"
+title: 'Object Creational: Builder'
 sidebar:
   label: Builder
   order: 2
 category: Creational
 goF: 2
-tags: ["cpp", "java", "python"]
+tags:
+  - cpp
+  - java
+  - python
+content_hash: 9444cba7c5ba25a9381307ca321a9293
+translation_status: original
 ---
 ## Intent
 

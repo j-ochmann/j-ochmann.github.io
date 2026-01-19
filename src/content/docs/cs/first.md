@@ -1,5 +1,7 @@
 ---
-title: "Čauky mňauky"
+title: Čauky mňauky
+content_hash: dcb56373ab3845b5e9c0230c591456e6
+translation_status: original
 ---
 Vždy mě fascinovaly technologie a možnost tvořit něco, co může usnadnit život ostatním.
 Časem se tato vášeň změnila v profesi.

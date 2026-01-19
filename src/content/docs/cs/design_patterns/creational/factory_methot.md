@@ -1,12 +1,17 @@
 ---
 id: factory_method
-title: "Class Creational: Factory Method"
+title: 'Class Creational: Factory Method'
 sidebar:
   label: Factory Method
   order: 3
 category: Creational
 goF: 3
-tags: ["cpp", "java", "python"]
+tags:
+  - cpp
+  - java
+  - python
+content_hash: 903bda2ef9799b613dac0871e36ef1db
+translation_status: original
 ---
 ## Intent
 

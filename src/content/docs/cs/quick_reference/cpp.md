@@ -1,11 +1,15 @@
---- 
+---
 id: quick_ref_cpp
-title: "C++ Rychlý Přehled"
+title: C++ Rychlý Přehled
 sidebar:
-  label: "C++"
+  label: C++
   order: 1
 category: programming
-tags: [cpp, programming]
+tags:
+  - cpp
+  - programming
+content_hash: b14d44716eb57d8573fadba1a56bded6
+translation_status: original
 ---
 ## Preprocesor
 

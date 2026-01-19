@@ -1,30 +1,42 @@
 ---
-title: "Courses"
+title: Courses
 sidebar:
-  label: Courses
+  label: Kurzy
   order: 0
+  badge:
+    text: Zdarma
+    variant: success
 category: courses
+content_hash: 9c1cefe3cd2d3d2f181d8860515e579a
+translation_status: translated
+source_hash: 9c1cefe3cd2d3d2f181d8860515e579a
+translated_from: cs
 ---
-## Free Certificates and Digital Badges
+## Free certificates and digital badges
 ### 1. Artificial Intelligence (AI)
 - [Cognitive Class](https://cognitiveclass.ai/) (IBM platform) 
-- [Elements of AI](https://www.elementsofai.com/) is a globally recognized course that offers a free certificate on the basics of AI upon completion.
-- [Google AI Essentials](https://grow.google/courses-and-tools/?category=career&topic=ai) offers courses focused on the practical use of AI, with some materials and skill badges available for free.
-- [DeepLearning.AI (AI For Everyone)](https://www.coursera.org/learn/ai-for-everyone) This popular course can be audited for free on Coursera; the certificate is paid. 
+- [Elements of AI](https://www.elementsofai.cz/) is a globally recognized course (also available in Czech thanks to [prg.ai](https://prg.ai/) and [ČVUT](https://www.cvut.cz/)), which offers a free certificate on the basics of AI upon completion.
+- [Google AI Essentials](https://grow.google/intl/cz/courses-and-tools/?category=career&topic=ai)
+  offers courses focused on the practical use of AI, while some materials and skill badges are available for free.
+- [DeepLearning.AI (AI For Everyone)](https://www.coursera.org/learn/ai-for-everyone) On Coursera, this popular course can be studied for free in "Audit" mode, the certificate is paid. 
 
-### 2. Cloud and Infrastructure
-- [Microsoft Virtual Training Days](https://www.microsoft.com/en-us/events/category/microsoft-virtual-training-days?scenario=mvtd#section-master-explore-all) regularly holds free webinars (e.g., for Azure, AI, Power Platform). Participants often receive a voucher for a free certification exam (e.g., AZ-900 Fundamentals).
-- [Oracle Cloud Infrastructure (OCI) Training](https://www.oracle.com/education/training/oracle-cloud-infrastructure/) often offers free learning paths and, during special promotions, free certification exams.
-- [Cisco Networking Academy:](https://www.netacad.com/) offers free introductory courses in networking and cybersecurity with digital badges (Introduction to Cybersecurity, Networking Basics). 
+### 2. Cloud and infrastructure
+- [Microsoft Virtual Training Days](https://www.microsoft.com/cs-cz/events/category/microsoft-virtual-training-days?scenario=mvtd#section-master-explore-all)
+  regularly hosts free webinars (e.g. for Azure, AI, Power Platform).
+  Participants often receive a voucher for a certification exam (eg AZ-900 Fundamentals) for free.
+- [Oracle Cloud Infrastructure (OCI) Training](https://www.oracle.com/education/training/oracle-cloud-infrastructure/)
+  often offers free study tours and, as part of special events, free certification exams.
+- [Cisco Networking Academy:](https://www.netacad.com/) offers free introductory courses to networks and cyber security with digital badges (Introduction to Cybersecurity, Networking Basics). 
 
 ### 3. Programming and Web
 - [freeCodeCamp](https://www.freecodecamp.org) is an independent platform offering thousands of hours of training (web design, Python, data science) with full-fledged certificates for free.
-- [HackerRank](https://www.hackerrank.com) and [CodeSignal](https://codesignal.com/) offer skill certifications based on solving practical coding challenges. 
+- [HackerRank](https://www.hackerrank.com) and [CodeSignal](https://codesignal.com/) offer skill certifications based on solving practical coding tasks. 
 
-### 4. Data Analysis and IT Support
-- [Google Skillshop](https://skillshop.docebosaas.com/pages/16/skillshop-home-page) Free certifications for Google Analytics, Google Ads, and other marketing and analytics tools.
+### 4. Data analysis and IT support
+- [Google Skillshop](https://skillshop.docebosaas.com/pages/16/skillshop-home-page)
+  Free certifications for Google Analytics, Google Ads and other marketing and analytics tools.
 
-**Tip:** *If you are looking for certificates on Coursera, always look for the "Financial Aid available" button. After your application is approved (it takes about 15 days), you can get a paid certificate for free.*
+**Tip:** *Always look for the "Financial Aid available" button when looking for certificates on Coursera. After the application is approved (takes approx. 15 days), you can get a paid certificate for free.*
 
 ## YouTube
 - [ÚFAL MFF UK](https://www.youtube.com/@ufalmffuk6883)

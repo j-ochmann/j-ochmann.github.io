@@ -1,12 +1,17 @@
 ---
 id: abstract_factory
-title: "Object Creational: Abstract Factory"
+title: 'Object Creational: Abstract Factory'
 sidebar:
   label: Abstract Factory
   order: 1
 category: Creational
 goF: 1
-tags: ["cpp", "java", "python"]
+tags:
+  - cpp
+  - java
+  - python
+content_hash: a71d0db242b989ddc70d4aafb3f795b1
+translation_status: original
 ---
 ## Intent
 

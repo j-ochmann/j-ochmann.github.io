@@ -1,12 +1,17 @@
 ---
 id: prototype
-title: "Object Creational: Prototype"
+title: 'Object Creational: Prototype'
 sidebar:
   label: Prototype
   order: 4
 category: Creational
 goF: 4
-tags: ["cpp", "java", "python"]
+tags:
+  - cpp
+  - java
+  - python
+content_hash: fe98541077ebb29bec1d72824dee376e
+translation_status: original
 ---
 ## Intent
 

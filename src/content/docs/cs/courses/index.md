@@ -1,5 +1,5 @@
 ---
-title: "Kurzy"
+title: Kurzy
 sidebar:
   label: Kurzy
   order: 0
@@ -7,6 +7,8 @@ sidebar:
     text: Zdarma
     variant: success
 category: courses
+content_hash: 9c1cefe3cd2d3d2f181d8860515e579a
+translation_status: original
 ---
 ## Certifikáty a digitální odznaky zdarma
 ### 1. Umělá inteligence (AI)
