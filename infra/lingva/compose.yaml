@@ -7,7 +7,7 @@ services:
     restart: unless-stopped
     environment:
       - site_domain=${SITE_DOMAIN}
-      - force_default_theme=light
+      - force_default_theme=dark
       - default_source_lang=auto
       - default_target_lang=en
     ports:
