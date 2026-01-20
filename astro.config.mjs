@@ -159,30 +159,8 @@ export default defineConfig({
       {
         label: 'Geo',
         translations: { cs: 'Geo' },
-        collapsed: true,
-        items: [
-          {
-            label: 'Countries',
-            translations: { cs: 'Země' },
-            link: '/countries/',
-          },
-          {
-            label: 'Languages',
-            translations: { cs: 'Jazyky' },
-            link: '/languages/',
-          },
-          {
-            label: 'Currencies',
-            translations: { cs: 'Měny' },
-            link: '/currencies/',
-          },
-          {
-            label: 'Flags',
-            translations: { cs: 'Vlajky' },
-            link: '/flags/',
-          },
-        ]
-
+        autogenerate: { directory: 'geo' },
+        collapsed: true
       },
     ],
   })],
