@@ -1,0 +1,35 @@
+---
+import type { StarlightRouteData } from '@astrojs/starlight/route-data';
+import DefaultSidebar from '@astrojs/starlight/components/Sidebar.astro';
+
+interface Props extends StarlightRouteData {}
+
+const props = Astro.props;
+---
+
+<div class="geo-sidebar-custom">
+  <!-- Sekce s globusem -->
+  <div class="globe-container">
+    <div class="globe"></div>
+  </div>
+
+  <!-- Předání dat do originálního sidebaru pro vykreslení menu -->
+  <!-- <DefaultSidebar {...props} /> -->
+</div>
+
+<style>
+  .globe {
+    width: 120px;
+    height: 120px;
+    margin: 1rem auto;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #4facfe 0%, #00f2fe 100%);
+    box-shadow: inset -10px -10px 20px rgba(0,0,0,0.4);
+    animation: pulse 4s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+</style>
