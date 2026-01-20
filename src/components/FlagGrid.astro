@@ -36,12 +36,24 @@ import 'flag-icons/css/flag-icons.min.css';
     align-items: start;
   }
   .flag-card {
+    //content-visibility: auto;
+    contain-intrinsic-size: 50px 70px;
+    will-change: transform;
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     margin-top: 0;
+    transition: transform 0.2s ease-in-out;
   }
+
+  .flag-card:hover {
+    transform: scale(2);
+    z-index: 10;
+    //transition: transform 0.2s ease-in-out;
+  }
+
   .fi {
     width: 2rem !important;
     height: 2rem !important;
@@ -55,13 +67,24 @@ import 'flag-icons/css/flag-icons.min.css';
     background-position: center;
     z-index: 1;
   }
+
   code {
     font-family: monospace;
-    background: #bebebe76;
+    //background: #cfcfcf;
     padding: 0px 2px 0px 2px;
     border-radius: 5px;
-    transform: rotate(-35deg); /* Otočení o 45 stupňů */
+    transform: rotate(-35deg);
     margin: -0.3rem 0 0 1.5rem; /* Posun nahoru a doprava */
-    z-index: 0;
- }
+    //z-index: 10;
+  }
+
+  .country-name {
+    display: none;
+    font-size: 0.5rem;
+    margin-top: 0.2rem;
+  }
+
+  .flag-card:hover .country-name {
+    display: block;
+  }
 </style>
