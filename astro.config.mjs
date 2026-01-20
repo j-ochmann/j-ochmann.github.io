@@ -34,6 +34,7 @@ export default defineConfig({
     d2(),
     starlight({
     title: 'Jindřich Ochmann - Software Engineer',
+    favicon: '/favicon.png', 
     customCss: ['./src/styles/globals.scss'],
     head: [
         {
@@ -83,70 +84,105 @@ export default defineConfig({
     },
     sidebar: [
       {
-        label: 'Quick Reference',
-        translations: { cs: 'Taháky' },
-        autogenerate: { directory: 'quick_reference' },
-        collapsed: true,
+        label: 'About Me',
+        translations: { cs: 'O mě' },
+        link: '/about/',
       },
       {
-        label: 'Tutorials',
-        translations: { cs: 'Tutorialy' },
-        autogenerate: { directory: 'tutorials' },
-        collapsed: true,
-      },
-      {
-        label: 'Design Patterns',
-        translations: { cs: 'Návrhové vzory' },
+        label: 'Dev',
+        translations: { cs: 'Dev' },
         collapsed: true,
         items: [
-          { 
-            label: 'Overview',
-            translations: { cs: 'Přehled' },
-            link: '/design_patterns/',
+          {
+            label: 'Quick Reference',
+            translations: { cs: 'Taháky' },
+            autogenerate: { directory: 'quick_reference' },
+            collapsed: true,
           },
           {
-            label: 'Creational',
-            translations: { cs: 'Tvůrčí' },
-            autogenerate: { directory: 'design_patterns/creational/' },
-            collapsed: true, 
-          },
-          { label: 'Structural',
-            translations: { cs: 'Strukturální' },
-            autogenerate: { directory: 'design_patterns/structural/' },
+            label: 'Tutorials',
+            translations: { cs: 'Tutorialy' },
+            autogenerate: { directory: 'tutorials' },
             collapsed: true,
           },
-          { label: 'Behavioral',
-            translations: { cs: 'Behaviorální' },
-            autogenerate: { directory: 'design_patterns/behavioral' },
+          {
+            label: 'Design Patterns',
+            translations: { cs: 'Návrhové vzory' },
             collapsed: true,
+            items: [
+              { 
+                label: 'Overview',
+                translations: { cs: 'Přehled' },
+                link: '/design_patterns/',
+              },
+              {
+                label: 'Creational',
+                translations: { cs: 'Tvůrčí' },
+                autogenerate: { directory: 'design_patterns/creational/' },
+                collapsed: true, 
+              },
+              { label: 'Structural',
+                translations: { cs: 'Strukturální' },
+                autogenerate: { directory: 'design_patterns/structural/' },
+                collapsed: true,
+              },
+              { label: 'Behavioral',
+                translations: { cs: 'Behaviorální' },
+                autogenerate: { directory: 'design_patterns/behavioral' },
+                collapsed: true,
+              },
+            ],
           },
+          {
+            label: 'External Resources',
+            translations: { cs: 'Externí materiály' },
+            link: '/external_resources/',
+          },
+          {
+            label: 'Courses',
+            translations: { cs: 'Kurzy' },
+            link: '/courses/',
+            badge: 'Free',
+          },
+          {
+            label: 'Artificial Intelligence',
+            translations: { cs: 'Umělá inteligence' },
+            link: '/ai/',
+          },
+          {
+            label: '3D Graph Example',
+            translations: { cs: 'Ukázka 3D grafu' },
+            link: '/3d-graph-example/',
+          }
         ],
       },
       {
-        label: 'External Resources',
-        translations: { cs: 'Externí materiály' },
-        link: '/external_resources/',
-      },
-      {
-        label: 'Courses',
-        translations: { cs: 'Kurzy' },
-        link: '/courses/',
-        badge: 'Free',
-      },
-      {
-        label: 'Artificial Intelligence',
-        translations: { cs: 'Umělá inteligence' },
-        link: '/ai/',
-      },
-      {
-        label: '3D Graph Example',
-        translations: { cs: 'Ukázka 3D grafu' },
-        link: '/3d-graph-example/',
-      },
-      {
-        label: 'Flags',
-        translations: { cs: 'Vlajky' },
-        link: '/flags/',
+        label: 'Geo',
+        translations: { cs: 'Geo' },
+        collapsed: true,
+        items: [
+          {
+            label: 'Countries',
+            translations: { cs: 'Země' },
+            link: '/countries/',
+          },
+          {
+            label: 'Languages',
+            translations: { cs: 'Jazyky' },
+            link: '/languages/',
+          },
+          {
+            label: 'Currencies',
+            translations: { cs: 'Měny' },
+            link: '/currencies/',
+          },
+          {
+            label: 'Flags',
+            translations: { cs: 'Vlajky' },
+            link: '/flags/',
+          },
+        ]
+
       },
     ],
   })],

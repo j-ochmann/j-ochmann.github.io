@@ -1,9 +1,11 @@
 ---
 // Tento kód běží na serveru při buildu
 import { getCollection } from 'astro:content';
+import astroConfig from '../../astro.config.mjs';
 
-const allDocs = await getCollection('docs');
-const languages = ['cs', 'en', 'de', 'es'];
+// Starlight config is in the integrations array
+const starlightConfig = astroConfig.integrations.find(i => i.name === '@astrojs/starlight');
+const languages = starlightConfig ? Object.keys(starlightConfig.locales) : [];
 const docsMap: { [key: string]: { id: string; locales: { [key: string]: any } } } = {};
 
 allDocs.forEach(entry => {
