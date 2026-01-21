@@ -1,34 +1,70 @@
 ---
-import mainImage from '@/assets/img/globe/world_2000x857px.svg';
-import hoverImage from '@/assets/img/globe/night_960x480px.jpg';
+import dayImage from '@/assets/img/globe/day_960x480px.jpg';
+import nightImage from '@/assets/img/globe/night_960x480px.jpg';
 import type { StarlightRouteData } from '@astrojs/starlight/route-data';
 import DefaultSidebar from '@astrojs/starlight/components/Sidebar.astro';
+import ThemeSelect from '@astrojs/starlight/components/ThemeSelect.astro';
+
 interface Props extends StarlightRouteData {}
 const props = Astro.props;
+
+const dayImageUrl = `url(${dayImage.src})`;
+const nightImageUrl = `url(${nightImage.src})`;
 ---
 
 <div class="geo-sidebar-custom">
-  <!-- Sekce s globusem -->
   <div class="globe-container">
     <div class="globe"></div>
   </div>
+
+  <ThemeSelect />
   <DefaultSidebar {...props} />
 </div>
 
-<style>
+<style define:vars={{ dayImageUrl, nightImageUrl }}>
+  .globe-container {
+    display: flex;
+    justify-content: center;
+    padding: 1rem 0;
+    filter: drop-shadow(0 0 15px rgba(79, 172, 254, 0.3));
+  }
+
+  :root[data-theme=light] .globe {
+    background-image: var(--dayImageUrl);
+  }
+  :root[data-theme=light] .globe:hover {
+    background-image: var(--nightImageUrl);
+  }
+  :root[data-theme=dark] .globe {
+    background-image: var(--nightImageUrl);
+  }
+  :root[data-theme=dark] .globe:hover {
+    background-image: var(--dayImageUrl);
+  }
   .globe {
-    width: 220px;
-    height: 220px;
-    margin: 1rem auto;
+    width: 180px;
+    height: 180px;
     border-radius: 50%;
-    background: hoverImage repeat-x, 
-                radial-gradient(circle at 30% 30%, #4facfe 0%, #00f2fe 100%);
-    box-shadow: inset -10px -10px 20px rgba(0,0,0,0.4);
-    animation: pulse 4s ease-in-out infinite;
+    background-size: cover;
+    background-repeat: repeat-x;
+    box-shadow: 
+      inset -20px -20px 40px rgba(0, 0, 0, 0.6),
+      inset 10px 10px 20px rgba(255, 255, 255, 0.1),
+      0 0 20px rgba(0, 0, 0, 0.2);
+    animation: 
+      rotateGlobe 20s linear infinite,
+      pulse 4s ease-in-out infinite;    
+    transition: background-image 0.5s ease;
+    cursor: crosshair;
+  }
+
+  @keyframes rotateGlobe {
+    from { background-position: 0 0; }
+    to { background-position: -400% 0; } /* Rychlost závisí na poměru stran obrázku */
   }
 
   @keyframes pulse {
     0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
+    50% { transform: scale(1.03); }
   }
 </style>
