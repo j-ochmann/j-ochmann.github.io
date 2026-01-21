@@ -3,6 +3,8 @@ import dayImage from '@/assets/img/globe/day_960x480px.jpg';
 import nightImage from '@/assets/img/globe/night_960x480px.jpg';
 import type { StarlightRouteData } from '@astrojs/starlight/route-data';
 import DefaultSidebar from '@astrojs/starlight/components/Sidebar.astro';
+import Icons from '../icons/icons.astro';
+import SocialIcons from '@/components/SocialCircle.astro';
 import ThemeSelect from '@astrojs/starlight/components/ThemeSelect.astro';
 
 interface Props extends StarlightRouteData {}
@@ -12,9 +14,11 @@ const dayImageUrl = `url(${dayImage.src})`;
 const nightImageUrl = `url(${nightImage.src})`;
 ---
 
+<Icons />
 <div class="geo-sidebar-custom">
   <div class="globe-container">
     <div class="globe"></div>
+    <SocialIcons />
   </div>
 
   <ThemeSelect />
@@ -23,6 +27,7 @@ const nightImageUrl = `url(${nightImage.src})`;
 
 <style define:vars={{ dayImageUrl, nightImageUrl }}>
   .globe-container {
+    position: relative;
     display: flex;
     justify-content: center;
     padding: 1rem 0;
@@ -60,11 +65,11 @@ const nightImageUrl = `url(${nightImage.src})`;
 
   @keyframes rotateGlobe {
     from { background-position: 0 0; }
-    to { background-position: -400% 0; } /* Rychlost závisí na poměru stran obrázku */
+    to { background-position: -400% 0; }
   }
 
   @keyframes pulse {
     0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.03); }
+    50% { transform: scale(1.05); }
   }
 </style>
