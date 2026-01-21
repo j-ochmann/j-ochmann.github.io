@@ -4,7 +4,7 @@ import nightImage from '@/assets/img/globe/night_960x480px.jpg';
 import type { StarlightRouteData } from '@astrojs/starlight/route-data';
 import DefaultSidebar from '@astrojs/starlight/components/Sidebar.astro';
 import Icons from '../icons/icons.astro';
-import SocialIcons from '@/components/SocialCircle.astro';
+import SocialCircle from '@/components/SocialCircle.astro';
 import ThemeSelect from '@astrojs/starlight/components/ThemeSelect.astro';
 
 interface Props extends StarlightRouteData {}
@@ -12,17 +12,26 @@ const props = Astro.props;
 
 const dayImageUrl = `url(${dayImage.src})`;
 const nightImageUrl = `url(${nightImage.src})`;
+
+import { getRelativeLocaleUrl } from 'astro:i18n';
+const lang = Astro.currentLocale || 'en';
+const aboutLink = getRelativeLocaleUrl(lang, 'about');
 ---
 
 <Icons />
-<div class="geo-sidebar-custom">
-  <div class="globe-container">
-    <div class="globe"></div>
-    <SocialIcons />
+<div class="social-circle-wrapper">
+  <div class="circular-menu">
+    <a href={aboutLink} aria-label="About page">
+      <img src={dayImageUrl} alt="Earth" class="profile-img main-img globe" />
+      <img src={nightImageUrl} alt="Hover" class="profile-img hover-img globe" />
+    </a>
+    <SocialCircle />
   </div>
+</div>
 
+<div class="wrapper">
   <ThemeSelect />
-  <DefaultSidebar {...props} />
+  <DefaultSidebar {...Astro.props} />
 </div>
 
 <style define:vars={{ dayImageUrl, nightImageUrl }}>

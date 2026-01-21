@@ -116,7 +116,7 @@ header.header {
   margin-top: 2rem;
 }
 /* ---------- PROFILE ---------- */
-.circular-menu-wrapper {
+.social-circle-wrapper {
   width: 100%; /* Aby mohl flexbox uvnitř centrovat na střed sidebaru */
   display: flex;
   flex-direction: column;
@@ -155,11 +155,11 @@ header.header {
   animation: pulse-glow 3s infinite ease-in-out;
   transform: scale(0.5) rotate(-180deg);
 }
-.circular-menu-wrapper:hover .main-img {
+.social-circle-wrapper:hover .main-img {
   opacity: 0;
   transform: scale(1.5) rotate(180deg);
 }
-.circular-menu-wrapper:hover .hover-img {
+.social-circle-wrapper:hover .hover-img {
   opacity: 1;
   transform: scale(1.2);
   transform: scale(1.2) rotate(0deg);
@@ -273,7 +273,7 @@ $action-start-angle: $start-angle + 2*$angle-step;
 .action-icons a{
   transform: rotate(var(--angle)) translateX(70px) translateY(-70px) rotate(calc(-1 * var(--angle)));
 }
-.circular-menu-wrapper:hover .action-icons {
+.social-circle-wrapper:hover .action-icons {
   opacity: 1; /* Visible on hover */
   pointer-events: auto; /* Interactive on hover */
 }
@@ -331,7 +331,7 @@ $action-start-angle: $start-angle + 2*$angle-step;
   transition: transform 1s ease;
   z-index: 2;
 }
-.circular-menu-wrapper:hover .name-circle {
+.social-circle-wrapper:hover .name-circle {
   transform: scale(1.3) rotate(0deg);
 }
 /* ---------- NAVIGATION ---------- */
