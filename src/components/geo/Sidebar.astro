@@ -126,13 +126,27 @@ const aboutLink = getRelativeLocaleUrl(lang, 'about');
     pointer-events: none;
     mix-blend-mode: screen; /* Způsobí, že černá z obrázku mraků zmizí a zbude jen bílá */
   }
-  :global(:root[data-theme='dark']) .clouds {
-    opacity: 0.2;
-  }
-
+  /* Základní opacity pro mraky (Světlý režim) */
   :global(:root[data-theme='light']) .clouds {
     opacity: 0.5;
+    transition: opacity 0.5s ease;
   }
+
+  /* Základní opacity pro mraky (Tmavý režim) */
+  :global(:root[data-theme='dark']) .clouds {
+    opacity: 0.1;
+    transition: opacity 0.5s ease;
+  }
+
+  /* Hover efekty - detekujeme hover na .profile-img, měníme .clouds uvnitř */
+  :global(:root[data-theme='dark']) .profile-img:hover .clouds {
+    opacity: 0.5;
+  }
+
+  :global(:root[data-theme='light']) .profile-img:hover .clouds {
+    opacity: 0.1;
+  }
+
 
   @keyframes rotateGlobe {
     from { background-position: 0 0; }
