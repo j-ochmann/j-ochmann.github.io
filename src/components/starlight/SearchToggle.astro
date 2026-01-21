@@ -1,0 +1,98 @@
+---
+/* Komponenta pro vyhledávání využívající styl z global.scss */
+---
+
+<div class="search-toggle-wrapper">
+  {/* Tlačítko využívá Starlight atribut pro otevření vyhledávacího okna */}
+  <button 
+    class="search-toggle-btn" 
+    aria-label="Hledat"
+    data-open-modal="search"
+  >
+    <div class="theme-icon-container icon-search">
+      <svg aria-hidden="true" viewBox="0 0 24 24">
+        <use href="#icon-search"></use>
+      </svg>
+    </div>
+  </button>
+</div>
+
+<script>
+  const openSearch = () => {
+    const modal = document.querySelector('dialog#starlight__search-modal');
+    
+    // Kontrola, zda prvek existuje a zda je to skutečně HTMLDialogElement
+    if (modal instanceof HTMLDialogElement) {
+      modal.showModal();
+    } else {
+      // Fallback: simulace Ctrl+K, pokud modal není v DOMu
+      window.dispatchEvent(new KeyboardEvent('keydown', {
+        key: 'k',
+        ctrlKey: true,
+        metaKey: true,
+        bubbles: true
+      }));
+    }
+  };
+
+  const trigger = document.getElementById('starlight__search-trigger');
+  if (trigger) {
+    trigger.addEventListener('click', (e) => {
+      e.preventDefault();
+      openSearch();
+    });
+  }
+</script>
+
+<style lang="scss">
+  .search-toggle-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .search-toggle-btn {
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.4s ease;
+
+    &:hover {
+      transform: scale(1.5);
+      z-index: 10;
+      
+      .theme-icon-container {
+        /* Použití vaší pulzující animace z global.scss */
+        animation: pulse-glow 3s infinite ease-in-out;
+        box-shadow: 0 8px 15px rgba(0,0,0,0.5);
+      }
+    }
+  }
+
+  .theme-icon-container {
+    /* Tyto hodnoty odpovídají vašemu mixinu icon-base v global.scss */
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: all 0.4s ease;
+
+    svg {
+      /* Velikost 32px je definována ve vašem global.scss pro .icon-search */
+      width: 32px; 
+      height: 32px;
+      fill: currentColor;
+    }
+  }
+
+  /* Třída .icon-search je již definována v global.scss, 
+     takže automaticky aplikuje: @include icon-style(32px, $baseFrontCol, $baseBackCol); */
+</style>
