@@ -100,7 +100,7 @@ const aboutLink = getRelativeLocaleUrl(lang, 'about');
     background-repeat: repeat-x;
     
     /* Animace pohybu mapy */
-    animation: rotateGlobe 40s linear infinite;
+    animation: rotateGlobe 60s linear infinite;
     z-index: 1; /* Pod stínem ::before */
   }
 
@@ -112,23 +112,28 @@ const aboutLink = getRelativeLocaleUrl(lang, 'about');
   /* VRSTVA MRAKŮ */
   .clouds {
     position: absolute;
-    top: -15%; left: -15%;
-    width: 130%; height: 130%;
+/*    top: -15%; left: -15%;*/
+    width: 100%; height: 100%;
     z-index: 2; /* Nad mapou (::after), ale pod stínem (::before) */
-    opacity: 0.4; /* Mraky musí být průhledné */
-    
-    /* Použijeme texturu mraků - pokud nemáte vlastní, 
-       lze použít generovaný šum nebo bílé skvrny */
-    background-image: cloudsImageUrl;
+    background-image: var(--cloudsImageUrl); /* Musí zde být var() */
+    display: block !important; /* Jistota zobrazení */
     background-size: cover;
     background-repeat: repeat-x;
     
     /* JINÝ NÁKLON A RYCHLOST */
-    transform: rotate(15deg); 
-    animation: rotateClouds 25s linear infinite; /* Rychlejší než země (40s) */
+    /*transform: rotate(15deg);*/ 
+    animation: rotateClouds 45s linear infinite; /* Rychlejší než země (40s) */
     pointer-events: none;
-    /*mix-blend-mode: screen; */ /* Způsobí, že černá z obrázku mraků zmizí a zbude jen bílá */
+    mix-blend-mode: screen; /* Způsobí, že černá z obrázku mraků zmizí a zbude jen bílá */
   }
+  :global(:root[data-theme='dark']) .clouds {
+    opacity: 0.2;
+  }
+
+  :global(:root[data-theme='light']) .clouds {
+    opacity: 0.5;
+  }
+
   @keyframes rotateGlobe {
     from { background-position: 0 0; }
     /* Pohyb probíhá po nakloněné ose díky transform: rotate na stejném elementu */
@@ -142,7 +147,7 @@ const aboutLink = getRelativeLocaleUrl(lang, 'about');
 
     @keyframes rotateClouds {
     from { background-position: 0 0; }
-    to { background-position: -200% 0; }
+    to { background-position: -400% 0; }
   }
   
 </style>
