@@ -1,36 +1,83 @@
 ---
 // src/components/CustomThemeSelect.astro
-// Zde můžete naimportovat ikony nebo původní komponentu pro inspiraci
 ---
 
-<button id="theme-toggle" aria-label="Přepnout režim">
-  <span class="light-icon">☀️</span>
-  <span class="dark-icon">🌙</span>
-</button>
+<div class="theme-select-wrapper">
+  <button id="theme-toggle" class="theme-toggle-btn" aria-label="Přepnout režim">
+    <span class="icon-wrapper icon-sun">
+      <svg><use xlink:href="#icon-sun"></use></svg>
+    </span>
+    <span class="icon-wrapper icon-moon">
+      <svg><use xlink:href="#icon-moon"></use></svg>
+    </span>
+  </button>
+</div>
 
 <script is:inline>
-  const theme = (() => {
-    if (typeof localStorage !== 'undefined' && localStorage.getItem('starlight-theme')) {
-      return localStorage.getItem('starlight-theme');
-    }
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  })();
-
-  const setEmojiTheme = (t) => {
-    document.documentElement.dataset.theme = t;
-    localStorage.setItem('starlight-theme', t);
+  const toggle = document.getElementById('theme-toggle');
+  
+  const setTheme = (theme) => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('starlight-theme', theme);
   };
 
-  document.getElementById('theme-toggle').addEventListener('click', () => {
-    const currentTheme = document.documentElement.dataset.theme;
-    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-    setEmojiTheme(newTheme);
-  });
+  if (toggle) {
+    toggle.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme') || 'dark';
+      const next = current === 'dark' ? 'light' : 'dark';
+      setTheme(next);
+    });
+  }
 </script>
 
 <style>
-  /* Vlastní styly pro váš přepínač */
-  #theme-toggle { border: none; background: transparent; cursor: pointer; font-size: 1.5rem; }
-  :global([data-theme='light']) .dark-icon { display: none; }
-  :global([data-theme='dark']) .light-icon { display: none; }
+  .theme-select-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .theme-toggle-btn {
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+  }
+
+  /* Toto vytvoří ten stejný kruh jako u Social Arc */
+  .icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px; /* Upravte podle přesné velikosti vašich social ikon */
+    height: 38px;
+    border-radius: 50%;
+    background-color: var(--sl-color-gray-6); /* Pozadí kruhu */
+    color: var(--sl-color-white);
+    border: 1px solid var(--sl-color-gray-5);
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .theme-toggle-btn:hover .icon-wrapper {
+    background-color: var(--sl-color-accent-low);
+    border-color: var(--sl-color-accent);
+    color: var(--sl-color-accent-high);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .icon-wrapper svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+  }
+
+  /* Logika přepínání: zobrazuje se ikona režimu, DO KTERÉHO se přepne */
+  :global([data-theme='light']) .icon-sun { display: none; }
+  :global([data-theme='light']) .icon-moon { display: flex; }
+
+  :global([data-theme='dark']) .icon-moon { display: none; }
+  :global([data-theme='dark']) .icon-sun { display: flex; }
 </style>
