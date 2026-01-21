@@ -92,7 +92,7 @@ import moonTexture from '@/assets/img/globe/moon_960x480px.jpg?url';
 
   .theme-toggle-btn:hover .mini-globe {
     transform: scale(1.5);
-    box-shadow: 0 0 30px var(--glow-color); /* Dynamická záře */
+    animation: pulse-glow 3s infinite ease-in-out, rotateMini 15s linear infinite;
   }
 
   @keyframes rotateMini {

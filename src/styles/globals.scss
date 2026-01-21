@@ -276,19 +276,42 @@ $action-start-angle: $start-angle + 2*$angle-step;
   pointer-events: auto; /* Interactive on hover */
 }
 
-/* New styles for searchbar-icons */
-.searchbar-icons {
-  display: flex; /* Arrange icons in a row */
-  gap: 10px; /* Add some space between icons */
-  justify-content: center; /* Center the icons if needed */
-  padding: 10px 0; /* Add some vertical padding */
-  margin-top: 10px; 
-}
+/* New styles for theme-icons */
+  .theme-toggle-btn {
+    background: transparent;
+    border: none;
+    width: 38px;
+    height: 38px;
+    cursor: pointer;
+    border-radius: 50% !important;
+    
+    // Klíčové pro centrování:
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px; // Vytvoří vnitřní prostor, aby ikona nebyla "nalepená"
 
-.searchbar-icons a {
-  @include icon-base;
-}
+    transition: background-color 0.2s, color 0.2s, transform 0.2s;
 
+    &:hover {
+      transform: scale(1.5);
+      background-color: var(--sl-color-gray-5); // Volitelné: zvýrazní kruhový tvar
+    }
+  }
+
+  .theme-icons {
+    width: 24px;  // Pevná velikost ikony uvnitř 38px tlačítka
+    height: 24px;
+    fill: currentColor;
+    display: none;
+    flex-shrink: 0; // Zabrání deformaci v některých prohlížečích
+    aspect-ratio: 1 / 1; // Vynutí čtvercový poměr stran
+    overflow: visible;   //
+  }
+
+  .theme-icons a {
+    @include icon-base;
+  }
 /* ---------- NAME CIRCLE ---------- */
 
 .name-circle {
