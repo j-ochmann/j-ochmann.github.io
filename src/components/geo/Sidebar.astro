@@ -16,9 +16,14 @@ const cloudsImageUrl = `url(${cloudsImage.src})`;
 const lang = Astro.currentLocale || 'en';
 const aboutLink = getRelativeLocaleUrl(lang, 'about');
 ---
-
 <Icons />
+<!-- Přepínač témat (Slunce/Měsíc) -->
+<div class="theme-select-overlay">
+  <ThemeSelect />
+</div>
 <div class="social-circle-wrapper">
+
+  <!-- Hlavní globus -->
   <div class="circular-menu">
     <a href={aboutLink} aria-label="About page">
       <div class="profile-img main-img"><div class="clouds"></div></div>
@@ -29,11 +34,55 @@ const aboutLink = getRelativeLocaleUrl(lang, 'about');
 </div>
 
 <div class="wrapper">
-  <ThemeSelect />
   <DefaultSidebar {...Astro.props} />
 </div>
 
 <style define:vars={{ dayImageUrl, nightImageUrl, cloudsImageUrl }}>
+  .sidebar-geo-header {
+    position: relative; /* Klíčové pro správné pozicování dětí */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 2rem;
+  }
+
+  .theme-select-overlay {
+    position: absolute;
+    /* Umístění v levém horním rohu vzhledem k headeru */
+    top: 10px;
+    left: 20px;
+    z-index: 20; /* Za zeměkoulí */
+    pointer-events: none; /* Kontejner propouští kliknutí skrz */
+  }
+
+  .theme-select-overlay :global(#theme-toggle) {
+    pointer-events: auto; /* Pouze samotné tlačítko reaguje na myš */
+  }
+  .social-circle-wrapper {
+    position: relative;
+    z-index: 10; /* Nižší než overlay, ale vyšší než DefaultSidebar */
+    /* Pokud tento wrapper překrývá rohy, také mu dáme pointer-events: none */
+    pointer-events: none;
+  }
+  /* 3. Reaktivní části (Zeměkoule a ikony) */
+  .circular-menu, 
+  .circular-menu a, 
+  .social-circle-wrapper :global(.social-icon) {
+    /* Tady myš opět zapneme pro konkrétní prvky */
+    pointer-events: auto;
+  }
+
+  .circular-menu a {
+    /* Vizuální kruh zůstává, clip-path zde nepoužijeme, 
+      aby neřezal nápisy/ikony */
+    border-radius: 50%;
+  }
+  .main-globe-wrapper {
+    position: relative;
+    z-index: 1; /* Před sluncem/měsícem */
+    /* Zajišťuje, že hlavní globus neposune nic nad sebou */
+  }
   .main-img {
     background-image: var(--current-main-image);
   }

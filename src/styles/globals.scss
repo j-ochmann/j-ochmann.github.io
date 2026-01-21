@@ -290,6 +290,12 @@ $action-start-angle: $start-angle + 2*$angle-step;
 }
 
 /* ---------- NAME CIRCLE ---------- */
+
+.name-circle {
+  clip-path: circle(50%); /* Funkční kruh pro myš */
+  pointer-events: none;
+}
+
 .name-circle svg {
   width: 100%;
   height: 100%;

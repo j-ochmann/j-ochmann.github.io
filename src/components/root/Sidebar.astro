@@ -13,6 +13,10 @@ const lang = Astro.currentLocale || 'en';
 const aboutLink = getRelativeLocaleUrl(lang, 'about');
 ---
 <Icons />
+<!-- Přepínač témat (Slunce/Měsíc) -->
+<div class="theme-select-overlay">
+  <ThemeSelect />
+</div>
 <!-- ---------- PROFILE ---------- -->
 <div class="social-circle-wrapper">
   <div class="circular-menu">
@@ -25,9 +29,17 @@ const aboutLink = getRelativeLocaleUrl(lang, 'about');
 </div>
 
 <div class="wrapper">
-  <Searchbar />
+  <!-- <Searchbar /> -->
   <Search />
-  <ThemeSelect />
   <LanguageSelect />
   <DefaultSidebar {...Astro.props} />
 </div>
+
+<style>
+  .theme-select-overlay {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 0; /* Za zeměkoulí */
+  }
+</style>
