@@ -6,7 +6,7 @@ import type { StarlightRouteData } from '@astrojs/starlight/route-data';
 import DefaultSidebar from '@astrojs/starlight/components/Sidebar.astro';
 import Icons from '../icons/icons.astro';
 import SocialCircle from '@/components/SocialCircle.astro';
-import ThemeSelect from '@/components/starlight/ThemeSelect.astro';
+import ThemeSelect from '@/components/geo/ThemeSelect.astro';
 import { getRelativeLocaleUrl } from 'astro:i18n';
 interface Props extends StarlightRouteData {}
 const props = Astro.props;
@@ -50,7 +50,7 @@ const aboutLink = getRelativeLocaleUrl(lang, 'about');
   .theme-select-overlay {
     position: absolute;
     /* Umístění v levém horním rohu vzhledem k headeru */
-    top: 10px;
+    top: 20px;
     left: 20px;
     z-index: 20; /* Za zeměkoulí */
     pointer-events: none; /* Kontejner propouští kliknutí skrz */
@@ -69,7 +69,7 @@ const aboutLink = getRelativeLocaleUrl(lang, 'about');
   .circular-menu, 
   .circular-menu a, 
   .social-circle-wrapper :global(.social-icon) {
-    /* Tady myš opět zapneme pro konkrétní prvky */
+    /* Tady myš opět zapne pro konkrétní prvky */
     pointer-events: auto;
   }
 

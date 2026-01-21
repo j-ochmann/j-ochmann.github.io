@@ -1,0 +1,102 @@
+---
+import sunTexture from '@/assets/img/globe/sun_960x480px.jpg?url';
+import moonTexture from '@/assets/img/globe/moon_960x480px.jpg?url';
+---
+
+<div class="theme-select-wrapper">
+  <!-- Přidali jsme class 'loading', kterou skript odstraní, jakmile téma potvrdí -->
+  <button id="theme-toggle" class="theme-toggle-btn loading" aria-label="Přepnout režim">
+    <div class="mini-globe sun"></div>
+    <div class="mini-globe moon"></div>
+  </button>
+</div>
+
+<script is:inline>
+  // Funkce pro aktualizaci stavu tlačítka
+  function updateThemeToggle() {
+    const theme = document.documentElement.getAttribute('data-theme') || 
+                  (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    
+    const btn = document.getElementById('theme-toggle');
+    if (btn) {
+      btn.classList.remove('loading');
+      // Ručně můžeme vynutit překreslení, pokud CSS selektory selžou
+    }
+  }
+
+  // Spustit hned
+  updateThemeToggle();
+
+  // Spustit po změně v DOMu (Starlight přepínání)
+  const observer = new MutationObserver(updateThemeToggle);
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+  document.getElementById('theme-toggle')?.addEventListener('click', () => {
+    const current = document.documentElement.getAttribute('data-theme') || 'dark';
+    const next = current === 'dark' ? 'light' : 'dark';
+    
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('starlight-theme', next);
+  });
+</script>
+
+<style define:vars={{ sunTexture: `url(${sunTexture})`, moonTexture: `url(${moonTexture})` }}>
+  
+  .theme-select-wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    /* min-height: 44px; /* Rezervuje místo, aby sidebar neskákal */
+  }
+
+  .theme-toggle-btn {
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+    display: block;
+  }
+
+  /* Schováme obě kuličky, dokud není téma určeno (pokud má btn class loading) */
+  .theme-toggle-btn.loading .mini-globe {
+    opacity: 0;
+  }
+
+  .mini-globe {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: rotateMini 15s linear infinite;
+  }
+
+  /* Logika zobrazení - MUSÍ BÝT SPECIFICKÁ */
+  .sun, .moon { display: none; }
+
+  :global([data-theme='dark']) .sun { display: block; }
+  :global([data-theme='light']) .moon { display: block; }
+
+  /* Vzhled a záře */
+  .sun {
+    background-image: var(--sunTexture);
+    box-shadow: 0 0 30px rgba(255, 170, 0, 0.8);
+  }
+
+  .moon {
+    background-image: var(--moonTexture);
+    box-shadow: 0 0 30px rgba(79, 172, 254, 0.7);
+  }
+
+  .theme-toggle-btn:hover .mini-globe {
+    transform: scale(1.5);
+    box-shadow: 0 0 30px var(--glow-color); /* Dynamická záře */
+  }
+
+  @keyframes rotateMini {
+    from { background-position: 0% center; }
+    to { background-position: 200% center; }
+  }
+</style>

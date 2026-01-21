@@ -47,7 +47,8 @@ export default defineConfig({
     ],
     defaultLocale: 'en',
     locales: {
-      en: { lang: 'en', label: 'English' },
+      gb: { lang: 'en-GB', label: 'English (UK)'},
+      en: { lang: 'en-US', label: 'English (US)'},
       cs: { lang: 'cs', label: 'Čeština'},
       sk: { lang: 'sk', label: 'Slovenčina'},
       pl: { lang: 'pl', label: 'Polski'},
