@@ -6,14 +6,11 @@ import DefaultSidebar from '@astrojs/starlight/components/Sidebar.astro';
 import Icons from '../icons/icons.astro';
 import SocialCircle from '@/components/SocialCircle.astro';
 import ThemeSelect from '@astrojs/starlight/components/ThemeSelect.astro';
-
+import { getRelativeLocaleUrl } from 'astro:i18n';
 interface Props extends StarlightRouteData {}
 const props = Astro.props;
-
 const dayImageUrl = `url(${dayImage.src})`;
 const nightImageUrl = `url(${nightImage.src})`;
-
-import { getRelativeLocaleUrl } from 'astro:i18n';
 const lang = Astro.currentLocale || 'en';
 const aboutLink = getRelativeLocaleUrl(lang, 'about');
 ---
@@ -22,8 +19,8 @@ const aboutLink = getRelativeLocaleUrl(lang, 'about');
 <div class="social-circle-wrapper">
   <div class="circular-menu">
     <a href={aboutLink} aria-label="About page">
-      <img src={dayImageUrl} alt="Earth" class="profile-img main-img globe" />
-      <img src={nightImageUrl} alt="Hover" class="profile-img hover-img globe" />
+      <div class="profile-img main-img"></div>
+      <div class="profile-img hover-img"></div>
     </a>
     <SocialCircle />
   </div>
@@ -35,50 +32,75 @@ const aboutLink = getRelativeLocaleUrl(lang, 'about');
 </div>
 
 <style define:vars={{ dayImageUrl, nightImageUrl }}>
-  .globe-container {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    padding: 1rem 0;
-    filter: drop-shadow(0 0 15px rgba(79, 172, 254, 0.3));
+  /* ... existující CSS pro .social-circle-wrapper a .circular-menu ... */
+  .main-img {
+    background-image: var(--current-main-image);
+  }
+  .hover-img {
+    background-image: var(--current-hover-image);
   }
 
-  :root[data-theme=light] .globe {
-    background-image: var(--dayImageUrl);
+  /* Logika pro světlý / tmavý režim */
+  :global(:root[data-theme='light']) .circular-menu {
+    --current-main-image: var(--dayImageUrl);
+    --current-hover-image: var(--nightImageUrl);
   }
-  :root[data-theme=light] .globe:hover {
-    background-image: var(--nightImageUrl);
+
+  :global(:root[data-theme='dark']) .circular-menu {
+    --current-main-image: var(--nightImageUrl);
+    --current-hover-image: var(--dayImageUrl);
   }
-  :root[data-theme=dark] .globe {
-    background-image: var(--nightImageUrl);
-  }
-  :root[data-theme=dark] .globe:hover {
-    background-image: var(--dayImageUrl);
-  }
-  .globe {
+  .profile-img {
+    position: absolute;
     width: 180px;
     height: 180px;
     border-radius: 50%;
-    background-size: cover;
-    background-repeat: repeat-x;
-    box-shadow: 
+    overflow: hidden; /* Důležité: ořízne nakloněnou mapu do kruhu */
+    
+    /* Stíny zůstávají svisle, což vypadá realističtěji (světlo z boku) */
+    box-shadow:
       inset -20px -20px 40px rgba(0, 0, 0, 0.6),
       inset 10px 10px 20px rgba(255, 255, 255, 0.1),
       0 0 20px rgba(0, 0, 0, 0.2);
-    animation: 
-      rotateGlobe 20s linear infinite,
-      pulse 4s ease-in-out infinite;    
-    transition: background-image 0.5s ease;
-    cursor: crosshair;
+    
+    animation: pulse 5s ease-in-out infinite;
+  }
+
+  /* Vytvoříme vrstvu pro samotnou mapu */
+  .profile-img::after {
+    content: '';
+    position: absolute;
+    top: -10%; /* Zvětšíme, aby při rotaci nevznikly prázdné rohy */
+    left: -10%;
+    width: 120%;
+    height: 120%;
+    
+    /* KLÍČOVÝ NÁKLON */
+    transform: rotate(23.5deg);
+    
+    /* Nastavení textury */
+    background-image: var(--current-main-image);
+    background-size: cover;
+    background-repeat: repeat-x;
+    
+    /* Animace pohybu mapy */
+    animation: rotateGlobe 40s linear infinite;
+  }
+
+  /* Hover efekt pro změnu obrázku na vnitřní vrstvě */
+  .hover-img::after {
+    background-image: var(--current-hover-image);
   }
 
   @keyframes rotateGlobe {
     from { background-position: 0 0; }
-    to { background-position: -400% 0; }
+    /* Pohyb probíhá po nakloněné ose díky transform: rotate na stejném elementu */
+    to { background-position: -400% 0; } 
   }
 
   @keyframes pulse {
     0%, 100% { transform: scale(1); }
     50% { transform: scale(1.05); }
   }
+  
 </style>
