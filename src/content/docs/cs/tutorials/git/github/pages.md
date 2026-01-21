@@ -63,7 +63,7 @@ Pokročilé nástroje: Pro dokumentaci můžete také použít specializované g
 ## Jak změnit téma (nejrychlejší způsob)
 V kořenovém adresáři úložiště (nebo v /docs) vytvořte nebo upravte soubor:
 **📄 _config.yml**
-```jaml
+```yaml
 název: Jindřich Ochmann
 popis: Vývoj, jazyky, projekty
 téma: jekyll-theme-hacker
@@ -106,7 +106,7 @@ Jmenuji se **Jindřich Ochmann**
 ## Navigace (horní nabídka)
 
 V `_config.yml`:
-```jaml
+```yaml
 název: Jindřich Ochmann
 téma: jekyll-theme-cayman
 

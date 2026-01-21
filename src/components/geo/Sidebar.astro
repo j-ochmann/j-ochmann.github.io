@@ -1,6 +1,7 @@
 ---
 import dayImage from '@/assets/img/globe/day_960x480px.jpg';
 import nightImage from '@/assets/img/globe/night_960x480px.jpg';
+import cloudsImage from '@/assets/img/globe/clouds_1024x512px.png';
 import type { StarlightRouteData } from '@astrojs/starlight/route-data';
 import DefaultSidebar from '@astrojs/starlight/components/Sidebar.astro';
 import Icons from '../icons/icons.astro';
@@ -11,6 +12,7 @@ interface Props extends StarlightRouteData {}
 const props = Astro.props;
 const dayImageUrl = `url(${dayImage.src})`;
 const nightImageUrl = `url(${nightImage.src})`;
+const cloudsImageUrl = `url(${cloudsImage.src})`;
 const lang = Astro.currentLocale || 'en';
 const aboutLink = getRelativeLocaleUrl(lang, 'about');
 ---
@@ -19,8 +21,8 @@ const aboutLink = getRelativeLocaleUrl(lang, 'about');
 <div class="social-circle-wrapper">
   <div class="circular-menu">
     <a href={aboutLink} aria-label="About page">
-      <div class="profile-img main-img"></div>
-      <div class="profile-img hover-img"></div>
+      <div class="profile-img main-img"><div class="clouds"></div></div>
+      <div class="profile-img hover-img"><div class="clouds"></div></div>
     </a>
     <SocialCircle />
   </div>
@@ -31,8 +33,7 @@ const aboutLink = getRelativeLocaleUrl(lang, 'about');
   <DefaultSidebar {...Astro.props} />
 </div>
 
-<style define:vars={{ dayImageUrl, nightImageUrl }}>
-  /* ... existující CSS pro .social-circle-wrapper a .circular-menu ... */
+<style define:vars={{ dayImageUrl, nightImageUrl, cloudsImageUrl }}>
   .main-img {
     background-image: var(--current-main-image);
   }
@@ -55,17 +56,32 @@ const aboutLink = getRelativeLocaleUrl(lang, 'about');
     width: 180px;
     height: 180px;
     border-radius: 50%;
-    overflow: hidden; /* Důležité: ořízne nakloněnou mapu do kruhu */
-    
-    /* Stíny zůstávají svisle, což vypadá realističtěji (světlo z boku) */
-    box-shadow:
-      inset -20px -20px 40px rgba(0, 0, 0, 0.6),
-      inset 10px 10px 20px rgba(255, 255, 255, 0.1),
-      0 0 20px rgba(0, 0, 0, 0.2);
-    
+    overflow: hidden;
+    box-shadow: 
+      0 10px 30px rgba(0, 0, 0, 0.5),
+      0 0 60px rgba(79, 172, 254, 0.5) !important;
     animation: pulse 5s ease-in-out infinite;
   }
-
+  .profile-img::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    border-radius: 50%;
+    z-index: 3; /* Musí být nad mapou (::after) */
+    
+    /* KOMPLEXNÍ STÍNOVÁNÍ */
+    background: radial-gradient(
+      circle at 30% 30%, 
+      rgba(255, 255, 255, 0.15) 0%,   /* Horní odlesk */
+      rgba(255, 255, 255, 0) 40%,      /* Průhledný střed */
+      rgba(0, 0, 0, 0.4) 70%,          /* Postupné stmívání */
+      rgba(0, 0, 0, 0.8) 100%          /* Temná strana planety */
+    );
+    
+    /* Vnitřní hrana pro efekt tloušťky atmosféry */
+    box-shadow: inset 2px 2px 5px rgba(255, 255, 255, 0.2);
+    pointer-events: none; /* Aby neblokovalo klikání (pokud by bylo potřeba) */
+  }
   /* Vytvoříme vrstvu pro samotnou mapu */
   .profile-img::after {
     content: '';
@@ -85,6 +101,7 @@ const aboutLink = getRelativeLocaleUrl(lang, 'about');
     
     /* Animace pohybu mapy */
     animation: rotateGlobe 40s linear infinite;
+    z-index: 1; /* Pod stínem ::before */
   }
 
   /* Hover efekt pro změnu obrázku na vnitřní vrstvě */
@@ -92,6 +109,26 @@ const aboutLink = getRelativeLocaleUrl(lang, 'about');
     background-image: var(--current-hover-image);
   }
 
+  /* VRSTVA MRAKŮ */
+  .clouds {
+    position: absolute;
+    top: -15%; left: -15%;
+    width: 130%; height: 130%;
+    z-index: 2; /* Nad mapou (::after), ale pod stínem (::before) */
+    opacity: 0.4; /* Mraky musí být průhledné */
+    
+    /* Použijeme texturu mraků - pokud nemáte vlastní, 
+       lze použít generovaný šum nebo bílé skvrny */
+    background-image: cloudsImageUrl;
+    background-size: cover;
+    background-repeat: repeat-x;
+    
+    /* JINÝ NÁKLON A RYCHLOST */
+    transform: rotate(15deg); 
+    animation: rotateClouds 25s linear infinite; /* Rychlejší než země (40s) */
+    pointer-events: none;
+    /*mix-blend-mode: screen; */ /* Způsobí, že černá z obrázku mraků zmizí a zbude jen bílá */
+  }
   @keyframes rotateGlobe {
     from { background-position: 0 0; }
     /* Pohyb probíhá po nakloněné ose díky transform: rotate na stejném elementu */
@@ -101,6 +138,11 @@ const aboutLink = getRelativeLocaleUrl(lang, 'about');
   @keyframes pulse {
     0%, 100% { transform: scale(1); }
     50% { transform: scale(1.05); }
+  }
+
+    @keyframes rotateClouds {
+    from { background-position: 0 0; }
+    to { background-position: -200% 0; }
   }
   
 </style>

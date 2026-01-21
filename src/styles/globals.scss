@@ -4,7 +4,7 @@
 @import '@fontsource/montserrat/400.css';
 @import '@fontsource/montserrat/600.css';
 @import '@fontsource/montserrat/700.css';
-//@import "tailwindcss";
+
 html, body {
   overflow-x: clip !important;
   position: relative;
@@ -83,7 +83,6 @@ header.header {
   width: 100%; /* Změněno z max-width pro lepší centrování */
   display: flex;
   flex-direction: column;
-  //align-items: center; /* Vycentruje vše uvnitř sidebaru */
 }
 /* Vycentrování položek v DefaultSidebar */
 /*.sidebar-content :global(nav > ul) {
@@ -130,7 +129,6 @@ header.header {
   position: relative;
   width: 180px;
   height: 180px;
-  //margin-bottom: 10px;
 }
 .profile-img {
   width: 180px;
@@ -165,7 +163,7 @@ header.header {
   transform: scale(1.2) rotate(0deg);
   box-shadow: 0 8px 25px rgba(0,0,0,0.4);
 }
-// BASE FOR ROUND ICONS
+/* BASE FOR ROUND ICONS */
 @mixin icon-base($size: 38px) {    
   width: 22px;
   height: 22px;
@@ -189,7 +187,7 @@ header.header {
     z-index: 100;
   }
 }
-// BASE ICON STYLE
+/* BASE ICON STYLE */
 @mixin icon-style($size: 22px, $baseFrontCol, $baseBackCol) {
   color: $baseFrontCol !important;
   background: $baseBackCol !important;
@@ -278,13 +276,13 @@ $action-start-angle: $start-angle + 2*$angle-step;
   pointer-events: auto; /* Interactive on hover */
 }
 
-// New styles for searchbar-icons
+/* New styles for searchbar-icons */
 .searchbar-icons {
   display: flex; /* Arrange icons in a row */
   gap: 10px; /* Add some space between icons */
   justify-content: center; /* Center the icons if needed */
   padding: 10px 0; /* Add some vertical padding */
-  margin-top: 10px; // A bit of margin to separate from other elements
+  margin-top: 10px; 
 }
 
 .searchbar-icons a {
@@ -308,14 +306,12 @@ $action-start-angle: $start-angle + 2*$angle-step;
 }
 
 .name-circle text {
-  //fill: #333;
   font-family: 'Syne', 'Montserrat', 'Space Grotesk', sans-serif !important;
   font-size: 18px;
   letter-spacing: 2px;
   font-weight: 700;
   text-transform: uppercase;
   paint-order: stroke;
-  //stroke: rgba(255, 255, 255, 0.5);
   stroke-width: 6px;
   stroke-linecap: round;
   stroke-linejoin: round;
