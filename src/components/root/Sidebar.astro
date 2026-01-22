@@ -17,7 +17,10 @@ const aboutLink = getRelativeLocaleUrl(lang, 'about');
   <ThemeSelect />
 </div>
 
-<Search />
+<div class="search-toggle-overlay">
+  <LanguageSelect />
+  <Search />
+</div>
 
 <!-- ---------- PROFILE ---------- -->
 <div class="social-circle-wrapper">
@@ -31,7 +34,6 @@ const aboutLink = getRelativeLocaleUrl(lang, 'about');
 </div>
 
 <div class="wrapper">
-  <LanguageSelect />
   <DefaultSidebar {...Astro.props} />
 </div>
 
@@ -46,10 +48,30 @@ const aboutLink = getRelativeLocaleUrl(lang, 'about');
 </script>
 
 <style>
+  .sidebar-top-controls {
+    position: absolute;
+    top: 0;
+    display: flex;
+    flex-direction: row;      /* Prvky vedle sebe */
+    align-items: center;      /* Vertikální vycentrování */
+    justify-content: center;   /* Horizontální vycentrování v sidebaru */
+    gap: 1rem;                /* Mezera mezi ikonami */
+    padding: 10px 5px;
+    background-color: var(--sl-color-bg-sidebar);
+    opacity: 0.3;
+  }
   .theme-select-overlay {
     position: absolute;
     top: 10px;
     left: 20px;
     z-index: 0; /* Za zeměkoulí */
+  }
+  .search-toggle-overlay {
+    position: absolute;
+        display: flex;
+    flex-direction: row;  
+    top: 10px;
+    right: 20px;
+    z-index: 0;
   }
 </style>
