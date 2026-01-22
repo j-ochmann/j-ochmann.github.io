@@ -135,7 +135,7 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 </script>
 
 <style lang="scss">
-	/* Styly zůstávají identické jako v předchozím návrhu */
+	/* 1. VAŠE TLAČÍTKO (Zůstává stejné) */
 	.search-toggle-btn {
 		background: transparent;
 		border: none;
@@ -155,6 +155,7 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 				box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
 			}
 		}
+		&:disabled { opacity: 0.5; cursor: not-allowed; }
 	}
 
 	.theme-icon-container {
@@ -164,40 +165,81 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		svg {
-			width: 32px;
-			height: 32px;
-			fill: currentColor;
+		svg { width: 32px; height: 32px; fill: currentColor; }
+	}
+
+	/* 2. OBNOVENÍ STARLIGHT VZHLEDU PRO DIALOG */
+	@layer starlight.core {
+		site-search {
+			display: contents;
 		}
-	}
 
-	dialog {
-		margin: 0;
-		background-color: var(--sl-color-gray-6);
-		border: 1px solid var(--sl-color-gray-5);
-		width: 100%;
-		max-width: 100%;
-		height: 100%;
-		&[open] { display: flex; }
-		&::backdrop {
-			background-color: var(--sl-color-backdrop-overlay);
-			backdrop-filter: blur(0.25rem);
-		}
-	}
-
-	.dialog-frame {
-		position: relative;
-		flex-direction: column;
-		flex-grow: 1;
-		padding: 1rem;
-	}
-
-	@media (min-width: 50rem) {
 		dialog {
-			margin: 4rem auto auto;
-			border-radius: 0.5rem;
-			width: 90%; max-width: 40rem;
-			height: max-content;
+			margin: 0;
+			background-color: var(--sl-color-gray-6);
+			border: 1px solid var(--sl-color-gray-5);
+			width: 100%;
+			max-width: 100%;
+			height: 100%;
+			max-height: 100%;
+			box-shadow: var(--sl-shadow-lg);
+
+			&[open] {
+				display: flex;
+			}
+
+			&::backdrop {
+				background-color: var(--sl-color-backdrop-overlay);
+				-webkit-backdrop-filter: blur(0.25rem);
+				backdrop-filter: blur(0.25rem);
+			}
+		}
+
+		.dialog-frame {
+			position: relative;
+			overflow: auto;
+			flex-direction: column;
+			flex-grow: 1;
+			gap: 1rem;
+			padding: 1rem;
+		}
+
+		/* Tlačítko zavřít (křížek) */
+		button[data-close-modal] {
+			position: absolute;
+			z-index: 1;
+			align-items: center;
+			align-self: flex-end;
+			height: 40px;
+			padding: 0.25rem;
+			border: 0;
+			background: transparent;
+			cursor: pointer;
+			color: var(--sl-color-text-accent);
+		}
+
+		/* Nastavení barev pro samotné výsledky Pagefind */
+		#starlight__search {
+			--pagefind-ui-primary: var(--sl-color-text-accent);
+			--pagefind-ui-text: var(--sl-color-gray-2);
+			--pagefind-ui-font: var(--__sl-font);
+			--pagefind-ui-background: var(--sl-color-black);
+			--pagefind-ui-border: var(--sl-color-gray-5);
+			--pagefind-ui-border-width: 1px;
+			--pagefind-ui-tag: var(--sl-color-gray-5);
+			width: 100%;
+		}
+
+		@media (min-width: 50rem) {
+			dialog {
+				margin: 4rem auto auto;
+				border-radius: 0.5rem;
+				width: 90%;
+				max-width: 40rem;
+				height: max-content;
+				min-height: 15rem;
+				max-height: calc(100% - 8rem);
+			}
 		}
 	}
 </style>
