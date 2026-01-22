@@ -3,12 +3,11 @@ import Search from '@astrojs/starlight/components/Search.astro';
 ---
 
 <div class="search-toggle-wrapper">
-  {/* 1. MUSÍME nechat Starlight vykreslit jeho komponentu, jinak se nenačte vyhledávací modal */}
-  <div class="hidden-search-trigger">
+  {/* Necháme Starlight vyrenderovat originál, ale skryjeme ho pouze vizuálně */}
+  <div class="starlight-search-init" style="position: absolute; opacity: 0; pointer-events: none; z-index: -1;">
     <Search />
   </div>
 
-  {/* 2. VAŠE vizuální tlačítko */}
   <button
     type="button"
     class="search-toggle-btn"
@@ -23,49 +22,44 @@ import Search from '@astrojs/starlight/components/Search.astro';
   </button>
 </div>
 
-<script>
-  function setupSearch() {
-    const trigger = document.getElementById('custom-search-trigger');
-    
-    if (trigger) {
-      trigger.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-
-        // Starlight Search Modal ID v roce 2026
-        const modal = document.querySelector('dialog#starlight__search-modal');
-        
-        if (modal instanceof HTMLDialogElement) {
-          modal.showModal();
-        } else {
-          // Pokud modal není v DOMu, simulujeme Ctrl+K, což vynutí jeho otevření
-          window.dispatchEvent(new KeyboardEvent('keydown', { 
-            key: 'k', 
-            ctrlKey: true, 
-            metaKey: true, 
-            bubbles: true 
-          }));
-        }
-      });
+<script is:inline>
+  // Použijeme funkci, která se pokusí otevřít vyhledávání několika způsoby
+  const openStarlightSearch = (e) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
     }
-  }
 
-  // Inicializace při načtení
-  setupSearch();
-  // Inicializace při navigaci (Astro View Transitions)
-  document.addEventListener('astro:page-load', setupSearch);
+    const modal = document.querySelector('dialog#starlight__search-modal');
+    
+    if (modal && typeof modal.showModal === 'function') {
+      modal.showModal();
+    } else {
+      // Pokud modal není připraven, simulujeme Ctrl+K, což je interní Starlight trigger
+      window.dispatchEvent(new KeyboardEvent('keydown', { 
+        key: 'k', 
+        ctrlKey: true, 
+        metaKey: true, 
+        bubbles: true 
+      }));
+    }
+  };
+
+  // Delegace na úrovni dokumentu zabraňuje vytuhnutí při navigaci
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('#custom-search-trigger')) {
+      openStarlightSearch(e);
+    }
+  });
 </script>
 
 <style lang="scss">
-/* Skrytí originálního Starlight tlačítka, aby nezavazelo */
-.hidden-search-trigger {
-  display: none !important;
-}
-
 .search-toggle-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  position: relative;
 }
 
 .search-toggle-btn {
@@ -78,6 +72,8 @@ import Search from '@astrojs/starlight/components/Search.astro';
   align-items: center;
   justify-content: center;
   transition: transform 0.3s ease;
+  line-height: 0;
+  -webkit-tap-highlight-color: transparent;
 
   &:hover {
     transform: scale(1.3);
@@ -95,12 +91,13 @@ import Search from '@astrojs/starlight/components/Search.astro';
   display: flex;
   align-items: center;
   justify-content: center;
-  /* Pozadí a barvy se berou z global.scss přes třídu .icon-search */
+  pointer-events: none; // Kliky propadnou na button
 
   svg {
     width: 32px;
     height: 32px;
     fill: currentColor;
+    display: block;
   }
 }
 </style>
