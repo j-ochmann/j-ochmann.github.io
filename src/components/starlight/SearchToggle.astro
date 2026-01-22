@@ -2,66 +2,21 @@
 import Search from '@astrojs/starlight/components/Search.astro';
 ---
 
-<div class="search-toggle-wrapper">
-  {/* Necháme Starlight vyrenderovat originál, ale skryjeme ho pouze vizuálně */}
-  <div class="starlight-search-init" style="position: absolute; opacity: 0; pointer-events: none; z-index: -1;">
-    <Search />
-  </div>
-
-  <button
-    type="button"
-    class="search-toggle-btn"
-    aria-label="Search"
-    id="custom-search-trigger"
-  >
+<Search>
+  <button slot="trigger"
+          type="button"
+          class="search-toggle-btn"
+          aria-label="Search"
+          aria-keyshortcuts="Control+K">
     <span class="theme-icon-container icon-search">
       <svg aria-hidden="true" viewBox="0 0 24 24">
         <use href="#icon-search" />
       </svg>
     </span>
   </button>
-</div>
-
-<script is:inline>
-  // Použijeme funkci, která se pokusí otevřít vyhledávání několika způsoby
-  const openStarlightSearch = (e) => {
-    if (e) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
-
-    const modal = document.querySelector('dialog#starlight__search-modal');
-    
-    if (modal && typeof modal.showModal === 'function') {
-      modal.showModal();
-    } else {
-      // Pokud modal není připraven, simulujeme Ctrl+K, což je interní Starlight trigger
-      window.dispatchEvent(new KeyboardEvent('keydown', { 
-        key: 'k', 
-        ctrlKey: true, 
-        metaKey: true, 
-        bubbles: true 
-      }));
-    }
-  };
-
-  // Delegace na úrovni dokumentu zabraňuje vytuhnutí při navigaci
-  document.addEventListener('click', (e) => {
-    if (e.target.closest('#custom-search-trigger')) {
-      openStarlightSearch(e);
-    }
-  });
-</script>
+</Search>
 
 <style lang="scss">
-.search-toggle-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  position: relative;
-}
-
 .search-toggle-btn {
   background: transparent;
   border: none;
@@ -72,11 +27,10 @@ import Search from '@astrojs/starlight/components/Search.astro';
   align-items: center;
   justify-content: center;
   transition: transform 0.3s ease;
-  line-height: 0;
-  -webkit-tap-highlight-color: transparent;
 
   &:hover {
     transform: scale(1.3);
+
     .theme-icon-container {
       animation: pulse-glow 2s infinite ease-in-out;
       box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
@@ -91,13 +45,11 @@ import Search from '@astrojs/starlight/components/Search.astro';
   display: flex;
   align-items: center;
   justify-content: center;
-  pointer-events: none; // Kliky propadnou na button
 
   svg {
     width: 32px;
     height: 32px;
     fill: currentColor;
-    display: block;
   }
 }
 </style>
