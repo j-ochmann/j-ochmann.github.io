@@ -1,0 +1,61 @@
+---
+// src/components/Search.astro
+import DefaultSearch from '@astrojs/starlight/components/Search.astro';
+---
+
+<div class="custom-search-wrapper">
+  <DefaultSearch />
+</div>
+
+<style lang="scss" is:global>
+  /* Zde přestylovat původní tlačítko */
+  .custom-search-wrapper {
+    /* Skryjeme původní text "Search" a ikonu, ponecháme jen funkční button */
+    button[data-open-modal="search"] {
+      background: transparent !important;
+      border: none !important;
+      width: 38px !important;
+      height: 38px !important;
+      padding: 0 !important;
+      border-radius: 50% !important;
+      display: flex !important;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.3s ease !important;
+      box-shadow: none !important;
+
+      // Schováme vnitřní Starlight elementy (label a kbd zkratku)
+      span, kbd {
+        display: none !important;
+      }
+
+      // Vložíme vaši ikonu pomocí pseudo-elementu nebo masky
+      &::before {
+        content: "";
+        width: 32px;
+        height: 32px;
+        background-color: currentColor;
+        mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org' viewBox='0 0 24 24'%3E%3Cpath d='M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z'/%3E%3C/svg%3E");
+        mask-size: contain;
+        mask-repeat: no-repeat;
+      }
+
+      &:hover {
+        transform: scale(1.3);
+        background-color: var(--sl-color-gray-5) !important;
+      }
+    }
+  }
+
+  /* Pokud chcete zachovat ty barvy z global.scss, aplikujte je zde */
+  .custom-search-wrapper button[data-open-modal="search"] {
+     color: #ffffff;
+     background: radial-gradient(circle at 30% 107%, #5c5c5c 0%, #ffffff 100%) !important;
+     
+     &:hover {
+        animation: pulse-glow 2s infinite ease-in-out;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3) !important;
+     }
+  }
+</style>

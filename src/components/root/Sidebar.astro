@@ -1,8 +1,7 @@
 ---
 import ThemeSelect from '@/components/starlight/ThemeSelect.astro';
 import LanguageSelect from '@astrojs/starlight/components/LanguageSelect.astro';
-import Search from '@astrojs/starlight/components/Search.astro';
-import SearchToggle from '@/components/starlight/SearchToggle.astro';
+import Search from '@/components/starlight/Search.astro';
 import Icons from '../icons/icons.astro';
 import DefaultSidebar from '@astrojs/starlight/components/Sidebar.astro';
 import mainImage from '@/assets/img/me/20250712_056.jpg?url';
@@ -29,7 +28,7 @@ const aboutLink = getRelativeLocaleUrl(lang, 'about');
 </div>
 
 <div class="wrapper">
-  <SearchToggle />
+  <Search />
   <LanguageSelect />
   <DefaultSidebar {...Astro.props} />
 </div>
