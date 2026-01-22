@@ -1,0 +1,95 @@
+---
+import 'flag-icons/css/flag-icons.min.css';
+
+/** 
+ * Mapování jazykových kódů (BCP-47) na ISO 3166-1 alpha-2 kódy zemí.
+ * Upravte podle jazyků, které na webu skutečně máte.
+ */
+const flagMap: Record<string, string> = {
+  en: 'gb',
+  cs: 'cz',
+  de: 'de',
+  fr: 'fr',
+  es: 'es',
+  // Pro root locale bez prefixu určete výchozí vlajku
+  root: 'gb' 
+};
+
+/** Přístup k datům o aktuální trase a dostupných jazycích */
+const { locales, currentLocale } = Astro.props;
+
+/** Pomocná funkce pro získání správné třídy vlajky */
+const getFlagClass = (lang: string) => {
+  const countryCode = flagMap[lang] || lang;
+  return `fi fi-${countryCode}`;
+};
+
+/** Generování URL pro přepnutí jazyka (zachování aktuální cesty) */
+const getLanguageUrl = (lang: string) => {
+  const parts = Astro.url.pathname.split('/').filter(Boolean);
+  
+  // Odstranění stávajícího locale prefixu, pokud existuje
+  const currentLangs = Object.keys(locales || {});
+  if (currentLangs.includes(parts[0])) {
+    parts.shift();
+  }
+  
+  // Přidání nového prefixu (pokud není root)
+  const newPath = lang === 'root' ? parts.join('/') : [lang, ...parts].join('/');
+  return `/${newPath}${Astro.url.search}${Astro.url.hash}`;
+};
+---
+
+<div class="language-select-wrapper">
+  {Object.entries(locales || {}).map(([code, locale]) => {
+    const isCurrent = code === currentLocale || (code === 'root' && !currentLocale);
+    return (
+      <a 
+        href={getLanguageUrl(code)}
+        class={`lang-link ${isCurrent ? 'active' : ''}`}
+        aria-label={locale?.label}
+        title={locale?.label}
+      >
+        <span class={getFlagClass(code)}></span>
+      </a>
+    );
+  })}
+</div>
+
+<style lang="scss">
+  .language-select-wrapper {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    padding: 0.5rem;
+  }
+
+  .lang-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 20px;
+    border-radius: 3px;
+    overflow: hidden;
+    opacity: 0.6;
+    transition: transform 0.2s, opacity 0.2s;
+    border: 1px solid var(--sl-color-gray-5);
+
+    &:hover, &.active {
+      opacity: 1;
+      transform: scale(1.2);
+      border-color: var(--sl-color-accent);
+    }
+
+    &.active {
+      box-shadow: 0 0 8px var(--sl-color-accent-low);
+    }
+
+    .fi {
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+    }
+  }
+</style>

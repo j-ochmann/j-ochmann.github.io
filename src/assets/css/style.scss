@@ -160,7 +160,7 @@ $google-colors:
   position: absolute;
   top: 90px;  /* Polovina výšky obrázku (180/2) */
   left: 90px; /* Polovina šířky obrázku (180/2) */
-  z-index: 3;
+  z-index: 19;
 }
 .social-icons a {
   @include icon-base;
@@ -248,10 +248,10 @@ $action-start-angle: $start-angle + 2*$angle-step;
   left: -15px;
   width: 210px;
   height: 210px;
-  pointer-events: none;
+  pointer-events: auto;
   transform: rotate(-45deg);
   transition: transform 1s ease;
-  z-index: 2;
+  z-index: 20;
 }
 .profile-container:hover .name-circle {
   transform: scale(1.3) rotate(0deg);

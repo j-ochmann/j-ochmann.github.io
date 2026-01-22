@@ -1,6 +1,7 @@
 ---
 import ThemeSelect from '@/components/starlight/ThemeSelect.astro';
-import LanguageSelect from '@astrojs/starlight/components/LanguageSelect.astro';
+//import LanguageSelect from '@astrojs/starlight/components/LanguageSelect.astro';
+import LanguageSelect from '@/components/starlight/LanguageSelect.astro';
 import Search from '@/components/starlight/Search.astro';
 import Icons from '../icons/icons.astro';
 import DefaultSidebar from '@astrojs/starlight/components/Sidebar.astro';
@@ -64,16 +65,10 @@ const aboutLink = getRelativeLocaleUrl(lang, 'about');
     position: absolute;
     top: 10px;
     left: 20px;
-    z-index: 0; /* Za zeměkoulí */
   }
   .search-toggle-overlay {
     position: absolute;
-    /*display: flex;*/
-    /*flex-direction: row;*/  
-    top: 10px;
+    top: 5px;
     right: 20px;
-    z-index: 10;
   }
-
-
 </style>
