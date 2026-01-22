@@ -1,61 +1,227 @@
 ---
 // src/components/Search.astro
-import DefaultSearch from '@astrojs/starlight/components/Search.astro';
+import project from 'virtual:starlight/project-context';
+
+const pagefindTranslations = {
+	placeholder: Astro.locals.t('search.label'),
+	...Object.fromEntries(
+		Object.entries(Astro.locals.t.all())
+			.filter(([key]) => key.startsWith('pagefind.'))
+			.map(([key, value]) => [key.replace('pagefind.', ''), value])
+	),
+};
+
+const dataAttributes: DOMStringMap = { 'data-translations': JSON.stringify(pagefindTranslations) };
+if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash'] = '';
 ---
 
-<div class="custom-search-wrapper">
-  <DefaultSearch />
-</div>
+<site-search class={Astro.props.class} {...dataAttributes}>
+	{/* --- VAŠE UPRAVENÉ TLAČÍTKO --- */}
+	<button
+		data-open-modal
+		disabled
+		aria-label={Astro.locals.t('search.label')}
+		aria-keyshortcuts="Control+K"
+		class="search-toggle-btn"
+	>
+		<span class="theme-icon-container icon-search">
+			<svg aria-hidden="true" viewBox="0 0 24 24">
+				<use href="#icon-search" />
+			</svg>
+		</span>
+	</button>
 
-<style lang="scss" is:global>
-  /* Zde přestylovat původní tlačítko */
-  .custom-search-wrapper {
-    /* Skryjeme původní text "Search" a ikonu, ponecháme jen funkční button */
-    button[data-open-modal="search"] {
-      background: transparent !important;
-      border: none !important;
-      width: 38px !important;
-      height: 38px !important;
-      padding: 0 !important;
-      border-radius: 50% !important;
-      display: flex !important;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: transform 0.3s ease !important;
-      box-shadow: none !important;
+	{/* --- ZBYTEK MODALU ZŮSTÁVÁ STEJNÝ (pro funkčnost) --- */}
+	<dialog style="padding:0" aria-label={Astro.locals.t('search.label')}>
+		<div class="dialog-frame sl-flex">
+			<button data-close-modal class="sl-flex md:sl-hidden">
+				{Astro.locals.t('search.cancelLabel')}
+			</button>
+			{
+				import.meta.env.DEV ? (
+					<div style="margin: auto; text-align: center; white-space: pre-line;" dir="ltr">
+						<p>{Astro.locals.t('search.devWarning')}</p>
+					</div>
+				) : (
+					<div class="search-container">
+						<div id="starlight__search" />
+					</div>
+				)
+			}
+		</div>
+	</dialog>
+</site-search>
 
-      // Schováme vnitřní Starlight elementy (label a kbd zkratku)
-      span, kbd {
-        display: none !important;
-      }
+<script is:inline>
+	(() => {
+		const openBtn = document.querySelector('button[data-open-modal]');
+		if (!openBtn) return;
+		if (/(Mac|iPhone|iPod|iPad)/i.test(navigator.platform)) {
+			openBtn.setAttribute('aria-keyshortcuts', 'Meta+K');
+		}
+	})();
+</script>
 
-      // Vložíme vaši ikonu pomocí pseudo-elementu nebo masky
-      &::before {
-        content: "";
-        width: 32px;
-        height: 32px;
-        background-color: currentColor;
-        mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org' viewBox='0 0 24 24'%3E%3Cpath d='M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z'/%3E%3C/svg%3E");
-        mask-size: contain;
-        mask-repeat: no-repeat;
-      }
+<script>
+	import { pagefindUserConfig } from 'virtual:starlight/pagefind-config';
 
-      &:hover {
-        transform: scale(1.3);
-        background-color: var(--sl-color-gray-5) !important;
-      }
-    }
-  }
+	class SiteSearch extends HTMLElement {
+		constructor() {
+			super();
+			const openBtn = this.querySelector<HTMLButtonElement>('button[data-open-modal]')!;
+			const closeBtn = this.querySelector<HTMLButtonElement>('button[data-close-modal]')!;
+			const dialog = this.querySelector('dialog')!;
+			const dialogFrame = this.querySelector('.dialog-frame')!;
 
-  /* Pokud chcete zachovat ty barvy z global.scss, aplikujte je zde */
-  .custom-search-wrapper button[data-open-modal="search"] {
-     color: #ffffff;
-     background: radial-gradient(circle at 30% 107%, #5c5c5c 0%, #ffffff 100%) !important;
-     
-     &:hover {
-        animation: pulse-glow 2s infinite ease-in-out;
-        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3) !important;
-     }
-  }
+			const onClick = (event: MouseEvent) => {
+				const isLink = 'href' in (event.target || {});
+				if (isLink || (document.body.contains(event.target as Node) && !dialogFrame.contains(event.target as Node))) {
+					closeModal();
+				}
+			};
+
+			const openModal = (event?: MouseEvent) => {
+				dialog.showModal();
+				document.body.toggleAttribute('data-search-modal-open', true);
+				this.querySelector('input')?.focus();
+				event?.stopPropagation();
+				window.addEventListener('click', onClick);
+			};
+
+			const closeModal = () => dialog.close();
+
+			openBtn.addEventListener('click', openModal);
+			openBtn.disabled = false;
+			closeBtn.addEventListener('click', closeModal);
+
+			dialog.addEventListener('close', () => {
+				document.body.toggleAttribute('data-search-modal-open', false);
+				window.removeEventListener('click', onClick);
+			});
+
+			window.addEventListener('keydown', (e) => {
+				if ((e.metaKey === true || e.ctrlKey === true) && e.key === 'k') {
+					dialog.open ? closeModal() : openModal();
+					e.preventDefault();
+				}
+			});
+
+			let translations = {};
+			try { translations = JSON.parse(this.dataset.translations || '{}'); } catch {}
+
+			const shouldStrip = this.dataset.stripTrailingSlash !== undefined;
+			const stripTrailingSlash = (path: string) => path.replace(/(.)\/(#.*)?$/, '$1$2');
+			const formatURL = shouldStrip ? stripTrailingSlash : (path: string) => path;
+
+			window.addEventListener('DOMContentLoaded', () => {
+				if (import.meta.env.DEV) return;
+				const onIdle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1));
+				onIdle(async () => {
+					const { PagefindUI } = await import('@pagefind/default-ui');
+					new PagefindUI({
+						...pagefindUserConfig,
+						element: '#starlight__search',
+						baseUrl: import.meta.env.BASE_URL,
+						bundlePath: import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagefind/',
+						showImages: false,
+						translations,
+						showSubResults: true,
+						processResult: (result: any) => {
+							result.url = formatURL(result.url);
+							result.sub_results = result.sub_results.map((sub_result: any) => {
+								sub_result.url = formatURL(sub_result.url);
+								return sub_result;
+							});
+						},
+					});
+				});
+			});
+		}
+	}
+	customElements.define('site-search', SiteSearch);
+</script>
+
+<style lang="scss">
+	/* --- VAŠE STYLY --- */
+	.search-toggle-btn {
+		background: transparent;
+		border: none;
+		padding: 0;
+		cursor: pointer;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: transform 0.3s ease;
+		margin: 0 auto;
+
+		&:hover {
+			transform: scale(1.3);
+			.theme-icon-container {
+				animation: pulse-glow 2s infinite ease-in-out;
+				box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+			}
+		}
+		
+		&:disabled {
+			opacity: 0.5;
+			cursor: not-allowed;
+		}
+	}
+
+	.theme-icon-container {
+		width: 38px;
+		height: 38px;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		/* Barvy a gradienty se berou z global.scss přes třídu icon-search */
+		svg {
+			width: 32px;
+			height: 32px;
+			fill: currentColor;
+		}
+	}
+
+	/* --- NUTNÉ MINIMUM ZE STARLIGHT CSS PRO DIALOG --- */
+	dialog {
+		margin: 0;
+		background-color: var(--sl-color-gray-6);
+		border: 1px solid var(--sl-color-gray-5);
+		width: 100%; height: 100%;
+		max-width: 100%; max-height: 100%;
+		&[open] { display: flex; }
+		&::backdrop {
+			background-color: var(--sl-color-backdrop-overlay);
+			backdrop-filter: blur(0.25rem);
+		}
+	}
+
+	.dialog-frame {
+		position: relative;
+		overflow: auto;
+		flex-direction: column;
+		flex-grow: 1;
+		gap: 1rem;
+		padding: 1rem;
+	}
+
+	#starlight__search {
+		--pagefind-ui-primary: var(--sl-color-text);
+		--pagefind-ui-text: var(--sl-color-gray-2);
+		--pagefind-ui-font: var(--__sl-font);
+		--pagefind-ui-background: var(--sl-color-black);
+		--pagefind-ui-border: var(--sl-color-gray-5);
+	}
+
+	@media (min-width: 50rem) {
+		dialog {
+			margin: 4rem auto auto;
+			border-radius: 0.5rem;
+			width: 90%; max-width: 40rem;
+			height: max-content; min-height: 15rem;
+			max-height: calc(100% - 8rem);
+		}
+	}
 </style>

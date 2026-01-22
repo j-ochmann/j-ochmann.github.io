@@ -16,6 +16,9 @@ const aboutLink = getRelativeLocaleUrl(lang, 'about');
 <div class="theme-select-overlay">
   <ThemeSelect />
 </div>
+
+<Search />
+
 <!-- ---------- PROFILE ---------- -->
 <div class="social-circle-wrapper">
   <div class="circular-menu">
@@ -28,7 +31,6 @@ const aboutLink = getRelativeLocaleUrl(lang, 'about');
 </div>
 
 <div class="wrapper">
-  <Search />
   <LanguageSelect />
   <DefaultSidebar {...Astro.props} />
 </div>
