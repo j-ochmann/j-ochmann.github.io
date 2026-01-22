@@ -1,6 +1,7 @@
 ---
 import ThemeSelect from '@/components/starlight/ThemeSelect.astro';
 import LanguageSelect from '@astrojs/starlight/components/LanguageSelect.astro';
+import Search from '@astrojs/starlight/components/Search.astro';
 import SearchToggle from '@/components/starlight/SearchToggle.astro';
 import Icons from '../icons/icons.astro';
 import DefaultSidebar from '@astrojs/starlight/components/Sidebar.astro';
@@ -32,6 +33,16 @@ const aboutLink = getRelativeLocaleUrl(lang, 'about');
   <LanguageSelect />
   <DefaultSidebar {...Astro.props} />
 </div>
+
+<script is:inline>
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('[data-search-modal-open]')) {
+      document
+        .querySelector('#starlight__search-modal')
+        ?.showModal();
+    }
+  });
+</script>
 
 <style>
   .theme-select-overlay {

@@ -78,7 +78,7 @@ export default defineConfig({
     components: {
       //ThemeSelect: './src/components/starlight/ThemeSelect.astro',
       //LanguageSelect: './src/components/starlight/LanguageSelect.astro',
-      Search: './src/components/starlight/SearchToggle.astro',
+      //SearchToggle: './src/components/starlight/SearchToggle.astro',
       Header: './src/components/starlight/Empty.astro',
       RightSidebar: './src/components/starlight/Empty.astro',
       MobileTableOfContents: './src/components/starlight/Empty.astro',

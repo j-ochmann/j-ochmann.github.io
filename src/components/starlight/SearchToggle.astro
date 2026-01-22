@@ -1,22 +1,67 @@
 ---
-/**
- * SearchToggle – oficiální Starlight způsob
- * Neobsahuje žádný JS
- * Otevírá search modal pomocí data-open-modal="search"
- */
 import Search from '@astrojs/starlight/components/Search.astro';
 ---
-  <Search />
 
 <div class="search-toggle-wrapper">
-  <button data-open-modal="search"
-          aria-label="Search"
-          aria-keyshortcuts="Control+K"
-          class="astro-v37mnknz">
+  {/* 1. MUSÍME nechat Starlight vykreslit jeho komponentu, jinak se nenačte vyhledávací modal */}
+  <div class="hidden-search-trigger">
+    <Search />
+  </div>
+
+  {/* 2. VAŠE vizuální tlačítko */}
+  <button
+    type="button"
+    class="search-toggle-btn"
+    aria-label="Search"
+    id="custom-search-trigger"
+  >
+    <span class="theme-icon-container icon-search">
+      <svg aria-hidden="true" viewBox="0 0 24 24">
+        <use href="#icon-search" />
+      </svg>
+    </span>
   </button>
 </div>
 
+<script>
+  function setupSearch() {
+    const trigger = document.getElementById('custom-search-trigger');
+    
+    if (trigger) {
+      trigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        // Starlight Search Modal ID v roce 2026
+        const modal = document.querySelector('dialog#starlight__search-modal');
+        
+        if (modal instanceof HTMLDialogElement) {
+          modal.showModal();
+        } else {
+          // Pokud modal není v DOMu, simulujeme Ctrl+K, což vynutí jeho otevření
+          window.dispatchEvent(new KeyboardEvent('keydown', { 
+            key: 'k', 
+            ctrlKey: true, 
+            metaKey: true, 
+            bubbles: true 
+          }));
+        }
+      });
+    }
+  }
+
+  // Inicializace při načtení
+  setupSearch();
+  // Inicializace při navigaci (Astro View Transitions)
+  document.addEventListener('astro:page-load', setupSearch);
+</script>
+
 <style lang="scss">
+/* Skrytí originálního Starlight tlačítka, aby nezavazelo */
+.hidden-search-trigger {
+  display: none !important;
+}
+
 .search-toggle-wrapper {
   display: flex;
   align-items: center;
@@ -32,15 +77,13 @@ import Search from '@astrojs/starlight/components/Search.astro';
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.4s ease;
+  transition: transform 0.3s ease;
 
   &:hover {
-    transform: scale(1.5);
-    z-index: 10;
-
+    transform: scale(1.3);
     .theme-icon-container {
-      animation: pulse-glow 3s infinite ease-in-out;
-      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+      animation: pulse-glow 2s infinite ease-in-out;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
     }
   }
 }
@@ -52,8 +95,7 @@ import Search from '@astrojs/starlight/components/Search.astro';
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  transition: all 0.4s ease;
+  /* Pozadí a barvy se berou z global.scss přes třídu .icon-search */
 
   svg {
     width: 32px;
