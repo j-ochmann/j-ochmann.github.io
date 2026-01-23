@@ -214,21 +214,3 @@ const aboutLink = getRelativeLocaleUrl(lang, 'about');
   }
   
 </style>
-
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    // This script handles the z-index of the social circle in the geo sidebar.
-    const menu = document.querySelector('.sidebar-geo-header .circular-menu');
-    const wrapper = document.querySelector('.sidebar-geo-header .social-circle-wrapper');
-
-    if (menu && wrapper) {
-      const baseZIndex = wrapper.style.zIndex || '10';
-      menu.addEventListener('mouseenter', () => {
-        wrapper.style.zIndex = '21';
-      });
-      menu.addEventListener('mouseleave', () => {
-        wrapper.style.zIndex = baseZIndex;
-      });
-    }
-  });
-</script>

@@ -1,0 +1,38 @@
+---
+import ThemeSelect from '@/components/starlight/ThemeSelect.astro';
+import LanguageSelect from '@/components/starlight/LanguageSelect.astro';
+import Search from '@/components/starlight/Search.astro';
+---
+<!-- Přepínač témat (Slunce/Měsíc) -->
+<div class="toolbar">
+  <div class="left_toolbar">
+    <ThemeSelect />
+  </div>
+  <div class="right_toolbar">
+    <Search />
+    <LanguageSelect />
+  </div>
+</div>
+
+<script is:inline>
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('[data-search-modal-open]')) {
+      document
+        .querySelector('#starlight__search-modal')
+        ?.showModal();
+    }
+  });
+</script>
+
+<style>
+  .left_toolbar {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+  }
+  .right_toolbar {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+  }
+</style>

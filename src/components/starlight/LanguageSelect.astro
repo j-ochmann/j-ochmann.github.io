@@ -3,32 +3,22 @@ import 'flag-icons/css/flag-icons.min.css';
 import { locales, getFlagCode } from '@/content/config/i18n';
 import config from 'virtual:starlight/user-config';
 
-// 1. Získání aktuálního identifikátoru jazyka z Astra
 const currentLocale = Astro.currentLocale?.toString() || 'en';
-// 2. Získání kódu vlajky pro aktuální jazyk (pro kruhové tlačítko)
 const currentFlag = getFlagCode(currentLocale);
-/**
- * Generování URL pro přepnutí jazyka.
- * Respektuje nastavení prefixDefault v astro.config.mjs.
- */
 const getLanguageUrl = (targetLang: string) => {
   const pathParts = Astro.url.pathname.split('/').filter(Boolean);
   const langCodes = Object.keys(locales);
-
   // Odstranění stávajícího jazyka z cesty
   if (pathParts.length > 0 && langCodes.includes(pathParts[0])) {
     pathParts.shift();
   }
-
   const slug = pathParts.join('/');
-  
   // Detekce, zda je cílový jazyk nastaven jako 'root' (bez prefixu)
   const isRoot = config.locales?.root && config.locales.root.lang === targetLang;
 
   if (isRoot) {
     return slug === '' ? '/' : `/${slug}`;
   }
-
   // Vrátí cestu s prefixem (např. /en/ nebo /cs/stranka)
   return slug === '' ? `/${targetLang}/` : `/${targetLang}/${slug}`;
 };
@@ -36,7 +26,7 @@ const getLanguageUrl = (targetLang: string) => {
 
 {locales && Object.keys(locales).length > 1 && (
   <div class="language-picker" tabindex="0">
-    <button type="button" class="picker-button" aria-label="Change language">
+    <button type="button" class="language-button" aria-label="Change language">
       {/* Aktuální vlajka: použita třída 'fib' pro čtvercový základ a 'current-fi' pro kruh */}
       <span class:list={['fi', `fi-${currentFlag}`, 'fib', 'current-fi']} aria-hidden="true"></span>
     </button>
@@ -77,7 +67,7 @@ const getLanguageUrl = (targetLang: string) => {
       transform: translateY(-40px);
     }
 
-    .picker-button {
+    .language-button {
       @include icon-base;
       border: none;
       .current-fi {
@@ -90,7 +80,7 @@ const getLanguageUrl = (targetLang: string) => {
       }
     }
 
-    .picker-button:hover { 
+    .language-button:hover { 
       opacity: 1;
     }
   }
@@ -142,7 +132,7 @@ const getLanguageUrl = (targetLang: string) => {
       pointer-events: none; // Aktivní jazyk není znovu klikatelný
     }
 
-    // Klasické obdélníkové vlajky v menu
+    // Obdélníkové vlajky v menu
     .fi:not(.current-fi) {
       width: 1.25rem;
       height: 0.9rem;

@@ -1,28 +1,16 @@
 ---
-import ThemeSelect from '@/components/starlight/ThemeSelect.astro';
-//import LanguageSelect from '@astrojs/starlight/components/LanguageSelect.astro';
-import LanguageSelect from '@/components/starlight/LanguageSelect.astro';
-import Search from '@/components/starlight/Search.astro';
-import Icons from '../icons/icons.astro';
+import Icons from '@/components/icons/icons.astro';
 import DefaultSidebar from '@astrojs/starlight/components/Sidebar.astro';
+import ToolBar from '@/components/ToolBar.astro';
+import SocialCircle from '@/components/SocialCircle.astro';
 import mainImage from '@/assets/img/me/20250712_056.jpg?url';
 import hoverImage from '@/assets/img/me/20250712_055.jpg?url';
-import SocialCircle from '@/components/SocialCircle.astro';
 import { getRelativeLocaleUrl } from 'astro:i18n';
 const lang = Astro.currentLocale || 'en';
 const aboutLink = getRelativeLocaleUrl(lang, 'about');
 ---
 <Icons />
-<!-- Přepínač témat (Slunce/Měsíc) -->
-<div class="theme-select-overlay">
-  <ThemeSelect />
-</div>
-
-<div class="search-toggle-overlay">
-  <LanguageSelect />
-  <Search />
-</div>
-
+<ToolBar />
 <!-- ---------- PROFILE ---------- -->
 <div class="social-circle-wrapper">
   <div class="circular-menu">
@@ -38,37 +26,6 @@ const aboutLink = getRelativeLocaleUrl(lang, 'about');
   <DefaultSidebar {...Astro.props} />
 </div>
 
-<script is:inline>
-  document.addEventListener('click', (e) => {
-    if (e.target.closest('[data-search-modal-open]')) {
-      document
-        .querySelector('#starlight__search-modal')
-        ?.showModal();
-    }
-  });
-</script>
-
 <style>
-  .sidebar-top-controls {
-    position: absolute;
-    top: 0;
-    display: flex;
-    flex-direction: row;      /* Prvky vedle sebe */
-    align-items: center;      /* Vertikální vycentrování */
-    justify-content: center;   /* Horizontální vycentrování v sidebaru */
-    gap: 1rem;                /* Mezera mezi ikonami */
-    padding: 10px 5px;
-    background-color: var(--sl-color-bg-sidebar);
-    opacity: 0.3;
-  }
-  .theme-select-overlay {
-    position: absolute;
-    top: 10px;
-    left: 20px;
-  }
-  .search-toggle-overlay {
-    position: absolute;
-    top: 5px;
-    right: 20px;
-  }
+
 </style>
