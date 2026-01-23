@@ -167,6 +167,7 @@ header.header {
 }
 /* BASE FOR ROUND ICONS */
 @mixin icon-base($size: 38px) {    
+  cursor: pointer;
   width: 22px;
   height: 22px;
   color: #ffffff;
