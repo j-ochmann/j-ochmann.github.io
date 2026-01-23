@@ -602,8 +602,8 @@ export const countries = {
    },
    "CZ": {
       "code": "CZ",
-      "name": "Czech Republic",
-      "native": "Česká republika",
+      "name": "Czechia",
+      "native": "Česko",
       "continent": "Europe",
       "capital": "Prague",
       "population": 10870000,
@@ -2745,4 +2745,53 @@ export const countries = {
       "currency": ["USD","ZAR","BWP","GBP","AUD","CNY","INR","JPY"],
       "language": ["en","sn","nd"]
    }
+};
+
+interface Country {
+  code: string;
+  name: string;
+  native: string;
+  continent: string;
+  population: number;
+  phone: number[];
+  capital?: string;      // Otazník znamená: může být undefined
+  currency?: string[];   // Otazník znamená: může být undefined
+  language?: string[];   // Otazník znamená: může být undefined
 }
+
+const countriesData = countries as Record<string, Country>;
+
+/** Unikátní jazyky (Antarktidu s undefined přeskočí) */
+export const getAllLanguages = (): string[] => {
+  return [
+    ...new Set(
+      Object.values(countriesData)
+        .flatMap(c => c.language ?? [])
+    )
+  ].sort();
+};
+
+export const getAllCurrencies = (): string[] => {
+  return [
+    ...new Set(
+      Object.values(countriesData)
+        .flatMap(c => c.currency ?? [])
+    )
+  ].sort();
+};
+
+export const getAllContinents = (): string[] => {
+  return [
+    ...new Set(
+      Object.values(countriesData)
+        .map(c => c.continent)
+    )
+  ].sort();
+};
+
+export const getAllCapitals = (): string[] => {
+  return Object.values(countriesData)
+    .map(c => c.capital)
+    .filter((cap): cap is string => !!cap)
+    .sort();
+};

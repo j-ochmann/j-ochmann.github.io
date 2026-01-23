@@ -1,95 +1,114 @@
 ---
 import 'flag-icons/css/flag-icons.min.css';
+import { starlightLocales } from '@/content/config/starlight-locales';
 
-/** 
- * Mapování jazykových kódů (BCP-47) na ISO 3166-1 alpha-2 kódy zemí.
- * Upravte podle jazyků, které na webu skutečně máte.
- */
+const locales = starlightLocales;
+const currentLocale = Astro.currentLocale!;
+
 const flagMap: Record<string, string> = {
-  en: 'gb',
+  en: 'us',
+  gb: 'gb',
   cs: 'cz',
   de: 'de',
   fr: 'fr',
   es: 'es',
-  // Pro root locale bez prefixu určete výchozí vlajku
-  root: 'gb' 
+  sk: 'sk',
+  pl: 'pl',
+  uk: 'ua',
+  ru: 'ru',
+  it: 'it',
+  nl: 'nl',
+  fi: 'fi',
+  no: 'no',
+  sv: 'se',
+  pt: 'pt',
+  tr: 'tr',
+  el: 'gr',
+  zh: 'cn',
+  ja: 'jp',
+  ko: 'kr',
+  hi: 'in',
+  ar: 'sa',
+  he: 'il',
 };
 
-/** Přístup k datům o aktuální trase a dostupných jazycích */
-const { locales, currentLocale } = Astro.props;
-
-/** Pomocná funkce pro získání správné třídy vlajky */
-const getFlagClass = (lang: string) => {
-  const countryCode = flagMap[lang] || lang;
-  return `fi fi-${countryCode}`;
+const getFlagCode = (lang: string) => {
+  return flagMap[lang] || lang;
 };
 
-/** Generování URL pro přepnutí jazyka (zachování aktuální cesty) */
 const getLanguageUrl = (lang: string) => {
-  const parts = Astro.url.pathname.split('/').filter(Boolean);
-  
-  // Odstranění stávajícího locale prefixu, pokud existuje
-  const currentLangs = Object.keys(locales || {});
-  if (currentLangs.includes(parts[0])) {
-    parts.shift();
+  const pathParts = Astro.url.pathname.split('/').filter(Boolean);
+  // Add a check for locales to avoid error when it's not passed to the component.
+  const langCodes = locales ? Object.keys(locales) : [];
+
+  // Pokud je prvním segmentem cesty kód jazyka, odstraňte ho
+  if (pathParts.length > 0 && langCodes.includes(pathParts[0])) {
+    pathParts.shift();
   }
-  
-  // Přidání nového prefixu (pokud není root)
-  const newPath = lang === 'root' ? parts.join('/') : [lang, ...parts].join('/');
-  return `/${newPath}${Astro.url.search}${Astro.url.hash}`;
+
+  const newPath = pathParts.join('/');
+
+  // Vždy vytváříme URL s jazykovým prefixem
+  return `/${lang}/${newPath.startsWith('/') ? newPath.substring(1) : newPath}`;
 };
 ---
 
-<div class="language-select-wrapper">
-  {Object.entries(locales || {}).map(([code, locale]) => {
-    const isCurrent = code === currentLocale || (code === 'root' && !currentLocale);
-    return (
-      <a 
-        href={getLanguageUrl(code)}
-        class={`lang-link ${isCurrent ? 'active' : ''}`}
-        aria-label={locale?.label}
-        title={locale?.label}
-      >
-        <span class={getFlagClass(code)}></span>
-      </a>
-    );
-  })}
-</div>
+{/* Nevykresluj komponentu, pokud je nakonfigurován pouze jeden jazyk */}
+{locales && Object.keys(locales).length > 1 && (
+  <div class="language-select-wrapper">
+    {Object.entries(locales).map(([lang, locale]) => {
+      if (!locale) return null;
+      const isCurrent = lang === currentLocale;
+      const flagCode = getFlagCode(lang);
+
+      return (
+        <a
+          href={getLanguageUrl(lang)}
+          class:list={['lang-link', { active: isCurrent }]}
+          aria-label={locale.label}
+          title={locale.label}
+        >
+          <span class={`fi fi-${flagCode}`} aria-hidden="true"></span>
+        </a>
+      );
+    })}
+  </div>
+)}
 
 <style lang="scss">
   .language-select-wrapper {
     display: flex;
-    gap: 0.75rem;
+    gap: 0.5rem;
     align-items: center;
-    padding: 0.5rem;
+    padding: 0 1rem;
   }
-
   .lang-link {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 28px;
-    height: 20px;
-    border-radius: 3px;
+    height: 21px;
+    border-radius: 4px;
     overflow: hidden;
     opacity: 0.6;
-    transition: transform 0.2s, opacity 0.2s;
+    transition: all 0.2s ease-in-out;
     border: 1px solid var(--sl-color-gray-5);
+    background-color: var(--sl-color-gray-6);
 
-    &:hover, &.active {
-      opacity: 1;
-      transform: scale(1.2);
-      border-color: var(--sl-color-accent);
-    }
-
-    &.active {
-      box-shadow: 0 0 8px var(--sl-color-accent-low);
-    }
-
-    .fi {
+    span {
+      display: block;
       width: 100%;
       height: 100%;
       background-size: cover;
+      background-position: center;
+    }
+
+    &.active,
+    &:hover {
+      opacity: 1;
+      transform: scale(1.1);
+      border-color: var(--sl-color-accent);
+      box-shadow: 0 0 8px -2px var(--sl-color-accent);
     }
   }
 </style>
