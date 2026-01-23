@@ -3,30 +3,33 @@ import 'flag-icons/css/flag-icons.min.css';
 import { locales, getFlagCode } from '@/content/config/i18n';
 import config from 'virtual:starlight/user-config';
 
-// 1. Získání aktuálního jazyka (s fallbackem na výchozí ze Starlightu)
-const currentLocale = Astro.currentLocale || config.defaultLocale || 'en';
-// 2. Definice chybějící proměnné currentFlag
-const currentFlag = getFlagCode(currentLocale.toString());
-
+// 1. Získání aktuálního identifikátoru jazyka z Astra
+const currentLocale = Astro.currentLocale?.toString() || 'en';
+// 2. Získání kódu vlajky pro aktuální jazyk (pro kruhové tlačítko)
+const currentFlag = getFlagCode(currentLocale);
+/**
+ * Generování URL pro přepnutí jazyka.
+ * Respektuje nastavení prefixDefault v astro.config.mjs.
+ */
 const getLanguageUrl = (targetLang: string) => {
   const pathParts = Astro.url.pathname.split('/').filter(Boolean);
   const langCodes = Object.keys(locales);
 
-  // Odstranění stávajícího jazyka z URL
+  // Odstranění stávajícího jazyka z cesty
   if (pathParts.length > 0 && langCodes.includes(pathParts[0])) {
     pathParts.shift();
   }
 
   const slug = pathParts.join('/');
   
-  // Detekce, zda je cílový jazyk 'root' (bez prefixu) v astro.config.mjs
+  // Detekce, zda je cílový jazyk nastaven jako 'root' (bez prefixu)
   const isRoot = config.locales?.root && config.locales.root.lang === targetLang;
 
   if (isRoot) {
     return slug === '' ? '/' : `/${slug}`;
   }
 
-  // Pokud prefixujete vše (včetně en), vrátí /targetLang/slug
+  // Vrátí cestu s prefixem (např. /en/ nebo /cs/stranka)
   return slug === '' ? `/${targetLang}/` : `/${targetLang}/${slug}`;
 };
 ---
@@ -34,83 +37,136 @@ const getLanguageUrl = (targetLang: string) => {
 {locales && Object.keys(locales).length > 1 && (
   <div class="language-picker" tabindex="0">
     <button type="button" class="picker-button" aria-label="Change language">
-      {/* Zde byla chyba - currentFlag musí být definován nahoře */}
-      <span class:list={['fi', `fi-${currentFlag}`]} aria-hidden="true"></span>
+      {/* Aktuální vlajka: použita třída 'fib' pro čtvercový základ a 'current-fi' pro kruh */}
+      <span class:list={['fi', `fi-${currentFlag}`, 'fib', 'current-fi']} aria-hidden="true"></span>
     </button>
     
-<div class="language-dropdown">
-  {Object.entries(locales).map(([code, locale]) => {
-    if (!locale) return null;
-    
-    // OPRAVA: Posíláme 'locale.lang' (např. 'en-US'), nikoliv klíč 'code' ('en')
-    // Tím zajistíte, že vaše funkce v i18n.ts najde shodu ve sloupci 'lang'
-    const flagCode = getFlagCode(locale.lang); 
-    
-    return (
-      <a
-        href={getLanguageUrl(code)}
-        class:list={['lang-link', { active: code === currentLocale }]}
-        title={locale.label}
-      >
-        <span class={`fi fi-${flagCode}`} aria-hidden="true"></span>
-        <span class="lang-label">{locale.label}</span>
-      </a>
-    );
-  })}
-</div>
-
+    <div class="language-dropdown">
+      {Object.entries(locales).map(([code, locale]) => {
+        if (!locale) return null;
+        // Používáme locale.lang pro vyhledání v i18n tabulce podle vašeho přání
+        const flagCode = getFlagCode(locale.lang);
+        
+        return (
+          <a
+            href={getLanguageUrl(code)}
+            class:list={['lang-link', { active: code === currentLocale }]}
+            title={locale.label}
+          >
+            <span class={`fi fi-${flagCode}`} aria-hidden="true"></span>
+            <span class="lang-label">{locale.label}</span>
+          </a>
+        );
+      })}
+    </div>
   </div>
 )}
 
 <style lang="scss">
-  /* ... Vaše SCSS zůstává stejné ... */
+  @use "@/styles/globals.scss" as *;
+
   .language-picker {
     position: relative;
     display: inline-flex;
-    outline: none;
+    align-items: center;
+    // Zajištění, že picker je nad ostatními prvky v headeru při interakci
+    z-index: 100; 
 
     &:focus-within .language-dropdown {
       opacity: 1;
       visibility: visible;
       transform: translateY(0);
     }
+
+    .picker-button {
+      // 1. Základ od Starlightu
+      @include icon-base;
+      
+      // 2. Vynucení rozměrů (přepisuje případný padding z mixinu)
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.5rem;  // Standardní klikatelná plocha ikon v roce 2026
+      height: 2.5rem;
+      padding: 0;     
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--sl-color-gray-3);
+
+      &:hover {
+        color: var(--sl-color-text-accent);
+        background-color: var(--sl-color-gray-6); // Jemný podklad pod ikonou při hoveru
+      }
+
+      .current-fi {
+        // Vlajka uvnitř tlačítka
+        width: 1.25rem !important; 
+        height: 1.25rem !important;
+        border-radius: 50%;
+        background-size: cover !important;
+        background-position: center;
+        flex-shrink: 0;
+        // Ochrana proti světlým vlajkám na světlém pozadí
+        box-shadow: 0 0 0 1px var(--sl-color-gray-5);
+      }
+    }
   }
-  .picker-button {
-    display: flex;
-    width: 28px;
-    height: 20px;
-    border-radius: 4px;
-    overflow: hidden;
-    border: 1px solid var(--sl-color-gray-5);
-    cursor: pointer;
-  }
+
   .language-dropdown {
     position: absolute;
-    top: calc(100% + 8px);
-    right: 50%;
-    transform: translateX(50%) translateY(-10px);
+    top: 100%;
+    right: 0;
+    margin-top: 0.5rem;
+    
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    padding: 6px;
+    gap: 0.25rem;
+    padding: 0.5rem;
+    
     background-color: var(--sl-color-bg-sidebar);
     border: 1px solid var(--sl-color-gray-5);
-    border-radius: 8px;
+    border-radius: 0.5rem;
+    box-shadow: var(--sl-shadow-lg);
+    
+    // Z-INDEX OPRAVA: Musí být vyšší než zbytek headeru
+    z-index: 1000; 
+    min-width: 12rem;
+
+    /* Animace */
     opacity: 0;
     visibility: hidden;
-    transition: all 0.2s ease;
-    z-index: 10000;
-    min-width: 140px;
+    transform: translateY(-10px);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   }
+
   .lang-link {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 6px 10px;
+    gap: 0.75rem;
+    padding: 0.6rem 0.75rem; // Trochu větší plocha pro prsty
     text-decoration: none;
+    border-radius: 0.25rem;
     color: var(--sl-color-gray-2);
-    font-size: var(--sl-text-xs);
-    &.active { color: var(--sl-color-accent); pointer-events: none; }
+    font-size: var(--sl-text-sm); // Starlight standard pro texty v menu
+
+    &:hover {
+      background-color: var(--sl-color-gray-6);
+      color: var(--sl-color-white);
+    }
+
+    &.active {
+      color: var(--sl-color-accent);
+      background-color: var(--sl-color-accent-low);
+      pointer-events: none; // Aktivní jazyk není znovu klikatelný
+    }
+
+    // Klasické obdélníkové vlajky v menu
+    .fi:not(.current-fi) {
+      width: 1.25rem;
+      height: 0.9rem;
+      border-radius: 2px;
+      box-shadow: 0 0 1px rgba(0,0,0,0.2);
+    }
   }
-  .fi { display: block; background-size: cover; background-position: center; width: 20px; height: 15px; }
 </style>
