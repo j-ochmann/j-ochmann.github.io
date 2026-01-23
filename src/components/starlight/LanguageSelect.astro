@@ -3,7 +3,7 @@ import 'flag-icons/css/flag-icons.min.css';
 import { starlightLocales } from '@/content/config/starlight-locales';
 
 const locales = starlightLocales;
-const currentLocale = Astro.currentLocale!;
+const currentLocale = Astro.currentLocale || 'en';
 
 const flagMap: Record<string, string> = {
   en: 'us',
@@ -32,9 +32,7 @@ const flagMap: Record<string, string> = {
   he: 'il',
 };
 
-const getFlagCode = (lang: string) => {
-  return flagMap[lang] || lang;
-};
+const getFlagCode = (lang: string) => flagMap[lang] || lang;
 
 const getLanguageUrl = (lang: string) => {
   const pathParts = Astro.url.pathname.split('/').filter(Boolean);
@@ -45,17 +43,20 @@ const getLanguageUrl = (lang: string) => {
   }
 
   const newPath = pathParts.join('/');
-  return `/${lang}/${newPath.startsWith('/') ? newPath.substring(1) : newPath}`;
+  // Root locale fix
+  if (lang === 'root' || lang === 'en') return `/${newPath}`;
+  return `/${lang}/${newPath}`;
 };
 
-const currentLang = locales[currentLocale];
 const currentFlag = getFlagCode(currentLocale);
 ---
+
 {locales && Object.keys(locales).length > 1 && (
-  <div class="language-picker">
-    <button type="button" class="picker-button" aria-label={`Change language. Current language: ${currentLang?.label}`}>
+  <div class="language-picker" tabindex="0">
+    <button type="button" class="picker-button" aria-label="Change language">
       <span class:list={['fi', `fi-${currentFlag}`]} aria-hidden="true"></span>
     </button>
+    
     <div class="language-dropdown">
       {Object.entries(locales).map(([lang, locale]) => {
         if (!locale) return null;
@@ -64,10 +65,10 @@ const currentFlag = getFlagCode(currentLocale);
           <a
             href={getLanguageUrl(lang)}
             class:list={['lang-link', { active: lang === currentLocale }]}
-            aria-label={locale.label}
             title={locale.label}
           >
             <span class={`fi fi-${flagCode}`} aria-hidden="true"></span>
+            <span class="lang-label">{locale.label}</span>
           </a>
         );
       })}
@@ -75,112 +76,104 @@ const currentFlag = getFlagCode(currentLocale);
   </div>
 )}
 
-<script is:inline>
-  document.addEventListener('DOMContentLoaded', () => {
-    const picker = document.querySelector('.language-picker');
-    if (!picker) return;
-    const button = picker.querySelector('.picker-button');
-
-    button.addEventListener('click', (e) => {
-      e.stopPropagation();
-      picker.classList.toggle('is-open');
-    });
-
-    document.addEventListener('click', (e) => {
-      if (!picker.contains(e.target)) {
-        picker.classList.remove('is-open');
-      }
-    });
-  });
-</script>
-
 <style lang="scss">
   .language-picker {
     position: relative;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0 1rem;
+    /* Důležité pro CSS focus trigger */
+    outline: none; 
 
     .picker-button {
       display: flex;
-      align-items: center;
-      justify-content: center;
       width: 28px;
-      height: 21px;
-      padding: 0;
-      background: none;
+      height: 20px;
       border-radius: 4px;
       overflow: hidden;
       border: 1px solid var(--sl-color-gray-5);
+      background: none;
       cursor: pointer;
-      transition: all 0.2s ease-in-out;
+      transition: border-color 0.2s;
 
-      &:hover, &.active {
-        opacity: 1;
-        transform: scale(1.1);
+      &:hover {
         border-color: var(--sl-color-accent);
-        box-shadow: 0 0 8px -2px var(--sl-color-accent);
       }
     }
 
-    &.is-open .picker-button {
-      border-color: var(--sl-color-accent);
-      box-shadow: 0 0 8px -2px var(--sl-color-accent);
-    }
-    
-    .fi {
-      display: block;
-      width: 100%;
-      height: 100%;
-      background-size: cover;
-      background-position: center;
+    /* --- ČISTÉ CSS ROZBALOVÁNÍ --- */
+    /* Menu se ukáže, když má tlačítko focus nebo se klikne do kontejneru */
+    &:focus-within .language-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
     }
   }
 
   .language-dropdown {
     position: absolute;
-    top: calc(100% + 10px);
-    right: 0;
-    display: none;
+    /* Směřuje nahoru nebo dolů podle potřeby, tady pod tlačítko */
+    top: calc(100% + 8px);
+    right: 50%;
+    transform: translateX(50%) translateY(-10px);
+    
+    display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-    padding: 0.5rem;
+    gap: 4px;
+    padding: 6px;
+    
     background-color: var(--sl-color-bg-sidebar);
     border: 1px solid var(--sl-color-gray-5);
     border-radius: 8px;
-    z-index: 10;
-    max-height: 200px;
-    overflow-y: auto;
-  }
-  
-  .language-picker.is-open .language-dropdown {
-    display: flex;
+    box-shadow: var(--sl-shadow-lg);
+    z-index: 10000;
+    min-width: 120px;
+
+    /* Výchozí stav (skrytý) */
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: all;
   }
 
   .lang-link {
     display: flex;
     align-items: center;
-    justify-content: center;
-    width: 28px;
-    height: 21px;
+    gap: 10px;
+    padding: 6px 10px;
+    text-decoration: none;
     border-radius: 4px;
-    overflow: hidden;
-    opacity: 0.6;
-    transition: all 0.2s ease-in-out;
-    border: 1px solid var(--sl-color-gray-5);
-    background-color: var(--sl-color-gray-6);
+    color: var(--sl-color-gray-2);
+    font-size: var(--sl-text-xs);
+    transition: background 0.2s;
 
     &:hover {
-      opacity: 1;
-      transform: scale(1.1);
-      border-color: var(--sl-color-accent);
+      background-color: var(--sl-color-gray-5);
+      color: var(--sl-color-white);
     }
 
     &.active {
-       opacity: 1;
-       border-color: var(--sl-color-accent);
-       box-shadow: 0 0 8px -2px var(--sl-color-accent);
+      background-color: var(--sl-color-accent-low);
+      color: var(--sl-color-accent);
+      pointer-events: none;
     }
+
+    .fi {
+      width: 20px;
+      height: 15px;
+      flex-shrink: 0;
+      border-radius: 2px;
+    }
+    
+    .lang-label {
+      white-space: nowrap;
+    }
+  }
+
+  /* Ikona vlajky */
+  .fi {
+    display: block;
+    background-size: cover;
+    background-position: center;
   }
 </style>
