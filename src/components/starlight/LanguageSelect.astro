@@ -5,49 +5,48 @@ import config from 'virtual:starlight/user-config';
 
 const currentLocale = Astro.currentLocale?.toString() || 'en';
 const currentFlag = getFlagCode(currentLocale);
+
 const getLanguageUrl = (targetLang: string) => {
   const pathParts = Astro.url.pathname.split('/').filter(Boolean);
   const langCodes = Object.keys(locales);
-  // Odstranění stávajícího jazyka z cesty
   if (pathParts.length > 0 && langCodes.includes(pathParts[0])) {
     pathParts.shift();
   }
   const slug = pathParts.join('/');
-  // Detekce, zda je cílový jazyk nastaven jako 'root' (bez prefixu)
   const isRoot = config.locales?.root && config.locales.root.lang === targetLang;
 
   if (isRoot) {
     return slug === '' ? '/' : `/${slug}`;
   }
-  // Vrátí cestu s prefixem (např. /en/ nebo /cs/stranka)
   return slug === '' ? `/${targetLang}/` : `/${targetLang}/${slug}`;
 };
 ---
 
 {locales && Object.keys(locales).length > 1 && (
-  <div class="language-picker" tabindex="0">
-    <button type="button" class="language-button" aria-label="Change language">
-      {/* Aktuální vlajka: použita třída 'fib' pro čtvercový základ a 'current-fi' pro kruh */}
+  <div class="language-picker" id="lang-picker-container">
+    <button type="button" class="language-button" id="lang-btn-trigger" aria-label="Change language">
       <span class:list={['fi', `fi-${currentFlag}`, 'fib', 'current-fi']} aria-hidden="true"></span>
     </button>
     
-    <div class="language-dropdown">
-      {Object.entries(locales).map(([code, locale]) => {
-        if (!locale) return null;
-        // Používáme locale.lang pro vyhledání v i18n tabulce podle vašeho přání
-        const flagCode = getFlagCode(locale.lang);
-        
-        return (
-          <a
-            href={getLanguageUrl(code)}
-            class:list={['lang-link', { active: code === currentLocale }]}
-            title={locale.label}
-          >
-            <span class={`fi fi-${flagCode}`} aria-hidden="true"></span>
-            <span class="lang-label">{locale.label}</span>
-          </a>
-        );
-      })}
+    {/* Šablona pro Portál - JS ji přesune pod body */}
+    <div id="lang-portal-root" class="language-portal">
+      <div class="language-dropdown">
+        {Object.entries(locales).map(([code, locale]) => {
+          if (!locale) return null;
+          const flagCode = getFlagCode(locale.lang);
+          
+          return (
+            <a
+              href={getLanguageUrl(code)}
+              class:list={['lang-link', { active: code === currentLocale }]}
+              title={locale.label}
+            >
+              <span class={`fi fi-${flagCode}`} aria-hidden="true"></span>
+              <span class="lang-label">{locale.label}</span>
+            </a>
+          );
+        })}
+      </div>
     </div>
   </div>
 )}
@@ -55,71 +54,80 @@ const getLanguageUrl = (targetLang: string) => {
 <style lang="scss">
   @use "@/styles/globals.scss" as *;
 
-  .language-picker {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    z-index: 100; 
+  // 1. ZÁMEK SCROLLU
+  :global(html.lock-scroll), :global(html.lock-scroll body) {
+    overflow: hidden !important;
+    height: 100vh !important;
+    touch-action: none; // Fix pro mobilní Safari 2026
+  }
 
-    &:focus-within .language-dropdown {
+  // 2. GLOBÁLNÍ SKLO (Portál)
+  :global(.global-glass-overlay) {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(12px) saturate(150%);
+    -webkit-backdrop-filter: blur(12px) saturate(150%);
+    z-index: 9998;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+  }
+
+  // 3. PORTÁL DROPDOWNU
+  :global(.language-portal) {
+    position: fixed;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    transform: translateY(-10px);
+    pointer-events: none;
+
+    &.is-open {
       opacity: 1;
       visibility: visible;
-      transform: translateY(-40px);
-    }
-
-    .language-button {
-      @include icon-base;
-      border: none;
-      .current-fi {
-        width: 38px;
-        height: 38px;
-        border-radius: 50%;
-        background-size: cover !important;
-        background-position: center;
-        flex-shrink: 0;
-      }
-    }
-
-    .language-button:hover { 
-      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
     }
   }
 
   .language-dropdown {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    padding: 0.5rem;
-    
     background-color: var(--sl-color-bg-sidebar);
     border: 1px solid var(--sl-color-gray-5);
-    border-radius: 0.5rem;
+    border-radius: 0.75rem;
+    padding: 0.5rem;
     box-shadow: var(--sl-shadow-lg);
-    
-    // Z-INDEX OPRAVA: Musí být vyšší než zbytek headeru
-    z-index: 1000; 
-    min-width: 12rem;
+    min-width: 14rem;
+    max-height: 70vh; // Povolí scroll v menu
+    overflow-y: auto;
+  }
 
-    /* Animace */
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  .language-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    
+    .current-fi {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background-size: cover !important;
+      border: 1px solid var(--sl-color-hairline);
+    }
   }
 
   .lang-link {
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    padding: 0.6rem 0.75rem; // Trochu větší plocha pro prsty
+    padding: 0.75rem 1rem;
     text-decoration: none;
-    border-radius: 0.25rem;
     color: var(--sl-color-gray-2);
-    font-size: var(--sl-text-sm); // Starlight standard pro texty v menu
+    border-radius: 0.5rem;
+    font-size: var(--sl-text-sm);
 
     &:hover {
       background-color: var(--sl-color-gray-6);
@@ -129,15 +137,71 @@ const getLanguageUrl = (targetLang: string) => {
     &.active {
       color: var(--sl-color-accent);
       background-color: var(--sl-color-accent-low);
-      pointer-events: none; // Aktivní jazyk není znovu klikatelný
+      pointer-events: none;
     }
 
-    // Obdélníkové vlajky v menu
     .fi:not(.current-fi) {
       width: 1.25rem;
       height: 0.9rem;
       border-radius: 2px;
-      box-shadow: 0 0 1px rgba(0,0,0,0.2);
     }
   }
 </style>
+
+<script>
+  function setupLanguagePortal() {
+    const trigger = document.getElementById('lang-btn-trigger') as HTMLButtonElement;
+    const portal = document.getElementById('lang-portal-root') as HTMLElement;
+    if (!trigger || !portal) return;
+
+    // Vytvoření skla pokud neexistuje
+    let glass = document.querySelector('.global-glass-overlay') as HTMLElement;
+    if (!glass) {
+      glass = document.createElement('div');
+      glass.className = 'global-glass-overlay';
+      document.body.appendChild(glass);
+    }
+
+    // Přesun menu pod body (Portál)
+    if (portal.parentElement !== document.body) {
+      document.body.appendChild(portal);
+    }
+
+    const toggle = (show: boolean) => {
+      document.documentElement.classList.toggle('lock-scroll', show);
+      portal.classList.toggle('is-open', show);
+      
+      if (glass) {
+        glass.style.opacity = show ? '1' : '0';
+        glass.style.visibility = show ? 'visible' : 'hidden';
+      }
+
+      if (show) {
+        const rect = trigger.getBoundingClientRect();
+        // Pozicování absolutně k viewportu
+        portal.style.top = `${rect.bottom + 12}px`;
+        portal.style.left = `${Math.max(10, rect.right - portal.offsetWidth)}px`;
+      }
+    };
+
+    trigger.onclick = (e) => {
+      e.stopPropagation();
+      toggle(!portal.classList.contains('is-open'));
+    };
+
+    // Zavření při kliku na sklo
+    glass.onclick = () => toggle(false);
+
+    // Zavření při resize (kvůli změně pozice toolbaru)
+    window.addEventListener('resize', () => toggle(false));
+
+    // Escape klávesa
+    document.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.key === 'Escape') toggle(false);
+    });
+  }
+
+  // Astro/Starlight životní cyklus
+  document.addEventListener('astro:page-load', setupLanguagePortal);
+  setupLanguagePortal();
+</script>
