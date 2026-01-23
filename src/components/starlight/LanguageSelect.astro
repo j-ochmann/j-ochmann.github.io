@@ -38,50 +38,126 @@ const getFlagCode = (lang: string) => {
 
 const getLanguageUrl = (lang: string) => {
   const pathParts = Astro.url.pathname.split('/').filter(Boolean);
-  // Add a check for locales to avoid error when it's not passed to the component.
-  const langCodes = locales ? Object.keys(locales) : [];
+  const langCodes = Object.keys(locales);
 
-  // Pokud je prvním segmentem cesty kód jazyka, odstraňte ho
   if (pathParts.length > 0 && langCodes.includes(pathParts[0])) {
     pathParts.shift();
   }
 
   const newPath = pathParts.join('/');
-
-  // Vždy vytváříme URL s jazykovým prefixem
   return `/${lang}/${newPath.startsWith('/') ? newPath.substring(1) : newPath}`;
 };
+
+const currentLang = locales[currentLocale];
+const currentFlag = getFlagCode(currentLocale);
 ---
-
-{/* Nevykresluj komponentu, pokud je nakonfigurován pouze jeden jazyk */}
 {locales && Object.keys(locales).length > 1 && (
-  <div class="language-select-wrapper">
-    {Object.entries(locales).map(([lang, locale]) => {
-      if (!locale) return null;
-      const isCurrent = lang === currentLocale;
-      const flagCode = getFlagCode(lang);
-
-      return (
-        <a
-          href={getLanguageUrl(lang)}
-          class:list={['lang-link', { active: isCurrent }]}
-          aria-label={locale.label}
-          title={locale.label}
-        >
-          <span class={`fi fi-${flagCode}`} aria-hidden="true"></span>
-        </a>
-      );
-    })}
+  <div class="language-picker">
+    <button type="button" class="picker-button" aria-label={`Change language. Current language: ${currentLang?.label}`}>
+      <span class:list={['fi', `fi-${currentFlag}`]} aria-hidden="true"></span>
+    </button>
+    <div class="language-dropdown">
+      {Object.entries(locales).map(([lang, locale]) => {
+        if (!locale) return null;
+        const flagCode = getFlagCode(lang);
+        return (
+          <a
+            href={getLanguageUrl(lang)}
+            class:list={['lang-link', { active: lang === currentLocale }]}
+            aria-label={locale.label}
+            title={locale.label}
+          >
+            <span class={`fi fi-${flagCode}`} aria-hidden="true"></span>
+          </a>
+        );
+      })}
+    </div>
   </div>
 )}
 
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const picker = document.querySelector('.language-picker');
+    if (!picker) return;
+    const button = picker.querySelector('.picker-button');
+
+    button.addEventListener('click', (e) => {
+      e.stopPropagation();
+      picker.classList.toggle('is-open');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!picker.contains(e.target)) {
+        picker.classList.remove('is-open');
+      }
+    });
+  });
+</script>
+
 <style lang="scss">
-  .language-select-wrapper {
+  .language-picker {
+    position: relative;
     display: flex;
-    gap: 0.5rem;
     align-items: center;
+    justify-content: center;
     padding: 0 1rem;
+
+    .picker-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 21px;
+      padding: 0;
+      background: none;
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid var(--sl-color-gray-5);
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+
+      &:hover, &.active {
+        opacity: 1;
+        transform: scale(1.1);
+        border-color: var(--sl-color-accent);
+        box-shadow: 0 0 8px -2px var(--sl-color-accent);
+      }
+    }
+
+    &.is-open .picker-button {
+      border-color: var(--sl-color-accent);
+      box-shadow: 0 0 8px -2px var(--sl-color-accent);
+    }
+    
+    .fi {
+      display: block;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+    }
   }
+
+  .language-dropdown {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    display: none;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background-color: var(--sl-color-bg-sidebar);
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 8px;
+    z-index: 10;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+  
+  .language-picker.is-open .language-dropdown {
+    display: flex;
+  }
+
   .lang-link {
     display: flex;
     align-items: center;
@@ -95,20 +171,16 @@ const getLanguageUrl = (lang: string) => {
     border: 1px solid var(--sl-color-gray-5);
     background-color: var(--sl-color-gray-6);
 
-    span {
-      display: block;
-      width: 100%;
-      height: 100%;
-      background-size: cover;
-      background-position: center;
-    }
-
-    &.active,
     &:hover {
       opacity: 1;
       transform: scale(1.1);
       border-color: var(--sl-color-accent);
-      box-shadow: 0 0 8px -2px var(--sl-color-accent);
+    }
+
+    &.active {
+       opacity: 1;
+       border-color: var(--sl-color-accent);
+       box-shadow: 0 0 8px -2px var(--sl-color-accent);
     }
   }
 </style>
