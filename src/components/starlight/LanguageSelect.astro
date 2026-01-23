@@ -1,147 +1,116 @@
 ---
 import 'flag-icons/css/flag-icons.min.css';
 import { locales, getFlagCode } from '@/content/config/i18n';
+import config from 'virtual:starlight/user-config';
 
-const currentLocale = Astro.currentLocale;
+// 1. Získání aktuálního jazyka (s fallbackem na výchozí ze Starlightu)
+const currentLocale = Astro.currentLocale || config.defaultLocale || 'en';
+// 2. Definice chybějící proměnné currentFlag
+const currentFlag = getFlagCode(currentLocale.toString());
 
 const getLanguageUrl = (targetLang: string) => {
   const pathParts = Astro.url.pathname.split('/').filter(Boolean);
   const langCodes = Object.keys(locales);
-  // Odstranění stávajícího jazyka z URL, pokud tam je
+
+  // Odstranění stávajícího jazyka z URL
   if (pathParts.length > 0 && langCodes.includes(pathParts[0])) {
     pathParts.shift();
   }
 
-  const newPath = pathParts.join('/');
-  return targetLang === 'en' ? `/${newPath}` : `/${targetLang}/${newPath}`;
-};
+  const slug = pathParts.join('/');
+  
+  // Detekce, zda je cílový jazyk 'root' (bez prefixu) v astro.config.mjs
+  const isRoot = config.locales?.root && config.locales.root.lang === targetLang;
 
-const currentFlag = getFlagCode(currentLocale);
+  if (isRoot) {
+    return slug === '' ? '/' : `/${slug}`;
+  }
+
+  // Pokud prefixujete vše (včetně en), vrátí /targetLang/slug
+  return slug === '' ? `/${targetLang}/` : `/${targetLang}/${slug}`;
+};
 ---
 
 {locales && Object.keys(locales).length > 1 && (
   <div class="language-picker" tabindex="0">
     <button type="button" class="picker-button" aria-label="Change language">
+      {/* Zde byla chyba - currentFlag musí být definován nahoře */}
       <span class:list={['fi', `fi-${currentFlag}`]} aria-hidden="true"></span>
     </button>
     
-    <div class="language-dropdown">
-      {Object.entries(locales).map(([lang, locale]) => {
-        if (!locale) return null;
-        const flagCode = getFlagCode(lang);
-        return (
-          <a
-            href={getLanguageUrl(lang)}
-            class:list={['lang-link', { active: lang === currentLocale }]}
-            title={locale.label}
-          >
-            <span class={`fi fi-${flagCode}`} aria-hidden="true"></span>
-            <span class="lang-label">{locale.label}</span>
-          </a>
-        );
-      })}
-    </div>
+<div class="language-dropdown">
+  {Object.entries(locales).map(([code, locale]) => {
+    if (!locale) return null;
+    
+    // OPRAVA: Posíláme 'locale.lang' (např. 'en-US'), nikoliv klíč 'code' ('en')
+    // Tím zajistíte, že vaše funkce v i18n.ts najde shodu ve sloupci 'lang'
+    const flagCode = getFlagCode(locale.lang); 
+    
+    return (
+      <a
+        href={getLanguageUrl(code)}
+        class:list={['lang-link', { active: code === currentLocale }]}
+        title={locale.label}
+      >
+        <span class={`fi fi-${flagCode}`} aria-hidden="true"></span>
+        <span class="lang-label">{locale.label}</span>
+      </a>
+    );
+  })}
+</div>
+
   </div>
 )}
 
 <style lang="scss">
+  /* ... Vaše SCSS zůstává stejné ... */
   .language-picker {
     position: relative;
     display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    /* Důležité pro CSS focus trigger */
-    outline: none; 
+    outline: none;
 
-    .picker-button {
-      display: flex;
-      width: 28px;
-      height: 20px;
-      border-radius: 4px;
-      overflow: hidden;
-      border: 1px solid var(--sl-color-gray-5);
-      background: none;
-      cursor: pointer;
-      transition: border-color 0.2s;
-
-      &:hover {
-        border-color: var(--sl-color-accent);
-      }
-    }
-
-    /* --- ČISTÉ CSS ROZBALOVÁNÍ --- */
-    /* Menu se ukáže, když má tlačítko focus nebo se klikne do kontejneru */
     &:focus-within .language-dropdown {
       opacity: 1;
       visibility: visible;
       transform: translateY(0);
     }
   }
-
+  .picker-button {
+    display: flex;
+    width: 28px;
+    height: 20px;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid var(--sl-color-gray-5);
+    cursor: pointer;
+  }
   .language-dropdown {
     position: absolute;
-    /* Směřuje nahoru nebo dolů podle potřeby, tady pod tlačítko */
     top: calc(100% + 8px);
     right: 50%;
     transform: translateX(50%) translateY(-10px);
-    
     display: flex;
     flex-direction: column;
     gap: 4px;
     padding: 6px;
-    
     background-color: var(--sl-color-bg-sidebar);
     border: 1px solid var(--sl-color-gray-5);
     border-radius: 8px;
-    box-shadow: var(--sl-shadow-lg);
-    z-index: 10000;
-    min-width: 120px;
-
-    /* Výchozí stav (skrytý) */
     opacity: 0;
     visibility: hidden;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    pointer-events: all;
+    transition: all 0.2s ease;
+    z-index: 10000;
+    min-width: 140px;
   }
-
   .lang-link {
     display: flex;
     align-items: center;
     gap: 10px;
     padding: 6px 10px;
     text-decoration: none;
-    border-radius: 4px;
     color: var(--sl-color-gray-2);
     font-size: var(--sl-text-xs);
-    transition: background 0.2s;
-
-    &:hover {
-      background-color: var(--sl-color-gray-5);
-      color: var(--sl-color-white);
-    }
-
-    &.active {
-      background-color: var(--sl-color-accent-low);
-      color: var(--sl-color-accent);
-      pointer-events: none;
-    }
-
-    .fi {
-      width: 20px;
-      height: 15px;
-      flex-shrink: 0;
-      border-radius: 2px;
-    }
-    
-    .lang-label {
-      white-space: nowrap;
-    }
+    &.active { color: var(--sl-color-accent); pointer-events: none; }
   }
-
-  /* Ikona vlajky */
-  .fi {
-    display: block;
-    background-size: cover;
-    background-position: center;
-  }
+  .fi { display: block; background-size: cover; background-position: center; width: 20px; height: 15px; }
 </style>

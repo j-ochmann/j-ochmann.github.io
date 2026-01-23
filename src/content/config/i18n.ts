@@ -6,7 +6,7 @@ export const locales = {
   pl: { lang: 'pl', flag: 'PL', label: 'Polski' },
   uk: { lang: 'uk', flag: 'UA', label: 'Українська' },
   ru: { lang: 'ru', flag: 'RU', label: 'Русский' },
-  de: { lang: 'de', flag: 'GE', label: 'Deutsch' },
+  de: { lang: 'de', flag: 'DE', label: 'Deutsch' },
   fr: { lang: 'fr', flag: 'FR', label: 'Français' },
   it: { lang: 'it', flag: 'IT', label: 'Italiano' },
   nl: { lang: 'nl', flag: 'NL', label: 'Nederlands' },
@@ -25,11 +25,9 @@ export const locales = {
   he: { lang: 'he', flag: 'IL', label: 'עברית' },
 };
 
-export type LocaleKey = keyof typeof locales;
-
-export function getFlagCode(locale?: string): string {
-  const key = locale as LocaleKey;
-  return (locales[key]?.flag);
+export function getFlagCode(lang_id: string) {
+  return Object.values(locales).find(
+    (item) => item.lang.toLowerCase() === lang_id.toLowerCase())?.flag.toLowerCase();
 }
 
 export const languages = {
