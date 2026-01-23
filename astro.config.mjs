@@ -7,7 +7,7 @@ import d2 from 'astro-d2'; // Předpokládá se instalace integrace
 import react from '@astrojs/react';
 import { fileURLToPath } from 'node:url'; // Importujte pro práci s cestami
 
-import { starlightLocales } from './src/content/config/starlight-locales.js';
+import { locales } from './src/content/config/i18n.ts';
 
 export default defineConfig({
   site: 'https://j-ochmann.github.io',
@@ -48,7 +48,7 @@ export default defineConfig({
         },
     ],
     defaultLocale: 'en',
-    locales: starlightLocales,
+    locales: locales,
     social: [
       { icon: 'github', label: 'GitHub', href: 'https://github.com/j-ochmann' }
     ],

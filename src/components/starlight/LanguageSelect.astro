@@ -1,51 +1,19 @@
 ---
 import 'flag-icons/css/flag-icons.min.css';
-import { starlightLocales } from '@/content/config/starlight-locales';
+import { locales, getFlagCode } from '@/content/config/i18n';
 
-const locales = starlightLocales;
-const currentLocale = Astro.currentLocale || 'en';
+const currentLocale = Astro.currentLocale;
 
-const flagMap: Record<string, string> = {
-  en: 'us',
-  gb: 'gb',
-  cs: 'cz',
-  de: 'de',
-  fr: 'fr',
-  es: 'es',
-  sk: 'sk',
-  pl: 'pl',
-  uk: 'ua',
-  ru: 'ru',
-  it: 'it',
-  nl: 'nl',
-  fi: 'fi',
-  no: 'no',
-  sv: 'se',
-  pt: 'pt',
-  tr: 'tr',
-  el: 'gr',
-  zh: 'cn',
-  ja: 'jp',
-  ko: 'kr',
-  hi: 'in',
-  ar: 'sa',
-  he: 'il',
-};
-
-const getFlagCode = (lang: string) => flagMap[lang] || lang;
-
-const getLanguageUrl = (lang: string) => {
+const getLanguageUrl = (targetLang: string) => {
   const pathParts = Astro.url.pathname.split('/').filter(Boolean);
   const langCodes = Object.keys(locales);
-
+  // Odstranění stávajícího jazyka z URL, pokud tam je
   if (pathParts.length > 0 && langCodes.includes(pathParts[0])) {
     pathParts.shift();
   }
 
   const newPath = pathParts.join('/');
-  // Root locale fix
-  if (lang === 'root' || lang === 'en') return `/${newPath}`;
-  return `/${lang}/${newPath}`;
+  return targetLang === 'en' ? `/${newPath}` : `/${targetLang}/${newPath}`;
 };
 
 const currentFlag = getFlagCode(currentLocale);
