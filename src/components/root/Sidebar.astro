@@ -15,15 +15,14 @@ const aboutLink = getRelativeLocaleUrl(lang, 'about');
 <Icons />
 
 <div class="sidebar-layout">
-  <!-- 1. DETEKTOR A PROFIL -->
   <div class="profile-container">
     <div class="social-circle-wrapper">
-       <!-- Váš kód s profilem -->
        <div class="circular-menu">
-          <a href={aboutLink}>
-            <img src={mainImage} class="profile-img main-img" />
-            <SocialCircle />
+          <a href={aboutLink} class="profile-link">
+            <img src={mainImage} class="profile-img main-img" alt="Profile" />
+            <img src={hoverImage} class="profile-img hover-img" alt="Profile Hover" />
           </a>
+          <SocialCircle />
        </div>
     </div>
   </div>
@@ -46,44 +45,66 @@ const aboutLink = getRelativeLocaleUrl(lang, 'about');
 
   .profile-container {
     position: relative;
-    height: auto;
-    /* Důležité: Tento kontejner nesmí mít z-index, aby profil "vyčníval" ven */
+    /* Rezervujeme místo, aby menu pod ním neskákalo */
+    min-height: 200px; 
+    display: flex;
+    justify-content: center;
+    /*padding-top: 2rem;*/
   }
 
   .social-circle-wrapper {
     position: relative;
-    /* Vyšší než ToolBar, aby ho nahoře překryl */
     z-index: 1100; 
     margin-bottom: 2rem;
     transition: transform 0.2s ease;
+    /* CLEAN CSS SCROLL EFFECT */
+    animation: sink-under linear both;
+    animation-timeline: scroll();
+    animation-range: 0px 80px; 
   }
 
   /* TOOLBAR SETUP */
   .toolbar {
     position: fixed !important;
     top: 0;
+    left: 0;
+    width: 300px; /* Nebo šířka sidebaru */
     z-index: 1000; /* Nižší než profil v klidu */
     /* Sklo */
-    backdrop-filter: blur(10px);
-    background: rgba(var(--sl-color-bg-sidebar-rgb), 0.8);
+    backdrop-filter: blur(8px) saturate(180%);
+    -webkit-backdrop-filter: blur(8px) saturate(180%);
+    /*background: color-mix(in srgb, var(--sl-color-bg-sidebar), transparent 75%);*/
+    border-right: 1px solid color-mix(in srgb, var(--sl-color-hairline), transparent 0%);
   }
 
-  /* KLÍČOVÝ TRIK: CSS Scroll-Driven Animation (2026 standard) */
-  @keyframes sink-under {
-    0% { z-index: 1100; opacity: 1; }
-    1% { z-index: 500; } /* Okamžitý propad pod toolbar po zahájení scrollu */
-    100% { z-index: 500; }
-  }
+/* Oprava mizení profilovky: zajistěte, aby obrázky měly jasný z-index v rámci wrapperu */
+.profile-img {
+  position: relative;
+  display: block;
+}
 
-  .social-circle-wrapper {
-    /* Pokud prohlížeč podporuje (Chrome, Edge, Safari 2025+), 
-       profil se propadne pod lištu hned, jak se pohne */
-    animation: sink-under linear both;
-    animation-timeline: scroll();
-    animation-range: 0px 50px;
-  }
+.hover-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
 
-  /* Fallback pro starší prohlížeče bez JS: 
-     Profil prostě odroluje pod lištu díky pořadí v DOMu, 
-     pokud mu sebereme ten vysoký z-index. */
+.social-circle-wrapper:hover .hover-img {
+  opacity: 1;
+}
+
+@keyframes sink-under {
+  0% { z-index: 1100; }
+  /* Propadne se dříve, než se dotkne horní hrany toolbaru */
+  10% { z-index: 500; } 
+  100% { z-index: 500; }
+}
+
+.wrapper {
+  position: relative;
+  z-index: 1;
+  margin-top: 1rem;
+}
+
 </style>
