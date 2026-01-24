@@ -14,79 +14,40 @@ import Search from '@/components/starlight/Search.astro';
   </div>
 </div>
 
-<script is:inline>
-  document.addEventListener('click', (e) => {
-    if (e.target.closest('[data-search-modal-open]')) {
-      document
-        .querySelector('#starlight__search-modal')
-        ?.showModal();
-    }
-  });
-</script>
-
 <style lang="scss">
   .toolbar {
     position: fixed;
-    //position: sticky;
     top: 0;
     left: 0;
-    width: 300px;
-    //width: 100%;
-    height: 50px; // Pevná výška pro snadné centrování
+    width: 300px; 
+    height: 50px;
     z-index: 1000;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    //margin:-16px;
-    padding: 0px 10px;
+    padding: 0 10px;
     /* Glassmorphism */
     backdrop-filter: blur(8px) saturate(180%);
     -webkit-backdrop-filter: blur(8px) saturate(180%);
-    //background: color-mix(in srgb, var(--sl-color-bg-sidebar), transparent 50%); 
-    border-bottom: 1px solid color-mix(in srgb, var(--sl-color-hairline), transparent 70%);
-    //border-right: 1px solid color-mix(in srgb, var(--sl-color-hairline), transparent 0%);
+    /*background: color-mix(in srgb, var(--sl-color-bg-sidebar), transparent 75%);*/
+    border-right: 1px solid color-mix(in srgb, var(--sl-color-hairline), transparent 0%);
+    border-bottom: 1px solid color-mix(in srgb, var(--sl-color-hairline), transparent 80%) !important;
   }
 
-  .right-section {
+  .left-section, .right-section {
     display: flex;
     align-items: center;
-    //flex-direction: row-reverse; // Otočíme pořadí pro snadnější z-index (Search bude vpravo a nahoře)
-
-    /* 3. VYNUCENÉ PŘEKRÝVÁNÍ */
-    /* Používáme hluboký selektor, aby se styly dostaly dovnitř komponent */
-    :global(> *) {
-      position: relative;
-      margin-right: -12px !important; // Negativní margin doprava (kvůli row-reverse)
-      transition: all 0.2s ease-in-out;
-      /* Každá komponenta musí mít vlastní pozadí, jinak uvidíte tu pod ní! */
-      background: var(--sl-color-bg-nav) !important;
-      border-radius: 50%;
-    }
-
-    /* Z-index kaskáda: Prvek úplně vpravo (Search) bude nejvýše */
-    :global(> *:nth-child(1)) { z-index: 3; }
-    :global(> *:nth-child(2)) { z-index: 2; }
-    :global(> *:nth-child(3)) { z-index: 1; }
-
-    /* Hover efekt: Ikona "vyskočí" dopředu */
-    :global(> *:hover) {
-      //z-index: 10 !important;
-      //transform: translateY(-3px);
-      //border-color: var(--sl-color-accent);
-    }
-  }
-
-  .left-section {
-    :global(> *) {
-      background: var(--sl-color-bg-nav) !important;
-      border-radius: 50%;
+    /*gap: 8px; */
+    :global(.starlight-theme-select),
+    :global(.starlight-language-select),
+    :global(sl-search) {
+      background: var(--sl-color-bg-nav);
+      border-radius: 20px; /* Tablet/Pill design místo force-circle */
       border: 1px solid var(--sl-color-hairline);
     }
   }
-
-  /* Aby obsah stránky nezačínal POD toolbarem (protože je fixed) */
-  :global(main), :global(.content-panel) {
-    //margin-top: 3.5rem;
+  /* Pokud Search v Starlightu vyžaduje specifickou šířku */
+  .right-section :global(sl-search) {
+    flex-shrink: 0;
   }
 </style>
-
