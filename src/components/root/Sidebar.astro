@@ -13,68 +13,77 @@ const lang = Astro.currentLocale || 'en';
 const aboutLink = getRelativeLocaleUrl(lang, 'about');
 ---
 <Icons />
-<!-- TOOLBAR (Má z-index: 1000) -->
-  <ToolBar />
-<!-- Obal, který drží profil i toolbar pohromadě v sidebaru -->
-<div class="sidebar-content-wrapper">
-  <!-- PROFILE (zmizí při scrollu nahoru) -->
-  <div class="social-circle-wrapper">
-    <div class="circular-menu">
-      <a href={aboutLink} aria-label="About page">
-        <img src={mainImage} alt="Jindrich Ochmann, a software engineer, smiling at the camera in a professional portrait setting with a neutral background, conveying approachability and professionalism" class="profile-img main-img" />
-        <img src={hoverImage} alt="Jindrich Ochmann, a software engineer, in a professional portrait setting with a neutral background, conveying approachability and professionalism in an alternative pose" class="profile-img hover-img" />
-      </a>
-      <SocialCircle />
+
+<div class="sidebar-layout">
+  <!-- 1. DETEKTOR A PROFIL -->
+  <div class="profile-container">
+    <div class="social-circle-wrapper">
+       <!-- Váš kód s profilem -->
+       <div class="circular-menu">
+          <a href={aboutLink}>
+            <img src={mainImage} class="profile-img main-img" />
+            <SocialCircle />
+          </a>
+       </div>
     </div>
   </div>
-  <!-- TOOLBAR (při scrollu se přichytí nahoře) -->
-  <!-- <ToolBar /> -->
-  <!-- ZBYTEK SIDEBARU -->
+
+  <!-- 2. TOOLBAR (Musí být až po profilu!) -->
+  <ToolBar /> 
+
+  <!-- 3. OBSAH SIDEBARU -->
   <div class="wrapper">
     <DefaultSidebar {...Astro.props} />
   </div>
 </div>
 
-<style>
-  .sidebar-content-wrapper {
+<style is:global> /* is:global zajistí, že ovlivníme i ToolBar pokud je to nutné */
+  .sidebar-layout {
     display: flex;
     flex-direction: column;
-    /* Zajistí, že sticky uvnitř bude fungovat vůči tomuto kontejneru */
-    position: relative; 
-    /* Důležité: horní padding, aby první položky menu nebyly pod profilem */
-    /*padding-top: -20px;*/ 
+    position: relative;
   }
+
+  .profile-container {
+    position: relative;
+    height: auto;
+    /* Důležité: Tento kontejner nesmí mít z-index, aby profil "vyčníval" ven */
+  }
+
   .social-circle-wrapper {
-    /* Můžete přidat margin, aby toolbar nebyl nalepený na fotce */
+    position: relative;
+    /* Vyšší než ToolBar, aby ho nahoře překryl */
+    z-index: 1100; 
     margin-bottom: 2rem;
-    position: relative;
-    /* Tato hodnota určuje, kde se profil zastaví předtím, než ho toolbar překryje */
-    /*top: 60px;*/ 
-    z-index: 2000; /* Vyšší než ToolBar (1000) */    
-    /* Tento trik způsobí, že se profil "propadne" pod toolbar při scrollu */
-    /*view-transition-name: profile-circle;*/
-    /*transition: z-index 0.3s; /* Rychlá změna vrstvy */
+    transition: transform 0.2s ease;
   }
 
-  .wrapper {
-    position: relative;
-    z-index: 1; /* Menu musí být pod profilem i toolbarem */
-    /*background: var(--sl-color-bg-sidebar);*/
+  /* TOOLBAR SETUP */
+  .toolbar {
+    position: fixed !important;
+    top: 0;
+    z-index: 1000; /* Nižší než profil v klidu */
+    /* Sklo */
+    backdrop-filter: blur(10px);
+    background: rgba(var(--sl-color-bg-sidebar-rgb), 0.8);
   }
+
+  /* KLÍČOVÝ TRIK: CSS Scroll-Driven Animation (2026 standard) */
+  @keyframes sink-under {
+    0% { z-index: 1100; opacity: 1; }
+    1% { z-index: 500; } /* Okamžitý propad pod toolbar po zahájení scrollu */
+    100% { z-index: 500; }
+  }
+
+  .social-circle-wrapper {
+    /* Pokud prohlížeč podporuje (Chrome, Edge, Safari 2025+), 
+       profil se propadne pod lištu hned, jak se pohne */
+    animation: sink-under linear both;
+    animation-timeline: scroll();
+    animation-range: 0px 50px;
+  }
+
+  /* Fallback pro starší prohlížeče bez JS: 
+     Profil prostě odroluje pod lištu díky pořadí v DOMu, 
+     pokud mu sebereme ten vysoký z-index. */
 </style>
-
-<script>
-  const profile = document.querySelector('.social-circle-wrapper') as HTMLElement | null;
-  
-  if (profile) {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        // Nyní TS ví, že profile není null
-        profile.style.zIndex = entry.isIntersecting ? "2000" : "500";
-      },
-      { threshold: [1.0] }
-    );
-
-    observer.observe(profile);
-  }
-</script>
