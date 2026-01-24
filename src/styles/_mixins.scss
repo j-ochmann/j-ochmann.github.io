@@ -1,4 +1,7 @@
 /* BASE FOR ROUND ICONS */
+$baseFrontCol: #ffffff;
+$baseBackCol: radial-gradient(circle at 30% 107%, #5c5c5c 0%, #ffffff 100%);
+
 @mixin icon-base($size: 38px) {    
   cursor: pointer;
   width: 22px;

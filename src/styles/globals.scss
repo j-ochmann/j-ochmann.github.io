@@ -1,4 +1,6 @@
 
+@use "animations" as *;
+@use "mixins" as *;
 /* ---------- FONTS ---------- */
 @import '@fontsource/syne/400.css';
 @import '@fontsource/montserrat/400.css';
@@ -9,15 +11,11 @@ html, body {
   min-height: 100vh;
 }
 
-/* Cílení přímo na kontejnery Starlightu, které mohou generovat scrollbar */
 .starlight__sidebar, 
 .sidebar-content,
 aside.sidebar {
   overflow-x: clip !important;
-  /* Zajištění, že se sidebar nebude snažit být širší než je definováno */
-  /*max-width: var(--sl-sidebar-width) !important;*/ 
 }
-/* Vypnutí scrollbaru pro starší prohlížeče (fallback) */
 * {
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE/Edge */
@@ -25,8 +23,6 @@ aside.sidebar {
 *::-webkit-scrollbar {
   display: none; /* Chrome/Safari/Brave */
 }
-/* POZOR: výše uvedené skryje i vertikální scrollbar. 
-   Pokud chcete nechat vertikální, použijte toto místo toho: */
 .starlight__sidebar::-webkit-scrollbar {
   height: 0; /* Skryje pouze horizontální */
 }
@@ -43,41 +39,26 @@ header.header {
 .content-panel {
   padding-top: 0 !important;
 }
-
-
 /* ---------- SIDEBAR COMMON ---------- */
 .starlight__sidebar {
   overflow-x: clip !important; /* Ikony mohou vyčnívat, ale nezpůsobí scrollbar */
 }
-
 .sidebar-content {
   height: 90%;
   width: 100%; /* Změněno z max-width pro lepší centrování */
   display: flex;
   flex-direction: column;
 }
-/* Vycentrování položek v DefaultSidebar */
-/*.sidebar-content :global(nav > ul) {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 0;
-  width: 100%;
-}*/
-
 .sidebar-content :global(details) {
   width: 100%;
 }
-
 .sidebar-content :global(summary) {
   justify-content: center !important; /* Zarovná šipky a text kategorií na střed */
 }
-
 .sidebar-content :global(a) {
   text-align: center;
   justify-content: center;
 }
-
 .sidebar-controls {
   display: flex;
   flex-direction: column;
@@ -86,12 +67,7 @@ header.header {
   width: 100%;
   margin-top: 2rem;
 }
-
-
 /* ICONS COLORS & SIZES */
-$baseFrontCol: #ffffff;
-$baseBackCol:
-  radial-gradient(circle at 30% 107%, #5c5c5c 0%, #ffffff 100%);
 $instagram-colors:
   radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
 $google-colors:
@@ -113,8 +89,6 @@ $google-colors:
 .icon-moon      { @include icon-style(25px, #ffea00, #000000); }
 .icon-instagram { @include icon-style(27px, $baseFrontCol, $instagram-colors); }
 .icon-email     { @include icon-style(25px, $baseFrontCol, $google-colors); }
-
-
 
 /* ---------- NAVIGATION ---------- */
 .nav-links ul {
