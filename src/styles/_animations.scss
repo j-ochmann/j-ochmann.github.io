@@ -1,0 +1,27 @@
+@keyframes pulse-glow {
+  0%   { box-shadow: 0 0 20px rgb(252, 252, 252); }
+  50%  { box-shadow: 0 0  5px rgb(0, 0, 0); filter: brightness(1.5); }
+  100% { box-shadow: 0 0 20px rgb(252, 252, 252); }
+}
+@keyframes float {
+  0% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(-10px) scale(1.02); }
+  100% { transform: translateY(0px) scale(1); }
+}
+@keyframes blob {
+  0% { border-radius: 5% 5% 5% 5%; }
+  33% { border-radius: 30% 20% 25% 25%; }
+  66% { border-radius: 40% 60% 30% 70%; }
+  100% { border-radius: 5% 5% 5% 5%; }
+}
+@keyframes hue-cycle {
+  from { filter: hue-rotate(0deg) brightness(1.2); }
+  to { filter: hue-rotate(360deg) brightness(1.2); }
+}
+@keyframes chaos {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  25%  { transform: translate(400px, -200px) rotate(90deg); }
+  50%  { transform: translate(-300px, 500px) rotate(180deg); }
+  75%  { transform: translate(200px, -400px) rotate(270deg); }
+  100% { transform: translate(0, 0) rotate(360deg); }
+}

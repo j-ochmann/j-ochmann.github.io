@@ -51,3 +51,196 @@
     <svg><use href="#icon-login"></use></svg>
   </a>
 </div>
+
+<style>
+@use "@/styles/mixins.scss"
+/* ---------- ICONS ARC ---------- */
+.social-icons {
+  position: absolute;
+  top: 90px;  /* Polovina výšky obrázku (180/2) */
+  left: 90px; /* Polovina šířky obrázku (180/2) */
+  z-index: 12;
+}
+.social-icons a {
+  @include icon-base;
+  position: absolute;
+  margin-top: -19px; /* Vycentrování ikony (výška/2) */
+  margin-left: -19px; /* Vycentrování ikony (šířka/2) */
+  transform: rotate(var(--angle)) translateX(70px) translateY(-70px) rotate(calc(-1 * var(--angle)));
+}
+.social-icons a:hover {
+  transform: rotate(var(--angle)) translateX(75px) translateY(-75px) rotate(calc(-1 * var(--angle))) scale(1.5);
+  box-shadow: 0 8px 15px rgba(0,0,0,0.5);
+  filter: brightness(1.1);
+  opacity: 1;
+  z-index: 100;
+  animation: pulse-glow 3s infinite ease-in-out;
+}
+/* Nastavení ikon po oblouku */
+$icon-count: 10;
+$start-angle: 160deg;
+$angle-range: 180deg;
+$angle-step: 0deg;
+@if $icon-count > 1 {
+  $angle-step: calc($angle-range / ($icon-count - 1));
+}
+$action-start-angle: $start-angle + 2*$angle-step;
+
+@for $i from 1 through $icon-count {
+  .social-icons a:nth-child(#{$i}) {
+    --angle: #{$start-angle + (($i - 1) * -$angle-step)};
+  }
+  .action-icons a:nth-child(#{$i}) {
+    --angle: #{$action-start-angle + (($i - 1) * $angle-step)};
+  }
+}
+
+.action-icons {
+  @extend .social-icons;
+  opacity: 0; /* invisible by default */
+  pointer-events: none; /* non-interactive by default */
+  transition: opacity 0.3s ease; /* Smooth transition */
+}
+.action-icons a{
+  transform: rotate(var(--angle)) translateX(70px) translateY(-70px) rotate(calc(-1 * var(--angle)));
+}
+.social-circle-wrapper:hover .action-icons {
+  opacity: 1; /* Visible on hover */
+  pointer-events: auto; /* Interactive on hover */
+}
+
+/* New styles for theme-icons */
+  .theme-toggle-btn {
+    background: transparent;
+    border: none;
+    width: 38px;
+    height: 38px;
+    cursor: pointer;
+    border-radius: 50% !important;
+    
+    // Klíčové pro centrování:
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px; // Vytvoří vnitřní prostor, aby ikona nebyla "nalepená"
+
+    transition: background-color 0.2s, color 0.2s, transform 0.2s;
+
+    &:hover {
+      transform: scale(1.5);
+      background-color: var(--sl-color-gray-5); // Volitelné: zvýrazní kruhový tvar
+    }
+  }
+
+  .theme-icons {
+    width: 24px;  // Pevná velikost ikony uvnitř 38px tlačítka
+    height: 24px;
+    fill: currentColor;
+    display: none;
+    flex-shrink: 0; // Zabrání deformaci v některých prohlížečích
+    aspect-ratio: 1 / 1; // Vynutí čtvercový poměr stran
+    overflow: visible;   //
+  }
+
+  .theme-icons a {
+    @include icon-base;
+  }
+/* ---------- NAME CIRCLE ---------- */
+
+.name-circle {
+  clip-path: circle(50%); /* Funkční kruh pro myš */
+  pointer-events: none;
+}
+
+.name-circle svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+:root[data-theme='light'] .name-circle text{
+  fill: #333;
+  stroke: rgba(255, 255, 255, 0.5);
+}
+:root[data-theme='dark'] .name-circle text {
+  fill: #ffffff;
+  stroke: rgba(26, 0, 69, 0.485);
+}
+
+.name-circle text {
+  font-family: 'Syne', 'Montserrat', 'Space Grotesk', sans-serif !important;
+  font-size: 18px;
+  letter-spacing: 2px;
+  font-weight: 700;
+  text-transform: uppercase;
+  paint-order: stroke;
+  stroke-width: 6px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.name-circle {
+  position: absolute;
+  top: -15px;
+  left: -15px;
+  width: 210px;
+  height: 210px;
+  pointer-events: none;
+  transform: rotate(-45deg);
+  transition: transform 1s ease;
+  z-index: 2;
+}
+/* ---------- PROFILE ---------- */
+.social-circle-wrapper {
+  width: 100%; /* Aby mohl flexbox uvnitř centrovat na střed sidebaru */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: 30px 0px;
+  position: relative;
+  overflow: visible; /* Důležité: ikony musí být vidět i mimo kontejner */
+}
+.circular-menu {
+  position: relative;
+  width: 180px;
+  height: 180px;
+}
+.profile-img {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: scale(1);
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.7s ease;
+}
+.main-img {
+  opacity: 1;
+  z-index: 1;
+  transform: scale(1) rotate(0deg);
+}
+.hover-img {
+  opacity: 0;
+  z-index: 2;
+  animation: pulse-glow 3s infinite ease-in-out;
+  transform: scale(0.5) rotate(-180deg);
+}
+.social-circle-wrapper:hover .main-img {
+  opacity: 0;
+  transform: scale(1.5) rotate(180deg);
+}
+.social-circle-wrapper:hover .hover-img {
+  opacity: 1;
+  transform: scale(1.2);
+  transform: scale(1.2) rotate(0deg);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+  z-index: 11;
+}
+.social-circle-wrapper:hover .name-circle {
+  transform: scale(1.3) rotate(0deg);
+  z-index: 11;
+}
+</style>

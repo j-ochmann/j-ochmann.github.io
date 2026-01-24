@@ -19,15 +19,15 @@ const getLanguageUrl = (targetLang: string) => {
 ---
 
 {locales && Object.keys(locales).length > 1 && (
-  <div class="language-picker">
-    <input type="checkbox" id="lang-toggle-final" class="lang-checkbox" />
+  <div class="language-picker-wrapper">
+    <input type="checkbox" id="lang-toggle" class="lang-checkbox" />
     
-    <label for="lang-toggle-final" class="language-button">
+    <label for="lang-toggle" class="language-button">
       <span class:list={['fi', `fi-${currentFlag}`, 'fib', 'current-fi']} aria-hidden="true"></span>
     </label>
     
-    {/* Sklo je sourozenec tlačítka i dropdownu, vše je uvnitř pickerru */}
-    <label for="lang-toggle-final" class="glass-overlay-fixed"></label>
+    {/* Overlay je nyní fixní k viewportu */}
+    <label for="lang-toggle" class="glass-overlay"></label>
 
     <div class="language-dropdown">
       <div class="dropdown-content">
@@ -47,71 +47,69 @@ const getLanguageUrl = (targetLang: string) => {
 )}
 
 <style lang="scss">
-  @use "@/styles/globals.scss" as *;
-
-  // 1. GLOBÁLNÍ ZÁMEK SCROLLU A ROZMAZÁNÍ (CSS 2026)
+  @use "@/styles/mixins.scss"
+  // Zámek scrollu při otevření
   :global(html:has(.lang-checkbox:checked)) {
-    overflow: hidden !important;
+    overflow: hidden;
   }
 
-  // Rozmažeme všechno kromě toolbaru (aby byl nad sklem)
-  :global(body:has(.lang-checkbox:checked) :where(main, .main-frame, .sidebar-pane, starlight-menu-button)) {
-    filter: blur(10px) saturate(140%);
-    pointer-events: none;
-    transition: filter 0.3s ease;
-  }
-
-  // 2. POVÝŠENÍ CELÉHO TOOLBARU (Stacking Context Fix)
-  // Aby dropdown mohl být nad sklem, musí se celý toolbar dostat nad z-index skla
-  :global(body:has(.lang-checkbox:checked) .toolbar) {
-    z-index: 10001 !important; // Vyšší než sklo (10000)
-    backdrop-filter: none !important; // Kritické: Vypne filtr rodiče, který blokuje z-index
-    background: var(--sl-color-bg-nav) !important;
-    overflow: visible !important;
-  }
-
-  .language-picker {
+  .language-picker-wrapper {
     position: relative;
-    display: inline-flex;
-    z-index: 100;
+    display: flex;
+    align-items: center;
   }
 
   .lang-checkbox {
     display: none;
   }
 
-  // 3. SKLO (Overlay)
-  .glass-overlay-fixed {
+  .language-button {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    z-index: 10005; // Nad overlayem i dropdownem pro zavření
+    
+    .current-fi {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background-size: cover !important;
+      border: 1px solid var(--sl-color-hairline);
+    }
+  }
+
+  // GLASS OVERLAY - Opravená pozice
+  .glass-overlay {
     position: fixed;
-    top: 0;
-    left: 0;
+    inset: 0;
     width: 100vw;
     height: 100vh;
     background: rgba(0, 0, 0, 0.4);
-    z-index: 10000; // Sklo je pod toolbarem (10001)
-    
+    backdrop-filter: blur(4px);
+    z-index: 9999; // Pod tlačítkem a dropdownem
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s ease;
-    cursor: default;
+    transition: all 0.3s ease;
   }
 
-  .lang-checkbox:checked ~ .glass-overlay-fixed {
+  .lang-checkbox:checked ~ .glass-overlay {
     opacity: 1;
     visibility: visible;
   }
 
-  // 4. DROPDOWN
+  // DROPDOWN - Opravená vrstva
   .language-dropdown {
     position: absolute;
-    top: calc(100% + 15px);
+    top: calc(100% + 10px);
     right: 0;
-    z-index: 10002; // Nejvyšší vrstva v rámci toolbaru
-    
+    z-index: 10000;
     opacity: 0;
     visibility: hidden;
     transform: translateY(-10px);
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.2s ease;
   }
 
   .lang-checkbox:checked ~ .language-dropdown {
@@ -121,33 +119,24 @@ const getLanguageUrl = (targetLang: string) => {
   }
 
   .dropdown-content {
-    background-color: var(--sl-color-bg-sidebar);
+    background: var(--sl-color-bg-sidebar);
     border: 1px solid var(--sl-color-gray-5);
     border-radius: 0.75rem;
     padding: 0.5rem;
-    min-width: 14rem;
-    max-height: 70vh;
-    overflow-y: auto;
+    min-width: 12rem;
     box-shadow: var(--sl-shadow-xl);
   }
 
-  .language-button {
-    cursor: pointer;
-    position: relative;
-    z-index: 10003; // Nad dropdownem pro zavření
-    .current-fi {
-      width: 38px; height: 38px;
-      border-radius: 50%;
-      background-size: cover !important;
-    }
-  }
-
   .lang-link {
-    display: flex; align-items: center; gap: 0.75rem;
-    padding: 0.75rem 1rem; text-decoration: none;
-    color: var(--sl-color-gray-2); border-radius: 0.5rem;
-    &:hover { background-color: var(--sl-color-gray-6); color: white; }
-    &.active { color: var(--sl-color-accent); background-color: var(--sl-color-accent-low); pointer-events: none; }
-    .fi { width: 1.25rem; height: 0.9rem; border-radius: 2px; }
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    text-decoration: none;
+    color: var(--sl-color-gray-2);
+    border-radius: 0.5rem;
+    &:hover { background: var(--sl-color-gray-6); color: white; }
+    &.active { background: var(--sl-color-accent-low); color: var(--sl-color-accent); }
+    .fi { width: 1.25rem; height: 0.9rem; }
   }
 </style>
