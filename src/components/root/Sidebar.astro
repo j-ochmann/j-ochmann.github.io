@@ -27,16 +27,14 @@ const aboutLink = getRelativeLocaleUrl(lang, 'about');
     </div>
   </div>
 
-  <!-- 2. TOOLBAR (Musí být až po profilu!) -->
   <ToolBar /> 
 
-  <!-- 3. OBSAH SIDEBARU -->
   <div class="wrapper">
     <DefaultSidebar {...Astro.props} />
   </div>
 </div>
 
-<style is:global> /* is:global zajistí, že ovlivníme i ToolBar pokud je to nutné */
+<style is:global> /* is:global ovlivní i ToolBar */
   .sidebar-layout {
     display: flex;
     flex-direction: column;
@@ -45,7 +43,7 @@ const aboutLink = getRelativeLocaleUrl(lang, 'about');
 
   .profile-container {
     position: relative;
-    /* Rezervujeme místo, aby menu pod ním neskákalo */
+    /* Rezervuje místo, aby menu pod ním neskákalo */
     min-height: 200px; 
     display: flex;
     justify-content: center;
@@ -68,43 +66,42 @@ const aboutLink = getRelativeLocaleUrl(lang, 'about');
     position: fixed !important;
     top: 0;
     left: 0;
-    width: 300px; /* Nebo šířka sidebaru */
+    width: 300px;
     z-index: 1000; /* Nižší než profil v klidu */
     /* Sklo */
     backdrop-filter: blur(8px) saturate(180%);
     -webkit-backdrop-filter: blur(8px) saturate(180%);
     /*background: color-mix(in srgb, var(--sl-color-bg-sidebar), transparent 75%);*/
     border-right: 1px solid color-mix(in srgb, var(--sl-color-hairline), transparent 0%);
+    border-bottom: 1px solid color-mix(in srgb, var(--sl-color-hairline), transparent 80%) !important;
   }
 
-/* Oprava mizení profilovky: zajistěte, aby obrázky měly jasný z-index v rámci wrapperu */
-.profile-img {
-  position: relative;
-  display: block;
-}
+  .profile-img {
+    position: relative;
+    display: block;
+  }
 
-.hover-img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0;
-}
+  .hover-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+  }
 
-.social-circle-wrapper:hover .hover-img {
-  opacity: 1;
-}
+  .social-circle-wrapper:hover .hover-img {
+    opacity: 1;
+  }
 
-@keyframes sink-under {
-  0% { z-index: 1100; }
-  /* Propadne se dříve, než se dotkne horní hrany toolbaru */
-  10% { z-index: 500; } 
-  100% { z-index: 500; }
-}
+  @keyframes sink-under {
+    0% { z-index: 1100; }
+    10% { z-index: 500; } 
+    100% { z-index: 500; }
+  }
 
-.wrapper {
-  position: relative;
-  z-index: 1;
-  margin-top: 1rem;
-}
+  .wrapper {
+    position: relative;
+    z-index: 1;
+    margin-top: 1rem;
+  }
 
 </style>
