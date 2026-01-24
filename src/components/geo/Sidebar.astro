@@ -7,7 +7,6 @@ import DefaultSidebar from '@astrojs/starlight/components/Sidebar.astro';
 import ToolBar from '@/components/ToolBar.astro';
 import Icons from '../icons/icons.astro';
 import SocialCircle from '@/components/SocialCircle.astro';
-import ThemeSelect from '@/components/geo/ThemeSelect.astro';
 import { getRelativeLocaleUrl } from 'astro:i18n';
 interface Props extends StarlightRouteData {}
 const props = Astro.props;
@@ -18,18 +17,8 @@ const lang = Astro.currentLocale || 'en';
 const aboutLink = getRelativeLocaleUrl(lang, 'about');
 ---
 <Icons />
-<ToolBar />
-<!-- Přepínač témat (Slunce/Měsíc) -->
-<div class="theme-select-overlay">
-  <ThemeSelect />
-</div>
-<!-- <div class="theme-select-overlay">
-  <ThemeSelect />
-</div> -->
-
 
 <div class="social-circle-wrapper" id="geo-social-circle-wrapper">
-
   <!-- Hlavní globus -->
   <div class="circular-menu">
     <a href={aboutLink} aria-label="About page">
@@ -40,69 +29,24 @@ const aboutLink = getRelativeLocaleUrl(lang, 'about');
   </div>
 </div>
 
+<ToolBar />
+
 <div class="wrapper">
   <DefaultSidebar {...Astro.props} />
 </div>
 
 <style define:vars={{ dayImageUrl, nightImageUrl, cloudsImageUrl }}>
-  .sidebar-geo-header {
-    position: relative; /* Klíčové pro správné pozicování dětí */
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 2rem;
-  }
-
-  .theme-select-overlay {
-    position: absolute;
-    /* Umístění v levém horním rohu vzhledem k headeru */
-    top: 20px;
-    left: 20px;
-    z-index: 20; /* Za zeměkoulí */
-    pointer-events: none; /* Kontejner propouští kliknutí skrz */
-  }
-
-  .theme-select-overlay :global(#theme-toggle) {
-    pointer-events: auto; /* Pouze samotné tlačítko reaguje na myš */
-  }
-  .social-circle-wrapper {
-    position: relative;
-    z-index: 10; /* Nižší než overlay, ale vyšší než DefaultSidebar */
-    /* Pokud tento wrapper překrývá rohy, také mu dáme pointer-events: none */
-    pointer-events: none;
-  }
-  /* 3. Reaktivní části (Zeměkoule a ikony) */
-  .circular-menu, 
-  .circular-menu a, 
-  .social-circle-wrapper :global(.social-icon) {
-    /* Tady myš opět zapne pro konkrétní prvky */
-    pointer-events: auto;
-  }
-
-  .circular-menu a {
-    /* Vizuální kruh zůstává, clip-path zde nepoužijeme, 
-      aby neřezal nápisy/ikony */
-    border-radius: 50%;
-  }
-  .main-globe-wrapper {
-    position: relative;
-    z-index: 1; /* Před sluncem/měsícem */
-    /* Zajišťuje, že hlavní globus neposune nic nad sebou */
-  }
   .main-img {
     background-image: var(--current-main-image);
   }
   .hover-img {
     background-image: var(--current-hover-image);
   }
-
   /* Logika pro světlý / tmavý režim */
   :global(:root[data-theme='light']) .circular-menu {
     --current-main-image: var(--dayImageUrl);
     --current-hover-image: var(--nightImageUrl);
   }
-
   :global(:root[data-theme='dark']) .circular-menu {
     --current-main-image: var(--nightImageUrl);
     --current-hover-image: var(--dayImageUrl);
@@ -124,7 +68,6 @@ const aboutLink = getRelativeLocaleUrl(lang, 'about');
     top: 0; left: 0; right: 0; bottom: 0;
     border-radius: 50%;
     z-index: 3; /* Musí být nad mapou (::after) */
-    
     /* KOMPLEXNÍ STÍNOVÁNÍ */
     background: radial-gradient(
       circle at 30% 30%, 
@@ -133,12 +76,11 @@ const aboutLink = getRelativeLocaleUrl(lang, 'about');
       rgba(0, 0, 0, 0.4) 70%,          /* Postupné stmívání */
       rgba(0, 0, 0, 0.8) 100%          /* Temná strana planety */
     );
-    
     /* Vnitřní hrana pro efekt tloušťky atmosféry */
     box-shadow: inset 2px 2px 5px rgba(255, 255, 255, 0.2);
     pointer-events: none; /* Aby neblokovalo klikání (pokud by bylo potřeba) */
   }
-  /* Vytvoříme vrstvu pro samotnou mapu */
+  /* Vrstva pro samotnou mapu */
   .profile-img::after {
     content: '';
     position: absolute;
@@ -146,15 +88,12 @@ const aboutLink = getRelativeLocaleUrl(lang, 'about');
     left: -10%;
     width: 120%;
     height: 120%;
-    
     /* KLÍČOVÝ NÁKLON */
     transform: rotate(23.5deg);
-    
     /* Nastavení textury */
     background-image: var(--current-main-image);
     background-size: cover;
     background-repeat: repeat-x;
-    
     /* Animace pohybu mapy */
     animation: rotateGlobe 60s linear infinite;
     z-index: 1; /* Pod stínem ::before */
@@ -168,17 +107,14 @@ const aboutLink = getRelativeLocaleUrl(lang, 'about');
   /* VRSTVA MRAKŮ */
   .clouds {
     position: absolute;
-/*    top: -15%; left: -15%;*/
     width: 100%; height: 100%;
     z-index: 2; /* Nad mapou (::after), ale pod stínem (::before) */
-    background-image: var(--cloudsImageUrl); /* Musí zde být var() */
-    display: block !important; /* Jistota zobrazení */
+    background-image: var(--cloudsImageUrl);
+    display: block !important;
     background-size: cover;
     background-repeat: repeat-x;
-    
     /* JINÝ NÁKLON A RYCHLOST */
-    /*transform: rotate(15deg);*/ 
-    animation: rotateClouds 45s linear infinite; /* Rychlejší než země (40s) */
+    animation: rotateClouds 45s linear infinite;
     pointer-events: none;
     mix-blend-mode: screen; /* Způsobí, že černá z obrázku mraků zmizí a zbude jen bílá */
   }
@@ -194,7 +130,7 @@ const aboutLink = getRelativeLocaleUrl(lang, 'about');
     transition: opacity 0.5s ease;
   }
 
-  /* Hover efekty - detekujeme hover na .profile-img, měníme .clouds uvnitř */
+  /* Hover efekty */
   :global(:root[data-theme='dark']) .profile-img:hover .clouds {
     opacity: 0.5;
   }
@@ -202,7 +138,6 @@ const aboutLink = getRelativeLocaleUrl(lang, 'about');
   :global(:root[data-theme='light']) .profile-img:hover .clouds {
     opacity: 0.1;
   }
-
 
   @keyframes rotateGlobe {
     from { background-position: 0 0; }
