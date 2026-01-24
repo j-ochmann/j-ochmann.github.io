@@ -1,12 +1,15 @@
 ---
+import type { StarlightRouteData } from '@astrojs/starlight/route-data';
 import ThemeSelect from '@/components/starlight/ThemeSelect.astro';
 import LanguageSelect from '@/components/starlight/LanguageSelect.astro';
 import Search from '@/components/starlight/Search.astro';
+
+interface Props extends StarlightRouteData {}
 ---
 
 <div class="toolbar">
   <div class="left-section">
-    <ThemeSelect />
+    <ThemeSelect {...Astro.props}/>
   </div>
   <div class="right-section">
     <LanguageSelect />
