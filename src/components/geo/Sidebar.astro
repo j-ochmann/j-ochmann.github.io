@@ -4,6 +4,7 @@ import nightImage from '@/assets/img/globe/night_960x480px.jpg';
 import cloudsImage from '@/assets/img/globe/clouds_1024x512px.png';
 import type { StarlightRouteData } from '@astrojs/starlight/route-data';
 import DefaultSidebar from '@astrojs/starlight/components/Sidebar.astro';
+import ToolBar from '@/components/ToolBar.astro';
 import Icons from '../icons/icons.astro';
 import SocialCircle from '@/components/SocialCircle.astro';
 import ThemeSelect from '@/components/geo/ThemeSelect.astro';
@@ -17,10 +18,16 @@ const lang = Astro.currentLocale || 'en';
 const aboutLink = getRelativeLocaleUrl(lang, 'about');
 ---
 <Icons />
+<ToolBar />
 <!-- Přepínač témat (Slunce/Měsíc) -->
 <div class="theme-select-overlay">
   <ThemeSelect />
 </div>
+<!-- <div class="theme-select-overlay">
+  <ThemeSelect />
+</div> -->
+
+
 <div class="social-circle-wrapper" id="geo-social-circle-wrapper">
 
   <!-- Hlavní globus -->

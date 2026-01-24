@@ -6,6 +6,7 @@ import rehypeMermaid from 'rehype-mermaid';
 import d2 from 'astro-d2'; // Předpokládá se instalace integrace
 import react from '@astrojs/react';
 import { fileURLToPath } from 'node:url'; // Importujte pro práci s cestami
+import '@fontsource/syne/700.css';
 
 import { locales } from './src/content/config/i18n.ts';
 
@@ -37,7 +38,9 @@ export default defineConfig({
     starlight({
     title: 'Jindřich Ochmann - Software Engineer',
     favicon: '/favicon.png', 
-    customCss: ['./src/styles/globals.scss'],
+    customCss: ['@fontsource/syne/400.css',
+                '@fontsource/syne/700.css',
+                './src/styles/globals.scss',],
     head: [
         {
           tag: 'meta',

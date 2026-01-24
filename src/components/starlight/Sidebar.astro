@@ -4,15 +4,11 @@ import RootSidebar from '@/components/root/Sidebar.astro';
 import GeoSidebar from '@/components/geo/Sidebar.astro';
 
 interface Props extends StarlightRouteData {}
-
 const { pathname } = Astro.url;
-const isGeoPage = pathname.includes('/geo');
-
-const props = Astro.props;
 ---
 
-{isGeoPage ? (
-  <GeoSidebar {...props} /> 
+{pathname.includes('/geo') ? (
+  <GeoSidebar {...Astro.props} /> 
 ) : (
-  <RootSidebar {...props} />
+  <RootSidebar {...Astro.props} />
 )}

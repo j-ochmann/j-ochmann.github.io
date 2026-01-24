@@ -14,33 +14,28 @@ const getLanguageUrl = (targetLang: string) => {
   }
   const slug = pathParts.join('/');
   const isRoot = config.locales?.root && config.locales.root.lang === targetLang;
-
-  if (isRoot) {
-    return slug === '' ? '/' : `/${slug}`;
-  }
-  return slug === '' ? `/${targetLang}/` : `/${targetLang}/${slug}`;
+  return isRoot ? (slug === '' ? '/' : `/${slug}`) : (slug === '' ? `/${targetLang}/` : `/${targetLang}/${slug}`);
 };
 ---
 
 {locales && Object.keys(locales).length > 1 && (
-  <div class="language-picker" id="lang-picker-container">
-    <button type="button" class="language-button" id="lang-btn-trigger" aria-label="Change language">
-      <span class:list={['fi', `fi-${currentFlag}`, 'fib', 'current-fi']} aria-hidden="true"></span>
-    </button>
+  <div class="language-picker">
+    <input type="checkbox" id="lang-toggle-final" class="lang-checkbox" />
     
-    {/* Šablona pro Portál - JS ji přesune pod body */}
-    <div id="lang-portal-root" class="language-portal">
-      <div class="language-dropdown">
+    <label for="lang-toggle-final" class="language-button">
+      <span class:list={['fi', `fi-${currentFlag}`, 'fib', 'current-fi']} aria-hidden="true"></span>
+    </label>
+    
+    {/* Sklo je sourozenec tlačítka i dropdownu, vše je uvnitř pickerru */}
+    <label for="lang-toggle-final" class="glass-overlay-fixed"></label>
+
+    <div class="language-dropdown">
+      <div class="dropdown-content">
         {Object.entries(locales).map(([code, locale]) => {
           if (!locale) return null;
           const flagCode = getFlagCode(locale.lang);
-          
           return (
-            <a
-              href={getLanguageUrl(code)}
-              class:list={['lang-link', { active: code === currentLocale }]}
-              title={locale.label}
-            >
+            <a href={getLanguageUrl(code)} class:list={['lang-link', { active: code === currentLocale }]}>
               <span class={`fi fi-${flagCode}`} aria-hidden="true"></span>
               <span class="lang-label">{locale.label}</span>
             </a>
@@ -54,154 +49,105 @@ const getLanguageUrl = (targetLang: string) => {
 <style lang="scss">
   @use "@/styles/globals.scss" as *;
 
-  // 1. ZÁMEK SCROLLU
-  :global(html.lock-scroll), :global(html.lock-scroll body) {
+  // 1. GLOBÁLNÍ ZÁMEK SCROLLU A ROZMAZÁNÍ (CSS 2026)
+  :global(html:has(.lang-checkbox:checked)) {
     overflow: hidden !important;
-    height: 100vh !important;
-    touch-action: none; // Fix pro mobilní Safari 2026
   }
 
-  // 2. GLOBÁLNÍ SKLO (Portál)
-  :global(.global-glass-overlay) {
+  // Rozmažeme všechno kromě toolbaru (aby byl nad sklem)
+  :global(body:has(.lang-checkbox:checked) :where(main, .main-frame, .sidebar-pane, starlight-menu-button)) {
+    filter: blur(10px) saturate(140%);
+    pointer-events: none;
+    transition: filter 0.3s ease;
+  }
+
+  // 2. POVÝŠENÍ CELÉHO TOOLBARU (Stacking Context Fix)
+  // Aby dropdown mohl být nad sklem, musí se celý toolbar dostat nad z-index skla
+  :global(body:has(.lang-checkbox:checked) .toolbar) {
+    z-index: 10001 !important; // Vyšší než sklo (10000)
+    backdrop-filter: none !important; // Kritické: Vypne filtr rodiče, který blokuje z-index
+    background: var(--sl-color-bg-nav) !important;
+    overflow: visible !important;
+  }
+
+  .language-picker {
+    position: relative;
+    display: inline-flex;
+    z-index: 100;
+  }
+
+  .lang-checkbox {
+    display: none;
+  }
+
+  // 3. SKLO (Overlay)
+  .glass-overlay-fixed {
     position: fixed;
-    inset: 0;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
     background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(12px) saturate(150%);
-    -webkit-backdrop-filter: blur(12px) saturate(150%);
-    z-index: 9998;
+    z-index: 10000; // Sklo je pod toolbarem (10001)
+    
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease;
+    cursor: default;
   }
 
-  // 3. PORTÁL DROPDOWNU
-  :global(.language-portal) {
-    position: fixed;
-    z-index: 9999;
+  .lang-checkbox:checked ~ .glass-overlay-fixed {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  // 4. DROPDOWN
+  .language-dropdown {
+    position: absolute;
+    top: calc(100% + 15px);
+    right: 0;
+    z-index: 10002; // Nejvyšší vrstva v rámci toolbaru
+    
     opacity: 0;
     visibility: hidden;
-    transition: transform 0.2s ease, opacity 0.2s ease;
     transform: translateY(-10px);
-    pointer-events: none;
-
-    &.is-open {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  .language-dropdown {
+  .lang-checkbox:checked ~ .language-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .dropdown-content {
     background-color: var(--sl-color-bg-sidebar);
     border: 1px solid var(--sl-color-gray-5);
     border-radius: 0.75rem;
     padding: 0.5rem;
-    box-shadow: var(--sl-shadow-lg);
     min-width: 14rem;
-    max-height: 70vh; // Povolí scroll v menu
+    max-height: 70vh;
     overflow-y: auto;
+    box-shadow: var(--sl-shadow-xl);
   }
 
   .language-button {
-    background: transparent;
-    border: none;
     cursor: pointer;
-    padding: 0;
-    display: flex;
-    
+    position: relative;
+    z-index: 10003; // Nad dropdownem pro zavření
     .current-fi {
-      width: 38px;
-      height: 38px;
+      width: 38px; height: 38px;
       border-radius: 50%;
       background-size: cover !important;
-      border: 1px solid var(--sl-color-hairline);
     }
   }
 
   .lang-link {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.75rem 1rem;
-    text-decoration: none;
-    color: var(--sl-color-gray-2);
-    border-radius: 0.5rem;
-    font-size: var(--sl-text-sm);
-
-    &:hover {
-      background-color: var(--sl-color-gray-6);
-      color: var(--sl-color-white);
-    }
-
-    &.active {
-      color: var(--sl-color-accent);
-      background-color: var(--sl-color-accent-low);
-      pointer-events: none;
-    }
-
-    .fi:not(.current-fi) {
-      width: 1.25rem;
-      height: 0.9rem;
-      border-radius: 2px;
-    }
+    display: flex; align-items: center; gap: 0.75rem;
+    padding: 0.75rem 1rem; text-decoration: none;
+    color: var(--sl-color-gray-2); border-radius: 0.5rem;
+    &:hover { background-color: var(--sl-color-gray-6); color: white; }
+    &.active { color: var(--sl-color-accent); background-color: var(--sl-color-accent-low); pointer-events: none; }
+    .fi { width: 1.25rem; height: 0.9rem; border-radius: 2px; }
   }
 </style>
-
-<script>
-  function setupLanguagePortal() {
-    const trigger = document.getElementById('lang-btn-trigger') as HTMLButtonElement;
-    const portal = document.getElementById('lang-portal-root') as HTMLElement;
-    if (!trigger || !portal) return;
-
-    // Vytvoření skla pokud neexistuje
-    let glass = document.querySelector('.global-glass-overlay') as HTMLElement;
-    if (!glass) {
-      glass = document.createElement('div');
-      glass.className = 'global-glass-overlay';
-      document.body.appendChild(glass);
-    }
-
-    // Přesun menu pod body (Portál)
-    if (portal.parentElement !== document.body) {
-      document.body.appendChild(portal);
-    }
-
-    const toggle = (show: boolean) => {
-      document.documentElement.classList.toggle('lock-scroll', show);
-      portal.classList.toggle('is-open', show);
-      
-      if (glass) {
-        glass.style.opacity = show ? '1' : '0';
-        glass.style.visibility = show ? 'visible' : 'hidden';
-      }
-
-      if (show) {
-        const rect = trigger.getBoundingClientRect();
-        // Pozicování absolutně k viewportu
-        portal.style.top = `${rect.bottom + 12}px`;
-        portal.style.left = `${Math.max(10, rect.right - portal.offsetWidth)}px`;
-      }
-    };
-
-    trigger.onclick = (e) => {
-      e.stopPropagation();
-      toggle(!portal.classList.contains('is-open'));
-    };
-
-    // Zavření při kliku na sklo
-    glass.onclick = () => toggle(false);
-
-    // Zavření při resize (kvůli změně pozice toolbaru)
-    window.addEventListener('resize', () => toggle(false));
-
-    // Escape klávesa
-    document.addEventListener('keydown', (e: KeyboardEvent) => {
-      if (e.key === 'Escape') toggle(false);
-    });
-  }
-
-  // Astro/Starlight životní cyklus
-  document.addEventListener('astro:page-load', setupLanguagePortal);
-  setupLanguagePortal();
-</script>
