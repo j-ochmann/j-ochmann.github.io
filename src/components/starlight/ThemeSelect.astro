@@ -1,14 +1,12 @@
 ---
-import type { StarlightRouteData } from '@astrojs/starlight/route-data';
 import RootThemeSelect from '@/components/root/ThemeSelect.astro';
 import GeoThemeSelect from '@/components/geo/ThemeSelect.astro';
 
-interface Props extends StarlightRouteData {}
 const { pathname } = Astro.url;
 ---
 
 {pathname.includes('/geo') ? (
-  <GeoThemeSelect {...Astro.props} /> 
+  <GeoThemeSelect /> 
 ) : (
-  <RootThemeSelect {...Astro.props} /> 
+  <RootThemeSelect /> 
 )}

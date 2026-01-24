@@ -56,7 +56,7 @@ export default defineConfig({
       { icon: 'github', label: 'GitHub', href: 'https://github.com/j-ochmann' }
     ],
     components: {
-      //ThemeSelect: './src/components/starlight/ThemeSelect.astro',
+      ThemeSelect: './src/components/starlight/ThemeSelect.astro',
       LanguageSelect: './src/components/starlight/LanguageSelect.astro',
       Search: './src/components/Search.astro',
       Header: './src/components/starlight/Empty.astro',
