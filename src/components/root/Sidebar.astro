@@ -13,22 +13,68 @@ const lang = Astro.currentLocale || 'en';
 const aboutLink = getRelativeLocaleUrl(lang, 'about');
 ---
 <Icons />
-<ToolBar/>
-<!-- ---------- PROFILE ---------- -->
-<div class="social-circle-wrapper">
-  <div class="circular-menu">
-    <a href={aboutLink} aria-label="About page">
-      <img src={mainImage} alt="Jindrich Ochmann, a software engineer, smiling at the camera in a professional portrait setting with a neutral background, conveying approachability and professionalism" class="profile-img main-img" />
-      <img src={hoverImage} alt="Jindrich Ochmann, a software engineer, in a professional portrait setting with a neutral background, conveying approachability and professionalism in an alternative pose" class="profile-img hover-img" />
-    </a>
-    <SocialCircle />
+<!-- TOOLBAR (Má z-index: 1000) -->
+  <ToolBar />
+<!-- Obal, který drží profil i toolbar pohromadě v sidebaru -->
+<div class="sidebar-content-wrapper">
+  <!-- PROFILE (zmizí při scrollu nahoru) -->
+  <div class="social-circle-wrapper">
+    <div class="circular-menu">
+      <a href={aboutLink} aria-label="About page">
+        <img src={mainImage} alt="Jindrich Ochmann, a software engineer, smiling at the camera in a professional portrait setting with a neutral background, conveying approachability and professionalism" class="profile-img main-img" />
+        <img src={hoverImage} alt="Jindrich Ochmann, a software engineer, in a professional portrait setting with a neutral background, conveying approachability and professionalism in an alternative pose" class="profile-img hover-img" />
+      </a>
+      <SocialCircle />
+    </div>
+  </div>
+  <!-- TOOLBAR (při scrollu se přichytí nahoře) -->
+  <!-- <ToolBar /> -->
+  <!-- ZBYTEK SIDEBARU -->
+  <div class="wrapper">
+    <DefaultSidebar {...Astro.props} />
   </div>
 </div>
 
-<div class="wrapper">
-  <DefaultSidebar {...Astro.props} />
-</div>
-
 <style>
+  .sidebar-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    /* Zajistí, že sticky uvnitř bude fungovat vůči tomuto kontejneru */
+    position: relative; 
+    /* Důležité: horní padding, aby první položky menu nebyly pod profilem */
+    /*padding-top: -20px;*/ 
+  }
+  .social-circle-wrapper {
+    /* Můžete přidat margin, aby toolbar nebyl nalepený na fotce */
+    margin-bottom: 2rem;
+    position: relative;
+    /* Tato hodnota určuje, kde se profil zastaví předtím, než ho toolbar překryje */
+    /*top: 60px;*/ 
+    z-index: 2000; /* Vyšší než ToolBar (1000) */    
+    /* Tento trik způsobí, že se profil "propadne" pod toolbar při scrollu */
+    /*view-transition-name: profile-circle;*/
+    /*transition: z-index 0.3s; /* Rychlá změna vrstvy */
+  }
 
+  .wrapper {
+    position: relative;
+    z-index: 1; /* Menu musí být pod profilem i toolbarem */
+    /*background: var(--sl-color-bg-sidebar);*/
+  }
 </style>
+
+<script>
+  const profile = document.querySelector('.social-circle-wrapper') as HTMLElement | null;
+  
+  if (profile) {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // Nyní TS ví, že profile není null
+        profile.style.zIndex = entry.isIntersecting ? "2000" : "500";
+      },
+      { threshold: [1.0] }
+    );
+
+    observer.observe(profile);
+  }
+</script>
