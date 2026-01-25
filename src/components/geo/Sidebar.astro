@@ -1,5 +1,4 @@
 ---
-/* Importy zůstávají stejné */
 import dayImage from '@/assets/img/globe/earth_day_640x480px.webp';
 import nightImage from '@/assets/img/globe/earth_night_640x480px.webp';
 import cloudsImage from '@/assets/img/globe/earth_clouds_640x480px.webp';
@@ -21,14 +20,12 @@ const aboutLink = getRelativeLocaleUrl(lang, 'about');
 
 <div class="social-circle-wrapper geo-version">
   <div class="circular-menu">
-    <!-- Tento odkaz s divy PŘEKRYJE profilovky z komponenty SocialCircle -->
-    <a href={aboutLink} aria-label="About page" class="globe-link">
-      <div class="profile-img main-img"><div class="clouds"></div></div>
-      <div class="profile-img hover-img"><div class="clouds"></div></div>
-    </a>
-    
-    <!-- Komponenta se postará o ikony v oblouku -->
-    <SocialCircle />
+    <SocialCircle>
+      <a href={aboutLink} aria-label="About page" class="globe-link">
+        <div class="profile-img main-img"><div class="clouds"></div></div>
+        <div class="profile-img hover-img"><div class="clouds"></div></div>
+      </a>
+    </SocialCircle>
   </div>
 </div>
 

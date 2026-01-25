@@ -10,10 +10,12 @@ const aboutLink = getRelativeLocaleUrl(lang, 'about');
 </script>
 
 <div class="circular-menu">
-  <a href={aboutLink} class="profile-link">
-    <img src={mainImage} class="profile-img main-img" alt="Profile" />
-    <img src={hoverImage} class="profile-img hover-img" alt="Profile Hover" />
-  </a>
+  <slot>
+    <a href={aboutLink} class="profile-link">
+      <img src={mainImage} class="profile-img main-img" alt="Profile" />
+      <img src={hoverImage} class="profile-img hover-img" alt="Profile Hover" />
+    </a>
+  </slot>
   <!-- ---------- NAME CIRCLE ---------- -->
   <div class="name-circle">
     <svg viewBox="0 0 200 200">
@@ -26,29 +28,25 @@ const aboutLink = getRelativeLocaleUrl(lang, 'about');
     </svg>
   </div>
   <div class="social-icons">
-    <a href="https://github.com/j-ochmann"
-        class="icon-github"
-        aria-label="GitHub profil">
+    <a href="https://github.com/j-ochmann" class="icon-github" aria-label="GitHub">
       <svg><use href="#icon-github"></use></svg>
     </a>
-    <a href="https://www.linkedin.com/in/jindrich-ochmann"
-        class="icon-linkedin"
-        aria-label="LinkedIn profil">
+    <a href="https://www.linkedin.com/in/jindrich-ochmann" class="icon-linkedin" aria-label="LinkedIn">
       <svg><use href="#icon-linkedin"></use></svg>
     </a>
-    <a href="https://www.instagram.com/jindrichochmann" class="icon-instagram" aria-label="Instagram profil">
+    <a href="https://www.instagram.com/jindrichochmann" class="icon-instagram" aria-label="Instagram">
       <svg><use href="#icon-instagram"></use></svg>
     </a>
-    <a href="https://www.facebook.com/jindrich.ochmann" class="icon-facebook" aria-label="Facebook profil">
+    <a href="https://www.facebook.com/jindrich.ochmann" class="icon-facebook" aria-label="Facebook">
       <svg><use href="#icon-facebook"></use></svg>
     </a>
-    <a href="https://www.youtube.com/@JindrichOchmann" class="icon-youtube" aria-label="YouTube kanál">
+    <a href="https://www.youtube.com/@JindrichOchmann" class="icon-youtube" aria-label="YouTube">
       <svg><use href="#icon-youtube"></use></svg>
     </a>
     <a href="https://wa.me/420792353539" class="icon-whatsapp" aria-label="WhatsApp">
       <svg><use href="#icon-whatsapp"></use></svg>
     </a>
-    <a href="mailto:jindrich.ochmann@gmail.com" class="icon-email" aria-label="Napsat e-mail">
+    <a href="mailto:jindrich.ochmann@gmail.com" class="icon-email" aria-label="E-mail">
       <svg><use href="#icon-email"></use></svg>
     </a>
   </div>
@@ -117,46 +115,7 @@ $action-start-angle: $start-angle + 2*$angle-step;
 .action-icons a{
   transform: rotate(var(--angle)) translateX(70px) translateY(-70px) rotate(calc(-1 * var(--angle)));
 }
-
-
-/* New styles for theme-icons */
-  .theme-toggle-btn {
-    background: transparent;
-    border: none;
-    width: 38px;
-    height: 38px;
-    cursor: pointer;
-    border-radius: 50% !important;
-    
-    /* Klíčové pro centrování: */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 4px; /* Vytvoří vnitřní prostor, aby ikona nebyla "nalepená" */
-
-    transition: background-color 0.2s, color 0.2s, transform 0.2s;
-
-    &:hover {
-      transform: scale(1.5);
-      background-color: var(--sl-color-gray-5); /* Volitelné: zvýrazní kruhový tvar */
-    }
-  }
-
-  .theme-icons {
-    width: 24px;  /* Pevná velikost ikony uvnitř 38px tlačítka */
-    height: 24px;
-    fill: currentColor;
-    display: none;
-    flex-shrink: 0; /* Zabrání deformaci v některých prohlížečích */
-    aspect-ratio: 1 / 1; /* Vynutí čtvercový poměr stran */
-    overflow: visible;
-  }
-
-  .theme-icons a {
-    @include icon-base;
-  }
 /* ---------- NAME CIRCLE ---------- */
-
 .name-circle {
   clip-path: circle(50%); /* Funkční kruh pro myš */
   pointer-events: none;
@@ -197,7 +156,7 @@ $action-start-angle: $start-angle + 2*$angle-step;
   pointer-events: none;
   transform: rotate(-45deg);
   transition: transform 1s ease;
-  z-index: 2;
+  z-index: 20;
 }
 /* ---------- PROFILE ---------- */
 .circular-menu {

@@ -35,11 +35,15 @@ import { Icon } from '@astrojs/starlight/components';
 <style lang="scss">
   @use "@/styles/mixins" as *;
   .theme-select-wrapper {
+    position: relative; // Nutné pro fungování z-indexu
+    z-index: 1000;  
     display: flex;
     justify-content: center;
     align-items: center;
   }
   .theme-toggle-btn {
+    position: relative;
+    z-index: 1001;
     background: transparent;
     border: none;
     padding: 0;

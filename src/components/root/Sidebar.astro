@@ -5,7 +5,6 @@ import DefaultSidebar from '@astrojs/starlight/components/Sidebar.astro';
 import ToolBar from '@/components/ToolBar.astro';
 import SocialCircle from '@/components/SocialCircle.astro';
 
-
 interface Props extends StarlightRouteData {}
 ---
 <Icons />
@@ -25,16 +24,3 @@ interface Props extends StarlightRouteData {}
     <DefaultSidebar {...Astro.props} />
   </div>
 </div>
-
-<style lang="scss">
-  .social-circle-wrapper {
-    width: 100%; /* Aby mohl flexbox uvnitř centrovat na střed sidebaru */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    margin: 30px 0px;
-    position: relative;
-    overflow: visible; /* Důležité: ikony musí být vidět i mimo kontejner */
-  }
-</style>
