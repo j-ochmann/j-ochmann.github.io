@@ -19,7 +19,6 @@
     height: $size;
   }
   &:hover {
-    transform: scale(1.5);
     z-index: 10;
   }
 }
@@ -43,6 +42,7 @@
     //border: 1px solid rgba(0, 0, 0, 0.05) !important;
   }
   &:hover {
+    transform: scale(1.5);
     opacity: 1;    
     // Zesílení skla při hoveru
     backdrop-filter: blur(12px);
@@ -74,7 +74,7 @@ $google-colors:
   radial-gradient(circle at 0% 100%,  #34a853 40%, transparent 80%);
 
 .icon-github    { @include icon-style(22px, $baseFrontCol, #24292f); }
-:root[data-theme='dark'] .icon-github { @include icon-style(22px, $baseFrontCol, #505051); }
+:root[data-theme='dark' ] .icon-github { @include icon-style(22px, $baseFrontCol, #505051); }
 .icon-linkedin  { @include icon-style(22px, $baseFrontCol, #0077b5); }
 .icon-facebook  { @include icon-style(28px, $baseFrontCol, #1877f2); }
 .icon-youtube   { @include icon-style(27px, $baseFrontCol, #ff0000); }
