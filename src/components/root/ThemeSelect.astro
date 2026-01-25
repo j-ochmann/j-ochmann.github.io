@@ -1,18 +1,14 @@
 ---
-
+import { Icon } from '@astrojs/starlight/components';
 ---
 
 <div class="theme-select-wrapper">
-  <button id="theme-toggle" class="theme-toggle-btn loading" aria-label="Přepnout režim">
+  <button id="theme-toggle" class="theme-toggle-btn" aria-label="Přepnout režim">
     <div class="theme-icon-container icon-sun">
-      <svg aria-hidden="true" viewBox="0 0 120 120">
-        <use href="#icon-sun"></use>
-      </svg>
+      <Icon name="sun" />
     </div>
     <div class="theme-icon-container icon-moon">
-      <svg aria-hidden="true" viewBox="0 0 24 24">
-        <use href="#icon-moon"></use>
-      </svg>
+      <Icon name="moon" />
     </div>
   </button>
 </div>
@@ -37,63 +33,42 @@
 </script>
 
 <style lang="scss">
+  @use "@/styles/mixins" as *;
   .theme-select-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 10px 0;
   }
-
   .theme-toggle-btn {
     background: transparent;
     border: none;
     padding: 0;
     cursor: pointer;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.4s ease;
-
-    &:hover {
-      transform: scale(1.5);
-      z-index: 10;
-    }
-
-    &.loading {
-      opacity: 0;
-    }
+    outline: none;
+    appearance: none;
   }
-
-  /* Tento kontejner simuluje chování <a> tagů v social arc */
   .theme-icon-container {
-    width: 38px;  // Velikost z icon-base mixinu
-    height: 38px;
-    border-radius: 50%;
-    display: none; // Defaultně skryté
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    opacity: 0.6;
-
-    svg {
-      width: 25px; // Velikost z global.scss icon-style
-      height: 25px;
+    @include icon-glass;
+    display: none; /* Defaultně skryto */
+    // Resetování SVG pro Starlight ikonu (aby seděla do mixinu)
+    :global(svg) {
+      width: 22px !important;
+      height: 22px !important;
       fill: currentColor;
     }
   }
-
-  .theme-icon-container:hover {
-    opacity: 1;
-    animation: pulse-glow 3s infinite ease-in-out;
-  }
-
-  /* Logika zobrazení svázaná s třídami v global.scss */
   :global([data-theme='dark']) .icon-sun {
     display: flex;
   }
-
   :global([data-theme='light']) .icon-moon {
     display: flex;
+  }
+  :global([data-theme='auto']) {
+    @media (prefers-color-scheme: dark) {
+      .icon-sun { display: flex; }
+    }
+    @media (prefers-color-scheme: light) {
+      .icon-moon { display: flex; }
+    }
   }
 </style>

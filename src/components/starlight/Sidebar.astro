@@ -12,8 +12,8 @@ const { pathname } = Astro.url;
 ) : (
   <RootSidebar {...Astro.props} />
 )}
-
-<style is:global> /* is:global ovlivní i ToolBar */
+/*
+<style is:global> /* is:global ovlivní i ToolBar 
   .sidebar-layout {
     display: flex;
     flex-direction: column;
@@ -22,16 +22,16 @@ const { pathname } = Astro.url;
 
   .profile-container {
     position: relative;
-    /* Rezervuje místo, aby menu pod ním neskákalo */
+    /* Rezervuje místo, aby menu pod ním neskákalo 
     min-height: 200px; 
     display: flex;
     justify-content: center;
-    /*padding-top: 2rem;*/
+    /*padding-top: 2rem;
   }
-
+*/
   .social-circle-wrapper {
     position: relative;
-    z-index: 1100; 
+    z-index: 10; 
     margin-bottom: 2rem;
     transition: transform 0.2s ease;
     /* CLEAN CSS SCROLL EFFECT */

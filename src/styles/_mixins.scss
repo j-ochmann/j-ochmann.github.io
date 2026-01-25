@@ -1,37 +1,85 @@
-/* BASE FOR ROUND ICONS */
-$baseFrontCol: #ffffff;
-$baseBackCol: radial-gradient(circle at 30% 107%, #5c5c5c 0%, #ffffff 100%);
-
 @mixin icon-base($size: 38px) {    
   cursor: pointer;
   width: 22px;
   height: 22px;
   color: #ffffff;
-  background: #939393;
+  //background: #939393;
   opacity: 0.7;
-  width: $size;
-  height: $size;
+  width: $size !important;
+  height: $size !important;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
-  transition: all 0.4s ease;
+  border: none !important;
+  border-radius: 50% !important;
+  transition: all 0.3s ease;
   svg {
     fill: currentColor;
-    width: 22px;
-    height: 22px;
+    width: $size;
+    height: $size;
   }
   &:hover {
     transform: scale(1.5);
-    z-index: 100;
+    z-index: 10;
   }
 }
+
+@mixin icon-glass($size: 38px) {    
+  @include icon-base;
+
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+
+  :global([data-theme='dark']) & {
+    background: rgba(0, 0, 0, 0.3);
+    color: #ffffff;
+    //border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  }
+  :global([data-theme='light']) & {
+    background: rgba(255, 255, 255, 0.4); 
+    color: #000000;
+    //border: 1px solid rgba(0, 0, 0, 0.05) !important;
+  }
+  &:hover {
+    opacity: 1;    
+    // Zesílení skla při hoveru
+    backdrop-filter: blur(12px);
+    :global([data-theme='dark']) & { background: rgba(0, 0, 0, 0.5); }
+    :global([data-theme='light']) & { background: rgba(255, 255, 255, 0.7); }
+  }
+}
+
 /* BASE ICON STYLE */
-@mixin icon-style($size: 22px, $baseFrontCol, $baseBackCol) {
-  color: $baseFrontCol !important;
-  background: $baseBackCol !important;
+@mixin icon-style($size: 38px, $baseFrontCol, $baseBackCol) {
+  @include icon-base;
+  color: $baseFrontCol;
+  background: $baseBackCol;
   & svg {
     width: $size !important;
     height: $size !important;
   }
 }
+/* ICONS COLORS & SIZES */
+/* BASE FOR ROUND ICONS */
+$baseFrontCol: #ffffff;
+$baseBackCol: radial-gradient(circle at 30% 107%, #5c5c5c 0%, #ffffff 100%);
+$instagram-colors:
+  radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+$google-colors:
+  radial-gradient(circle at 0% 0%,    #4285f4 40%, transparent 80%), 
+  radial-gradient(circle at 100% 0%,  #ea4335 40%, transparent 80%),
+  radial-gradient(circle at 100% 100%,#fbbc05 40%, transparent 80%), 
+  radial-gradient(circle at 0% 100%,  #34a853 40%, transparent 80%);
+
+.icon-github    { @include icon-style(22px, $baseFrontCol, #24292f); }
+:root[data-theme='dark'] .icon-github { @include icon-style(22px, $baseFrontCol, #505051); }
+.icon-linkedin  { @include icon-style(22px, $baseFrontCol, #0077b5); }
+.icon-facebook  { @include icon-style(28px, $baseFrontCol, #1877f2); }
+.icon-youtube   { @include icon-style(27px, $baseFrontCol, #ff0000); }
+.icon-whatsapp  { @include icon-style(30px, $baseFrontCol, #25D366); }
+.icon-search    { @include icon-style(32px, $baseFrontCol, $baseBackCol); }
+.icon-settings  { @include icon-style(28px, $baseFrontCol, $baseBackCol); }
+.icon-login     { @include icon-style(25px, $baseFrontCol, $baseBackCol); }
+.icon-moon      { @include icon-style(25px, $baseFrontCol, $baseBackCol); }
+.icon-instagram { @include icon-style(27px, $baseFrontCol, $instagram-colors); }
+.icon-email     { @include icon-style(25px, $baseFrontCol, $google-colors); }

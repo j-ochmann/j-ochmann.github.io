@@ -1,4 +1,5 @@
 ---
+/* Importy zůstávají stejné */
 import dayImage from '@/assets/img/globe/earth_day_640x480px.webp';
 import nightImage from '@/assets/img/globe/earth_night_640x480px.webp';
 import cloudsImage from '@/assets/img/globe/earth_clouds_640x480px.webp';
@@ -8,8 +9,8 @@ import ToolBar from '@/components/ToolBar.astro';
 import Icons from '../icons/icons.astro';
 import SocialCircle from '@/components/SocialCircle.astro';
 import { getRelativeLocaleUrl } from 'astro:i18n';
+
 interface Props extends StarlightRouteData {}
-const props = Astro.props;
 const dayImageUrl = `url(${dayImage.src})`;
 const nightImageUrl = `url(${nightImage.src})`;
 const cloudsImageUrl = `url(${cloudsImage.src})`;
@@ -18,13 +19,15 @@ const aboutLink = getRelativeLocaleUrl(lang, 'about');
 ---
 <Icons />
 
-<div class="social-circle-wrapper" id="geo-social-circle-wrapper">
-  <!-- Hlavní globus -->
+<div class="social-circle-wrapper geo-version">
   <div class="circular-menu">
-    <a href={aboutLink} aria-label="About page">
+    <!-- Tento odkaz s divy PŘEKRYJE profilovky z komponenty SocialCircle -->
+    <a href={aboutLink} aria-label="About page" class="globe-link">
       <div class="profile-img main-img"><div class="clouds"></div></div>
       <div class="profile-img hover-img"><div class="clouds"></div></div>
     </a>
+    
+    <!-- Komponenta se postará o ikony v oblouku -->
     <SocialCircle />
   </div>
 </div>
@@ -36,123 +39,106 @@ const aboutLink = getRelativeLocaleUrl(lang, 'about');
 </div>
 
 <style define:vars={{ dayImageUrl, nightImageUrl, cloudsImageUrl }}>
-  .main-img {
-    background-image: var(--current-main-image);
+  .geo-version {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 30px 0;
+    position: relative;
   }
-  .hover-img {
-    background-image: var(--current-hover-image);
+
+  /* ZAJIŠTĚNÍ, ŽE GLOBUS PŘEKRYJE OBLIČEJ */
+  .globe-link {
+    display: block;
+    width: 180px;
+    height: 180px;
+    position: relative;
+    z-index: 10; /* Musí být nad obličejem v SocialCircle */
+    border-radius: 50%;
   }
-  /* Logika pro světlý / tmavý režim */
-  :global(:root[data-theme='light']) .circular-menu {
-    --current-main-image: var(--dayImageUrl);
-    --current-hover-image: var(--nightImageUrl);
+
+  /* SKRYTÍ PŮVODNÍCH OBRÁZKŮ OBLIČEJE, ABY NEPROSVÍTALO NIC POD GLOBUSEM */
+  .geo-version :global(.main-img), 
+  .geo-version :global(.hover-img) {
+    background-size: cover;
   }
-  :global(:root[data-theme='dark']) .circular-menu {
-    --current-main-image: var(--nightImageUrl);
-    --current-hover-image: var(--dayImageUrl);
-  }
+
+  /* STYLOVÁNÍ GLOBUSU */
   .profile-img {
     position: absolute;
+    inset: 0;
     width: 180px;
     height: 180px;
     border-radius: 50%;
     overflow: hidden;
-    box-shadow: 
-      0 10px 30px rgba(0, 0, 0, 0.5),
-      0 0 60px rgba(79, 172, 254, 0.5) !important;
+    background-color: #000; /* Pozadí pro vesmír */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 60px rgba(79, 172, 254, 0.4);
     animation: pulse 5s ease-in-out infinite;
   }
-  .profile-img::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    border-radius: 50%;
-    z-index: 3; /* Musí být nad mapou (::after) */
-    /* KOMPLEXNÍ STÍNOVÁNÍ */
-    background: radial-gradient(
-      circle at 30% 30%, 
-      rgba(255, 255, 255, 0.15) 0%,   /* Horní odlesk */
-      rgba(255, 255, 255, 0) 40%,      /* Průhledný střed */
-      rgba(0, 0, 0, 0.4) 70%,          /* Postupné stmívání */
-      rgba(0, 0, 0, 0.8) 100%          /* Temná strana planety */
-    );
-    /* Vnitřní hrana pro efekt tloušťky atmosféry */
-    box-shadow: inset 2px 2px 5px rgba(255, 255, 255, 0.2);
-    pointer-events: none; /* Aby neblokovalo klikání (pokud by bylo potřeba) */
+
+  .main-img { background-image: var(--current-main-image); z-index: 1; }
+  .hover-img { background-image: var(--current-hover-image); z-index: 2; opacity: 0; transition: opacity 0.5s; }
+  
+  .globe-link:hover .hover-img { opacity: 1; }
+
+  /* LOGIKA TÉMAT PRO GLOBUS */
+  :global(:root[data-theme='light']) .geo-version {
+    --current-main-image: var(--dayImageUrl);
+    --current-hover-image: var(--nightImageUrl);
   }
-  /* Vrstva pro samotnou mapu */
+  :global(:root[data-theme='dark']) .geo-version {
+    --current-main-image: var(--nightImageUrl);
+    --current-hover-image: var(--dayImageUrl);
+  }
+
+  /* TEXTURA ZEMĚ (Aplikuje se na ::after všech .profile-img v tomto souboru) */
   .profile-img::after {
     content: '';
     position: absolute;
-    top: -10%; /* Zvětšíme, aby při rotaci nevznikly prázdné rohy */
-    left: -10%;
+    inset: -10%;
     width: 120%;
     height: 120%;
-    /* KLÍČOVÝ NÁKLON */
     transform: rotate(23.5deg);
-    /* Nastavení textury */
-    background-image: var(--current-main-image);
+    background-image: inherit; /* Převezme background-image od rodiče (.main-img/.hover-img) */
     background-size: cover;
     background-repeat: repeat-x;
-    /* Animace pohybu mapy */
     animation: rotateGlobe 60s linear infinite;
-    z-index: 1; /* Pod stínem ::before */
   }
 
-  /* Hover efekt pro změnu obrázku na vnitřní vrstvě */
-  .hover-img::after {
-    background-image: var(--current-hover-image);
+  /* ATMOSFÉRA */
+  .profile-img::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    z-index: 5;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.1) 0%, transparent 40%, rgba(0,0,0,0.8) 100%);
+    pointer-events: none;
   }
 
-  /* VRSTVA MRAKŮ */
   .clouds {
     position: absolute;
-    width: 100%; height: 100%;
-    z-index: 2; /* Nad mapou (::after), ale pod stínem (::before) */
+    inset: 0;
+    z-index: 4;
     background-image: var(--cloudsImageUrl);
-    display: block !important;
     background-size: cover;
     background-repeat: repeat-x;
-    /* JINÝ NÁKLON A RYCHLOST */
+    mix-blend-mode: screen;
     animation: rotateClouds 45s linear infinite;
-    pointer-events: none;
-    mix-blend-mode: screen; /* Způsobí, že černá z obrázku mraků zmizí a zbude jen bílá */
-  }
-  /* Základní opacity pro mraky (Světlý režim) */
-  :global(:root[data-theme='light']) .clouds {
-    opacity: 0.5;
-    transition: opacity 0.5s ease;
-  }
-
-  /* Základní opacity pro mraky (Tmavý režim) */
-  :global(:root[data-theme='dark']) .clouds {
-    opacity: 0.1;
-    transition: opacity 0.5s ease;
-  }
-
-  /* Hover efekty */
-  :global(:root[data-theme='dark']) .profile-img:hover .clouds {
-    opacity: 0.5;
-  }
-
-  :global(:root[data-theme='light']) .profile-img:hover .clouds {
-    opacity: 0.1;
+    opacity: 0.3;
   }
 
   @keyframes rotateGlobe {
     from { background-position: 0 0; }
-    /* Pohyb probíhá po nakloněné ose díky transform: rotate na stejném elementu */
-    to { background-position: -400% 0; } 
+    to { background-position: -400% 0; }
   }
-
-  @keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-  }
-
-    @keyframes rotateClouds {
+  @keyframes rotateClouds {
     from { background-position: 0 0; }
     to { background-position: -400% 0; }
   }
-  
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+  }
 </style>
