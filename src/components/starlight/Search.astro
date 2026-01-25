@@ -1,4 +1,5 @@
 ---
+import { Icon } from 'astro-icon/components';
 import project from 'virtual:starlight/project-context';
 
 const pagefindTranslations = {
@@ -23,7 +24,7 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 		class="search-toggle-btn"
 	>
 		<span class="theme-icon-container icon-search">
-			<svg aria-hidden="true" viewBox="0 0 24 24">
+			<svg aria-hidden="true" viewBox="0 0 20 20" class="iconify search-loop" >
 				<use href="#icon-search" />
 			</svg>
 		</span>
@@ -134,7 +135,14 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 
 <style lang="scss">
 
-	/* 1. VAŠE TLAČÍTKO (Zůstává stejné) */
+	@keyframes search-pulse {
+		0% { transform: scale(1); opacity: 1; }
+		50% { transform: scale(1.1); opacity: 0.7; }
+		100% { transform: scale(1); opacity: 1; }
+	}
+	.search-loop {
+		animation: search-pulse 2s infinite ease-in-out;
+	}
 	.search-toggle-btn {
 		background: transparent;
 		border: none;
@@ -149,23 +157,19 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 		opacity: 0.7;
 
 		&:hover {
-			transform: scale(1.3);
-			.theme-icon-container {
-				animation: pulse-glow 2s infinite ease-in-out;
-				box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
-			}
+			transform: scale(1.5);
+			z-index: 99999999;
 		}
-		&:disabled { opacity: 0.5; cursor: not-allowed; }
+
 	}
 
 	.theme-icon-container {
-		width: 38px;
-		height: 38px;
+		display: flex;
 		border-radius: 50%;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		svg { width: 32px; height: 32px; fill: currentColor; }
+		svg { width: 28px; height: 28px; fill: currentColor; }
 	}
 
 	/* 2. OBNOVENÍ STARLIGHT VZHLEDU PRO DIALOG */

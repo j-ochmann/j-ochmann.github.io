@@ -45,9 +45,9 @@
     transform: scale(1.5);
     opacity: 1;    
     // Zesílení skla při hoveru
-    backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);/*
     :global([data-theme='dark']) & { background: rgba(0, 0, 0, 0.5); }
-    :global([data-theme='light']) & { background: rgba(255, 255, 255, 0.7); }
+    :global([data-theme='light']) & { background: rgba(255, 255, 255, 0.7); }*/
   }
 }
 

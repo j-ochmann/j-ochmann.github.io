@@ -1,14 +1,16 @@
 ---
-import { Icon } from '@astrojs/starlight/components';
+//import { Icon } from '@astrojs/starlight/components';
+import { Icon } from 'astro-icon/components';
 ---
 
 <div class="theme-select-wrapper">
   <button id="theme-toggle" class="theme-toggle-btn" aria-label="Přepnout režim">
     <div class="theme-icon-container icon-sun">
-      <Icon name="sun" />
+      <Icon name="line-md:sunny-filled-loop" width="24" height="24" />
+      <!--<Icon name="line-md:sun-rising-loop" width="24" height="24" />-->
     </div>
     <div class="theme-icon-container icon-moon">
-      <Icon name="moon" />
+      <Icon name="line-md:moon-filled-loop" width="24" height="24" />
     </div>
   </button>
 </div>
