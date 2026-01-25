@@ -64,7 +64,7 @@ const aboutLink = getRelativeLocaleUrl(lang, 'about');
 </div>
 
 <style lang="scss">
-/*@use "@/styles/animations" as *;*/
+@use "@/styles/animations" as *;
 @use "@/styles/mixins" as *;
 /* ---------- ICONS ARC ---------- */
 
@@ -117,10 +117,7 @@ $action-start-angle: $start-angle + 2*$angle-step;
 .action-icons a{
   transform: rotate(var(--angle)) translateX(70px) translateY(-70px) rotate(calc(-1 * var(--angle)));
 }
-.social-circle-wrapper:hover .action-icons {
-  opacity: 1; /* Visible on hover */
-  pointer-events: auto; /* Interactive on hover */
-}
+
 
 /* New styles for theme-icons */
   .theme-toggle-btn {
@@ -203,16 +200,6 @@ $action-start-angle: $start-angle + 2*$angle-step;
   z-index: 2;
 }
 /* ---------- PROFILE ---------- */
-.social-circle-wrapper {
-  width: 100%; /* Aby mohl flexbox uvnitř centrovat na střed sidebaru */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  margin: 30px 0px;
-  position: relative;
-  overflow: visible; /* Důležité: ikony musí být vidět i mimo kontejner */
-}
 .circular-menu {
   position: relative;
   width: 180px;
@@ -227,6 +214,8 @@ $action-start-angle: $start-angle + 2*$angle-step;
   position: absolute;
   top: 0;
   left: 0;
+  will-change: transform, opacity;
+  backface-visibility: hidden; /* Zabrání blikání při rotaci */
   transform: scale(1);
   transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.7s ease;
 }
@@ -241,19 +230,28 @@ $action-start-angle: $start-angle + 2*$angle-step;
   animation: pulse-glow 3s infinite ease-in-out;
   transform: scale(0.5) rotate(-180deg);
 }
-.social-circle-wrapper:hover .main-img {
+
+/* V SocialCircle.astro */
+.circular-menu:hover .main-img {
   opacity: 0;
   transform: scale(1.5) rotate(180deg);
 }
-.social-circle-wrapper:hover .hover-img {
+
+.circular-menu:hover .hover-img {
   opacity: 1;
-  transform: scale(1.2);
-  transform: scale(1.2) rotate(0deg);
+  transform: scale(1.2) rotate(0deg); /* Přidáno rotate(0deg) pro plynulost! */
   box-shadow: 0 8px 25px rgba(0,0,0,0.4);
   z-index: 11;
 }
-.social-circle-wrapper:hover .name-circle {
+
+.circular-menu:hover .name-circle {
   transform: scale(1.3) rotate(0deg);
   z-index: 11;
 }
+
+.circular-menu:hover .action-icons {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 </style>
