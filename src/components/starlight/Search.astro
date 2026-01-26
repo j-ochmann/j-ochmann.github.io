@@ -24,7 +24,7 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 		class="search-toggle-btn"
 	>
 		<span class="theme-icon-container icon-search">
-			<svg aria-hidden="true" viewBox="0 0 20 20" class="iconify search-loop" >
+			<svg aria-hidden="true" viewBox="0 0 20 20" >
 				<use href="#icon-search" />
 			</svg>
 		</span>
@@ -140,9 +140,9 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 		50% { transform: scale(1.1); opacity: 0.7; }
 		100% { transform: scale(1); opacity: 1; }
 	}
-	.search-loop {
-		animation: search-pulse 2s infinite ease-in-out;
-	}
+	/* .icon-search {
+		animation: search-pulse 4s infinite ease-in-out;
+	} */
 	.search-toggle-btn {
 		background: transparent;
 		border: none;

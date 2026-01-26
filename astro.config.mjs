@@ -110,9 +110,10 @@ export default defineConfig({
         { label: 'Artificial Intelligence',
           translations: { cs: 'Umělá inteligence' },
           link: '/ai/', },
-        { label: '3D Graph Example',
-          translations: { cs: 'Ukázka 3D grafu' },
-          link: '/3d-graph-example/', }
+        { label: 'Examples',
+          translations: { cs: 'Ukázky' },
+          autogenerate: { directory: 'examples/' },
+          collapsed: true }
       ],
     },
     { label: 'Geo',
