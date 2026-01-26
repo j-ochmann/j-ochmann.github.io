@@ -1,0 +1,142 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  icons: string[];
+}
+
+const { icons } = Astro.props;
+---
+
+<div class="icon-grid-row">
+  {icons.map((name) => {
+    const shortName = name.replace('skill-icons:', '');
+    const copyText = `<Icon name="${name}" />`;
+    
+    return (
+      <div class="icon-item" data-copy={copyText} title="Click to copy">
+        <Icon name={name} />
+        <span class="tooltip"><code>{shortName}</code></span>
+      </div>
+    );
+  })}
+</div>
+
+<script>
+  const items = document.querySelectorAll('.icon-item');
+  items.forEach(item => {
+    item.addEventListener('click', () => {
+      const textToCopy = item.getAttribute('data-copy');
+      if (textToCopy) {
+        navigator.clipboard.writeText(textToCopy);
+        
+        const tooltip = item.querySelector('.tooltip code');
+        if (tooltip) {
+          const originalText = tooltip.textContent;
+          tooltip.textContent = 'Copied!';
+          item.classList.add('copied');
+          
+          setTimeout(() => { 
+            tooltip.textContent = originalText; 
+            item.classList.remove('copied');
+          }, 1000);
+        }
+      }
+    });
+  });
+</script>
+
+<style>
+  .icon-grid-row {
+    display: flex !important;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.2rem;
+    margin: 1.5rem 0;
+    line-height: 0;
+    font-size: 0;
+  }
+
+  .icon-item {
+    position: relative;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    margin: 0 !important;
+    padding: 0 !important;
+    vertical-align: middle;
+  }
+
+  .icon-item:hover {
+    transform: scale(1.2);
+  }
+
+  .icon-item :global(svg) {
+    width: 44px !important;
+    height: 44px !important;
+    display: block !important;
+    margin: 0 !important;
+  }
+
+  .tooltip {
+    position: absolute;
+    bottom: 115%;
+    left: 50%;
+    transform: translateX(-50%);
+    
+    /* Dynamické barvy podle tématu */
+    background: var(--tooltip-bg, #1e1e1e);
+    color: var(--tooltip-text, #4ade80);
+    border: 1px solid var(--tooltip-border, #333);
+    
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    line-height: 1.2;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.2s ease;
+    z-index: 50;
+    pointer-events: none;
+    white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Šipka tooltipu - barva se musí shodovat s pozadím */
+  .tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: var(--tooltip-bg, #1e1e1e) transparent transparent transparent;
+  }
+
+  /* Detekce světlého režimu (přizpůsobte podle toho, co používá váš web) */
+  :global([data-theme='light']) .tooltip,
+  :global(.light) .tooltip {
+    --tooltip-bg: #ffffff;
+    --tooltip-text: #16a34a; /* Tmavší zelená pro lepší čitelnost na bílé */
+    --tooltip-border: #e5e7eb;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  /* Pokud používáte standardní media query pro systémové nastavení */
+  @media (prefers-color-scheme: light) {
+    :global(:not([data-theme='dark'])) .tooltip {
+      --tooltip-bg: #ffffff;
+      --tooltip-text: #16a34a;
+      --tooltip-border: #e5e7eb;
+    }
+  }
+
+  .icon-item:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(-5px);
+  }
+</style>
