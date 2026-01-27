@@ -64,7 +64,7 @@ export default defineConfig({
     MobileTableOfContents: './src/components/starlight/Empty.astro',
     Sidebar: './src/components/starlight/Sidebar.astro' },
   sidebar: [
-    { label: 'About',
+    /*{ label: 'About',
       translations: { cs: 'O mě' },
       link: '/about/' },
     { label: 'Projects',
@@ -80,7 +80,7 @@ export default defineConfig({
       collapsed: true },
     { label: 'CV',
       translations: { cs: 'Životopis' },
-      link: '/cv/' },
+      link: '/cv/' },*/
     { label: 'Contact',
       translations: { cs: 'Životopis' },
       link: '/contact/' },

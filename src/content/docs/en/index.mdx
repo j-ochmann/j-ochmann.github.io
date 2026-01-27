@@ -1,19 +1,83 @@
 ---
-title: Hey there
-description: Software Engineer
+title: Complex tasks into simple software.
+description: Full-stack Software Engineer specializing in scalable web applications.
 hero:
-  tagline: Turning complex problems into software that simply works.
-  image:
-    file: src/assets/img/me/2025-06-02_jindrich_ochmann_400x600px.webp
+  tagline: Full-stack Software Engineer specializing in scalable web applications.
+  //image:
+    //alt: Portrait of Jindřich Ochmann
+    //file: src/assets/img/me/2025-06-02_jindrich_ochmann_400x600px.webp
   actions:
-    - text: Design Patterns
-      link: /design_patterns/
-      icon: right-arrow
-    - text: Read the Starlight docs
-      link: 'https://starlight.astro.build'
-      icon: external
+    - text: '(+420) 792 353 539'
+      link: 'tel:+420792353539'
+      icon: phone
+      variant: primary
+    - text: CV
+      link: '#cv'
+      icon: download
       variant: minimal
-content_hash: d41d8cd98f00b204e9800998ecf8427e
+    - text: 'jindrich.ochmann@gmail.com'
+      link: 'mailto:jindrich.ochmann@gmail.com'
+      icon: email
+      variant: secondary
+//template: splash
+//tableOfContents: false
 translation_status: original
 ---
+import { Card, CardGrid } from '@astrojs/starlight/components';
+import { LinkButton } from '@astrojs/starlight/components';
 
+## Introduction
+
+<CardGrid>
+  <Card title="Full-stack Developer" icon="pencil">
+    Building scalable web applications. 
+  </Card>
+  <Card title="Frontend Architecture" icon="pencil">
+    Specializing in **React and Next.js** with an emphasis on performance and UX.
+  </Card>
+  <Card title="Backend & Scalability" icon="setting">
+    Robust API built on **Node.js** and efficient database management.
+  </Card>
+  <Card title="Clean Code" icon="approve-check">
+    Emphasis on maintainability, testability and understandable documentation.
+  </Card>
+</CardGrid>
+
+## Skills
+
+| OOP  |            | DB     | Web   |         |      | DevOps | Other |
+|------|------------|--------|-------|---------|------|--------|-------|
+| C++  | Python     | T-SQL  | JS/TS | React   | HTML | Docker | AI    |
+| C#   | .NET       | MySQL  | PHP   | Node.js | CSS  | Git    | IoT   |
+| Java |__SAP ABAP__|__HANA__|__BSP__| Astro   | SASS | Bash   | CNC   |
+
+|ANSI/ISA-95|             |            |             |           |
+|-----------|-------------|------------|-------------|-----------|
+| WordPress | WooCommerce | PrestaShop | nopCommerce | Starlight |
+
+{/*
+|OOP |            |Web  |       |       |DevOps|DB      |
+|----|------------|-----|-------|-------|------|--------|
+|C++ |Python      |HTML |PHP    |Node.js|Docker|T-SQL   | 
+|C#  |.NET        |CSS  |JS/TS  |React  |Git   |MySQL   |
+|Java|**SAP ABAP**|SASS |**BSP**|Astro  |Bash  |**HANA**|
+*/}
+{/*
+|OOP       |DB     |Web  |              |DevOps|
+|----------|-------|-----|--------------|------|
+|**C++**   |**SQL**|HTML |Node.js       |Docker| 
+|**C#**    |       |CSS  |React         |Git   |
+|**Java**  |       |SASS |Astro         |Linux |
+|**Python**|       |PHP  |WP/WooCommerce|Bash  |
+|**SAP ABAP**|     |JS/TS|PrestaShop    |Scrum |
+*/}
+
+## Contact
+
+RSS 
+
+You can contact me through the channels listed in the sidebar, or just save my details:
+
+<LinkButton href="/jindrich-ochmann.vcf" icon="external" variant="secondary">
+  Stáhnout vizitku (vCard)
+</LinkButton>
