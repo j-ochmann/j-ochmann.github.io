@@ -79,6 +79,7 @@ $google-colors:
 .icon-facebook  { @include icon-style(28px, $baseFrontCol, #1877f2); }
 .icon-youtube   { @include icon-style(27px, $baseFrontCol, #ff0000); }
 .icon-whatsapp  { @include icon-style(30px, $baseFrontCol, #25D366); }
+.icon-rss       { @include icon-style(30px, $baseFrontCol, #ee802f); }
 .icon-search    { @include icon-style(32px, $baseFrontCol, $baseBackCol); }
 .icon-settings  { @include icon-style(28px, $baseFrontCol, $baseBackCol); }
 .icon-login     { @include icon-style(25px, $baseFrontCol, $baseBackCol); }
