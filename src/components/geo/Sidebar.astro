@@ -14,14 +14,14 @@ const dayImageUrl = `url(${dayImage.src})`;
 const nightImageUrl = `url(${nightImage.src})`;
 const cloudsImageUrl = `url(${cloudsImage.src})`;
 const lang = Astro.currentLocale || 'en';
-const aboutLink = getRelativeLocaleUrl(lang, 'about');
+const landingLink = getRelativeLocaleUrl(lang, '/');
 ---
 <Icons />
 
 <div class="social-circle-wrapper geo-version">
   <div class="circular-menu">
     <SocialCircle>
-      <a href={aboutLink} aria-label="About page" class="globe-link">
+      <a href={landingLink} aria-label="About page" class="globe-link">
         <div class="profile-img main-img"><div class="clouds"></div></div>
         <div class="profile-img hover-img"><div class="clouds"></div></div>
       </a>

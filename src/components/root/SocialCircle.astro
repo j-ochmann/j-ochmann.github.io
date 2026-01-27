@@ -4,7 +4,7 @@ import hoverImage from '@/assets/img/me/20250712_055.webp?url';
 import { Icon } from '@astrojs/starlight/components';
 import { getRelativeLocaleUrl } from 'astro:i18n';
 const lang = Astro.currentLocale || 'en';
-const aboutLink = getRelativeLocaleUrl(lang, 'about');
+const landingLink = getRelativeLocaleUrl(lang, '/');
 ---
 <script>
   import "@/scripts/fly-away.js";
@@ -12,7 +12,7 @@ const aboutLink = getRelativeLocaleUrl(lang, 'about');
 
 <div class="circular-menu">
   <slot>
-    <a href={aboutLink} class="profile-link">
+    <a href={landingLink} class="profile-link">
       <img src={mainImage} class="profile-img main-img" alt="Profile" />
       <img src={hoverImage} class="profile-img hover-img" alt="Profile Hover" />
     </a>
