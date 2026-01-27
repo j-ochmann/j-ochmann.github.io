@@ -16,6 +16,7 @@ hero:
       variant: primary
     - text: 'Save business card'
       link: '/jindrich-ochmann.vcf'
+      icon: vcard
       variant: secondary
     - text: 'jindrich.ochmann@gmail.com'
       link: 'mailto:jindrich.ochmann@gmail.com'
@@ -31,6 +32,7 @@ translation_status: original
 ---
 import { Card, CardGrid } from '@astrojs/starlight/components';
 import { LinkButton } from '@astrojs/starlight/components';
+import { Icon } from 'astro-icon/components';
 
 ## Introduction
 
@@ -77,36 +79,34 @@ import { LinkButton } from '@astrojs/starlight/components';
 |**Python**|       |PHP  |WP/WooCommerce|Bash  |
 |**SAP ABAP**|     |JS/TS|PrestaShop    |Scrum |
 */} 
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com">
 <div class="contact-list" markdown="1">
 
 ## Contacts
 
-- <i class="fa-solid fa-phone"></i> **mobile** [*(+420) 792 353 539*](tel:+420792353539)
-- <i class="fa-solid fa-envelope"></i> **e-mail** [*jindrich.ochmann@gmail.com*](mailto:jindrich.ochmann@gmail.com)
-- <i class="fa-solid fa-location-dot"></i> **address** *Hlavní třída 695/93, 708 00 Ostrava-Poruba*
+- <Icon name="fa6-solid:phone" /> **mobile** [*(+420) 792 353 539*](tel:+420792353539)
+- <Icon name="fa6-solid:envelope" /> **e-mail** [*jindrich.ochmann@gmail.com*](mailto:jindrich.ochmann@gmail.com)
+- <Icon name="fa6-solid:location-dot" /> **address** <a href="geo:49.82902,18.17240?q=Hlavní+třída+93,+708+00+Ostrava-Poruba" class="address-link">*Hlavní třída 557/93, 708 00 Ostrava-Poruba, Czechia*</a>
 
 ### IČO [88032353](https://ares.gov.cz/ekonomicke-subjekty/ros/88032353)
 
-- <i class="fa-solid fa-envelope"></i> **data box** *ec658w8*
-- <i class="fa-solid fa-location-dot"></i> **address** *Antala Staška 2059/80b, 140 00 Prague 4 - Krč*
+- <Icon name="fa6-solid:envelope" /> **data box** [*ec658w8*](https://mojedatovaschranka.cz/ec658w8/)
+- <Icon name="fa6-solid:location-dot" /> **address** <a href="geo:50.04300,14.45042?q=Antala+Staška+2059+80b,+14046+Prague+4+Krč" class="address-link">*Antala Staška 2059/80b, 140 46 Prague 4 - Krč, Czechia*</a>
 
 ### Websites
 
-- <i class="fa-solid fa-circle-user"></i> [ochmann.cz](https://ochmann.cz/)
-- <i class="fa-solid fa-circle-user"></i> [j-ochmann.github.io](https://j-ochmann.github.io/)
+- <Icon name="fa6-solid:globe" /> [ochmann.cz](https://ochmann.cz/)
+- <Icon name="fa6-solid:globe" /> [j-ochmann.github.io](https://j-ochmann.github.io/)
 
 ### Profiles
 
-- <a href="https://github.com/j-ochmann"                  class="icon-gh"><i class="fa-brands fa-github"></i>GitHub</a>
-- <a href="https://stackoverflow.com/users/27880872/"     class="icon-so"><i class="fa-brands fa-stack-overflow"></i>Stack Overflow</a>
-- <a href="https://www.linkedin.com/in/jindrich-ochmann/" class="icon-li"><i class="fa-brands fa-linkedin"></i>LinkedIn</a>
-- <a href="https://www.instagram.com/jindrichochmann"     class="icon-ig"><i class="fa-brands fa-instagram"></i>Instagram</a>
-- <a href="https://www.facebook.com/jindrich.ochmann"     class="icon-fb"><i class="fa-brands fa-facebook"></i>Facebook</a>
-- <a href="https://x.com/OchmannJindrich"                 class="icon-tw"><i class="fa-brands fa-twitter"></i>Twitter</a>
-- <a href="https://mastodon.social/@jindrich_ochmann"     class="icon-ma"><i class="fa-brands fa-mastodon"></i>Mastodon</a>
-- <a href="https://www.youtube.com/@JindrichOchmann"      class="icon-yt"><i class="fa-brands fa-youtube"></i>YouTube</a>
+- <a href="https://github.com/j-ochmann"                  class="icon-github"><Icon name="fa6-brands:github" />GitHub</a>
+- <a href="https://stackoverflow.com/users/27880872/"     class="icon-stackoverflow"><Icon name="fa6-brands:stack-overflow" />Stack Overflow</a>
+- <a href="https://www.linkedin.com/in/jindrich-ochmann/" class="icon-linkedin"><Icon name="fa6-brands:linkedin" />LinkedIn</a>
+- <a href="https://www.instagram.com/jindrichochmann"     class="icon-instagram"><Icon name="fa6-brands:instagram" />Instagram</a>
+- <a href="https://www.facebook.com/jindrich.ochmann"     class="icon-facebook"><Icon name="fa6-brands:facebook" />Facebook</a>
+- <a href="https://x.com/OchmannJindrich"                 class="icon-twitter"><Icon name="fa6-brands:twitter" />Twitter</a>
+- <a href="https://mastodon.social/@jindrich_ochmann"     class="icon-mastodon"><Icon name="fa6-brands:mastodon" />Mastodon</a>
+- <a href="https://www.youtube.com/@JindrichOchmann"      class="icon-youtube"><Icon name="fa6-brands:youtube" />YouTube</a>
 
-RSS
-
-</div>
+</div></link>

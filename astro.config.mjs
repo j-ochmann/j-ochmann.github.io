@@ -54,7 +54,7 @@ export default defineConfig({
   locales: locales,
   social: [
     { icon: 'github', label: 'GitHub', href: 'https://github.com/j-ochmann' },
-    { rss: 'https://j-ochmann.github.io/rss.xml', },
+    { icon: 'rss'   , label: 'RSS'   , href: '/rss.xml', },
   ],
   components: {
     ThemeSelect: './src/components/starlight/ThemeSelect.astro',

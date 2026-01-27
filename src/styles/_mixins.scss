@@ -74,9 +74,12 @@ $google-colors:
   radial-gradient(circle at 0% 100%,  #34a853 40%, transparent 80%);
 
 .icon-github    { @include icon-style(22px, $baseFrontCol, #24292f); }
+.icon-stackoverflow { @include icon-style(22px, $baseFrontCol, #f47200); }
 :root[data-theme='dark' ] .icon-github { @include icon-style(22px, $baseFrontCol, #505051); }
 .icon-linkedin  { @include icon-style(22px, $baseFrontCol, #0077b5); }
 .icon-facebook  { @include icon-style(28px, $baseFrontCol, #1877f2); }
+.icon-mastodon  { @include icon-style(28px, $baseFrontCol, #6364FF); }
+.icon-twitter   { @include icon-style(28px, $baseFrontCol, #1da1f2); }
 .icon-youtube   { @include icon-style(27px, $baseFrontCol, #ff0000); }
 .icon-whatsapp  { @include icon-style(30px, $baseFrontCol, #25D366); }
 .icon-rss       { @include icon-style(30px, $baseFrontCol, #ee802f); }
@@ -87,3 +90,26 @@ $google-colors:
 .icon-moon      { @include icon-style(25px, $baseFrontCol, $baseBackCol); }
 .icon-instagram { @include icon-style(27px, $baseFrontCol, $instagram-colors); }
 .icon-email     { @include icon-style(25px, $baseFrontCol, $google-colors); }
+
+.contact-list ul {
+  list-style-type: none; /* Odstraní standardní odrážky */
+  padding-left: 0;       /* Zruší odsazení seznamu */
+}
+
+.contact-list li {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;             /* Mezera mezi ikonou a textem */
+  margin-bottom: 5px;    /* Rozestup mezi řádky */
+}
+
+.contact-list i {
+  width: 20px;           /* Fixní šířka zajistí, že text bude zarovnaný pod sebou */
+  text-align: center;
+  color: #6364FF;        /* Použijeme tu fialovou z Mastodonu, vypadá profi */
+}
+
+/* Specifická barva pro Mastodon odkaz, pokud chcete */
+.icon-mastodon {
+  color: #6364FF !important;
+}
